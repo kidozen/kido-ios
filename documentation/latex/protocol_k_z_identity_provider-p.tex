@@ -1,0 +1,126 @@
+\hypertarget{protocol_k_z_identity_provider-p}{\section{$<$K\-Z\-Identity\-Provider$>$ Protocol Reference}
+\label{protocol_k_z_identity_provider-p}\index{$<$\-K\-Z\-Identity\-Provider$>$@{$<$\-K\-Z\-Identity\-Provider$>$}}
+}
+
+
+{\ttfamily \#import $<$K\-Z\-Identity\-Provider.\-h$>$}
+
+
+
+Inherits $<$\-N\-S\-Object$>$.
+
+
+
+Inherited by \hyperlink{interface_k_z_a_d_f_s_identity_provider}{K\-Z\-A\-D\-F\-S\-Identity\-Provider}, and \hyperlink{interface_k_z_w_r_a_pv09_identity_provider}{K\-Z\-W\-R\-A\-Pv09\-Identity\-Provider}.
+
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{protocol_k_z_identity_provider-p_a0bf56da3b677bf584410f19148acb1d9}{configure\-:}
+\item 
+(void) -\/ \hyperlink{protocol_k_z_identity_provider-p_a3541d97b26c6feb3e416b4c5e26bce33}{initialize\-With\-User\-Name\-:password\-:and\-Scope\-:}
+\item 
+(void) -\/ \hyperlink{protocol_k_z_identity_provider-p_a1ddebe0e2fe01626644834cbefd50103}{before\-Request\-Token\-:}
+\item 
+(void) -\/ \hyperlink{protocol_k_z_identity_provider-p_a370ad854c754f567c314c346a9cca5e9}{request\-Token\-:completion\-:}
+\item 
+(void) -\/ \hyperlink{protocol_k_z_identity_provider-p_ac618432929da77b50705b1a97b64e632}{after\-Request\-Token\-:}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Identity Provider interface
+
+Implement this interface in order to create customs identity providers Kidozen implements a template method pattern to call the methods in the following order\-: 1-\/\-Initialize 2-\/\-Before\-Request\-Token 3-\/\-Request\-Token 4-\/\-After\-Request\-Token
+
+\begin{DoxyAuthor}{Author}
+kidozen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-00, April 2013 
+\end{DoxyVersion}
+
+
+\subsection{Method Documentation}
+\hypertarget{protocol_k_z_identity_provider-p_ac618432929da77b50705b1a97b64e632}{\index{K\-Z\-Identity\-Provider-\/p@{K\-Z\-Identity\-Provider-\/p}!after\-Request\-Token\-:@{after\-Request\-Token\-:}}
+\index{after\-Request\-Token\-:@{after\-Request\-Token\-:}!KZIdentityProvider-p@{K\-Z\-Identity\-Provider-\/p}}
+\subsubsection[{after\-Request\-Token\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) after\-Request\-Token\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-Dictionary $\ast$)}]{params}
+\end{DoxyParamCaption}
+}}\label{protocol_k_z_identity_provider-p_ac618432929da77b50705b1a97b64e632}
+The following method is invoked after the token request to the Identity Provider
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{protocol_k_z_identity_provider-p_a1ddebe0e2fe01626644834cbefd50103}{\index{K\-Z\-Identity\-Provider-\/p@{K\-Z\-Identity\-Provider-\/p}!before\-Request\-Token\-:@{before\-Request\-Token\-:}}
+\index{before\-Request\-Token\-:@{before\-Request\-Token\-:}!KZIdentityProvider-p@{K\-Z\-Identity\-Provider-\/p}}
+\subsubsection[{before\-Request\-Token\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) before\-Request\-Token\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-Dictionary $\ast$)}]{params}
+\end{DoxyParamCaption}
+}}\label{protocol_k_z_identity_provider-p_a1ddebe0e2fe01626644834cbefd50103}
+Implement this method to execute actions before the token request to the Identity Provider 
+\begin{DoxyParams}{Parameters}
+{\em params} & N\-S\-Dictionary with data to use \\
+\hline
+\end{DoxyParams}
+\hypertarget{protocol_k_z_identity_provider-p_a0bf56da3b677bf584410f19148acb1d9}{\index{K\-Z\-Identity\-Provider-\/p@{K\-Z\-Identity\-Provider-\/p}!configure\-:@{configure\-:}}
+\index{configure\-:@{configure\-:}!KZIdentityProvider-p@{K\-Z\-Identity\-Provider-\/p}}
+\subsubsection[{configure\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) configure\-: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{configuration}
+\end{DoxyParamCaption}
+}}\label{protocol_k_z_identity_provider-p_a0bf56da3b677bf584410f19148acb1d9}
+Use it to pass some configuration data to use later in your provider
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & \\
+\hline
+\end{DoxyParams}
+\hypertarget{protocol_k_z_identity_provider-p_a3541d97b26c6feb3e416b4c5e26bce33}{\index{K\-Z\-Identity\-Provider-\/p@{K\-Z\-Identity\-Provider-\/p}!initialize\-With\-User\-Name\-:password\-:and\-Scope\-:@{initialize\-With\-User\-Name\-:password\-:and\-Scope\-:}}
+\index{initialize\-With\-User\-Name\-:password\-:and\-Scope\-:@{initialize\-With\-User\-Name\-:password\-:and\-Scope\-:}!KZIdentityProvider-p@{K\-Z\-Identity\-Provider-\/p}}
+\subsubsection[{initialize\-With\-User\-Name\-:password\-:and\-Scope\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) initialize\-With\-User\-Name\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-String $\ast$)}]{user}
+\item[{password:(N\-S\-String $\ast$)}]{and\-Password}
+\item[{andScope:(N\-S\-String $\ast$)}]{scope}
+\end{DoxyParamCaption}
+}}\label{protocol_k_z_identity_provider-p_a3541d97b26c6feb3e416b4c5e26bce33}
+Initialization step
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & The user name of the user to be authenticate \\
+\hline
+{\em password} & The password for the user \\
+\hline
+{\em scope} & The identity scope \\
+\hline
+\end{DoxyParams}
+\hypertarget{protocol_k_z_identity_provider-p_a370ad854c754f567c314c346a9cca5e9}{\index{K\-Z\-Identity\-Provider-\/p@{K\-Z\-Identity\-Provider-\/p}!request\-Token\-:completion\-:@{request\-Token\-:completion\-:}}
+\index{request\-Token\-:completion\-:@{request\-Token\-:completion\-:}!KZIdentityProvider-p@{K\-Z\-Identity\-Provider-\/p}}
+\subsubsection[{request\-Token\-:completion\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) request\-Token\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-String $\ast$)}]{identity\-Provider\-Url}
+\item[{completion:(Request\-Token\-Completion\-Block)}]{block}
+\end{DoxyParamCaption}
+}}\label{protocol_k_z_identity_provider-p_a370ad854c754f567c314c346a9cca5e9}
+This method executes a request to the Identity Provider
+
+
+\begin{DoxyParams}{Parameters}
+{\em identity\-Provider\-Url} & The identity provider endpoint \\
+\hline
+{\em action} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this protocol was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+kidozen.\-client/K\-Z\-Identity\-Provider.\-h\end{DoxyCompactItemize}

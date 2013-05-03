@@ -1,0 +1,52 @@
+\hypertarget{interface_k_z_mail}{\section{K\-Z\-Mail Class Reference}
+\label{interface_k_z_mail}\index{K\-Z\-Mail@{K\-Z\-Mail}}
+}
+
+
+{\ttfamily \#import $<$K\-Z\-Mail.\-h$>$}
+
+
+
+Inherits \hyperlink{interface_k_z_service}{K\-Z\-Service}.
+
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_k_z_mail_a902e1567b713d5b7d346c862665a9efb}{send\-:completion\-:}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Mail service interface
+
+\begin{DoxyAuthor}{Author}
+kidozen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-00, April 2013 
+\end{DoxyVersion}
+
+
+\subsection{Method Documentation}
+\hypertarget{interface_k_z_mail_a902e1567b713d5b7d346c862665a9efb}{\index{K\-Z\-Mail@{K\-Z\-Mail}!send\-:completion\-:@{send\-:completion\-:}}
+\index{send\-:completion\-:@{send\-:completion\-:}!KZMail@{K\-Z\-Mail}}
+\subsubsection[{send\-:completion\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) send\-: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{email}
+\item[{completion:({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_mail_a902e1567b713d5b7d346c862665a9efb}
+
+\begin{DoxyParams}{Parameters}
+{\em mail} & a N\-S\-Dictionary with the information of the Email message to send. It must contain the following Keys\-: \char`\"{}to\char`\"{}, \char`\"{}from\char`\"{}, \char`\"{}subject\char`\"{}, \char`\"{}html\-Body\char`\"{} and \char`\"{}text\-Body\char`\"{} \\
+\hline
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+kidozen.\-client/K\-Z\-Mail.\-h\item 
+kidozen.\-client/K\-Z\-Mail.\-m\end{DoxyCompactItemize}

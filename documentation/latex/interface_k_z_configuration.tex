@@ -1,0 +1,111 @@
+\hypertarget{interface_k_z_configuration}{\section{K\-Z\-Configuration Class Reference}
+\label{interface_k_z_configuration}\index{K\-Z\-Configuration@{K\-Z\-Configuration}}
+}
+
+
+{\ttfamily \#import $<$K\-Z\-Configuration.\-h$>$}
+
+
+
+Inherits \hyperlink{interface_k_z_service}{K\-Z\-Service}.
+
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_k_z_configuration_a4e4fdfac7efd5970948ff6e204aa755e}{save\-:completion\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_configuration_a10e04df39b1f90c1272a560f5f4b74c4}{get\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_configuration_acc1af01645323a836539f93c5dfb693f}{remove}
+\item 
+(void) -\/ \hyperlink{interface_k_z_configuration_a85b0596d7550fb01156cdb32b5f6553c}{remove\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_configuration_a2a496702a7579b245f36b22b901d6e36}{all\-:}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Configuration service interface
+
+\begin{DoxyAuthor}{Author}
+kidozen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-00, April 2013 
+\end{DoxyVersion}
+
+
+\subsection{Method Documentation}
+\hypertarget{interface_k_z_configuration_a2a496702a7579b245f36b22b901d6e36}{\index{K\-Z\-Configuration@{K\-Z\-Configuration}!all\-:@{all\-:}}
+\index{all\-:@{all\-:}!KZConfiguration@{K\-Z\-Configuration}}
+\subsubsection[{all\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) all\-: 
+\begin{DoxyParamCaption}
+\item[{({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_configuration_a2a496702a7579b245f36b22b901d6e36}
+Pulls all the configuration values
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_configuration_a10e04df39b1f90c1272a560f5f4b74c4}{\index{K\-Z\-Configuration@{K\-Z\-Configuration}!get\-:@{get\-:}}
+\index{get\-:@{get\-:}!KZConfiguration@{K\-Z\-Configuration}}
+\subsubsection[{get\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\-: 
+\begin{DoxyParamCaption}
+\item[{({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_configuration_a10e04df39b1f90c1272a560f5f4b74c4}
+Retrieves the configuration value
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_configuration_acc1af01645323a836539f93c5dfb693f}{\index{K\-Z\-Configuration@{K\-Z\-Configuration}!remove@{remove}}
+\index{remove@{remove}!KZConfiguration@{K\-Z\-Configuration}}
+\subsubsection[{remove}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) remove 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_configuration_acc1af01645323a836539f93c5dfb693f}
+Deletes the current configuration \hypertarget{interface_k_z_configuration_a85b0596d7550fb01156cdb32b5f6553c}{\index{K\-Z\-Configuration@{K\-Z\-Configuration}!remove\-:@{remove\-:}}
+\index{remove\-:@{remove\-:}!KZConfiguration@{K\-Z\-Configuration}}
+\subsubsection[{remove\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) remove\-: 
+\begin{DoxyParamCaption}
+\item[{({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_configuration_a85b0596d7550fb01156cdb32b5f6553c}
+Deletes the current configuration
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_configuration_a4e4fdfac7efd5970948ff6e204aa755e}{\index{K\-Z\-Configuration@{K\-Z\-Configuration}!save\-:completion\-:@{save\-:completion\-:}}
+\index{save\-:completion\-:@{save\-:completion\-:}!KZConfiguration@{K\-Z\-Configuration}}
+\subsubsection[{save\-:completion\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) save\-: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{object}
+\item[{completion:({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_configuration_a4e4fdfac7efd5970948ff6e204aa755e}
+Save the value of the configuration
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & A N\-S\-Dictionary that represents the configuration \\
+\hline
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+kidozen.\-client/K\-Z\-Configuration.\-h\item 
+kidozen.\-client/K\-Z\-Configuration.\-m\end{DoxyCompactItemize}

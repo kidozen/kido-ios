@@ -1,0 +1,86 @@
+\hypertarget{interface_k_z_queue}{\section{K\-Z\-Queue Class Reference}
+\label{interface_k_z_queue}\index{K\-Z\-Queue@{K\-Z\-Queue}}
+}
+
+
+{\ttfamily \#import $<$K\-Z\-Queue.\-h$>$}
+
+
+
+Inherits \hyperlink{interface_k_z_service}{K\-Z\-Service}.
+
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_k_z_queue_aeab107869d0341a0aa73fadd7ba14187}{enqueue\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_queue_af6ba2fa473abf4533279aa7cf63a747b}{enqueue\-:completion\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_queue_ad8554b093d5d7c8ef0ad3a64735b805e}{dequeue\-:}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Queue service interface
+
+\begin{DoxyAuthor}{Author}
+kidozen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-00, April 2013 
+\end{DoxyVersion}
+
+
+\subsection{Method Documentation}
+\hypertarget{interface_k_z_queue_ad8554b093d5d7c8ef0ad3a64735b805e}{\index{K\-Z\-Queue@{K\-Z\-Queue}!dequeue\-:@{dequeue\-:}}
+\index{dequeue\-:@{dequeue\-:}!KZQueue@{K\-Z\-Queue}}
+\subsubsection[{dequeue\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) dequeue\-: 
+\begin{DoxyParamCaption}
+\item[{({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_queue_ad8554b093d5d7c8ef0ad3a64735b805e}
+Dequeues a message
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_queue_aeab107869d0341a0aa73fadd7ba14187}{\index{K\-Z\-Queue@{K\-Z\-Queue}!enqueue\-:@{enqueue\-:}}
+\index{enqueue\-:@{enqueue\-:}!KZQueue@{K\-Z\-Queue}}
+\subsubsection[{enqueue\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) enqueue\-: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{object}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_queue_aeab107869d0341a0aa73fadd7ba14187}
+Enqueues a message
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message (N\-S\-Dictionary) to enqueue \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_queue_af6ba2fa473abf4533279aa7cf63a747b}{\index{K\-Z\-Queue@{K\-Z\-Queue}!enqueue\-:completion\-:@{enqueue\-:completion\-:}}
+\index{enqueue\-:completion\-:@{enqueue\-:completion\-:}!KZQueue@{K\-Z\-Queue}}
+\subsubsection[{enqueue\-:completion\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) {\bf enqueue\-:} 
+\begin{DoxyParamCaption}
+\item[{(id)}]{object}
+\item[{completion:({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_queue_af6ba2fa473abf4533279aa7cf63a747b}
+Enqueues a message
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to enqueue \\
+\hline
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+kidozen.\-client/K\-Z\-Queue.\-h\item 
+kidozen.\-client/K\-Z\-Queue.\-m\end{DoxyCompactItemize}

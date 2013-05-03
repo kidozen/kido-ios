@@ -1,0 +1,111 @@
+\hypertarget{interface_k_z_logging}{\section{K\-Z\-Logging Class Reference}
+\label{interface_k_z_logging}\index{K\-Z\-Logging@{K\-Z\-Logging}}
+}
+
+
+{\ttfamily \#import $<$K\-Z\-Logging.\-h$>$}
+
+
+
+Inherits \hyperlink{interface_k_z_service}{K\-Z\-Service}.
+
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_k_z_logging_aa552633574c58c3a6410deb99d04bf1c}{write\-:with\-Level\-:completion\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_logging_aab0a77643e772a9625512bb849364ced}{all\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_logging_a6c01a9d160634173a29ea695eaa0aafb}{clear\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_logging_a955bbb7f40571b69b654260c541b165d}{query\-:with\-Options\-:and\-Block\-:}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Log service interface
+
+\begin{DoxyAuthor}{Author}
+kidozen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-00, April 2013 
+\end{DoxyVersion}
+
+
+\subsection{Method Documentation}
+\hypertarget{interface_k_z_logging_aab0a77643e772a9625512bb849364ced}{\index{K\-Z\-Logging@{K\-Z\-Logging}!all\-:@{all\-:}}
+\index{all\-:@{all\-:}!KZLogging@{K\-Z\-Logging}}
+\subsubsection[{all\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) all\-: 
+\begin{DoxyParamCaption}
+\item[{({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_logging_aab0a77643e772a9625512bb849364ced}
+Retrieves all the Log entries
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_logging_a6c01a9d160634173a29ea695eaa0aafb}{\index{K\-Z\-Logging@{K\-Z\-Logging}!clear\-:@{clear\-:}}
+\index{clear\-:@{clear\-:}!KZLogging@{K\-Z\-Logging}}
+\subsubsection[{clear\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) clear\-: 
+\begin{DoxyParamCaption}
+\item[{({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_logging_a6c01a9d160634173a29ea695eaa0aafb}
+Clears the log. This method add a new entry to the Log with the information of the user that executes this action
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_logging_a955bbb7f40571b69b654260c541b165d}{\index{K\-Z\-Logging@{K\-Z\-Logging}!query\-:with\-Options\-:and\-Block\-:@{query\-:with\-Options\-:and\-Block\-:}}
+\index{query\-:with\-Options\-:and\-Block\-:@{query\-:with\-Options\-:and\-Block\-:}!KZLogging@{K\-Z\-Logging}}
+\subsubsection[{query\-:with\-Options\-:and\-Block\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) query\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-String $\ast$)}]{query}
+\item[{withOptions:(N\-S\-String $\ast$)}]{options}
+\item[{andBlock:({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_logging_a955bbb7f40571b69b654260c541b165d}
+Executes a query against the Log
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & An string with the same syntax used for a Mongo\-Db query \\
+\hline
+{\em options} & An string with the same syntax used for a Mongo\-Db query options \\
+\hline
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_logging_aa552633574c58c3a6410deb99d04bf1c}{\index{K\-Z\-Logging@{K\-Z\-Logging}!write\-:with\-Level\-:completion\-:@{write\-:with\-Level\-:completion\-:}}
+\index{write\-:with\-Level\-:completion\-:@{write\-:with\-Level\-:completion\-:}!KZLogging@{K\-Z\-Logging}}
+\subsubsection[{write\-:with\-Level\-:completion\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) write\-: 
+\begin{DoxyParamCaption}
+\item[{(id)}]{object}
+\item[{withLevel:(Log\-Level)}]{level}
+\item[{completion:({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_logging_aa552633574c58c3a6410deb99d04bf1c}
+Writes a new entry in the application Log
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message (N\-S\-Dictionary) you want to save \\
+\hline
+{\em level} & The log level\-: Verbose, Information, Warning, Error, Critical \\
+\hline
+{\em block} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+kidozen.\-client/K\-Z\-Logging.\-h\item 
+kidozen.\-client/K\-Z\-Logging.\-m\end{DoxyCompactItemize}

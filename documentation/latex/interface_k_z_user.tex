@@ -1,0 +1,91 @@
+\hypertarget{interface_k_z_user}{\section{K\-Z\-User Class Reference}
+\label{interface_k_z_user}\index{K\-Z\-User@{K\-Z\-User}}
+}
+
+
+{\ttfamily \#import $<$K\-Z\-User.\-h$>$}
+
+
+
+Inherits $<$\-N\-S\-Object$>$.
+
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_k_z_user_a6d1bcceef0db0d4af5c38f4d4bd38ed6}{(id) -\/ {\bfseries init\-With\-Token\-:}}\label{interface_k_z_user_a6d1bcceef0db0d4af5c38f4d4bd38ed6}
+
+\item 
+(B\-O\-O\-L $\ast$) -\/ \hyperlink{interface_k_z_user_a722e77694f00dbce750119348c6884ba}{is\-In\-Role\-:}
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_k_z_user_ae27798741c2e4f58545b14232eaf16f7}{N\-S\-String $\ast$ {\bfseries \-\_\-kz\-Token}}\label{interface_k_z_user_ae27798741c2e4f58545b14232eaf16f7}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+N\-S\-Mutable\-Dictionary $\ast$ \hyperlink{interface_k_z_user_a318bcfa5e1e27c031e963144c4d5182b}{claims}
+\item 
+N\-S\-Array $\ast$ \hyperlink{interface_k_z_user_aff87e2dff9f8d236f7fd04e6eec7e6b3}{roles}
+\item 
+int \hyperlink{interface_k_z_user_a297647adfd1901441e760c7509b5ccec}{expires\-On}
+\item 
+N\-S\-String $\ast$ \hyperlink{interface_k_z_user_a0b3b6896d3941d8e3e646c2f974ecec0}{user}
+\item 
+N\-S\-String $\ast$ \hyperlink{interface_k_z_user_a478bd400425d7301f092393e7d5257f0}{pass}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The kidozen user identity
+
+\begin{DoxyAuthor}{Author}
+Kido\-Zen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-00, April 2013 
+\end{DoxyVersion}
+
+
+\subsection{Method Documentation}
+\hypertarget{interface_k_z_user_a722e77694f00dbce750119348c6884ba}{\index{K\-Z\-User@{K\-Z\-User}!is\-In\-Role\-:@{is\-In\-Role\-:}}
+\index{is\-In\-Role\-:@{is\-In\-Role\-:}!KZUser@{K\-Z\-User}}
+\subsubsection[{is\-In\-Role\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (B\-O\-O\-L $\ast$) is\-In\-Role\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-String $\ast$)}]{role}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_user_a722e77694f00dbce750119348c6884ba}
+Checks if the user belongs to the role 
+\begin{DoxyParams}{Parameters}
+{\em role} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\subsection{Property Documentation}
+\hypertarget{interface_k_z_user_a318bcfa5e1e27c031e963144c4d5182b}{\index{K\-Z\-User@{K\-Z\-User}!claims@{claims}}
+\index{claims@{claims}!KZUser@{K\-Z\-User}}
+\subsubsection[{claims}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\-S\-Mutable\-Dictionary$\ast$) claims\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}}\label{interface_k_z_user_a318bcfa5e1e27c031e963144c4d5182b}
+The claims of this user \hypertarget{interface_k_z_user_a297647adfd1901441e760c7509b5ccec}{\index{K\-Z\-User@{K\-Z\-User}!expires\-On@{expires\-On}}
+\index{expires\-On@{expires\-On}!KZUser@{K\-Z\-User}}
+\subsubsection[{expires\-On}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (int) expires\-On\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [assign]}}}\label{interface_k_z_user_a297647adfd1901441e760c7509b5ccec}
+The expiration in miliseconds \hypertarget{interface_k_z_user_a478bd400425d7301f092393e7d5257f0}{\index{K\-Z\-User@{K\-Z\-User}!pass@{pass}}
+\index{pass@{pass}!KZUser@{K\-Z\-User}}
+\subsubsection[{pass}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\-S\-String$\ast$) pass\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}}\label{interface_k_z_user_a478bd400425d7301f092393e7d5257f0}
+The password \hypertarget{interface_k_z_user_aff87e2dff9f8d236f7fd04e6eec7e6b3}{\index{K\-Z\-User@{K\-Z\-User}!roles@{roles}}
+\index{roles@{roles}!KZUser@{K\-Z\-User}}
+\subsubsection[{roles}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\-S\-Array$\ast$) roles\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}}\label{interface_k_z_user_aff87e2dff9f8d236f7fd04e6eec7e6b3}
+The Roles of this user \hypertarget{interface_k_z_user_a0b3b6896d3941d8e3e646c2f974ecec0}{\index{K\-Z\-User@{K\-Z\-User}!user@{user}}
+\index{user@{user}!KZUser@{K\-Z\-User}}
+\subsubsection[{user}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (N\-S\-String$\ast$) user\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}, {\ttfamily [nonatomic]}, {\ttfamily [strong]}}}\label{interface_k_z_user_a0b3b6896d3941d8e3e646c2f974ecec0}
+The current user name 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+kidozen.\-client/K\-Z\-User.\-h\item 
+kidozen.\-client/K\-Z\-User.\-m\end{DoxyCompactItemize}

@@ -1,0 +1,73 @@
+\hypertarget{interface_k_z_s_m_s_sender}{\section{K\-Z\-S\-M\-S\-Sender Class Reference}
+\label{interface_k_z_s_m_s_sender}\index{K\-Z\-S\-M\-S\-Sender@{K\-Z\-S\-M\-S\-Sender}}
+}
+
+
+{\ttfamily \#import $<$K\-Z\-S\-M\-S\-Sender.\-h$>$}
+
+
+
+Inherits \hyperlink{interface_k_z_service}{K\-Z\-Service}.
+
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(void) -\/ \hyperlink{interface_k_z_s_m_s_sender_ab012cb9e885d76021e1e73d119b9c80e}{send\-:completion\-:}
+\item 
+(void) -\/ \hyperlink{interface_k_z_s_m_s_sender_af32989806c3ef612c22838d438955cc5}{get\-Status\-:completion\-:}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+S\-M\-S service interface
+
+\begin{DoxyAuthor}{Author}
+kidozen 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\-00, April 2013 
+\end{DoxyVersion}
+
+
+\subsection{Method Documentation}
+\hypertarget{interface_k_z_s_m_s_sender_af32989806c3ef612c22838d438955cc5}{\index{K\-Z\-S\-M\-S\-Sender@{K\-Z\-S\-M\-S\-Sender}!get\-Status\-:completion\-:@{get\-Status\-:completion\-:}}
+\index{get\-Status\-:completion\-:@{get\-Status\-:completion\-:}!KZSMSSender@{K\-Z\-S\-M\-S\-Sender}}
+\subsubsection[{get\-Status\-:completion\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\-Status\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-String $\ast$)}]{message\-Id}
+\item[{completion:({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_s_m_s_sender_af32989806c3ef612c22838d438955cc5}
+Get the status of one message\-: Sent or queued
+
+
+\begin{DoxyParams}{Parameters}
+{\em message\-Id} & The unique identifier of the sent message \\
+\hline
+{\em callback} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+\hypertarget{interface_k_z_s_m_s_sender_ab012cb9e885d76021e1e73d119b9c80e}{\index{K\-Z\-S\-M\-S\-Sender@{K\-Z\-S\-M\-S\-Sender}!send\-:completion\-:@{send\-:completion\-:}}
+\index{send\-:completion\-:@{send\-:completion\-:}!KZSMSSender@{K\-Z\-S\-M\-S\-Sender}}
+\subsubsection[{send\-:completion\-:}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) send\-: 
+\begin{DoxyParamCaption}
+\item[{(N\-S\-String $\ast$)}]{message}
+\item[{completion:({\bf K\-Z\-Response} $\ast$)}]{block}
+\end{DoxyParamCaption}
+}}\label{interface_k_z_s_m_s_sender_ab012cb9e885d76021e1e73d119b9c80e}
+Sends the sms message
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to send \\
+\hline
+{\em callback} & The callback with the result of the service call \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+kidozen.\-client/K\-Z\-S\-M\-S\-Sender.\-h\item 
+kidozen.\-client/K\-Z\-S\-M\-S\-Sender.\-m\end{DoxyCompactItemize}
