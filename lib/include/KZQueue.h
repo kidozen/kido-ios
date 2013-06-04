@@ -1,12 +1,12 @@
 #import <Foundation/Foundation.h>
-#import "KZService.h"
+#import "KZBaseService.h"
 /**
  * Queue service interface
  *
  * @author kidozen
  * @version 1.00, April 2013
  */
-@interface KZQueue : KZService
+@interface KZQueue : KZBaseService
 /**
  * Enqueues a message
  *

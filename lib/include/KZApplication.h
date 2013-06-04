@@ -6,7 +6,7 @@
 //  Copyright 2013 KidoZen All rights reserved.
 //
 
-#import "KZService.h"
+#import "KZBaseService.h"
 #import "KZNotification.h"
 #import "KZQueue.h"
 #import "KZStorage.h"
@@ -14,6 +14,7 @@
 #import "KZMail.h"
 #import "KZSMSSender.h"
 #import "KZLogging.h"
+#import "KZService.h"
 
 #if TARGET_OS_IPHONE
 #import "KZPubSubChannel.h"
@@ -31,7 +32,7 @@ typedef void (^TokenExpiresBlock)(id);
  * Main KidoZen application object
  *
  */
-@interface KZApplication : KZService <KZAuthentication>
+@interface KZApplication : KZBaseService <KZAuthentication>
 {
     id<KZIdentityProvider>  ip ;
     NSString *_tennantMarketPlace;
@@ -44,6 +45,7 @@ typedef void (^TokenExpiresBlock)(id);
     NSMutableDictionary * _smssenders;
     NSMutableDictionary * _channels;
     NSMutableDictionary * _files;
+    NSMutableDictionary * _services;
     
     __block NSTimer* tokenExpirationTimer ;
 }
@@ -147,7 +149,25 @@ typedef void (^TokenExpiresBlock)(id);
  * @throws Exception
  */
 -(void) writeLog:(id) message withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block;
+/**
+ * Clears the KZApplication log
+ *
+ * @param callback The callback with the result of the service call */
+-(void) clearLog:(void (^)(KZResponse *))block;
 
--(void) sendByServiceBus:(NSMutableURLRequest *) request completion:(void (^)(KZResponse *))block;
+/**
+ * Creates a new entry in the KZApplication log
+ *
+ * @param callback The callback with the result of the service call
+ */
+-(void) allLogMessages:(void (^)(KZResponse *))block;
+
+/**
+ * Creates a new LOBService object
+ *
+ * @param name the service name.
+ * @return a new LOBService object
+ */
+-(KZService *) LOBServiceWithName:(NSString *) name;
 
 @end

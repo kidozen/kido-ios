@@ -1,4 +1,4 @@
-#import "KZService.h"
+#import "KZBaseService.h"
 
 typedef enum  {
     LogLevelVerbose,
@@ -14,7 +14,7 @@ typedef enum  {
  * @author kidozen
  * @version 1.00, April 2013
  */
-@interface KZLogging : KZService
+@interface KZLogging : KZBaseService
 /**
  * Writes a new entry in the application Log
  *

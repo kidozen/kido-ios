@@ -1,4 +1,4 @@
-#import "KZService.h"
+#import "KZBaseService.h"
 #import "SRWebSocket.h"
 /**
  * Publish and subscribe service interface
@@ -9,7 +9,7 @@
 
 typedef void (^WebSocketEventBlock)(id);
 
-@interface KZPubSubChannel : KZService <SRWebSocketDelegate>
+@interface KZPubSubChannel : KZBaseService <SRWebSocketDelegate>
 {
     SRWebSocket *_webSocket;
 }

@@ -1,7 +1,7 @@
 
 #import "KZBaseService.h"
 
-@interface KZService : KZBaseService
+@interface KZLOBService : KZBaseService
 
 -(void) invokeMethod:(NSString *) method withData:(id)data completion:(void (^)(KZResponse *))block;
 

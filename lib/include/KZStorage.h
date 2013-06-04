@@ -1,4 +1,4 @@
-#import "KZService.h"
+#import "KZBaseService.h"
 /**
  * Storage  service interface
  *
@@ -6,7 +6,7 @@
  * @version 1.00, April 2013
  */
 
-@interface KZStorage : KZService
+@interface KZStorage : KZBaseService
 
 /**
  * Creates a new object in the storage

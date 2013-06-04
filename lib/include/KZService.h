@@ -1,28 +1,10 @@
-#import <Foundation/Foundation.h>
-#import "KZHTTPClient.h"
-#import "KZResponse.h" 
-#import "KZIdentityProvider.h"
-#import "KZUser.h"
 
-extern NSInteger const KZHttpErrorStatusCode;
+#import "KZBaseService.h"
 
-@interface KZService : NSObject
-{
-    NSString * _endpoint;
-    KZHTTPClient * _client;
-    NSURL * baseUrl;
-    BOOL _bypassSSL;
+@interface KZService : KZBaseService
 
-}
-@property (atomic, strong) NSString * kzToken;
-@property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSURL * serviceUrl;
-@property (atomic) BOOL isAuthenticated;
-@property (atomic, strong) KZUser * KidoZenUser;
+-(void) invokeMethod:(NSString *) method withData:(id)data completion:(void (^)(KZResponse *))block;
+//
+//-(void) invokeMethod:(NSString *) method withData:(id)data andConfiguration:(NSDictionary *) configuration completion:(void (^)(KZResponse *))block;
 
-
--(id) initWithEndpoint:(NSString *) endpoint andName:(NSString *) name;
--(NSError *) createNilReferenceError;
--(void) setBypassSSL:(BOOL)bypass;
--(BOOL) bypassSSL;
 @end

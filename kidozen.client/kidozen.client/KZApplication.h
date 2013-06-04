@@ -163,14 +163,11 @@ typedef void (^TokenExpiresBlock)(id);
 -(void) allLogMessages:(void (^)(KZResponse *))block;
 
 /**
- * Creates a new KZService object
+ * Creates a new LOBService object
  *
- * @param name The phone number to send messages.
- * @return a new SMSSender object
+ * @param name the service name.
+ * @return a new LOBService object
  */
--(KZService *) ServiceWithName:(NSString *) name;
-
--(void) sendByServiceBus:(NSMutableURLRequest *) request completion:(void (^)(KZResponse *))block;
-
+-(KZService *) LOBServiceWithName:(NSString *) name;
 
 @end

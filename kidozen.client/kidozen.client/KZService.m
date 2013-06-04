@@ -21,9 +21,4 @@
     
 }
 
-//-(void) invokeMethod:(NSString *) method withData:(id)data andConfiguration:(NSDictionary *) configuration completion:(void (^)(KZResponse *))block
-//{
-//
-//}
-
 @end

@@ -5,9 +5,9 @@
  * @version 1.00, April 2013
  *
  */
-#import "KZService.h"
+#import "KZBaseService.h"
 
-@interface KZConfiguration : KZService
+@interface KZConfiguration : KZBaseService
 
 /**
  * Save the value of the configuration

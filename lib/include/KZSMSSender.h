@@ -1,11 +1,11 @@
-#import "KZService.h"
+#import "KZBaseService.h"
 /**
  * SMS  service interface
  *
  * @author kidozen
  * @version 1.00, April 2013
  */
-@interface KZSMSSender : KZService
+@interface KZSMSSender : KZBaseService
 /**
  * Sends the sms message
  *
