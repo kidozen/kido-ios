@@ -1,8 +1,2 @@
-/.DS_Store
-/KidoZenDemos/DerivedData/
-/KidoZenDemos/.DS_Store
-/KidoZenDemos/certificates/.DS_Store
-/kz.client/.DS_Store
-/OSXKidozenDemos/DerivedData/OSXKidozenDemos/
-/OSXKidozenDemos/OSXKidozenDemos/OSXKidozenDemos-Prefix.pch
+.DS_Store
 *.xcuserdatad
