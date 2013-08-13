@@ -1,6 +1,8 @@
 #Kidozen SDK for iOS Devices
 
-In order to use the iOS SDK in your android application
+The SDK has a dependency with SocketRocket if you clone the sources you must download it and add it as a library or a sub-project
+
+In order to use the iOS SDK binaries in your android application you must:
 
 - Download the lib folder. This folder contains all the headers and static libs files
 - In Xcode, open Project Navigator and select your project file.
