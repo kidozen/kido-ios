@@ -178,7 +178,7 @@ static NSMutableDictionary * tokenCache;
                     NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
                 }
                 if (_authCompletionBlock) {
-                    if (![self.KidoZenUser.claims objectForKey:@"system"])
+                    if (![self.KidoZenUser.claims objectForKey:@"system"] && ![self.KidoZenUser.claims objectForKey:@"usersource"] )
                     {
                         NSError * err = [[NSError alloc] initWithDomain:@"Authentication" code:0 userInfo:[NSDictionary dictionaryWithObject:@"User is not authenticated" forKey:@"description"]];
                         _authCompletionBlock(err);
