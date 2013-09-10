@@ -209,6 +209,7 @@ typedef NSUInteger SVHTTPRequestState;
                 [NSException raise:NSInvalidArgumentException format:@"Request parameters couldn't be serialized into JSON."];
             [self.operationRequest setHTTPBody:jsonData];
             [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+            [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
             [self.operationRequest setValue:[NSString stringWithFormat:@"%ld",(long) [jsonData length]] forHTTPHeaderField:@"Content-Length"];
         }
         else
