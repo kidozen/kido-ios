@@ -5,7 +5,9 @@
 #import "KZNotification.h"
 
 @interface KZNotification (private)
+
 - (NSString *)getMacAddress;
+
 @end
 
 @implementation KZNotification
@@ -18,12 +20,12 @@
         self.name = name;
         _endpoint = endpoint;
         self.serviceUrl = [NSURL URLWithString:_endpoint] ;
-
+        
         if (!deviceMacAddress) {
             deviceMacAddress = [self getMacAddress];
         }
-
-        _client = [[KZHTTPClient alloc] init]; 
+        
+        _client = [[KZHTTPClient alloc] init];
         [_client setBasePath:endpoint];
     }
     return self;
@@ -32,6 +34,20 @@
 
 -(void) subscribeDeviceWithToken:(NSString *)deviceToken toChannel:(NSString *) channel completion:(void (^)(KZResponse *))block
 {
+    NSError * error;
+    if ([deviceToken length] == 0 || deviceToken==NULL)
+    {
+        error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'deviceToken'" forKey:@"Description"]];
+    }
+    if ([channel length] == 0 || channel==NULL)
+    {
+        error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
+    }
+    if (error) {
+        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        return;
+    }
+
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@", self.name, channel];
     NSDictionary * body = [NSDictionary dictionaryWithObjectsAndKeys:@"apns",@"platform", deviceToken, @"subscriptionId", deviceMacAddress, @"deviceId", nil];
     [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
@@ -43,11 +59,20 @@
         }
         block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
     }];
-
+    
 }
 
 -(void) pushNotification:(NSDictionary *) notification InChannel:(NSString *) channel completion:(void (^)(KZResponse *))block
 {
+    NSError * error;
+    if ([channel length] == 0 || channel==NULL)
+    {
+        error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
+    }
+    if (error) {
+        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        return;
+    }
     NSString * path= [NSString stringWithFormat:@"/push/%@/%@", self.name, channel];
     [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
     [_client setSendParametersAsJSON:YES];
@@ -88,6 +113,19 @@
 
 -(void) unSubscribeDeviceUsingToken:(NSString *)deviceToken fromChannel:(NSString *) channel completion:(void (^)(KZResponse *))block
 {
+    NSError * error;
+    if ([deviceToken length] == 0 || deviceToken==NULL)
+    {
+        error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'deviceToken'" forKey:@"Description"]];
+    }
+    if ([channel length] == 0 || channel==NULL)
+    {
+        error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
+    }
+    if (error) {
+        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        return;
+    }
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@/%@", self.name, channel, deviceToken];
     [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
     [_client DELETE:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -98,7 +136,6 @@
         block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
     }];
 }
-
 
 
 - (NSString *)getMacAddress
@@ -114,17 +151,17 @@
     // Setup the management Information Base (mib)
     mgmtInfoBase[0] = CTL_NET;        // Request network subsystem
     mgmtInfoBase[1] = AF_ROUTE;       // Routing table info
-    mgmtInfoBase[2] = 0;              
+    mgmtInfoBase[2] = 0;
     mgmtInfoBase[3] = AF_LINK;        // Request link layer information
     mgmtInfoBase[4] = NET_RT_IFLIST;  // Request all configured interfaces
     
     // With all configured interfaces requested, get handle index
-    if ((mgmtInfoBase[5] = if_nametoindex("en0")) == 0) 
+    if ((mgmtInfoBase[5] = if_nametoindex("en0")) == 0)
         errorFlag = @"if_nametoindex failure";
     else
     {
         // Get the size of the data available (store in len)
-        if (sysctl(mgmtInfoBase, 6, NULL, &length, NULL, 0) < 0) 
+        if (sysctl(mgmtInfoBase, 6, NULL, &length, NULL, 0) < 0)
             errorFlag = @"sysctl mgmtInfoBase failure";
         else
         {
@@ -157,8 +194,8 @@
     memcpy(&macAddress, socketStruct->sdl_data + socketStruct->sdl_nlen, 6);
     
     // Read from char array into a string object, into traditional Mac address format
-    NSString *macAddressString = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X", 
-                                  macAddress[0], macAddress[1], macAddress[2], 
+    NSString *macAddressString = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X",
+                                  macAddress[0], macAddress[1], macAddress[2],
                                   macAddress[3], macAddress[4], macAddress[5]];
     DLog(@"Mac Address: %@", macAddressString);
     
