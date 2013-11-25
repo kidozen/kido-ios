@@ -123,6 +123,16 @@
                </Test>
             </SkippedTests>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AA1E4B86183127860059314D"
+               BuildableName = "sdk.integration.tests.xctest"
+               BlueprintName = "sdk.integration.tests"
+               ReferencedContainer = "container:kidozen.client.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

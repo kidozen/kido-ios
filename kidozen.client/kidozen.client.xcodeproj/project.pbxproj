@@ -55,11 +55,20 @@
 		8EB8652B1614D11800DD60E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
 		8EE16FAD161B52B6006BAA59 /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */; };
 		AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4208165D32BE00EB6443 /* CFNetwork.framework */; };
-		AA0F7EAC1730514000C55706 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AA0F7EAD1730514000C55706 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4206165D32B900EB6443 /* Security.framework */; };
 		AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0F7EB01730515200C55706 /* UIKit.framework */; };
+		AA1756FE18312D1100B3DEDF /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA86D4C317BAD7CF00B5F15E /* libSocketRocket.a */; };
+		AA1756FF18312E5400B3DEDF /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
+		AA1E4B89183127860059314D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1E4B88183127860059314D /* XCTest.framework */; };
+		AA1E4B8A183127860059314D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
+		AA1E4B8B183127860059314D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0F7EB01730515200C55706 /* UIKit.framework */; };
+		AA1E4B91183127860059314D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA1E4B8F183127860059314D /* InfoPlist.strings */; };
+		AA1E4B93183127860059314D /* sdk_integration_tests.m in Sources */ = {isa = PBXBuildFile; fileRef = AA1E4B92183127860059314D /* sdk_integration_tests.m */; };
+		AA1E4B9E18312CDB0059314D /* libkidozen.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB865271614D11800DD60E6 /* libkidozen.client.a */; };
 		AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = AA211CDA1667B35600848407 /* KZStorageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = AA211CDB1667B35600848407 /* KZStorageMetadata.m */; };
+		AA68A3401843BAEB00CBCFC2 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33F1843BAEB00CBCFC2 /* Constants.m */; };
+		AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
 		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -69,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AA1E4B95183127860059314D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8EB865261614D11800DD60E6;
+			remoteInfo = kidozen.client;
+		};
 		AA86D4C217BAD7CF00B5F15E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */;
@@ -171,8 +187,16 @@
 		8EB8652E1614D11800DD60E6 /* kidozen.client-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "kidozen.client-Prefix.pch"; sourceTree = "<group>"; };
 		8EB982871641A99300AA12CC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		AA0F7EB01730515200C55706 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AA1E4B87183127860059314D /* sdk.integration.tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sdk.integration.tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA1E4B88183127860059314D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AA1E4B8E183127860059314D /* sdk.integration.tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sdk.integration.tests-Info.plist"; sourceTree = "<group>"; };
+		AA1E4B90183127860059314D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA1E4B92183127860059314D /* sdk_integration_tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sdk_integration_tests.m; sourceTree = "<group>"; };
+		AA1E4B94183127860059314D /* sdk.integration.tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sdk.integration.tests-Prefix.pch"; sourceTree = "<group>"; };
 		AA211CDA1667B35600848407 /* KZStorageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZStorageMetadata.h; sourceTree = "<group>"; };
 		AA211CDB1667B35600848407 /* KZStorageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZStorageMetadata.m; sourceTree = "<group>"; };
+		AA68A33E1843BAEB00CBCFC2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		AA68A33F1843BAEB00CBCFC2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../../SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		AAC92C451725954200D1FF88 /* KZService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZService.h; sourceTree = "<group>"; };
 		AAC92C461725954200D1FF88 /* KZService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZService.m; sourceTree = "<group>"; };
@@ -190,11 +214,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */,
 				AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */,
 				AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */,
-				AA0F7EAC1730514000C55706 /* libicucore.dylib in Frameworks */,
 				AA0F7EAD1730514000C55706 /* Security.framework in Frameworks */,
 				8EB8652B1614D11800DD60E6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA1E4B84183127860059314D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1756FF18312E5400B3DEDF /* libicucore.dylib in Frameworks */,
+				AA1756FE18312D1100B3DEDF /* libSocketRocket.a in Frameworks */,
+				AA1E4B9E18312CDB0059314D /* libkidozen.client.a in Frameworks */,
+				AA1E4B89183127860059314D /* XCTest.framework in Frameworks */,
+				AA1E4B8B183127860059314D /* UIKit.framework in Frameworks */,
+				AA1E4B8A183127860059314D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +279,7 @@
 			children = (
 				AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */,
 				8EB8652C1614D11800DD60E6 /* kidozen.client */,
+				AA1E4B8C183127860059314D /* sdk.integration.tests */,
 				8EB865291614D11800DD60E6 /* Frameworks */,
 				8EB865281614D11800DD60E6 /* Products */,
 			);
@@ -251,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				8EB865271614D11800DD60E6 /* libkidozen.client.a */,
+				AA1E4B87183127860059314D /* sdk.integration.tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,6 +305,7 @@
 				8EB8652A1614D11800DD60E6 /* Foundation.framework */,
 				8E746EE0162312B0001D39C7 /* SenTestingKit.framework */,
 				8E5A61A71641872800038364 /* Cocoa.framework */,
+				AA1E4B88183127860059314D /* XCTest.framework */,
 				8E5A61A91641872800038364 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -331,6 +371,27 @@
 			isa = PBXGroup;
 			children = (
 				8EB8652E1614D11800DD60E6 /* kidozen.client-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA1E4B8C183127860059314D /* sdk.integration.tests */ = {
+			isa = PBXGroup;
+			children = (
+				AA1E4B92183127860059314D /* sdk_integration_tests.m */,
+				AA1E4B8D183127860059314D /* Supporting Files */,
+				AA68A33E1843BAEB00CBCFC2 /* Constants.h */,
+				AA68A33F1843BAEB00CBCFC2 /* Constants.m */,
+			);
+			path = sdk.integration.tests;
+			sourceTree = "<group>";
+		};
+		AA1E4B8D183127860059314D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA1E4B8E183127860059314D /* sdk.integration.tests-Info.plist */,
+				AA1E4B8F183127860059314D /* InfoPlist.strings */,
+				AA1E4B94183127860059314D /* sdk.integration.tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -408,6 +469,24 @@
 			productReference = 8EB865271614D11800DD60E6 /* libkidozen.client.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		AA1E4B86183127860059314D /* sdk.integration.tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA1E4B9D183127860059314D /* Build configuration list for PBXNativeTarget "sdk.integration.tests" */;
+			buildPhases = (
+				AA1E4B83183127860059314D /* Sources */,
+				AA1E4B84183127860059314D /* Frameworks */,
+				AA1E4B85183127860059314D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA1E4B96183127860059314D /* PBXTargetDependency */,
+			);
+			name = sdk.integration.tests;
+			productName = sdk.integration.tests;
+			productReference = AA1E4B87183127860059314D /* sdk.integration.tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -416,6 +495,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Tellago Studios";
+				TargetAttributes = {
+					AA1E4B86183127860059314D = {
+						TestTargetID = 8EB865261614D11800DD60E6;
+					};
+				};
 			};
 			buildConfigurationList = 8EB865211614D11800DD60E6 /* Build configuration list for PBXProject "kidozen.client" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -436,6 +520,7 @@
 			projectRoot = "";
 			targets = (
 				8EB865261614D11800DD60E6 /* kidozen.client */,
+				AA1E4B86183127860059314D /* sdk.integration.tests */,
 			);
 		};
 /* End PBXProject section */
@@ -470,6 +555,17 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA1E4B85183127860059314D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1E4B91183127860059314D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		8E0774BA1619E55400FA21D9 /* ShellScript */ = {
@@ -520,7 +616,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AA1E4B83183127860059314D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA1E4B93183127860059314D /* sdk_integration_tests.m in Sources */,
+				AA68A3401843BAEB00CBCFC2 /* Constants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA1E4B96183127860059314D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8EB865261614D11800DD60E6 /* kidozen.client */;
+			targetProxy = AA1E4B95183127860059314D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AA1E4B8F183127860059314D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA1E4B90183127860059314D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8EB865331614D11800DD60E6 /* Debug */ = {
@@ -547,7 +671,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$SRCROOT/DerivedData\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_CODE_SIGN_FLAGS = "-ObjC";
+				OTHER_CODE_SIGN_FLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-allLoad",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -569,7 +697,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$SRCROOT/DerivedData\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				OTHER_CODE_SIGN_FLAGS = "-ObjC";
+				OTHER_CODE_SIGN_FLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-allLoad",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -582,10 +714,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SYMROOT}/${CONFIGURATION}-universal/usr/local/include/include/";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -599,13 +728,74 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SYMROOT}/${CONFIGURATION}-universal/usr/local/include/include/";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AA1E4B97183127860059314D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sdk.integration.tests/sdk.integration.tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "sdk.integration.tests/sdk.integration.tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AA1E4B98183127860059314D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "sdk.integration.tests/sdk.integration.tests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "sdk.integration.tests/sdk.integration.tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -626,6 +816,15 @@
 			buildConfigurations = (
 				8EB865361614D11800DD60E6 /* Debug */,
 				8EB865371614D11800DD60E6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA1E4B9D183127860059314D /* Build configuration list for PBXNativeTarget "sdk.integration.tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA1E4B97183127860059314D /* Debug */,
+				AA1E4B98183127860059314D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

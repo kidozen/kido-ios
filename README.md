@@ -7,13 +7,13 @@ In order to use the iOS SDK binaries in your android application you must:
 - Download the lib folder. This folder contains all the headers and static libs files
 - In Xcode, open Project Navigator and select your project file.
 - Import the following libraryies and frameworks:
-  - libicucore.dylib
+  - [libicucore.dylib](/img/add-libicucore.png)
   - security.framework
   - cfnetwork.framework
 - On the right panel, click the Build Phases
   - Search Header Search Paths and include the path where the KidoZen headers files are
   - Search Library Search Paths and include the path where the KidoZen static library file is
-  - Search Other Linker Flags and include -allLoad and -ObjC
+  - [Search Other Linker Flags and include -allLoad and -ObjC](/img/other-linker.png)
 
 ##Getting started with the code
 One instance of the Application object has one or many instances of each of the services that you can find in the Kidozen platform (Storage, Queue, etc.) 
