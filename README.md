@@ -33,13 +33,13 @@ Initialize the Application: During initialization the SDK pulls the application 
 
 Then you must Authenticate against kidozen. To do that you must provide the identity provider that you will use the username and the password. The SDK hides all the calls needed to authenticate the user against the selected identity provider and to create a security context to execute all the services call.
 
-		[app authenticateUser:USER withProvider:PROVIDER andPassword:PASS completion:^(id r) {
+		[app authenticateUser:@"username@kidocloud.com" withProvider:@"Kidozen" andPassword:@"supersecret" completion:^(id r) {
 		...
 		}];
 
 Once the user is authenticated you can start using all the services:
 
-		tasks = [app StorageWithName:@"tasks"];
+		tasks = [app StorageWithName:@"tasksList"];
 		[tasks create:t completion:^(KZResponse * kr) {
 		...
 		}];
