@@ -25,8 +25,8 @@ The SDK API is callback based on all its interfaces to avoid UI block. The callb
 
 Initialize the Application: During initialization the SDK pulls the application configuration from the cloud services for the specified platform
 
-  	KZApplication * app = [[KZApplication alloc] initWithTennantMarketPlace:TENANT 
-                                                            applicationName:APP 
+  	KZApplication * app = [[KZApplication alloc] initWithTennantMarketPlace:@"https://my-company.kidocloud.com"" 
+                                                            applicationName:@"tasks"
                                                                 andCallback:^(KZResponse * r) {
 			...
 		}];
