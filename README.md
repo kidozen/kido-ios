@@ -2,15 +2,19 @@
 
 The SDK has a dependency with SocketRocket if you clone the sources you must download it and add it as a library or a sub-project
 
-In order to use the iOS SDK binaries in your android application you must:
+In order to use the iOS SDK binaries in your application you must download the lib folder. This folder contains all the headers and static libs files
 
-- Download the lib folder. This folder contains all the headers and static libs files
-- In Xcode, open Project Navigator and select your project file.
-- Import the following libraryies and frameworks:
-  - [libicucore.dylib](/img/add-libicucore.png)
+Import the libicucore.dylib library:
+  - Open Project Navigator and select your project file.
+  - Click the build phases tab button near the top
+  - Expand the Link Binary with Libraries
+  - [Then add the library](/img/add-libicucore.png)
+
+Repeat the operation with the following frameworks:
   - security.framework
   - cfnetwork.framework
-- On the right panel, click the Build Phases
+
+On the right panel, click the Build Phases
   - Search Header Search Paths and include the path where the KidoZen headers files are
   - Search Library Search Paths and include the path where the KidoZen static library file is
   - [Search Other Linker Flags and include -allLoad and -ObjC](/img/other-linker.png)
@@ -25,29 +29,29 @@ The SDK API is callback based on all its interfaces to avoid UI block. The callb
 
 Initialize the Application: During initialization the SDK pulls the application configuration from the cloud services for the specified platform
 
-  	KZApplication * app = [[KZApplication alloc] initWithTennantMarketPlace:@"https://my-company.kidocloud.com"" 
+    KZApplication * app = [[KZApplication alloc] initWithTennantMarketPlace:@"https://my-company.kidocloud.com"" 
                                                             applicationName:@"tasks"
                                                                 andCallback:^(KZResponse * r) {
-			...
-		}];
+            ...
+        }];
 
 Then you must Authenticate against kidozen. To do that you must provide the identity provider that you will use the username and the password. The SDK hides all the calls needed to authenticate the user against the selected identity provider and to create a security context to execute all the services call.
 
-		[app authenticateUser:@"username@kidocloud.com" withProvider:@"Kidozen" andPassword:@"supersecret" completion:^(id r) {
-		...
-		}];
+        [app authenticateUser:@"username@kidocloud.com" withProvider:@"Kidozen" andPassword:@"supersecret" completion:^(id r) {
+        ...
+        }];
 
 Once the user is authenticated you can start using all the services:
 
-		tasks = [app StorageWithName:@"tasksList"];
-		[tasks create:t completion:^(KZResponse * kr) {
-		...
-		}];
-		...
-		queue = [app QueueWithName:@"messages"];
-		[queue enqueue completion:^(KZResponse * kr) {
-		...
-		}];
+        tasks = [app StorageWithName:@"tasksList"];
+        [tasks create:t completion:^(KZResponse * kr) {
+        ...
+        }];
+        ...
+        queue = [app QueueWithName:@"messages"];
+        [queue enqueue completion:^(KZResponse * kr) {
+        ...
+        }];
 
 
 #License 
