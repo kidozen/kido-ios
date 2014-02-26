@@ -129,14 +129,14 @@ static NSMutableDictionary * tokenCache;
         ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:_bypassSSLValidation ];
     
     [ip initializeWithUserName:user password:password andScope:authServiceScope];
-    [ip requestToken:providerIPEndpoint completion:^(NSString *token, NSError *error) {
+    [ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
         if (error) {
             if (_authCompletionBlock) {
                 _authCompletionBlock(error);
                 return ;         
             }
         }
-        NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:applicationScope ,@"wrap_scope", @"SAML",@"wrap_assertion_format", token,@"wrap_assertion", nil];
+        NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:applicationScope ,@"wrap_scope", @"SAML",@"wrap_assertion_format", ipToken,@"wrap_assertion", nil];
         
         if (!_defaultClient) {
             _defaultClient = [[KZHTTPClient alloc] init];
@@ -151,19 +151,22 @@ static NSMutableDictionary * tokenCache;
               _authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
             }
             else {
-                self.isAuthenticated=true;
+                self.isAuthenticated = true;
                 self.KidoZenUser.user = user;
                 self.KidoZenUser.pass = password;
                 
-                NSString * t =[NSString stringWithFormat:@"WRAP access_token=\"%@\"",[response objectForKey:@"rawToken"]];
-                [self willChangeValueForKey:KVO_KEY_VALUE];
-                self.kzToken = t;
+                NSString * kzToken = [NSString stringWithFormat:@"WRAP access_token=\"%@\"", [response objectForKey:@"rawToken"]];
                 
-                NSString * key = [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword] createHash];
-                [tokenCache setValue:t forKey:key];
-                [self didChangeValueForKey:@"kzToken"];
-                [self parseUserInfo:t];
-                if (self.KidoZenUser.expiresOn>0) {
+                [self willChangeValueForKey:KVO_KEY_VALUE];
+                
+                self.kzToken = kzToken;
+                self.ipToken = ipToken;
+                
+                [self setCacheWithIPToken:ipToken andKzToken:kzToken];
+                
+                [self parseUserInfo:kzToken];
+                
+                if (self.KidoZenUser.expiresOn > 0) {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         tokenExpirationTimer = [NSTimer scheduledTimerWithTimeInterval:self.KidoZenUser.expiresOn
                                                                                 target:self
@@ -200,8 +203,7 @@ static NSMutableDictionary * tokenCache;
     }
     else
     {
-        NSString * key = [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword] createHash];
-        [tokenCache removeObjectForKey:key];
+        [self removeTokensFromCache];
         [self  authenticateUser:_lastUserName withProvider:_lastProviderKey andPassword:_lastPassword];
     }
 }
@@ -323,19 +325,18 @@ static NSMutableDictionary * tokenCache;
     _lastPassword = password;
     _lastProviderKey = provider;
 
-    NSString * key = [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, provider, user, password] createHash];
-    NSString * value=[tokenCache objectForKey:key] ;
-    if (value) {
-        [self willChangeValueForKey:KVO_KEY_VALUE];
-        self.kzToken = value;
-        [self didChangeValueForKey:KVO_KEY_VALUE];
-        [self parseUserInfo:value];
+    [self loadTokensFromCache];
+    
+    if (self.kzToken && self.ipToken) {
+        [self parseUserInfo:self.kzToken];
+        
         if (_authCompletionBlock) {
             _authCompletionBlock(self.kzToken);
         }
     }
-    else
+    else {
         [self invokeAuthServices:user withPassword:password andProvider:provider];
+    }
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -371,9 +372,55 @@ static NSMutableDictionary * tokenCache;
     
     KZService * s= [[KZService alloc] initWithEndpoint:ep andName:name];
     [s setBypassSSL:_bypassSSLValidation];
+    
     s.kzToken = self.kzToken;
+    s.ipToken = self.ipToken;
+    
     [_services setObject:s forKey:name];
-    return s;    
+    
+    return s;
 }
 
+-(void) setCacheWithIPToken:(NSString *) ipToken andKzToken:(NSString *) kzToken
+{
+    NSString * kzKey = [self getKzCacheKey];
+    NSString * ipKey = [self getIpCacheKey];
+    
+    [tokenCache setValue:kzToken forKey:kzKey];
+    [tokenCache setValue:ipToken forKey:ipKey];
+    
+    [self didChangeValueForKey:KVO_KEY_VALUE];
+}
+
+-(void) loadTokensFromCache
+{
+    NSString * kzKey = [self getKzCacheKey];
+    NSString * ipKey = [self getIpCacheKey];
+     
+    self.kzToken = [tokenCache objectForKey:kzKey];
+    self.ipToken = [tokenCache objectForKey:ipKey];
+
+    [self willChangeValueForKey:KVO_KEY_VALUE];
+    [self didChangeValueForKey:KVO_KEY_VALUE];
+}
+
+-(void) removeTokensFromCache
+{
+    NSString * kzKey = [self getKzCacheKey];
+    NSString * ipKey = [self getIpCacheKey];
+    
+    [tokenCache removeObjectForKey:kzKey];
+    [tokenCache removeObjectForKey:ipKey];
+}
+
+- (NSString *) getIpCacheKey
+{
+    return [[NSString stringWithFormat:@"%@%@%@%@-ipToken", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword] createHash];
+}
+
+- (NSString *) getKzCacheKey
+{
+    return [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword]
+            createHash];
+}
 @end

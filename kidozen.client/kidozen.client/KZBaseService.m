@@ -19,7 +19,7 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
 @synthesize serviceUrl = _serviceUrl;
 @synthesize kzToken = _kzToken;
 @synthesize KidoZenUser = _kzUser;
-
+@synthesize ipToken = _ipToken;
 
 -(id) initWithEndpoint:(NSString *)endpoint andName:(NSString *)name
 {

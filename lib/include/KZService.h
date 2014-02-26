@@ -5,4 +5,6 @@
 
 -(void) invokeMethod:(NSString *) method withData:(id)data completion:(void (^)(KZResponse *))block;
 
+-(void) invokeMethodWithAuth:(NSString *) method withData:(id)data completion:(void (^)(KZResponse *))block;
+
 @end

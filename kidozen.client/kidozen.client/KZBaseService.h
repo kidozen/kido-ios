@@ -15,6 +15,8 @@ extern NSInteger const KZHttpErrorStatusCode;
 
 }
 @property (atomic, strong) NSString * kzToken;
+@property (atomic, strong) NSString * ipToken;
+
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSURL * serviceUrl;
 @property (atomic) BOOL isAuthenticated;
