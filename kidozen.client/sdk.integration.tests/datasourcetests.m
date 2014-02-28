@@ -75,4 +75,18 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
+- (void)testShouldReturnError
+{
+    KZDatasource *ds = [self.application DataSourceWithName:@"invalid"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [ds Query:^(KZResponse *r) {
+        XCTAssertNotNil(r.error,@"invalid response");
+        XCTAssertEqual(1,[r.error code]);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+}
+
 @end
