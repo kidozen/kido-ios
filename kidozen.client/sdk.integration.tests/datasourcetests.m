@@ -51,7 +51,10 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
     [ds Query:^(KZResponse *r) {
-        XCTAssertNotNil(r,@"User not authenticated");
+        XCTAssertNotNil(r,@"invalid response");
+        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
+        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
@@ -59,7 +62,17 @@
 
 - (void)testShouldExecuteInvoke
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    KZDatasource *ds = [self.application DataSourceWithName:@"test-operation"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [ds Invoke:^(KZResponse *r) {
+        XCTAssertNotNil(r,@"invalid response");
+        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
+        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
 @end
