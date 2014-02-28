@@ -20,20 +20,6 @@
                ReferencedContainer = "container:kidozen.client.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AA8FEBDA165C116F00653F4B"
-               BuildableName = "kidozen.client.tests.octest"
-               BlueprintName = "kidozen.client.tests"
-               ReferencedContainer = "container:kidozen.client.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

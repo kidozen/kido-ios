@@ -66,7 +66,7 @@
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
 		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6B2A6166915AF00AED1AF /* KZConstants.m */; };
-		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; };
+		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */; };
 		AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1E4B88183127860059314D /* XCTest.framework */; };
 		AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
@@ -442,7 +442,6 @@
 				8E0774D11619F35500FA21D9 /* KZNotification.h in Headers */,
 				8E0774D21619F35500FA21D9 /* KZPubSubChannel.h in Headers */,
 				8E0774D31619F35500FA21D9 /* KZQueue.h in Headers */,
-				AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */,
 				8E0774D41619F35500FA21D9 /* KZResponse.h in Headers */,
 				8E0774D51619F35500FA21D9 /* KZBaseService.h in Headers */,
 				8E0774D61619F35500FA21D9 /* KZSMSSender.h in Headers */,
@@ -452,6 +451,7 @@
 				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
 				8E69448D16261DA90089959F /* NSData+SRB64Additions.h in Headers */,
 				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
+				AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */,
 				8E0774DC1619F35500FA21D9 /* Query.h in Headers */,
 				AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */,
 			);
