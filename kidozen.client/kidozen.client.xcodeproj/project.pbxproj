@@ -191,9 +191,6 @@
 		8EB982871641A99300AA12CC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		AA0F7EB01730515200C55706 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA1E4B88183127860059314D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		AA1E4B8E183127860059314D /* sdk.integration.tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "sdk.integration.tests-Info.plist"; sourceTree = "<group>"; };
-		AA1E4B90183127860059314D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AA1E4B94183127860059314D /* sdk.integration.tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sdk.integration.tests-Prefix.pch"; sourceTree = "<group>"; };
 		AA211CDA1667B35600848407 /* KZStorageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZStorageMetadata.h; sourceTree = "<group>"; };
 		AA211CDB1667B35600848407 /* KZStorageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZStorageMetadata.m; sourceTree = "<group>"; };
 		AA68A33E1843BAEB00CBCFC2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../sdk.integration.tests/Constants.h; sourceTree = "<group>"; };
@@ -288,7 +285,6 @@
 			children = (
 				AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */,
 				8EB8652C1614D11800DD60E6 /* kidozen.client */,
-				AA1E4B8C183127860059314D /* sdk.integration.tests */,
 				AAE6E8DB18C10D8100FB046A /* Integration Tests */,
 				8EB865291614D11800DD60E6 /* Frameworks */,
 				8EB865281614D11800DD60E6 /* Products */,
@@ -383,24 +379,6 @@
 			isa = PBXGroup;
 			children = (
 				8EB8652E1614D11800DD60E6 /* kidozen.client-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AA1E4B8C183127860059314D /* sdk.integration.tests */ = {
-			isa = PBXGroup;
-			children = (
-				AA1E4B8D183127860059314D /* Supporting Files */,
-			);
-			path = sdk.integration.tests;
-			sourceTree = "<group>";
-		};
-		AA1E4B8D183127860059314D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AA1E4B8E183127860059314D /* sdk.integration.tests-Info.plist */,
-				AA1E4B8F183127860059314D /* InfoPlist.strings */,
-				AA1E4B94183127860059314D /* sdk.integration.tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -670,14 +648,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		AA1E4B8F183127860059314D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA1E4B90183127860059314D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		AAE6E8DE18C10D8100FB046A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

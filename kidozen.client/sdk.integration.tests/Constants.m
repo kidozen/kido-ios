@@ -8,8 +8,8 @@
 
 #import "Constants.h"
 
-NSString * const kzAppCenterUrl = @"https://tests.qa.kidozen.com";
-NSString * const kzAppName = @"tasks";
-NSString * const kzUser = @"tellago@kidozen.com";
-NSString * const kzPassword = @"pass";
+NSString * const kzAppCenterUrl = @""; //URL of the tenant's marketplece
+NSString * const kzAppName = @""; // app name
+NSString * const kzUser = @""; //kidozen user
+NSString * const kzPassword = @""; //kidozen password
 NSString * const kzProvider = @"Kidozen";
