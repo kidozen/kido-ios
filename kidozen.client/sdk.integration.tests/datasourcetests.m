@@ -48,9 +48,13 @@
 - (void)testShouldExecuteGet
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+
     [ds Query:^(KZResponse *r) {
         XCTAssertNotNil(r,@"User not authenticated");
     }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
 - (void)testShouldExecuteInvoke

@@ -178,5 +178,5 @@ typedef void (^TokenExpiresBlock)(id);
  * @param name the service name.
  * @return a new DataSource object
  */
--(KZService *) DataSourceWithName:(NSString *) name;
+-(KZDatasource *) DataSourceWithName:(NSString *) name;
 @end

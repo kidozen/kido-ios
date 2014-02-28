@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0460"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -46,90 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AA8FEBDA165C116F00653F4B"
-               BuildableName = "kidozen.client.tests.octest"
-               BlueprintName = "kidozen.client.tests"
-               ReferencedContainer = "container:kidozen.client.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "KidoZenApplicationTests">
-               </Test>
-               <Test
-                  Identifier = "KidoZenConfigurationTests">
-               </Test>
-               <Test
-                  Identifier = "KidoZenEmailTests">
-               </Test>
-               <Test
-                  Identifier = "KidoZenLoggingTests">
-               </Test>
-               <Test
-                  Identifier = "KidoZenQueueTests">
-               </Test>
-               <Test
-                  Identifier = "KidoZenUserAuthenticationTests">
-               </Test>
-               <Test
-                  Identifier = "KidoZenStorageTests">
-               </Test>
-               <Test
-                  Identifier = "SMSServiceShould/testSendSMS">
-               </Test>
-               <Test
-                  Identifier = "KidoZenSMSTests">
-               </Test>
-               <Test
-                  Identifier = "ADFIdentityProviderShould">
-               </Test>
-               <Test
-                  Identifier = "AuthenticationServiceShould">
-               </Test>
-               <Test
-                  Identifier = "ConfigurationServiceShould/testCreateConfiguration">
-               </Test>
-               <Test
-                  Identifier = "ConfigurationServiceShould/testGetEntity">
-               </Test>
-               <Test
-                  Identifier = "ConfigurationServiceShould/testRemoveConfiguration">
-               </Test>
-               <Test
-                  Identifier = "SMSServiceShould">
-               </Test>
-               <Test
-                  Identifier = "StorageMetadataSerialization">
-               </Test>
-               <Test
-                  Identifier = "ConfigurationServiceShould/testGetAllConfigurations">
-               </Test>
-               <Test
-                  Identifier = "EMailServiceShould/testShouldSendEmailWithMultiplesRecipients">
-               </Test>
-               <Test
-                  Identifier = "ConfigurationServiceShould">
-               </Test>
-               <Test
-                  Identifier = "EMailServiceShould">
-               </Test>
-               <Test
-                  Identifier = "QueueServiceShould">
-               </Test>
-               <Test
-                  Identifier = "LoggingServiceShould">
-               </Test>
-               <Test
-                  Identifier = "StorageServiceShould">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AA1E4B86183127860059314D"
-               BuildableName = "sdk.integration.tests.xctest"
-               BlueprintName = "sdk.integration.tests"
+               BlueprintIdentifier = "AAE6E8D618C10D8100FB046A"
+               BuildableName = "Integration Tests.xctest"
+               BlueprintName = "Integration Tests"
                ReferencedContainer = "container:kidozen.client.xcodeproj">
             </BuildableReference>
          </TestableReference>
