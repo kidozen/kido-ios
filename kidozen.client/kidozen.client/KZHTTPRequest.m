@@ -290,7 +290,7 @@ typedef NSUInteger SVHTTPRequestState;
     [self.operationConnection start];
     
 #if !(defined SVHTTPREQUEST_DISABLE_LOGGING)
-    DLog(@"[%@] %@", self.operationRequest.HTTPMethod, self.operationRequest.URL.absoluteString);
+    //DLog(@"[%@] %@", self.operationRequest.HTTPMethod, self.operationRequest.URL.absoluteString);
 #endif
 }
 

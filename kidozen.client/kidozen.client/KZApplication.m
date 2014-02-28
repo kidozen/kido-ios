@@ -361,6 +361,24 @@ static NSMutableDictionary * tokenCache;
     [_log setKzToken:[change objectForKey:KVO_NEW_VALUE]];
 }
 
+-(KZDatasource *) DataSourceWithName:(NSString *)name
+{
+    if (!_datasources) {
+        _datasources = [[NSMutableDictionary alloc] init];
+    }
+    NSString * ep =[[_configuration valueForKey:@"datasource"] stringByAppendingString:@"/"];
+    
+    KZDatasource * s= [[KZDatasource alloc] initWithEndpoint:ep andName:name];
+    [s setBypassSSL:_bypassSSLValidation];
+    
+    s.kzToken = self.kzToken;
+    s.ipToken = self.ipToken;
+    
+    [_datasources setObject:s forKey:name];
+    
+    return s;
+}
+
 -(KZService *) LOBServiceWithName:(NSString *) name
 {
     if (!_services) {

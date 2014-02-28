@@ -8,8 +8,8 @@
 
 #import "Constants.h"
 
-NSString * const kzAppCenterUrl = @"https://dybero.kidocloud.com";
-NSString * const kzAppName = @"dynamicsmobile";
-NSString * const kzUser = @"dybero@kidozen.com";
-NSString * const kzPassword = @"zPr398n!";
-NSString * const kzProvider = @"Kidoze";
+NSString * const kzAppCenterUrl = @"https://tests.qa.kidozen.com";
+NSString * const kzAppName = @"tasks";
+NSString * const kzUser = @"tellago@kidozen.com";
+NSString * const kzPassword = @"pass";
+NSString * const kzProvider = @"Kidozen";

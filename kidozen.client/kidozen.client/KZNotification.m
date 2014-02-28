@@ -180,7 +180,7 @@
     // Befor going any further...
     if (errorFlag != NULL)
     {
-        DLog(@"Error: %@", errorFlag);
+        //DLog(@"Error: %@", errorFlag);
         return errorFlag;
     }
     
@@ -197,7 +197,7 @@
     NSString *macAddressString = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X",
                                   macAddress[0], macAddress[1], macAddress[2],
                                   macAddress[3], macAddress[4], macAddress[5]];
-    DLog(@"Mac Address: %@", macAddressString);
+    //DLog(@"Mac Address: %@", macAddressString);
     
     // Release the buffer memory
     free(msgBuffer);

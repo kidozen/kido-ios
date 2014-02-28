@@ -15,6 +15,7 @@
 #import "KZSMSSender.h"
 #import "KZLogging.h"
 #import "KZService.h"
+#import "KZDatasource.h"
 
 #if TARGET_OS_IPHONE
 #import "KZPubSubChannel.h"
@@ -46,6 +47,7 @@ typedef void (^TokenExpiresBlock)(id);
     NSMutableDictionary * _channels;
     NSMutableDictionary * _files;
     NSMutableDictionary * _services;
+    NSMutableDictionary * _datasources;
     
     __block NSTimer* tokenExpirationTimer ;
 }
@@ -170,4 +172,11 @@ typedef void (^TokenExpiresBlock)(id);
  */
 -(KZService *) LOBServiceWithName:(NSString *) name;
 
+/**
+ * Creates a new DataSource object
+ *
+ * @param name the service name.
+ * @return a new DataSource object
+ */
+-(KZService *) DataSourceWithName:(NSString *) name;
 @end
