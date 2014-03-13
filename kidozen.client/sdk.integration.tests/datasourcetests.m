@@ -12,6 +12,8 @@
 
 @interface datasourcetests : XCTestCase
 @property (nonatomic, retain) KZApplication * application;
+@property (nonatomic, retain) NSDictionary * nestedDataDict;
+@property (nonatomic, retain) NSDictionary * dataDict;
 @end
 
 @implementation datasourcetests
@@ -19,6 +21,8 @@
 - (void)setUp
 {
     [super setUp];
+    self.nestedDataDict = [NSDictionary dictionaryWithObjectsAndKeys:@"path",@"/",[NSDictionary dictionaryWithObject:@"kidozen" forKey:@"k"],@"qs",nil];
+    self.dataDict = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
     // Put setup code here; it will be run once, before the first test case.
     if (!self.application) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -49,7 +53,6 @@
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query"];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-
     [ds Query:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
         NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
@@ -78,9 +81,9 @@
 - (void)testShouldExecuteGetWithDataAsDictionary
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query-params"];
-    NSDictionary * data = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
+
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [ds QueryWithData:data completion:^(KZResponse *r) {
+    [ds QueryWithData:_dataDict completion:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
         NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
         XCTAssertEqual(200,[status intValue], @"Invalid status code");
@@ -93,9 +96,8 @@
 - (void)testShouldExecuteGetWithDataAsNestedDictionary
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query-params"];
-    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"path",@"/",[NSDictionary dictionaryWithObject:@"kidozen" forKey:@"k"],@"qs",nil];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [ds QueryWithData:data completion:^(KZResponse *r) {
+    [ds QueryWithData:_nestedDataDict completion:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
         NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
         XCTAssertEqual(200,[status intValue], @"Invalid status code");
@@ -108,9 +110,8 @@
 - (void)testShouldExecuteInvokeWithDataAsDictionary
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-operation-params"];
-    NSDictionary * data = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [ds InvokeWithData:data completion:^(KZResponse *r) {
+    [ds InvokeWithData:_dataDict completion:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
         NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
         XCTAssertEqual(200,[status intValue], @"Invalid status code");

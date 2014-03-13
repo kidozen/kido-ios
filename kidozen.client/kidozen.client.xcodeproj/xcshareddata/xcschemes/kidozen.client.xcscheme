@@ -44,18 +44,6 @@
                <Test
                   Identifier = "datasourcetests/testShouldReturnError">
                </Test>
-               <Test
-                  Identifier = "datasourcetests/testShouldExecuteGet">
-               </Test>
-               <Test
-                  Identifier = "datasourcetests/testShouldExecuteGetWithDataAsDictionary">
-               </Test>
-               <Test
-                  Identifier = "datasourcetests/testShouldExecuteInvoke">
-               </Test>
-               <Test
-                  Identifier = "datasourcetests/testShouldExecuteInvokeWithDataAsDictionary">
-               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
