@@ -112,7 +112,7 @@
     requestOperation.cachePolicy = self.cachePolicy;
     requestOperation.userAgent = self.userAgent;
     [requestOperation setBypassSSLValidation:_bypassSSLValidation];
-    
+
     if(self.username && self.password)
         [(id<KZHTTPRequestPrivateMethods>)requestOperation signRequestWithUsername:self.username password:self.password];
     

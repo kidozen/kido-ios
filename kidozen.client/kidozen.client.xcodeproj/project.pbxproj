@@ -64,6 +64,7 @@
 		AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
+		AACBD73B18CA579400518D14 /* applicationtests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationtests.m */; };
 		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6B2A6166915AF00AED1AF /* KZConstants.m */; };
 		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -198,6 +199,7 @@
 		AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../../SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		AAC92C451725954200D1FF88 /* KZService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZService.h; sourceTree = "<group>"; };
 		AAC92C461725954200D1FF88 /* KZService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZService.m; sourceTree = "<group>"; };
+		AACBD73A18CA579400518D14 /* applicationtests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = applicationtests.m; sourceTree = "<group>"; };
 		AADA4204165D327400EB6443 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		AADA4206165D32B900EB6443 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AADA4208165D32BE00EB6443 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -402,6 +404,7 @@
 				AAE6E88418C0E80B00FB046A /* datasourcetests.m */,
 				AAE6E8E118C10D8100FB046A /* Integration_Tests.m */,
 				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
+				AACBD73A18CA579400518D14 /* applicationtests.m */,
 			);
 			path = "Integration Tests";
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AACBD73B18CA579400518D14 /* applicationtests.m in Sources */,
 				AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */,
 				AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */,
 				AAE6E8EB18C10DBF00FB046A /* datasourcetests.m in Sources */,
@@ -727,7 +731,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SYMROOT}/${CONFIGURATION}-universal/usr/local/include/include/";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -741,7 +748,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = "${SYMROOT}/${CONFIGURATION}-universal/usr/local/include/include/";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -776,6 +786,10 @@
 				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				WRAPPER_EXTENSION = xctest;
@@ -807,6 +821,10 @@
 				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				WRAPPER_EXTENSION = xctest;

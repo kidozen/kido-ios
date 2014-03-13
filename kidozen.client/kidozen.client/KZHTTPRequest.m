@@ -1,6 +1,6 @@
 #import "KZHTTPRequest.h"
 
-#define kSVHTTPRequestTimeoutInterval 20
+#define kSVHTTPRequestTimeoutInterval 100
 
 @interface NSData (Base64)
 - (NSString*)base64EncodingWithLineLength:(unsigned int)lineLength;

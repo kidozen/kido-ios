@@ -35,7 +35,7 @@
                                                                     }];
         assert(self.application);
         while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
     }
 }
 
@@ -57,7 +57,7 @@
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
 - (void)testShouldExecuteInvoke
@@ -75,6 +75,50 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
+- (void)testShouldExecuteGetWithDataAsDictionary
+{
+    KZDatasource *ds = [self.application DataSourceWithName:@"test-query-params"];
+    NSDictionary * data = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [ds QueryWithData:data completion:^(KZResponse *r) {
+        XCTAssertNotNil(r,@"invalid response");
+        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
+        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+- (void)testShouldExecuteGetWithDataAsNestedDictionary
+{
+    KZDatasource *ds = [self.application DataSourceWithName:@"test-query-params"];
+    NSDictionary * data = [NSDictionary dictionaryWithObjectsAndKeys:@"path",@"/",[NSDictionary dictionaryWithObject:@"kidozen" forKey:@"k"],@"qs",nil];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [ds QueryWithData:data completion:^(KZResponse *r) {
+        XCTAssertNotNil(r,@"invalid response");
+        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
+        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+- (void)testShouldExecuteInvokeWithDataAsDictionary
+{
+    KZDatasource *ds = [self.application DataSourceWithName:@"test-operation-params"];
+    NSDictionary * data = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [ds InvokeWithData:data completion:^(KZResponse *r) {
+        XCTAssertNotNil(r,@"invalid response");
+        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
+        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+}
 - (void)testShouldReturnError
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"invalid"];

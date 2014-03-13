@@ -37,6 +37,26 @@
                BlueprintName = "Integration Tests"
                ReferencedContainer = "container:kidozen.client.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "applicationtests">
+               </Test>
+               <Test
+                  Identifier = "datasourcetests/testShouldReturnError">
+               </Test>
+               <Test
+                  Identifier = "datasourcetests/testShouldExecuteGet">
+               </Test>
+               <Test
+                  Identifier = "datasourcetests/testShouldExecuteGetWithDataAsDictionary">
+               </Test>
+               <Test
+                  Identifier = "datasourcetests/testShouldExecuteInvoke">
+               </Test>
+               <Test
+                  Identifier = "datasourcetests/testShouldExecuteInvokeWithDataAsDictionary">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

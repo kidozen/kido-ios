@@ -15,4 +15,8 @@
 
 -(void) Invoke:(void (^)(KZResponse *))block;
 
+-(void) QueryWithData:(id)data completion:(void (^)(KZResponse *))block;
+
+-(void) InvokeWithData:(id)data completion:(void (^)(KZResponse *))block;
+
 @end

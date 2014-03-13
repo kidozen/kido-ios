@@ -30,8 +30,9 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
         _endpoint = endpoint;
         
         _serviceUrl = [NSURL URLWithString:_endpoint] ;
-        _client = [[KZHTTPClient alloc] init]; 
+        _client = [[KZHTTPClient alloc] init];
         [_client setBasePath:_serviceUrl.absoluteString];
+        
     }
     return self;
 }
