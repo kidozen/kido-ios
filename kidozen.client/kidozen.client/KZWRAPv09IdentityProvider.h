@@ -1,5 +1,5 @@
 #import "KZIdentityProvider.h"
-#import "KZHTTPClient.h"
+#import <SVHTTPClient.h>
 /**
  * WRAP V 09 Identity Provider
  *

@@ -25,7 +25,7 @@
             deviceMacAddress = [self getMacAddress];
         }
         
-        _client = [[KZHTTPClient alloc] init];
+        _client = [[SVHTTPClient alloc] init];
         [_client setBasePath:endpoint];
     }
     return self;

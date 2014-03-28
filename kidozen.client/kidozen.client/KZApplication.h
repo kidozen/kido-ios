@@ -16,13 +16,14 @@
 #import "KZLogging.h"
 #import "KZService.h"
 #import "KZDatasource.h"
+#import "KZCrashReporter.h"
 
 #if TARGET_OS_IPHONE
 #import "KZPubSubChannel.h"
 #endif
 #import "KZAuthentication.h"
 #import "KZWRAPv09IdentityProvider.h"
-#import "KZHTTPRequest.h"
+#import <SVHTTPRequest.h>
 
 
 typedef void (^AuthCompletionBlock)(id);
@@ -86,7 +87,15 @@ typedef void (^TokenExpiresBlock)(id);
 
 @property (strong, nonatomic) KZMail * mail;
 @property (strong, nonatomic) KZLogging * log;
-@property (strong, nonatomic) KZHTTPClient * defaultClient;
+@property (strong, nonatomic) SVHTTPClient * defaultClient;
+
+
+/**
+ * Crash reporter
+ *
+ * @return crash reporter object
+ */
++ (KZCrashReporter *) sharedCrashReporter;
 
 /**
  * Push notification service main entry point

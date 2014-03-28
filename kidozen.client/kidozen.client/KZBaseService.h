@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "KZHTTPClient.h"
+#import "SVHTTPClient.h"
 #import "KZResponse.h" 
 #import "KZIdentityProvider.h"
 #import "KZUser.h"
@@ -9,7 +9,7 @@ extern NSInteger const KZHttpErrorStatusCode;
 @interface KZBaseService : NSObject
 {
     NSString * _endpoint;
-    KZHTTPClient * _client;
+    SVHTTPClient * _client;
     NSURL * baseUrl;
     BOOL _bypassSSL;
 

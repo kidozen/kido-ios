@@ -26,8 +26,8 @@
 -(void) requestToken:(NSString *) identityProviderUrl completion:(RequestTokenCompletionBlock)block
 {
     NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:_wrapName ,@"wrap_name", _wrapPassword,@"wrap_password", _wrapScope,@"wrap_scope", nil];
-    KZHTTPClient * client = [[KZHTTPClient alloc] init];
-    [client setBypassSSLValidation:_bypassSSLValidation];
+    SVHTTPClient * client = [[SVHTTPClient alloc] init];
+    [client setDismissNSURLAuthenticationMethodServerTrust:_bypassSSLValidation];
     [client setBasePath:identityProviderUrl];
     [client POST:@"" parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;

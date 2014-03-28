@@ -6,7 +6,7 @@
  *
  */
 #import <Foundation/Foundation.h>
-#import "KZHTTPClient.h"
+#import <SVHTTPClient.h>
 #import "KZIdentityProvider.h"
 
 @interface KZADFSIdentityProvider : NSObject <KZIdentityProvider, NSURLConnectionDelegate>

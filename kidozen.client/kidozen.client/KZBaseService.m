@@ -30,7 +30,7 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
         _endpoint = endpoint;
         
         _serviceUrl = [NSURL URLWithString:_endpoint] ;
-        _client = [[KZHTTPClient alloc] init];
+        _client = [[SVHTTPClient alloc] init];
         [_client setBasePath:_serviceUrl.absoluteString];
         
     }
@@ -40,7 +40,7 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
 -(void) setBypassSSL:(BOOL)bypass
 {
     _bypassSSL = bypass;
-    [_client setBypassSSLValidation:bypass];
+    [_client setDismissNSURLAuthenticationMethodServerTrust:bypass];
 }
 
 -(BOOL) bypassSSL

@@ -33,6 +33,15 @@ static NSMutableDictionary * tokenCache;
 @synthesize identityProviders = _identityProviders;
 @synthesize bypassSSLValidation = _bypassSSLValidation;
 
++ (KZCrashReporter *) sharedCrashReporter {
+    static dispatch_once_t once;
+    static KZCrashReporter *instance;
+    dispatch_once(&once, ^{
+        instance = [[KZCrashReporter alloc] init];
+    });
+    return instance;
+}
+
 -(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName andCallback:(void (^)(KZResponse *))callback
 {
    return [self initWithTennantMarketPlace:tennantMarketPlace applicationName:applicationName bypassSSLValidation:NO andCallback:callback];
@@ -64,8 +73,8 @@ static NSMutableDictionary * tokenCache;
 {
     NSString * appSettingsPath = [NSString stringWithFormat:KZ_APP_CONFIG_PATH];
     if (!_defaultClient) {
-        _defaultClient = [[KZHTTPClient alloc] init];
-        [_defaultClient setBypassSSLValidation:_bypassSSLValidation];
+        _defaultClient = [[SVHTTPClient alloc] init];
+        [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_bypassSSLValidation];
     }
 
     [_defaultClient setBasePath:_tennantMarketPlace];
@@ -139,8 +148,8 @@ static NSMutableDictionary * tokenCache;
         NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:applicationScope ,@"wrap_scope", @"SAML",@"wrap_assertion_format", ipToken,@"wrap_assertion", nil];
         
         if (!_defaultClient) {
-            _defaultClient = [[KZHTTPClient alloc] init];
-            [_defaultClient setBypassSSLValidation:_bypassSSLValidation];
+            _defaultClient = [[SVHTTPClient alloc] init];
+            [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_bypassSSLValidation];
         }
         
         [_defaultClient setBasePath:authServiceEndpoint];
