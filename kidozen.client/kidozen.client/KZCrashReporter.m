@@ -19,6 +19,7 @@ NSMutableDictionary * internalCrashReporterInfo;
     self = [super init];
     if (self) {
         internalCrashReporterInfo = [[NSMutableDictionary alloc] init];
+        _client = [[SVHTTPClient alloc] init];
     }
     return self;
 }
@@ -29,7 +30,7 @@ NSMutableDictionary * internalCrashReporterInfo;
     if ([reporterServiceUrl indexOf:@"/"] == [reporterServiceUrl length] ) {
         [url appendString:@"/"];
     }
-    [url appendString: @"api/v3/logging/crash/android/dump"];
+    [url appendString: @"api/v3/logging/crash/ios/dump"];
     _reporterServiceUrl = url;
 }
 
@@ -93,8 +94,11 @@ NSMutableDictionary * internalCrashReporterInfo;
 }
 
 - (void) postReport:(NSString *) reportdataasstring {
+    NSDictionary * jsonDictionary = [NSDictionary dictionaryWithObject:_crashReportContentAsString forKey:@"report"];
     [_client setBasePath:_reporterServiceUrl];
-    [_client POST:nil parameters:_crashReportContentAsString completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [_client setSendParametersAsJSON:YES];
+    [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
+    [_client POST:nil parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (!error) {
                 [_baseReporter purgePendingCrashReport];
         }
