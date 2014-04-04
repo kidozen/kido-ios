@@ -6,6 +6,37 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6D428AB118EEE6F60002C36C /* kidozen.client.device */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6D428AB918EEE6F60002C36C /* Build configuration list for PBXAggregateTarget "kidozen.client.device" */;
+			buildPhases = (
+				6D428AB818EEE6F60002C36C /* ShellScript */,
+			);
+			dependencies = (
+				6D428AB218EEE6F60002C36C /* PBXTargetDependency */,
+				6D428AB418EEE6F60002C36C /* PBXTargetDependency */,
+				6D428AB618EEE6F60002C36C /* PBXTargetDependency */,
+			);
+			name = kidozen.client.device;
+			productName = kidozen.client.fat;
+		};
+		6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6DF1EBBB18EDF726000C3AA7 /* Build configuration list for PBXAggregateTarget "kidozen.client.fat" */;
+			buildPhases = (
+				6DF1EBBE18EDF72F000C3AA7 /* ShellScript */,
+			);
+			dependencies = (
+				6DFF94E218EE6EEE00EA324F /* PBXTargetDependency */,
+				6DFF94E418EE6EEE00EA324F /* PBXTargetDependency */,
+				6DFF94E618EE6EEE00EA324F /* PBXTargetDependency */,
+			);
+			name = kidozen.client.fat;
+			productName = kidozen.client.fat;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */; };
 		8E0774A41619D9AF00FA21D9 /* KZConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774831619D9AF00FA21D9 /* KZConfiguration.m */; };
@@ -77,6 +108,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6D428AB318EEE6F60002C36C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94CD18EE67CA00EA324F;
+			remoteInfo = CrashReporter.device;
+		};
+		6D428AB518EEE6F60002C36C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94B318EE621B00EA324F;
+			remoteInfo = libSVHTTPRequest.device;
+		};
+		6D428AB718EEE6F60002C36C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94BC18EE63ED00EA324F;
+			remoteInfo = SocketRocket.device;
+		};
+		6DFF94E118EE6EEE00EA324F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94C918EE67BF00EA324F;
+			remoteInfo = CrashReporter.fat;
+		};
+		6DFF94E318EE6EEE00EA324F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DE1A30318EDFFC400A8810E;
+			remoteInfo = libSVHTTPRequest.fat;
+		};
+		6DFF94E518EE6EEE00EA324F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94B818EE63E200EA324F;
+			remoteInfo = SocketRocket.fat;
+		};
 		AA50FE3E18E5C2DD00DE42F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
@@ -556,7 +629,6 @@
 				8EB865231614D11800DD60E6 /* Sources */,
 				8EB865241614D11800DD60E6 /* Frameworks */,
 				8EB865251614D11800DD60E6 /* CopyFiles */,
-				8E0774BA1619E55400FA21D9 /* ShellScript */,
 				8E0774C71619F32C00FA21D9 /* Headers */,
 			);
 			buildRules = (
@@ -628,6 +700,8 @@
 			targets = (
 				8EB865261614D11800DD60E6 /* kidozen.client */,
 				AAE6E8D618C10D8100FB046A /* Integration Tests */,
+				6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */,
+				6D428AB118EEE6F60002C36C /* kidozen.client.device */,
 			);
 		};
 /* End PBXProject section */
@@ -773,7 +847,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8E0774BA1619E55400FA21D9 /* ShellScript */ = {
+		6D428AB818EEE6F60002C36C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -784,8 +858,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\n# c.f. StackOverflow question/answer here: http://stackoverflow.com/questions/3520977/build-fat-static-library-device-simulator-using-xcode-and-sdk-4\n#\n# Version 2.5\n#\n# Latest Change:\n# - The \"copy headers\" section now respects the build setting for the location of the public headers\n#\n# Purpose:\n#   Create a static library for iPhone from within XCode\n#   Because Apple staff DELIBERATELY broke Xcode to make this impossible from the GUI (Xcode 3.2.3 specifically states this in the Release notes!)\n#   ...no, I don't understand why they did this!\n#\n# Author: Adam Martin - http://twitter.com/redglassesapps\n# Based on: original script from Eonil (main changes: Eonil's script WILL NOT WORK in Xcode GUI - it WILL CRASH YOUR COMPUTER)\n#\n\nset -e\nset -o pipefail\n\n#################[ Tests: helps workaround any future bugs in Xcode ]########\n#\nDEBUG_THIS_SCRIPT=\"false\"\n\nif [ $DEBUG_THIS_SCRIPT = \"true\" ]\nthen\necho \"########### TESTS #############\"\necho \"Use the following variables when debugging this script; note that they may change on recursions\"\necho \"BUILD_DIR = $BUILD_DIR\"\necho \"BUILD_ROOT = $BUILD_ROOT\"\necho \"CONFIGURATION_BUILD_DIR = $CONFIGURATION_BUILD_DIR\"\necho \"BUILT_PRODUCTS_DIR = $BUILT_PRODUCTS_DIR\"\necho \"CONFIGURATION_TEMP_DIR = $CONFIGURATION_TEMP_DIR\"\necho \"TARGET_BUILD_DIR = $TARGET_BUILD_DIR\"\nfi\n\n#####################[ part 1 ]##################\n# First, work out the BASESDK version number (NB: Apple ought to report this, but they hide it)\n#    (incidental: searching for substrings in sh is a nightmare! Sob)\n\nSDK_VERSION=$(echo ${SDK_NAME} | grep -o '.\\{3\\}$')\n\n# Next, work out if we're in SIM or DEVICE\n\nif [ ${PLATFORM_NAME} = \"iphonesimulator\" ]\nthen\nOTHER_SDK_TO_BUILD=iphoneos${SDK_VERSION}\nelse\nOTHER_SDK_TO_BUILD=iphonesimulator${SDK_VERSION}\nfi\n\necho \"XCode has selected SDK: ${PLATFORM_NAME} with version: ${SDK_VERSION} (although back-targetting: ${IPHONEOS_DEPLOYMENT_TARGET})\"\necho \"...therefore, OTHER_SDK_TO_BUILD = ${OTHER_SDK_TO_BUILD}\"\n#\n#####################[ end of part 1 ]##################\n\n#####################[ part 2 ]##################\n#\n# IF this is the original invocation, invoke WHATEVER other builds are required\n#\n# Xcode is already building ONE target...\n#\n# ...but this is a LIBRARY, so Apple is wrong to set it to build just one.\n# ...we need to build ALL targets\n# ...we MUST NOT re-build the target that is ALREADY being built: Xcode WILL CRASH YOUR COMPUTER if you try this (infinite recursion!)\n#\n#\n# So: build ONLY the missing platforms/configurations.\n\nif [ \"true\" == ${ALREADYINVOKED:-false} ]\nthen\necho \"RECURSION: I am NOT the root invocation, so I'm NOT going to recurse\"\nelse\n# CRITICAL:\n# Prevent infinite recursion (Xcode sucks)\nexport ALREADYINVOKED=\"true\"\n\necho \"RECURSION: I am the root ... recursing all missing build targets NOW...\"\necho \"RECURSION: ...about to invoke: xcodebuild -configuration \\\"${CONFIGURATION}\\\" -project \\\"${PROJECT_NAME}.xcodeproj\\\" -target \\\"${TARGET_NAME}\\\" -sdk \\\"${OTHER_SDK_TO_BUILD}\\\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO\" BUILD_DIR=\\\"${BUILD_DIR}\\\" BUILD_ROOT=\\\"${BUILD_ROOT}\\\" SYMROOT=\\\"${SYMROOT}\\\"\n\nxcodebuild -configuration \"${CONFIGURATION}\" -project \"${PROJECT_NAME}.xcodeproj\" -target \"${TARGET_NAME}\" -sdk \"${OTHER_SDK_TO_BUILD}\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\"\n\nACTION=\"build\"\n\n#Merge all platform binaries as a fat binary for each configurations.\n\n# Calculate where the (multiple) built files are coming from:\nCURRENTCONFIG_DEVICE_DIR=${SYMROOT}/${CONFIGURATION}-iphoneos\nCURRENTCONFIG_SIMULATOR_DIR=${SYMROOT}/${CONFIGURATION}-iphonesimulator\n\necho \"Taking device build from: ${CURRENTCONFIG_DEVICE_DIR}\"\necho \"Taking simulator build from: ${CURRENTCONFIG_SIMULATOR_DIR}\"\n\nCREATING_UNIVERSAL_DIR=${SYMROOT}/${CONFIGURATION}-universal\necho \"...I will output a universal build to: ${CREATING_UNIVERSAL_DIR}\"\n\n# ... remove the products of previous runs of this script\n#      NB: this directory is ONLY created by this script - it should be safe to delete!\n\nrm -rf \"${CREATING_UNIVERSAL_DIR}\"\nmkdir \"${CREATING_UNIVERSAL_DIR}\"\n\n#\necho \"lipo: for current configuration (${CONFIGURATION}) creating output file: ${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\"\nlipo -create -output \"${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_DEVICE_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_SIMULATOR_DIR}/${EXECUTABLE_NAME}\"\n\n#########\n#\n# Added: StackOverflow suggestion to also copy \"include\" files\n#    (untested, but should work OK)\n#\necho \"Fetching headers from ${PUBLIC_HEADERS_FOLDER_PATH}\"\nif [ -d \"${CURRENTCONFIG_DEVICE_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\" ]\nthen\nmkdir -p \"${CREATING_UNIVERSAL_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"\n# * needs to be outside the double quotes?\ncp -r \"${CURRENTCONFIG_DEVICE_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"* \"${CREATING_UNIVERSAL_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"\nfi\nfi";
-			showEnvVarsInLog = 0;
+			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\necho \"Your binary is in $BUILD_DIR}/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a\"\n";
+		};
+		6DF1EBBE18EDF72F000C3AA7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target kidozen.client -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\nrm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $UNIVERSAL_OUTPUTFOLDER\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -835,6 +921,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D428AB218EEE6F60002C36C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CrashReporter.device;
+			targetProxy = 6D428AB318EEE6F60002C36C /* PBXContainerItemProxy */;
+		};
+		6D428AB418EEE6F60002C36C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libSVHTTPRequest.device;
+			targetProxy = 6D428AB518EEE6F60002C36C /* PBXContainerItemProxy */;
+		};
+		6D428AB618EEE6F60002C36C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket.device;
+			targetProxy = 6D428AB718EEE6F60002C36C /* PBXContainerItemProxy */;
+		};
+		6DFF94E218EE6EEE00EA324F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CrashReporter.fat;
+			targetProxy = 6DFF94E118EE6EEE00EA324F /* PBXContainerItemProxy */;
+		};
+		6DFF94E418EE6EEE00EA324F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libSVHTTPRequest.fat;
+			targetProxy = 6DFF94E318EE6EEE00EA324F /* PBXContainerItemProxy */;
+		};
+		6DFF94E618EE6EEE00EA324F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket.fat;
+			targetProxy = 6DFF94E518EE6EEE00EA324F /* PBXContainerItemProxy */;
+		};
 		AAE6E8F418C1135100FB046A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8EB865261614D11800DD60E6 /* kidozen.client */;
@@ -854,6 +970,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6D428ABA18EEE6F60002C36C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = kidozen.client.device;
+			};
+			name = Debug;
+		};
+		6D428ABB18EEE6F60002C36C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = kidozen.client.device;
+			};
+			name = Release;
+		};
+		6DF1EBBC18EDF726000C3AA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6DF1EBBD18EDF726000C3AA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		8EB865331614D11800DD60E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1049,6 +1193,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6D428AB918EEE6F60002C36C /* Build configuration list for PBXAggregateTarget "kidozen.client.device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D428ABA18EEE6F60002C36C /* Debug */,
+				6D428ABB18EEE6F60002C36C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DF1EBBB18EDF726000C3AA7 /* Build configuration list for PBXAggregateTarget "kidozen.client.fat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DF1EBBC18EDF726000C3AA7 /* Debug */,
+				6DF1EBBD18EDF726000C3AA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8EB865211614D11800DD60E6 /* Build configuration list for PBXProject "kidozen.client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

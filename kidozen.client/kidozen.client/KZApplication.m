@@ -41,6 +41,12 @@ static NSMutableDictionary * tokenCache;
     });
     return instance;
 }
+    
+- (void) dealloc
+{
+    [self removeObserver:self forKeyPath:KVO_KEY_VALUE];
+}
+    
 
 -(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName andCallback:(void (^)(KZResponse *))callback
 {
@@ -56,7 +62,7 @@ static NSMutableDictionary * tokenCache;
             tokenCache = [[NSMutableDictionary alloc] init];
         }
         _bypassSSLValidation = NO;
-        _tennantMarketPlace = tennantMarketPlace;
+        _tennantMarketPlace = [self sanitizeTennantMnrketPlace:tennantMarketPlace];
         _applicationName = applicationName;
         _onInitializationComplete = callback;
         _bypassSSLValidation = bypassSSL;
@@ -68,6 +74,14 @@ static NSMutableDictionary * tokenCache;
 }
 
 #pragma mark private methods
+    
+-(NSString *)sanitizeTennantMnrketPlace:(NSString *)tennant
+{
+    NSMutableCharacterSet *characterSet = [NSCharacterSet whitespaceCharacterSet];
+    [characterSet addCharactersInString:@"/"];
+    
+    return [tennant stringByTrimmingCharactersInSet:characterSet];
+}
 
 -(void) initializeServices
 {
@@ -450,4 +464,5 @@ static NSMutableDictionary * tokenCache;
     return [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword]
             createHash];
 }
+
 @end

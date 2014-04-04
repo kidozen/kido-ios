@@ -6,6 +6,31 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6DFF94B818EE63E200EA324F /* SocketRocket.fat */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6DFF94BB18EE63E200EA324F /* Build configuration list for PBXAggregateTarget "SocketRocket.fat" */;
+			buildPhases = (
+				6DFF94C018EE63F700EA324F /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = SocketRocket.fat;
+			productName = SocketRocket.fat;
+		};
+		6DFF94BC18EE63ED00EA324F /* SocketRocket.device */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6DFF94BD18EE63ED00EA324F /* Build configuration list for PBXAggregateTarget "SocketRocket.device" */;
+			buildPhases = (
+				6DFF94C118EE644200EA324F /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = SocketRocket.device;
+			productName = SocketRocket.device;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		F6016C8814620EC70037BB3D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A12CD3145122FC00C1D980 /* Security.framework */; };
 		F6016C8914620ECC0037BB3D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A12CD3145122FC00C1D980 /* Security.framework */; };
@@ -402,6 +427,8 @@
 				F668C87F153E91210044DBAC /* SocketRocketOSX */,
 				F6BDA801145900D200FE3253 /* SRWebSocketTests */,
 				F62417E214D52F3C003CE997 /* TestChat */,
+				6DFF94B818EE63E200EA324F /* SocketRocket.fat */,
+				6DFF94BC18EE63ED00EA324F /* SocketRocket.device */,
 			);
 		};
 /* End PBXProject section */
@@ -435,6 +462,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6DFF94C018EE63F700EA324F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target SocketRocket -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n#rm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $UNIVERSAL_OUTPUTFOLDER\"\n";
+		};
+		6DFF94C118EE644200EA324F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\necho \"Your binary is in $BUILD_DIR}/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a\"\n";
+		};
 		F6BDA800145900D200FE3253 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -526,6 +579,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6DFF94B918EE63E200EA324F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6DFF94BA18EE63E200EA324F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6DFF94BE18EE63ED00EA324F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6DFF94BF18EE63ED00EA324F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		F62417FD14D52F3C003CE997 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -775,6 +856,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6DFF94BB18EE63E200EA324F /* Build configuration list for PBXAggregateTarget "SocketRocket.fat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DFF94B918EE63E200EA324F /* Debug */,
+				6DFF94BA18EE63E200EA324F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6DFF94BD18EE63ED00EA324F /* Build configuration list for PBXAggregateTarget "SocketRocket.device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DFF94BE18EE63ED00EA324F /* Debug */,
+				6DFF94BF18EE63ED00EA324F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		F62417FC14D52F3C003CE997 /* Build configuration list for PBXNativeTarget "TestChat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
