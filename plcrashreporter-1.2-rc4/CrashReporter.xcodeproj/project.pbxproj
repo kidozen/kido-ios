@@ -67,7 +67,6 @@
 				6D991FFD18EF1D35000A6C5D /* ShellScript */,
 			);
 			dependencies = (
-				6DFF94D818EE6E5D00EA324F /* PBXTargetDependency */,
 			);
 			name = CrashReporter.device;
 			productName = CrashReporter.device;
@@ -1112,13 +1111,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = "CrashReporter-MacOSX";
-		};
-		6DFF94D718EE6E5D00EA324F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 05CD31510EE936A9000FDE88;
-			remoteInfo = "CrashReporter-iOS-Device";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -3642,11 +3634,6 @@
 			target = 8DC2EF4F0486A6940098B216 /* CrashReporter-MacOSX */;
 			targetProxy = 05F40CFC0EF7AC9D008050CF /* PBXContainerItemProxy */;
 		};
-		6DFF94D818EE6E5D00EA324F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 05CD31510EE936A9000FDE88 /* CrashReporter-iOS-Device */;
-			targetProxy = 6DFF94D718EE6E5D00EA324F /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -4490,14 +4477,20 @@
 		6DFF94CF18EE67CA00EA324F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Debug;
 		};
 		6DFF94D018EE67CA00EA324F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Release;
 		};
