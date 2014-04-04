@@ -29,7 +29,7 @@
         
         self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
                                                                 applicationName:kzAppName
-                                                            bypassSSLValidation:YES
+                                                            strictSSL:YES
                                                                     andCallback:^(KZResponse * r) {
                                                                         XCTAssertNotNil(r.response,@"Invalid response");
                                                                         [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {

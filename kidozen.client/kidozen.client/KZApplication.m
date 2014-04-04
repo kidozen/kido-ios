@@ -31,7 +31,7 @@ static NSMutableDictionary * tokenCache;
 @synthesize lastPassword = _lastPassword;
 @synthesize lastUserName = _lastUserName;
 @synthesize identityProviders = _identityProviders;
-@synthesize bypassSSLValidation = _bypassSSLValidation;
+@synthesize strictSSL = _strictSSL;
 
 + (KZCrashReporter *) sharedCrashReporter {
     static dispatch_once_t once;
@@ -50,10 +50,10 @@ static NSMutableDictionary * tokenCache;
 
 -(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName andCallback:(void (^)(KZResponse *))callback
 {
-   return [self initWithTennantMarketPlace:tennantMarketPlace applicationName:applicationName bypassSSLValidation:NO andCallback:callback];
+   return [self initWithTennantMarketPlace:tennantMarketPlace applicationName:applicationName strictSSL:YES andCallback:callback];
 }
 
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName bypassSSLValidation:(BOOL) bypassSSL andCallback:(void (^)(KZResponse *))callback
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName strictSSL:(BOOL) strictSSL andCallback:(void (^)(KZResponse *))callback
 {
     self = [super init];
     if (self)
@@ -61,11 +61,10 @@ static NSMutableDictionary * tokenCache;
         if (!tokenCache) {
             tokenCache = [[NSMutableDictionary alloc] init];
         }
-        _bypassSSLValidation = NO;
         _tennantMarketPlace = [self sanitizeTennantMnrketPlace:tennantMarketPlace];
         _applicationName = applicationName;
         _onInitializationComplete = callback;
-        _bypassSSLValidation = bypassSSL;
+        _strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
         [self initializeServices];
         [self addObserver:self forKeyPath:KVO_KEY_VALUE options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
 
@@ -88,7 +87,7 @@ static NSMutableDictionary * tokenCache;
     NSString * appSettingsPath = [NSString stringWithFormat:KZ_APP_CONFIG_PATH];
     if (!_defaultClient) {
         _defaultClient = [[SVHTTPClient alloc] init];
-        [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_bypassSSLValidation];
+        [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
     }
 
     [_defaultClient setBasePath:_tennantMarketPlace];
@@ -102,12 +101,12 @@ static NSMutableDictionary * tokenCache;
               [_identityProviders setValue:obj forKey:key];
           }
           _pushNotifications = [[KZNotification alloc] initWithEndpoint:[_configuration valueForKey:@"notification"] andName:_applicationName];
-          [_pushNotifications setBypassSSL:_bypassSSLValidation];
+          [_pushNotifications setBypassSSL:_strictSSL];
           _log = [[KZLogging alloc] initWithEndpoint:[_configuration valueForKey:@"logging"] andName:nil];
-          [_log setBypassSSL:_bypassSSLValidation];
+          [_log setBypassSSL:_strictSSL];
           _log.kzToken = self.kzToken;
           _mail = [[KZMail alloc] initWithEndpoint:[_configuration valueForKey:@"email"] andName:nil];
-          [_mail setBypassSSL:_bypassSSLValidation];
+          [_mail setBypassSSL:_strictSSL];
           _mail.kzToken = self.kzToken;
           if (_onInitializationComplete) {
               if (_onInitializationComplete) {
@@ -149,7 +148,7 @@ static NSMutableDictionary * tokenCache;
     NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
     
     if (!ip)
-        ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:_bypassSSLValidation ];
+        ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:_strictSSL ];
     
     [ip initializeWithUserName:user password:password andScope:authServiceScope];
     [ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
@@ -163,7 +162,7 @@ static NSMutableDictionary * tokenCache;
         
         if (!_defaultClient) {
             _defaultClient = [[SVHTTPClient alloc] init];
-            [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_bypassSSLValidation];
+            [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
         }
         
         [_defaultClient setBasePath:authServiceEndpoint];
@@ -268,7 +267,7 @@ static NSMutableDictionary * tokenCache;
     }
     NSString * ep = [_configuration valueForKey:@"config"] ;
     KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:ep andName:name];
-    [c setBypassSSL:_bypassSSLValidation];
+    [c setBypassSSL:_strictSSL];
     c.kzToken = self.kzToken;
     [_configurations setObject:c forKey:name];
     return c;
@@ -281,7 +280,7 @@ static NSMutableDictionary * tokenCache;
     }
     NSString * ep = [_configuration valueForKey:@"sms"] ;
     KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:ep andName:number];
-    [s setBypassSSL:_bypassSSLValidation];
+    [s setBypassSSL:_strictSSL];
     s.kzToken = self.kzToken;
     [_smssenders setObject:s forKey:number];
     return s;
@@ -296,7 +295,7 @@ static NSMutableDictionary * tokenCache;
     
     NSString * ep = [_configuration valueForKey:@"queue"] ;
     KZQueue * q = [[KZQueue alloc] initWithEndpoint:ep andName:name];
-    [q setBypassSSL:_bypassSSLValidation];
+    [q setBypassSSL:_strictSSL];
     q.kzToken = self.kzToken;
     [_queues setObject:q forKey:name];
     return q;
@@ -308,7 +307,7 @@ static NSMutableDictionary * tokenCache;
     }
     NSString * ep = [[_configuration valueForKey:@"storage"] stringByAppendingString:@"/"];
     KZStorage * s= [[KZStorage alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_bypassSSLValidation];
+    [s setBypassSSL:_strictSSL];
     s.kzToken = self.kzToken;
     [_storages setObject:s forKey:name];
     return s;
@@ -324,7 +323,7 @@ static NSMutableDictionary * tokenCache;
     NSString * ep = [_configuration valueForKey:@"pubsub"];
     NSString * wsep = [_configuration valueForKey:@"ws"];
     KZPubSubChannel * ch =[[KZPubSubChannel alloc] initWithEndpoint:ep wsEndpoint:wsep andName:name];
-    [ch setBypassSSL:_bypassSSLValidation];
+    [ch setBypassSSL:_strictSSL];
     ch.kzToken = self.kzToken;
     [_channels setObject:ch forKey:name];
     return ch;
@@ -392,7 +391,7 @@ static NSMutableDictionary * tokenCache;
     NSString * ep =[[_configuration valueForKey:@"datasource"] stringByAppendingString:@"/"];
     
     KZDatasource * s= [[KZDatasource alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_bypassSSLValidation];
+    [s setBypassSSL:_strictSSL];
     
     s.kzToken = self.kzToken;
     s.ipToken = self.ipToken;
@@ -412,7 +411,7 @@ static NSMutableDictionary * tokenCache;
                      [NSString stringWithFormat:@"api/services/%@/",name]];
     
     KZService * s= [[KZService alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_bypassSSLValidation];
+    [s setBypassSSL:_strictSSL];
     
     s.kzToken = self.kzToken;
     s.ipToken = self.ipToken;
