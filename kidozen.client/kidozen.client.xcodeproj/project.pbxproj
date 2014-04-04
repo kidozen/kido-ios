@@ -83,7 +83,7 @@
 		AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = AA211CDA1667B35600848407 /* KZStorageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = AA211CDB1667B35600848407 /* KZStorageMetadata.m */; };
 		AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */; };
-		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; };
+		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA50FEC918E5D2F900DE42F7 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FE3F18E5C2DD00DE42F7 /* libSocketRocket.a */; };
 		AA50FECA18E5D30D00DE42F7 /* libSVHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FE9218E5C6E100DE42F7 /* libSVHTTPRequest.a */; };
 		AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
