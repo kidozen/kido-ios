@@ -14,9 +14,9 @@
 				6D428AB818EEE6F60002C36C /* ShellScript */,
 			);
 			dependencies = (
-				6D428AB218EEE6F60002C36C /* PBXTargetDependency */,
-				6D428AB418EEE6F60002C36C /* PBXTargetDependency */,
-				6D428AB618EEE6F60002C36C /* PBXTargetDependency */,
+				6D99201A18EF217A000A6C5D /* PBXTargetDependency */,
+				6D99201C18EF217A000A6C5D /* PBXTargetDependency */,
+				6D99201E18EF217A000A6C5D /* PBXTargetDependency */,
 			);
 			name = kidozen.client.device;
 			productName = kidozen.client.fat;
@@ -28,9 +28,9 @@
 				6DF1EBBE18EDF72F000C3AA7 /* ShellScript */,
 			);
 			dependencies = (
-				6DFF94E218EE6EEE00EA324F /* PBXTargetDependency */,
-				6DFF94E418EE6EEE00EA324F /* PBXTargetDependency */,
-				6DFF94E618EE6EEE00EA324F /* PBXTargetDependency */,
+				6D99201418EF2121000A6C5D /* PBXTargetDependency */,
+				6D99201618EF2121000A6C5D /* PBXTargetDependency */,
+				6D99201818EF2121000A6C5D /* PBXTargetDependency */,
 			);
 			name = kidozen.client.fat;
 			productName = kidozen.client.fat;
@@ -108,47 +108,47 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6D428AB318EEE6F60002C36C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94CD18EE67CA00EA324F;
-			remoteInfo = CrashReporter.device;
-		};
-		6D428AB518EEE6F60002C36C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94B318EE621B00EA324F;
-			remoteInfo = libSVHTTPRequest.device;
-		};
-		6D428AB718EEE6F60002C36C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94BC18EE63ED00EA324F;
-			remoteInfo = SocketRocket.device;
-		};
-		6DFF94E118EE6EEE00EA324F /* PBXContainerItemProxy */ = {
+		6D99201318EF2121000A6C5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6DFF94C918EE67BF00EA324F;
 			remoteInfo = CrashReporter.fat;
 		};
-		6DFF94E318EE6EEE00EA324F /* PBXContainerItemProxy */ = {
+		6D99201518EF2121000A6C5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6DE1A30318EDFFC400A8810E;
 			remoteInfo = libSVHTTPRequest.fat;
 		};
-		6DFF94E518EE6EEE00EA324F /* PBXContainerItemProxy */ = {
+		6D99201718EF2121000A6C5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 6DFF94B818EE63E200EA324F;
 			remoteInfo = SocketRocket.fat;
+		};
+		6D99201918EF217A000A6C5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94CD18EE67CA00EA324F;
+			remoteInfo = CrashReporter.device;
+		};
+		6D99201B18EF217A000A6C5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94B318EE621B00EA324F;
+			remoteInfo = libSVHTTPRequest.device;
+		};
+		6D99201D18EF217A000A6C5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94BC18EE63ED00EA324F;
+			remoteInfo = SocketRocket.device;
 		};
 		AA50FE3E18E5C2DD00DE42F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -858,7 +858,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\necho \"Your binary is in $BUILD_DIR}/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a\"\n";
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p $OUTPUTFOLDER\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUTFOLDER/\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${OUTPUTFOLDER}/\"\n\necho \"Your binary is in $OUTPUTFOLDER/lib$PROJECT_NAME.a\"\n\ncd $OUTPUTFOLDER\nlibtool -static -o kz.client.a libkidozen.client.a libSVHTTPRequest.a libSocketRocket.a libCrashReporter.a\n";
 		};
 		6DF1EBBE18EDF72F000C3AA7 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -871,7 +871,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target kidozen.client -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\nrm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $UNIVERSAL_OUTPUTFOLDER\"\n";
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target kidozen.client -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${OUTPUTFOLDER}/\"\nrm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n\ncd $OUTPUTFOLDER\nlibtool -static -o kz.client.a libkidozen.client.a libSVHTTPRequest.a libSocketRocket.a libCrashReporter.a\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -921,35 +921,35 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6D428AB218EEE6F60002C36C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CrashReporter.device;
-			targetProxy = 6D428AB318EEE6F60002C36C /* PBXContainerItemProxy */;
-		};
-		6D428AB418EEE6F60002C36C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libSVHTTPRequest.device;
-			targetProxy = 6D428AB518EEE6F60002C36C /* PBXContainerItemProxy */;
-		};
-		6D428AB618EEE6F60002C36C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SocketRocket.device;
-			targetProxy = 6D428AB718EEE6F60002C36C /* PBXContainerItemProxy */;
-		};
-		6DFF94E218EE6EEE00EA324F /* PBXTargetDependency */ = {
+		6D99201418EF2121000A6C5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CrashReporter.fat;
-			targetProxy = 6DFF94E118EE6EEE00EA324F /* PBXContainerItemProxy */;
+			targetProxy = 6D99201318EF2121000A6C5D /* PBXContainerItemProxy */;
 		};
-		6DFF94E418EE6EEE00EA324F /* PBXTargetDependency */ = {
+		6D99201618EF2121000A6C5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = libSVHTTPRequest.fat;
-			targetProxy = 6DFF94E318EE6EEE00EA324F /* PBXContainerItemProxy */;
+			targetProxy = 6D99201518EF2121000A6C5D /* PBXContainerItemProxy */;
 		};
-		6DFF94E618EE6EEE00EA324F /* PBXTargetDependency */ = {
+		6D99201818EF2121000A6C5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket.fat;
-			targetProxy = 6DFF94E518EE6EEE00EA324F /* PBXContainerItemProxy */;
+			targetProxy = 6D99201718EF2121000A6C5D /* PBXContainerItemProxy */;
+		};
+		6D99201A18EF217A000A6C5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CrashReporter.device;
+			targetProxy = 6D99201918EF217A000A6C5D /* PBXContainerItemProxy */;
+		};
+		6D99201C18EF217A000A6C5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libSVHTTPRequest.device;
+			targetProxy = 6D99201B18EF217A000A6C5D /* PBXContainerItemProxy */;
+		};
+		6D99201E18EF217A000A6C5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket.device;
+			targetProxy = 6D99201D18EF217A000A6C5D /* PBXContainerItemProxy */;
 		};
 		AAE6E8F418C1135100FB046A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
