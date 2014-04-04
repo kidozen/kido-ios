@@ -56,8 +56,6 @@
 				6DFF94D118EE685600EA324F /* ShellScript */,
 			);
 			dependencies = (
-				6D428AAD18EE73060002C36C /* PBXTargetDependency */,
-				6D428AAB18EE72E60002C36C /* PBXTargetDependency */,
 			);
 			name = CrashReporter.fat;
 			productName = CrashReporter.fat;
@@ -66,6 +64,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 6DFF94CE18EE67CA00EA324F /* Build configuration list for PBXAggregateTarget "CrashReporter.device" */;
 			buildPhases = (
+				6D991FFD18EF1D35000A6C5D /* ShellScript */,
 			);
 			dependencies = (
 				6DFF94D818EE6E5D00EA324F /* PBXTargetDependency */,
@@ -1113,20 +1112,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = "CrashReporter-MacOSX";
-		};
-		6D428AAA18EE72E60002C36C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 05CD31510EE936A9000FDE88;
-			remoteInfo = "CrashReporter-iOS-Device";
-		};
-		6D428AAC18EE73060002C36C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 05CD31620EE93905000FDE88;
-			remoteInfo = "CrashReporter-iOS-Simulator";
 		};
 		6DFF94D718EE6E5D00EA324F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2880,6 +2865,19 @@
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SRCROOT}/Tools/google-toolbox-for-mac-trunk-r582/UnitTesting/RunMacOSUnitTests.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6D991FFD18EF1D35000A6C5D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "OUTPUT_FOLDER=../outputLibrary\n\nxcodebuild -target CrashReporter-iOS-Device ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p \"${OUTPUT_FOLDER}/include\"\n\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME-iphoneos.a $OUTPUT_FOLDER/lib$PROJECT_NAME.a\n\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include/\" \"${OUTPUT_FOLDER}/include/\"\n\necho \"Your binary is in $OUTPUT_FOLDER\"\n";
+		};
 		6DFF94D118EE685600EA324F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2891,7 +2889,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# define output folder environment variable\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# Step 1. Build Device and Simulator versions\n#xcodebuild -target CrashReporter ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n#xcodebuild -target CrashReporter -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-iphoneos.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-iphonesimulator.a\"\n\n# Last touch. copy the header files. Just for convenience\n#cp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${UNIVERSAL_OUTPUTFOLDER}/\"\n#rm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $UNIVERSAL_OUTPUTFOLDER\"\n";
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target CrashReporter-iOS-Device ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target CrashReporter-iOS-Simulator -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}-iphoneos.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}-iphonesimulator.a\"\n\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include/\" \"${OUTPUTFOLDER}/include/\"\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3643,16 +3641,6 @@
 			isa = PBXTargetDependency;
 			target = 8DC2EF4F0486A6940098B216 /* CrashReporter-MacOSX */;
 			targetProxy = 05F40CFC0EF7AC9D008050CF /* PBXContainerItemProxy */;
-		};
-		6D428AAB18EE72E60002C36C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 05CD31510EE936A9000FDE88 /* CrashReporter-iOS-Device */;
-			targetProxy = 6D428AAA18EE72E60002C36C /* PBXContainerItemProxy */;
-		};
-		6D428AAD18EE73060002C36C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 05CD31620EE93905000FDE88 /* CrashReporter-iOS-Simulator */;
-			targetProxy = 6D428AAC18EE73060002C36C /* PBXContainerItemProxy */;
 		};
 		6DFF94D818EE6E5D00EA324F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

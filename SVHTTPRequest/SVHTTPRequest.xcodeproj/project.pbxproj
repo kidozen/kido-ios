@@ -205,7 +205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT_FOLDER=../outputLibrary\n\nxcodebuild -target SVHTTPRequest ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p \"${OUTPUT_FOLDER}/include\"\n\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUT_FOLDER\ncp $PROJECT_NAME/*.h $OUTPUT_FOLDER/include\n                 \necho \"Your binary is in $BUILD_DIR}/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a\"\n";
+			shellScript = "OUTPUT_FOLDER=../outputLibrary\n\nxcodebuild -target SVHTTPRequest ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p \"${OUTPUT_FOLDER}/include\"\n\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUT_FOLDER\ncp $PROJECT_NAME/*.h $OUTPUT_FOLDER/include\n                 \necho \"Your binary is in $OUTPUT_FOLDER/lib$PROJECT_NAME.a\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
