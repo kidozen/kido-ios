@@ -11,9 +11,9 @@
 #import "Constants.h"
 
 @interface datasourcetests : XCTestCase
-@property (nonatomic, retain) KZApplication * application;
-@property (nonatomic, retain) NSDictionary * nestedDataDict;
-@property (nonatomic, retain) NSDictionary * dataDict;
+@property (nonatomic, strong) KZApplication * application;
+@property (nonatomic, strong) NSDictionary * nestedDataDict;
+@property (nonatomic, strong) NSDictionary * dataDict;
 @end
 
 @implementation datasourcetests

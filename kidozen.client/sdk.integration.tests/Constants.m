@@ -12,4 +12,4 @@ NSString * const kzAppCenterUrl = @"https://armonia.kidocloud.com"; //URL of the
 NSString * const kzAppName = @"tasks"; // app name
 NSString * const kzUser = @"armonia@kidozen.com"; //kidozen user
 NSString * const kzPassword = @"pass"; //kidozen password
-NSString * const kzProvider = @"kidozen";
+NSString * const kzProvider = @"Kidozen";

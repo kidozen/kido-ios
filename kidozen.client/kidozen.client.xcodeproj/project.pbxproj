@@ -38,6 +38,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6D6C85ED18F2D160002CA3A0 /* libCrashReporter-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FEB318E5CE4800DE42F7 /* libCrashReporter-iphonesimulator.a */; };
+		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
 		8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */; };
 		8E0774A41619D9AF00FA21D9 /* KZConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774831619D9AF00FA21D9 /* KZConfiguration.m */; };
 		8E0774A51619D9AF00FA21D9 /* KZIdentityProviderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774861619D9AF00FA21D9 /* KZIdentityProviderFactory.m */; };
@@ -108,6 +110,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6D6C85EB18F2D13D002CA3A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DF1EBBA18EDF726000C3AA7;
+			remoteInfo = kidozen.client.fat;
+		};
 		6D99201318EF2121000A6C5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
@@ -276,13 +285,6 @@
 			remoteGlobalIDString = 050DE24D0F61B80B00152ED3;
 			remoteInfo = "Fuzz Testing";
 		};
-		AAE6E8F318C1135100FB046A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8EB865261614D11800DD60E6;
-			remoteInfo = kidozen.client;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -298,6 +300,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZADFSIdentityProvider.h; sourceTree = "<group>"; };
 		8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZADFSIdentityProvider.m; sourceTree = "<group>"; };
 		8E0774811619D9AF00FA21D9 /* KZAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAuthentication.h; sourceTree = "<group>"; };
@@ -393,6 +396,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
+				6D6C85ED18F2D160002CA3A0 /* libCrashReporter-iphonesimulator.a in Frameworks */,
 				AA50FECA18E5D30D00DE42F7 /* libSVHTTPRequest.a in Frameworks */,
 				AA50FEC918E5D2F900DE42F7 /* libSocketRocket.a in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
@@ -441,6 +446,7 @@
 		8EB865291614D11800DD60E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */,
 				AA0F7EB01730515200C55706 /* UIKit.framework */,
 				AADA4208165D32BE00EB6443 /* CFNetwork.framework */,
 				AADA4206165D32B900EB6443 /* Security.framework */,
@@ -651,7 +657,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				AAE6E8F418C1135100FB046A /* PBXTargetDependency */,
+				6D6C85EC18F2D13D002CA3A0 /* PBXTargetDependency */,
 			);
 			name = "Integration Tests";
 			productName = "Integration Tests";
@@ -921,6 +927,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D6C85EC18F2D13D002CA3A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
+			targetProxy = 6D6C85EB18F2D13D002CA3A0 /* PBXContainerItemProxy */;
+		};
 		6D99201418EF2121000A6C5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CrashReporter.fat;
@@ -950,11 +961,6 @@
 			isa = PBXTargetDependency;
 			name = SocketRocket.device;
 			targetProxy = 6D99201D18EF217A000A6C5D /* PBXContainerItemProxy */;
-		};
-		AAE6E8F418C1135100FB046A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8EB865261614D11800DD60E6 /* kidozen.client */;
-			targetProxy = AAE6E8F318C1135100FB046A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
