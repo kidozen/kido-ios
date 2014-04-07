@@ -23,13 +23,14 @@
     [super setUp];
     self.nestedDataDict = [NSDictionary dictionaryWithObjectsAndKeys:@"path",@"/",[NSDictionary dictionaryWithObject:@"kidozen" forKey:@"k"],@"qs",nil];
     self.dataDict = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
+    
     // Put setup code here; it will be run once, before the first test case.
     if (!self.application) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         
         self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
                                                                 applicationName:kzAppName
-                                                            strictSSL:YES
+                                                            strictSSL:NO
                                                                     andCallback:^(KZResponse * r) {
                                                                         XCTAssertNotNil(r.response,@"Invalid response");
                                                                         [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
@@ -75,7 +76,7 @@
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
 - (void)testShouldExecuteGetWithDataAsDictionary
@@ -118,7 +119,7 @@
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 - (void)testShouldReturnError
 {
@@ -131,7 +132,7 @@
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
 @end
