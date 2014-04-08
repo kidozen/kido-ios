@@ -307,21 +307,38 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
         [NSException raise:NSInvalidArgumentException format:@"GET and DELETE parameters must be provided as NSDictionary."];
 }
 
-- (NSString*)parameterStringForDictionary:(NSDictionary*)parameters {
-    NSMutableArray *stringParameters = [NSMutableArray arrayWithCapacity:parameters.count];
-    
-    [parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        if([obj isKindOfClass:[NSString class]]) {
-            [stringParameters addObject:[NSString stringWithFormat:@"%@=%@", key, [obj encodedURLParameterString]]];
+- (NSString*)parameterStringForDictionary:(NSDictionary*)params {
+    NSMutableArray* pairs = [NSMutableArray array];
+    for (NSString* key in [params keyEnumerator]) {
+        id value = [params objectForKey:key];
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            for (NSString *subKey in value) {
+                NSString* escaped_value = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                              (CFStringRef)[value objectForKey:subKey],
+                                                                                              NULL,
+                                                                                              (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                              kCFStringEncodingUTF8);
+                [pairs addObject:[NSString stringWithFormat:@"%@[%@]=%@", key, subKey, escaped_value]];
+            }
+        } else if ([value isKindOfClass:[NSArray class]]) {
+            for (NSString *subValue in value) {
+                NSString* escaped_value = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                              (CFStringRef)subValue,
+                                                                                              NULL,
+                                                                                              (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                              kCFStringEncodingUTF8);
+                [pairs addObject:[NSString stringWithFormat:@"%@[]=%@", key, escaped_value]];
+            }
+        } else {
+            NSString* escaped_value = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                                                                                          (CFStringRef)[params objectForKey:key],
+                                                                                          NULL,
+                                                                                          (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                          kCFStringEncodingUTF8);
+            [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, escaped_value]];
         }
-        else if([obj isKindOfClass:[NSNumber class]]) {
-            [stringParameters addObject:[NSString stringWithFormat:@"%@=%@", key, obj]];
-        }
-        else
-            [NSException raise:NSInvalidArgumentException format:@"%@ requests only accept NSString, NSNumber and NSData parameters.", self.operationRequest.HTTPMethod];
-    }];
-    
-    return [stringParameters componentsJoinedByString:@"&"];
+    }
+    return [pairs componentsJoinedByString:@"&"];
 }
 
 
