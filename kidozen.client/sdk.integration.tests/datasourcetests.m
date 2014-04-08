@@ -21,9 +21,11 @@
 - (void)setUp
 {
     [super setUp];
-    self.nestedDataDict = [NSDictionary dictionaryWithObjectsAndKeys:@"path",@"/",[NSDictionary dictionaryWithObject:@"kidozen" forKey:@"k"],@"qs",nil];
-    self.dataDict = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
+    self.nestedDataDict = @{@"path": @"/",
+                            @"qa" : @{@"k": @"kidozen"}
+                            };
     
+    self.dataDict = @{@"path": @"?k=kidozen"};
     // Put setup code here; it will be run once, before the first test case.
     if (!self.application) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -127,8 +129,7 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [ds Query:^(KZResponse *r) {
-        XCTAssertNotNil(r.error,@"invalid response");
-        XCTAssertEqual(1,[r.error code]);
+        XCTAssertEqual(404,r.urlResponse.statusCode);
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
