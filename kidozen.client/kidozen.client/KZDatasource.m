@@ -59,12 +59,12 @@
 
 -(void) Query:(void (^)(KZResponse *))block
 {
-    [self queryWithData:Nil completion:block];
+    [self queryWithData:@{} completion:block];
 }
 
 -(void) Invoke:(void (^)(KZResponse *))block
 {
-    [self invokeWithData:Nil completion:block];
+    [self invokeWithData:@{} completion:block];
 }
 
 -(void) InvokeWithData:(id)data completion:(void (^)(KZResponse *))block
