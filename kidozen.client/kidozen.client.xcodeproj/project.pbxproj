@@ -877,7 +877,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target kidozen.client -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${OUTPUTFOLDER}/\"\nrm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n\ncd $OUTPUTFOLDER\nlibtool -static -o kz.client.a libkidozen.client.a libSVHTTPRequest.a libSocketRocket.a libCrashReporter.a\n";
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator -arch x86_64 -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${OUTPUTFOLDER}/\"\nrm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n\ncd $OUTPUTFOLDER\nlibtool -static -o kz.client.a libkidozen.client.a libSVHTTPRequest.a libSocketRocket.a libCrashReporter.a\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1137,7 +1137,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$SRCROOT/DerivedData\"",
+					"$SRCROOT/**",
 					"../SVHTTPRequest/**",
 					"../SocketRocket/**",
 					"../plcrashreporter-1.2-rc4/Source/**",
@@ -1178,7 +1178,7 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"\"$SRCROOT/DerivedData\"",
+					"$SRCROOT/**",
 					"../SVHTTPRequest/**",
 					"../SocketRocket/**",
 					"../plcrashreporter-1.2-rc4/Source/**",
