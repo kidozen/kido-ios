@@ -15,9 +15,26 @@
 
 @implementation KZDatasource
 
--(void) queryWithData: (NSDictionary *) data completion:(void (^)(KZResponse *))block
+-(NSDictionary *)headersWithTimeout:(int)timeout
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+    if (timeout > 0) {
+        [headers setObject:@(timeout) forKey:@"timeout"];
+    }
+    [headers setObject:self.kzToken forKey:@"Authorization"];
+
+    return headers;
+}
+
+-(void) queryWithData: (id) data completion:(void (^)(KZResponse *))block
+{
+    [self QueryWithData:data timeout:0 completion:block];
+}
+-(void) QueryWithData:(NSDictionary *)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
+{
+    NSDictionary *headers = [self headersWithTimeout:timeout];
+    [_client setHeaders:headers];
+    
     [_client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -26,10 +43,18 @@
         }
         block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
     }];
+    
 }
+
 -(void) invokeWithData: (NSDictionary *) data completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self InvokeWithData:data timeout:0 completion:block];
+}
+-(void) InvokeWithData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
+{
+    NSDictionary *headers = [self headersWithTimeout:timeout];
+    [_client setHeaders:headers];
+    
     [_client setSendParametersAsJSON:YES];
     [_client POST:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -39,6 +64,11 @@
         }
         block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
     }];
+
+}
+- (void)InvokeWithTimeout:(int)timeout callback:(void (^)(KZResponse *))block
+{
+    [self InvokeWithData:@{} timeout:0 completion:block];
 }
 
 -(NSDictionary *) dataAsDictionary : (id)data
@@ -59,7 +89,11 @@
 
 -(void) Query:(void (^)(KZResponse *))block
 {
-    [self queryWithData:@{} completion:block];
+    [self QueryWithData:@{} completion:block];
+}
+-(void) QueryWithTimeout:(int)timeout callback:(void (^)(KZResponse *))block
+{
+    [self QueryWithData:@{} timeout:0 completion:block];
 }
 
 -(void) Invoke:(void (^)(KZResponse *))block

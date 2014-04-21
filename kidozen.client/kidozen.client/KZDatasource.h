@@ -12,11 +12,15 @@
 @interface KZDatasource : KZService
 
 -(void) Query:(void (^)(KZResponse *))block;
+-(void) QueryWithTimeout:(int)timeout callback:(void (^)(KZResponse *))block;
 
 -(void) Invoke:(void (^)(KZResponse *))block;
+-(void) InvokeWithTimeout:(int)timeout callback:(void (^)(KZResponse *))block;
 
 -(void) QueryWithData:(id)data completion:(void (^)(KZResponse *))block;
+-(void) QueryWithData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block;
 
 -(void) InvokeWithData:(id)data completion:(void (^)(KZResponse *))block;
+-(void) InvokeWithData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block;
 
 @end
