@@ -28,8 +28,8 @@ typedef NSUInteger SVHTTPRequestState;
 @property (nonatomic, strong) NSHTTPURLResponse *operationURLResponse;
 @property (nonatomic, strong) NSString *operationSavePath;
 
-@property (nonatomic, assign) dispatch_queue_t saveDataDispatchQueue;
-@property (nonatomic, assign) dispatch_group_t saveDataDispatchGroup;
+@property (nonatomic, strong) dispatch_queue_t saveDataDispatchQueue;
+@property (nonatomic, strong) dispatch_group_t saveDataDispatchGroup;
 @property (nonatomic, copy) void (^operationCompletionBlock)(id response, NSHTTPURLResponse *urlResponse, NSError *error);
 @property (nonatomic, copy) void (^operationProgressBlock)(float progress);
 
