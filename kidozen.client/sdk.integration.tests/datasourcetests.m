@@ -21,7 +21,11 @@
 - (void)setUp
 {
     [super setUp];
-    self.nestedDataDict = [NSDictionary dictionaryWithObjectsAndKeys:@"path",@"/",[NSDictionary dictionaryWithObject:@"kidozen" forKey:@"k"],@"qs",nil];
+
+    self.nestedDataDict = @{@"path": @"/",
+                            @"qs" : @{@"k": @"kidozen"}
+                            };
+
     self.dataDict = [NSDictionary dictionaryWithObject:@"?k=kidozen" forKey:@"path"];
     // Put setup code here; it will be run once, before the first test case.
     if (!self.application) {
