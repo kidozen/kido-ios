@@ -8,14 +8,25 @@
     [self invokeMethodCore:method withData:data andHeaders:nil completion:block];
 }
 
+-(void) invokeMethod:(NSString *)method withData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
+{
+    [self invokeMethodCore:method withData:data andHeaders:@{@"timeout": @(timeout)} completion:block];
+}
+
 -(void) invokeMethodWithAuth:(NSString *) method withData:(id)data completion:(void (^)(KZResponse *))block
 {
-    NSData *plainData = [self.ipToken dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *encodedToken = [plainData SR_stringByBase64Encoding];
+    NSString *authHeader = [self authHeaderString];
+
+    NSDictionary *headers = @{@"x-kidozen-actas": authHeader};
     
-    NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", encodedToken];
-    
-    NSDictionary *headers = [NSDictionary dictionaryWithObject:authHeader forKey:@"x-kidozen-actas"];
+    [self invokeMethodCore:method withData:data andHeaders:headers completion:block];
+}
+
+-(void) invokeMethodWithAuth:(NSString *)method withData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
+{
+    NSString *authHeader = [self authHeaderString];
+    NSDictionary *headers = @{@"x-kidozen-actas": authHeader,
+                              @"timeout": @(timeout)};
     
     [self invokeMethodCore:method withData:data andHeaders:headers completion:block];
 }
@@ -44,5 +55,13 @@
     }];
 }
 
+- (NSString *)authHeaderString
+{
+    NSData *plainData = [self.ipToken dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *encodedToken = [plainData SR_stringByBase64Encoding];
+    
+    return [NSString stringWithFormat:@"Bearer %@", encodedToken];
+    
+}
 
 @end
