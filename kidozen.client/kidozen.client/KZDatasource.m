@@ -19,7 +19,7 @@
 {
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     if (timeout > 0) {
-        [headers setObject:@(timeout) forKey:@"timeout"];
+        [headers setObject:[NSString stringWithFormat:@"%d", timeout] forKey:@"timeout"];
     }
     [headers setObject:self.kzToken forKey:@"Authorization"];
 
@@ -68,7 +68,7 @@
 }
 - (void)InvokeWithTimeout:(int)timeout callback:(void (^)(KZResponse *))block
 {
-    [self InvokeWithData:@{} timeout:0 completion:block];
+    [self InvokeWithData:@{} timeout:timeout completion:block];
 }
 
 -(NSDictionary *) dataAsDictionary : (id)data
@@ -93,7 +93,7 @@
 }
 -(void) QueryWithTimeout:(int)timeout callback:(void (^)(KZResponse *))block
 {
-    [self QueryWithData:@{} timeout:0 completion:block];
+    [self QueryWithData:@{} timeout:timeout completion:block];
 }
 
 -(void) Invoke:(void (^)(KZResponse *))block
