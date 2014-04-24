@@ -10,7 +10,10 @@
 
 -(void) invokeMethod:(NSString *)method withData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
 {
-    [self invokeMethodCore:method withData:data andHeaders:@{@"timeout": @(timeout)} completion:block];
+    [self invokeMethodCore:method
+                  withData:data
+                andHeaders:@{@"timeout": [NSString stringWithFormat:@"%d", timeout]}
+                completion:block];
 }
 
 -(void) invokeMethodWithAuth:(NSString *) method withData:(id)data completion:(void (^)(KZResponse *))block
@@ -26,7 +29,7 @@
 {
     NSString *authHeader = [self authHeaderString];
     NSDictionary *headers = @{@"x-kidozen-actas": authHeader,
-                              @"timeout": @(timeout)};
+                              @"timeout": [NSString stringWithFormat:@"%d", timeout]};
     
     [self invokeMethodCore:method withData:data andHeaders:headers completion:block];
 }

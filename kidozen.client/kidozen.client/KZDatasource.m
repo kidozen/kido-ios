@@ -19,7 +19,7 @@
 {
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     if (timeout > 0) {
-        [headers setObject:[NSString stringWithFormat:@"%d", timeout] forKey:@"timeout"];
+        headers[@"timeout"] = [NSString stringWithFormat:@"%d", timeout];
     }
     [headers setObject:self.kzToken forKey:@"Authorization"];
 
