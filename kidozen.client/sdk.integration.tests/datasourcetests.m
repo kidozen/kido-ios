@@ -68,12 +68,11 @@
 }
 - (void)testShouldExecuteGetWithTimeout
 {
-    KZDatasource *ds = [self.application DataSourceWithName:@"test-query"];
+    KZDatasource *ds = [self.application DataSourceWithName:@"test-query-delayed"];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     [ds QueryWithTimeout:1 callback:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
-        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
-        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+        XCTAssertEqual(408,r.urlResponse.statusCode, @"Must be a timeout response");
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
@@ -97,13 +96,12 @@
 
 - (void)testShouldExecuteInvokeWithTimeout
 {
-    KZDatasource *ds = [self.application DataSourceWithName:@"test-operation"];
+    KZDatasource *ds = [self.application DataSourceWithName:@"test-operation-delayed"];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [ds InvokeWithTimeout:1 callback:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
-        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
-        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+        XCTAssertEqual(408,r.urlResponse.statusCode, @"Must be a timeout response");
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
