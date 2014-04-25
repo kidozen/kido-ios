@@ -13,25 +13,14 @@ NSString *const AUTH_SVC_KEY_SCOPE = @"authServiceScope";
 
 
 @interface KZApplication ()
--(void) initializeServices;
--(void) invokeAuthServices:(NSString *) user withPassword:(NSString *) password andProvider:(NSString *) provider;
--(void) tokenExpires:(NSTimer*)theTimer;
--(void) parseUserInfo:(NSString *) token;
+
+@property (nonatomic, copy, readwrite) NSString *applicationKeyName;
+
 @end
 
 @implementation KZApplication
 
 static NSMutableDictionary * tokenCache;
-
-@synthesize pushNotifications = _pushNotifications;
-@synthesize onInitializationComplete = _onInitializationComplete;
-@synthesize mail = _mail;
-@synthesize log = _log;
-@synthesize lastProviderKey = _lastProviderKey;
-@synthesize lastPassword = _lastPassword;
-@synthesize lastUserName = _lastUserName;
-@synthesize identityProviders = _identityProviders;
-@synthesize strictSSL = _strictSSL;
 
 + (KZCrashReporter *) sharedCrashReporter {
     static dispatch_once_t once;
@@ -48,12 +37,30 @@ static NSMutableDictionary * tokenCache;
 }
     
 
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName andCallback:(void (^)(KZResponse *))callback
+-(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
+                 applicationName:(NSString *)applicationName
+                     andCallback:(void (^)(KZResponse *))callback
 {
-   return [self initWithTennantMarketPlace:tennantMarketPlace applicationName:applicationName strictSSL:YES andCallback:callback];
+   return [self initWithTennantMarketPlace:tennantMarketPlace
+                           applicationName:applicationName
+                                 strictSSL:YES
+                               andCallback:callback];
 }
 
 -(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName strictSSL:(BOOL) strictSSL andCallback:(void (^)(KZResponse *))callback
+{
+    return [self initWithTennantMarketPlace:tennantMarketPlace
+                            applicationName:applicationName
+                         applicationKeyName:nil
+                                  strictSSL:strictSSL
+                                andCallback:callback];
+}
+
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+                 applicationName:(NSString *)applicationName
+              applicationKeyName:(NSString *)keyName
+                       strictSSL:(BOOL)strictSSL
+                     andCallback:(void (^)(KZResponse *))callback
 {
     self = [super init];
     if (self)
@@ -61,20 +68,26 @@ static NSMutableDictionary * tokenCache;
         if (!tokenCache) {
             tokenCache = [[NSMutableDictionary alloc] init];
         }
-        _tennantMarketPlace = [self sanitizeTennantMnrketPlace:tennantMarketPlace];
+        
+        if (keyName != nil) {
+            self.applicationKeyName = keyName;
+        }
+        
+        _tennantMarketPlace = [self sanitizeTennantMarketPlace:tennantMarketPlace];
         _applicationName = applicationName;
         _onInitializationComplete = callback;
         _strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
         [self initializeServices];
         [self addObserver:self forKeyPath:KVO_KEY_VALUE options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
-
+        
     }
     return self;
+    
 }
 
 #pragma mark private methods
     
--(NSString *)sanitizeTennantMnrketPlace:(NSString *)tennant
+-(NSString *)sanitizeTennantMarketPlace:(NSString *)tennant
 {
     NSMutableCharacterSet *characterSet = [NSCharacterSet whitespaceCharacterSet];
     [characterSet addCharactersInString:@"/"];
@@ -90,6 +103,8 @@ static NSMutableDictionary * tokenCache;
         [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
     }
 
+    __weak KZApplication *safeMe = self;
+    
     [_defaultClient setBasePath:_tennantMarketPlace];
     [_defaultClient GET:appSettingsPath parameters:[NSDictionary dictionaryWithObjectsAndKeys:_applicationName,@"name", nil]
       completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -104,17 +119,31 @@ static NSMutableDictionary * tokenCache;
           [_pushNotifications setBypassSSL:_strictSSL];
           _log = [[KZLogging alloc] initWithEndpoint:[_configuration valueForKey:@"logging"] andName:nil];
           [_log setBypassSSL:_strictSSL];
-          _log.kzToken = self.kzToken;
+          _log.kzToken = safeMe.kzToken;
           _mail = [[KZMail alloc] initWithEndpoint:[_configuration valueForKey:@"email"] andName:nil];
           [_mail setBypassSSL:_strictSSL];
-          _mail.kzToken = self.kzToken;
-          if (_onInitializationComplete) {
-              if (_onInitializationComplete) {
-                  KZResponse * kzresponse = [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] ;
-                  [kzresponse setApplication:self];
-                  _onInitializationComplete (kzresponse);
-              }
+          _mail.kzToken = safeMe.kzToken;
+          
+          if (safeMe.applicationKeyName == nil) {
+              safeMe.applicationKeyName = @"defaultKey";
           }
+          
+          NSString *clientId = _configuration[@"_id"];
+          [self authenticateWithApplicationKeyName:safeMe.applicationKeyName
+                                          clientId:clientId
+                                          callback:^(NSString *tokenForProvidedApplicationKey, NSError *error) {
+              
+              // do something with tokenForProvidedApplicationKey.
+                                              
+              if (_onInitializationComplete) {
+                  if (_onInitializationComplete) {
+                      KZResponse * kzresponse = [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] ;
+                      [kzresponse setApplication:safeMe];
+                      _onInitializationComplete (kzresponse);
+                  }
+              }
+              
+          }];
 
       }];
 }
@@ -331,6 +360,50 @@ static NSMutableDictionary * tokenCache;
 
 #endif
 
+
+- (NSDictionary *)dictionaryForTokenForClientId:(NSString *)clientId
+{
+    NSMutableDictionary *postContentDictionary = [NSMutableDictionary dictionary];
+    
+    postContentDictionary[@"client_id"] = [NSString stringWithFormat:@"%@, %@", _tennantMarketPlace, clientId];
+    postContentDictionary[@"client_secret"] = self.applicationKeyName;
+    postContentDictionary[@"grant_type"] = @"client_credentials";
+    postContentDictionary[@"scope"] = _applicationName;
+    
+    return postContentDictionary;
+}
+
+- (void)authenticateWithApplicationKeyName:(NSString *)applicationKeyName
+                                  clientId:(NSString *)clientId
+                                  callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback
+{
+    NSDictionary *postContentDictionary = [self dictionaryForTokenForClientId:clientId];
+    
+    NSString * tokenPathEndPoint = @"https://tasks.contoso.local.kidozen.com/";
+    if (!_defaultClient) {
+        _defaultClient = [[SVHTTPClient alloc] init];
+        [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
+    }
+    
+    [_defaultClient setBasePath:_tennantMarketPlace];
+    [_defaultClient POST:tokenPathEndPoint
+              parameters:postContentDictionary
+              completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                  // Handle error.
+                  if ([urlResponse statusCode] > 300) {
+                      NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                      [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
+                      callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
+                  }
+
+                  // TODO:
+                  // we should get here the updated token.
+                  // get token.
+                  callback(response, nil);
+                  
+              }];
+}
+
 -(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
 {
     _authCompletionBlock = block;
@@ -463,5 +536,6 @@ static NSMutableDictionary * tokenCache;
     return [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword]
             createHash];
 }
+
 
 @end

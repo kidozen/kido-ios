@@ -31,15 +31,15 @@
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         
         self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
-                                                                applicationName:kzAppName
-                                                            strictSSL:NO
-                                                                    andCallback:^(KZResponse * r) {
-                                                                        XCTAssertNotNil(r.response,@"Invalid response");
-                                                                        [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
-                                                                            XCTAssertNotNil(c,@"User not authenticated");
-                                                                            dispatch_semaphore_signal(semaphore);
-                                                                        }];
-                                                                    }];
+                                                             applicationName:kzAppName
+                                                                   strictSSL:NO
+                                                                 andCallback:^(KZResponse * r) {
+                                                                     XCTAssertNotNil(r.response,@"Invalid response");
+                                                                     [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
+                                                                         XCTAssertNotNil(c,@"User not authenticated");
+                                                                         dispatch_semaphore_signal(semaphore);
+                                                                     }];
+                                                                 }];
         assert(self.application);
         while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
             [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];

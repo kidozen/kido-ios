@@ -67,15 +67,34 @@ typedef void (^TokenExpiresBlock)(id);
  *
  * @param tenantMarketPlace The url of the KidoZen marketplace
  * @param application The application name
- * @param bypassSSLVerification Allows to bypass the SSL validation, use it only for development purposes
+ * @param strictSSL Whether we want SSL to be bypassed or not, only use in development
  * @param callback The ServiceEventListener callback with the operation results
  */
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName strictSSL:(BOOL) strictSSL andCallback:(void (^)(KZResponse *))callback;
+-(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
+                 applicationName:(NSString *)applicationName
+                       strictSSL:(BOOL)strictSSL
+                     andCallback:(void (^)(KZResponse *))callback;
+
+/**
+ * Constructor
+ *
+ * @param tenantMarketPlace The url of the KidoZen marketplace
+ * @param applicationName The application name
+ * @param applicationKey Is the application key
+ * @param strictSSL Whether we want SSL to be bypassed or not,  only use in development
+ * @param callback The ServiceEventListener callback with the operation results
+ */
+-(id) initWithTennantMarketPlace:(NSString *) ennantMarketPlace
+                 applicationName:(NSString *)applicationName
+              applicationKeyName:(NSString *)keyName
+                       strictSSL:(BOOL)strictSSL
+                     andCallback:(void (^)(KZResponse *))callback;
 
 @property (nonatomic, strong) NSMutableDictionary * identityProviders ;
 @property (nonatomic, strong) NSDictionary * configuration ;
 @property (nonatomic, strong) NSDictionary * securityConfiguration ;
 @property (atomic) BOOL strictSSL ;
+@property (nonatomic, copy, readonly) NSString *applicationKeyName;
 
 @property (nonatomic, strong) NSString * lastProviderKey;
 @property (nonatomic, strong) NSString * lastUserName;
