@@ -113,9 +113,9 @@ static NSMutableDictionary * tokenCache;
     [_defaultClient setBasePath:_tennantMarketPlace];
     [_defaultClient GET:appSettingsPath
              parameters:@{@"name": _applicationName}
-             completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+             completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *error) {
           
-          _configuration = [NSDictionary dictionaryWithDictionary:[response objectAtIndex:0]];
+          _configuration = [NSDictionary dictionaryWithDictionary:[configResponse objectAtIndex:0]];
           _securityConfiguration = [NSDictionary dictionaryWithDictionary:[_configuration objectForKey:@"authConfig"]];
           _identityProviders = [[NSMutableDictionary alloc] init];
           for(NSString *key in _securityConfiguration[@"identityProviders"]) {
@@ -139,27 +139,60 @@ static NSMutableDictionary * tokenCache;
           safeMe.domain = _configuration[@"domain"];
           
           if (safeMe.applicationKey != nil && [safeMe.applicationKey length] > 0) {
+              [safeMe handleAuthenticationViaApplicationKeyWithConfig:configResponse
+                                                    urlConfigResponse:configUrlResponse];
               
-              [safeMe authenticateWithApplicationKey:safeMe.applicationKey
-                                            callback:^(id responseForToken, NSError *error) {
-
-                                                // Where Do I cache the token?
-                                                safeMe.kzToken = responseForToken[@"access_token"];
-                                                _log.kzToken = safeMe.kzToken;
-                                                _mail.kzToken = safeMe.kzToken;
-                                                
-                                                if (_onInitializationComplete) {
-                                                    if (_onInitializationComplete) {
-                                                        KZResponse * kzresponse = [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] ;
-                                                        [kzresponse setApplication:safeMe];
-                                                        _onInitializationComplete (kzresponse);
-                                                    }
-                                                }
-                                            }];
           }
           
 
       }];
+}
+
+- (void) handleAuthenticationViaApplicationKeyWithConfig:(id)configResponse
+                                       urlConfigResponse:(NSHTTPURLResponse *)configUrlResponse
+{
+    
+    __weak KZApplication *safeMe = self;
+    
+    [self authenticateWithApplicationKey:self.applicationKey
+                                callback:^(id responseForToken, NSError *error) {
+                                    
+                                    // Where Do I cache the token?
+                                    safeMe.kzToken = responseForToken[@"access_token"];
+                                    safeMe.ipToken = @"";
+
+                                    [safeMe willChangeValueForKey:KVO_KEY_VALUE];
+                                    
+                                    [safeMe parseUserInfo:safeMe.kzToken];
+                                    
+                                    [safeMe setCacheWithIPToken:@"" andKzToken:safeMe.kzToken];
+                                    
+                                    if (safeMe.KidoZenUser.expiresOn > 0) {
+                                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                            tokenExpirationTimer = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
+                                                                                                    target:safeMe
+                                                                                                  selector:@selector(tokenExpires:)
+                                                                                                  userInfo:nil
+                                                                                                   repeats:NO];
+                                            [[NSRunLoop currentRunLoop] addTimer:tokenExpirationTimer forMode:NSDefaultRunLoopMode];
+                                            [[NSRunLoop currentRunLoop] run];
+                                        });
+                                    }
+                                    else {
+                                        NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
+                                    }
+                                    
+                                    if (_onInitializationComplete) {
+                                        if (_onInitializationComplete) {
+                                            KZResponse * kzresponse = [[KZResponse alloc] initWithResponse:configResponse
+                                                                                               urlResponse:configUrlResponse
+                                                                                                  andError:error];
+                                            [kzresponse setApplication:safeMe];
+                                            _onInitializationComplete (kzresponse);
+                                        }
+                                    }
+                                }];
+
 }
 -(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey
 {
