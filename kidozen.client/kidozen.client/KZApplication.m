@@ -14,6 +14,10 @@ NSString *const AUTH_SVC_KEY_SCOPE = @"authServiceScope";
 
 @interface KZApplication ()
 
+@property (nonatomic, copy) NSString *applicationScope;
+@property (nonatomic, copy) NSString *oAuthTokenEndPoint;
+@property (nonatomic, copy) NSString *domain;
+
 @property (nonatomic, copy, readwrite) NSString *applicationKey;
 
 @end
@@ -125,11 +129,13 @@ static NSMutableDictionary * tokenCache;
           [_mail setBypassSSL:_strictSSL];
           _mail.kzToken = safeMe.kzToken;
           
-          NSString *clientId = _configuration[@"_id"];
+          self.oAuthTokenEndPoint = _securityConfiguration[@"oauthTokenEndpoint"];
+          self.applicationScope = _securityConfiguration[@"applicationScope"];
+          self.domain = _configuration[@"domain"];
+          
           if (safeMe.applicationKey != nil && [safeMe.applicationKey length] > 0) {
               
               [safeMe authenticateWithApplicationKey:safeMe.applicationKey
-                                            clientId:clientId
                                             callback:^(NSString *tokenForProvidedApplicationKey, NSError *error) {
                                                 
                                                 // TODO:
@@ -363,33 +369,31 @@ static NSMutableDictionary * tokenCache;
 #endif
 
 
-- (NSDictionary *)dictionaryForTokenForClientId:(NSString *)clientId
+- (NSDictionary *)dictionaryForTokenUsingApplicationKey
 {
     NSMutableDictionary *postContentDictionary = [NSMutableDictionary dictionary];
     
-    postContentDictionary[@"client_id"] = [NSString stringWithFormat:@"%@, %@", _tennantMarketPlace, clientId];
+    postContentDictionary[@"client_id"] = self.domain;
     postContentDictionary[@"client_secret"] = self.applicationKey;
     postContentDictionary[@"grant_type"] = @"client_credentials";
-    postContentDictionary[@"scope"] = _applicationName;
+    postContentDictionary[@"scope"] = self.applicationScope;
     
     return postContentDictionary;
 }
 
 - (void)authenticateWithApplicationKey:(NSString *)applicationKey
-                              clientId:(NSString *)clientId
                               callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback
 {
-    NSDictionary *postContentDictionary = [self dictionaryForTokenForClientId:clientId];
+    NSDictionary *postContentDictionary = [self dictionaryForTokenUsingApplicationKey];
     
-    NSString * tokenPathEndPoint = @"https://tasks.contoso.local.kidozen.com/";
+    NSString * tokenPathEndPoint = self.oAuthTokenEndPoint;
     if (!_defaultClient) {
         _defaultClient = [[SVHTTPClient alloc] init];
         [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
     }
     
     [_defaultClient setBasePath:@""];
-    NSLog(@"endpoint %@", tokenPathEndPoint);
-    NSLog(@"params %@", postContentDictionary);
+
     [_defaultClient POST:tokenPathEndPoint
               parameters:postContentDictionary
               completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -399,8 +403,6 @@ static NSMutableDictionary * tokenCache;
                       [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
                       callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
                   }
-                  NSString *str = [[ NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-                  NSLog(@"%@", str);
                   // TODO:
                   // we should get here the updated token.
                   // get token.
