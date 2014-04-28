@@ -111,36 +111,42 @@ static NSMutableDictionary * tokenCache;
     __weak KZApplication *safeMe = self;
     
     [_defaultClient setBasePath:_tennantMarketPlace];
-    [_defaultClient GET:appSettingsPath parameters:[NSDictionary dictionaryWithObjectsAndKeys:_applicationName,@"name", nil]
-      completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [_defaultClient GET:appSettingsPath
+             parameters:@{@"name": _applicationName}
+             completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+          
           _configuration = [NSDictionary dictionaryWithDictionary:[response objectAtIndex:0]];
           _securityConfiguration = [NSDictionary dictionaryWithDictionary:[_configuration objectForKey:@"authConfig"]];
           _identityProviders = [[NSMutableDictionary alloc] init];
-          for(NSString *key in [_securityConfiguration objectForKey:@"identityProviders" ]) {
+          for(NSString *key in _securityConfiguration[@"identityProviders"]) {
               NSString * obj = [[[_securityConfiguration objectForKey:@"identityProviders" ] valueForKey:key] valueForKey:@"protocol"] ;
               [_identityProviders setValue:obj forKey:key];
           }
+                 
           _pushNotifications = [[KZNotification alloc] initWithEndpoint:[_configuration valueForKey:@"notification"] andName:_applicationName];
           [_pushNotifications setBypassSSL:_strictSSL];
+                 
           _log = [[KZLogging alloc] initWithEndpoint:[_configuration valueForKey:@"logging"] andName:nil];
           [_log setBypassSSL:_strictSSL];
           _log.kzToken = safeMe.kzToken;
+                 
           _mail = [[KZMail alloc] initWithEndpoint:[_configuration valueForKey:@"email"] andName:nil];
           [_mail setBypassSSL:_strictSSL];
           _mail.kzToken = safeMe.kzToken;
           
-          self.oAuthTokenEndPoint = _securityConfiguration[@"oauthTokenEndpoint"];
-          self.applicationScope = _securityConfiguration[@"applicationScope"];
-          self.domain = _configuration[@"domain"];
+          safeMe.oAuthTokenEndPoint = _securityConfiguration[@"oauthTokenEndpoint"];
+          safeMe.applicationScope = _securityConfiguration[@"applicationScope"];
+          safeMe.domain = _configuration[@"domain"];
           
           if (safeMe.applicationKey != nil && [safeMe.applicationKey length] > 0) {
               
               [safeMe authenticateWithApplicationKey:safeMe.applicationKey
-                                            callback:^(NSString *tokenForProvidedApplicationKey, NSError *error) {
-                                                
-                                                // TODO:
-                                                // do something with tokenForProvidedApplicationKey.
-                                                
+                                            callback:^(id responseForToken, NSError *error) {
+
+                                                // Where Do I cache the token?
+                                                safeMe.kzToken = responseForToken[@"access_token"];
+                                                _log.kzToken = safeMe.kzToken;
+                                                _mail.kzToken = safeMe.kzToken;
                                                 
                                                 if (_onInitializationComplete) {
                                                     if (_onInitializationComplete) {
@@ -403,9 +409,7 @@ static NSMutableDictionary * tokenCache;
                       [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
                       callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
                   }
-                  // TODO:
-                  // we should get here the updated token.
-                  // get token.
+                  
                   callback(response, nil);
                   
               }];
