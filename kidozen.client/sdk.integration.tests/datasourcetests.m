@@ -52,6 +52,18 @@
     [super tearDown];
 }
 
+- (void)testShouldExecuteLog
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.application writeLog:@{@"message": @"text"} withLevel:LogLevelVerbose completion:^(KZResponse *r) {
+        XCTAssertNotNil(r,@"invalid response");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
 - (void)testShouldExecuteGet
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query"];
