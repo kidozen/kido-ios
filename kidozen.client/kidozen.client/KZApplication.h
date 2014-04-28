@@ -60,7 +60,9 @@ typedef void (^TokenExpiresBlock)(id);
  * @param applicationName The application name
  * @param callback The ServiceEventListener callback with the operation results
  */
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName andCallback:(void (^)(KZResponse *))callback;
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+                 applicationName:(NSString *) applicationName
+                     andCallback:(void (^)(KZResponse *))callback;
 
 /**
  * Constructor
@@ -80,13 +82,14 @@ typedef void (^TokenExpiresBlock)(id);
  *
  * @param tenantMarketPlace The url of the KidoZen marketplace
  * @param applicationName The application name
- * @param applicationKey Is the application key
+ * @param applicationKey Is the application key that gives you access to logging services
+ * without username/password authentication.
  * @param strictSSL Whether we want SSL to be bypassed or not,  only use in development
  * @param callback The ServiceEventListener callback with the operation results
  */
 -(id) initWithTennantMarketPlace:(NSString *) ennantMarketPlace
                  applicationName:(NSString *)applicationName
-              applicationKeyName:(NSString *)keyName
+                  applicationKey:(NSString *)applicationKey
                        strictSSL:(BOOL)strictSSL
                      andCallback:(void (^)(KZResponse *))callback;
 
@@ -170,7 +173,13 @@ typedef void (^TokenExpiresBlock)(id);
  * @param callback The callback with the result of the service call
  * @throws Exception
  */
--(void) sendMailTo:(NSString *)to from:(NSString *) from withSubject:(NSString *) subject andHtmlBody:(NSString *) htmlBody andTextBody:(NSString *)textBody  completion:(void (^)(KZResponse *))block;
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+        completion:(void (^)(KZResponse *))block;
+
 /**
  * Creates a new entry in the KZApplication log
  *
