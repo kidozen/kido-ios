@@ -424,7 +424,7 @@ static NSMutableDictionary * tokenCache;
                               callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback
 {
     NSDictionary *postContentDictionary = [self dictionaryForTokenUsingApplicationKey];
-    
+    [_defaultClient setSendParametersAsJSON:YES];
     NSString * tokenPathEndPoint = self.oAuthTokenEndPoint;
     if (!_defaultClient) {
         _defaultClient = [[SVHTTPClient alloc] init];
