@@ -11,6 +11,17 @@ NSString *const IP_KEY_ENDPOINT = @"ipEndpoint";
 NSString *const AUTH_SVC_KEY_ENDPOINT = @"authServiceEndpoint";
 NSString *const AUTH_SVC_KEY_SCOPE = @"authServiceScope";
 
+NSString *const kAuthConfigKey = @"authConfig";
+NSString *const kIdentityProvidersKey = @"identityProviders";
+NSString *const kProtocolKey = @"protocol";
+NSString *const kApplicationNameKey = @"name";
+NSString *const kLoggingKey = @"logging";
+NSString *const kEmailKey = @"email";
+NSString *const kNotificationKey = @"notification";
+NSString *const kDomainKey = @"domain";
+NSString *const kOauthTokenEndpointKey = @"oauthTokenEndpoint";
+NSString *const kApplicationScopeKey = @"applicationScope";
+NSString *const kAccessTokenKey = @"access_token";
 
 @interface KZApplication ()
 
@@ -20,11 +31,29 @@ NSString *const AUTH_SVC_KEY_SCOPE = @"authServiceScope";
 
 @property (nonatomic, copy, readwrite) NSString *applicationKey;
 
+
+@property (nonatomic, copy) NSString *tennantMarketPlace;
+@property (nonatomic, copy) NSString *applicationName;
+@property (nonatomic, copy) NSString *notificationUrl;
+
+@property (nonatomic, strong) NSMutableDictionary *queues;
+@property (nonatomic, strong) NSMutableDictionary *configurations;
+@property (nonatomic, strong) NSMutableDictionary *storages;
+@property (nonatomic, strong) NSMutableDictionary *smssenders;
+@property (nonatomic, strong) NSMutableDictionary *channels;
+@property (nonatomic, strong) NSMutableDictionary *files;
+@property (nonatomic, strong) NSMutableDictionary *services;
+@property (nonatomic, strong) NSMutableDictionary *datasources;
+
+@property (nonatomic, assign) id<KZIdentityProvider> ip;
+@property (nonatomic, strong) NSTimer *tokenExpirationTimer;
+
+
 @end
 
 @implementation KZApplication
 
-static NSMutableDictionary * tokenCache;
+static NSMutableDictionary * staticTokenCache;
 
 + (KZCrashReporter *) sharedCrashReporter {
     static dispatch_once_t once;
@@ -69,16 +98,17 @@ static NSMutableDictionary * tokenCache;
     self = [super init];
     if (self)
     {
-        if (!tokenCache) {
-            tokenCache = [[NSMutableDictionary alloc] init];
+        if (!staticTokenCache) {
+            staticTokenCache = [[NSMutableDictionary alloc] init];
         }
         
         self.applicationKey = applicationKey;
         
-        _tennantMarketPlace = [self sanitizeTennantMarketPlace:tennantMarketPlace];
-        _applicationName = applicationName;
-        _onInitializationComplete = callback;
-        _strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
+        self.tennantMarketPlace = [self sanitizeTennantMarketPlace:tennantMarketPlace];
+        self.applicationName = applicationName;
+        self.onInitializationComplete = callback;
+        self.strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
+        
         [self initializeServices];
         [self addObserver:self
                forKeyPath:KVO_KEY_VALUE
@@ -100,52 +130,82 @@ static NSMutableDictionary * tokenCache;
     return [tennant stringByTrimmingCharactersInSet:characterSet];
 }
 
--(void) initializeServices
+- (void) initialzeDefaultHttpClient
 {
-    NSString * appSettingsPath = [NSString stringWithFormat:KZ_APP_CONFIG_PATH];
-    if (!_defaultClient) {
-        _defaultClient = [[SVHTTPClient alloc] init];
-        [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
+    if (!self.defaultClient) {
+        self.defaultClient = [[SVHTTPClient alloc] init];
+        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
     }
 
+}
+
+-(void) initializeServices
+{
     __weak KZApplication *safeMe = self;
+
+    NSString * appSettingsPath = [NSString stringWithFormat:KZ_APP_CONFIG_PATH];
+    [self initializeHttpClient];
     
-    [_defaultClient setBasePath:_tennantMarketPlace];
-    [_defaultClient GET:appSettingsPath
-             parameters:@{@"name": _applicationName}
-             completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *error) {
+    [self.defaultClient setBasePath:self.tennantMarketPlace];
+    
+    [self.defaultClient GET:appSettingsPath
+                 parameters:@{kApplicationNameKey: self.applicationName}
+                 completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *error) {
           
-          _configuration = [NSDictionary dictionaryWithDictionary:[configResponse objectAtIndex:0]];
-          _securityConfiguration = [NSDictionary dictionaryWithDictionary:[_configuration objectForKey:@"authConfig"]];
-          _identityProviders = [[NSMutableDictionary alloc] init];
-          for(NSString *key in _securityConfiguration[@"identityProviders"]) {
-              NSString * obj = [[[_securityConfiguration objectForKey:@"identityProviders" ] valueForKey:key] valueForKey:@"protocol"] ;
-              [_identityProviders setValue:obj forKey:key];
-          }
-                 
-          _pushNotifications = [[KZNotification alloc] initWithEndpoint:[_configuration valueForKey:@"notification"] andName:_applicationName];
-          [_pushNotifications setBypassSSL:_strictSSL];
-                 
-          _log = [[KZLogging alloc] initWithEndpoint:[_configuration valueForKey:@"logging"] andName:nil];
-          [_log setBypassSSL:_strictSSL];
-          _log.kzToken = safeMe.kzToken;
-                 
-          _mail = [[KZMail alloc] initWithEndpoint:[_configuration valueForKey:@"email"] andName:nil];
-          [_mail setBypassSSL:_strictSSL];
-          _mail.kzToken = safeMe.kzToken;
-          
-          safeMe.oAuthTokenEndPoint = _securityConfiguration[@"oauthTokenEndpoint"];
-          safeMe.applicationScope = _securityConfiguration[@"applicationScope"];
-          safeMe.domain = _configuration[@"domain"];
-          
-          if (safeMe.applicationKey != nil && [safeMe.applicationKey length] > 0) {
-              [safeMe handleAuthenticationViaApplicationKeyWithConfig:configResponse
-                                                    urlConfigResponse:configUrlResponse];
-              
-          }
+                     safeMe.configuration = [NSDictionary dictionaryWithDictionary:[configResponse objectAtIndex:0]];
+                     safeMe.securityConfiguration = [NSDictionary dictionaryWithDictionary:self.configuration[kAuthConfigKey]];
+                     
+                     [safeMe initializeIdentityProviders];
+                     [safeMe initializePushNotifications];
+                     [safeMe initializeLogging];
+                     [safeMe initializeMail];
+                     
+                     [safeMe handleAuthenticationViaApplicationKeyWithConfig:configResponse
+                                                           urlConfigResponse:configUrlResponse];
+                     
+                     
           
 
       }];
+}
+
+- (void)initializeMail
+{
+    self.mail = [[KZMail alloc] initWithEndpoint:self.configuration[kEmailKey]
+                                         andName:nil];
+    [self.mail setBypassSSL:self.strictSSL];
+    self.mail.kzToken = self.kzToken;
+}
+
+- (void) initializeLogging
+{
+    self.log = [[KZLogging alloc] initWithEndpoint:self.configuration[kLoggingKey]
+                                           andName:nil];
+    
+    [self.log setBypassSSL:self.strictSSL];
+    self.log.kzToken = self.kzToken;
+}
+
+- (void)initializeIdentityProviders
+{
+    self.identityProviders = [[NSMutableDictionary alloc] init];
+    
+    NSDictionary *providerDictionary = self.securityConfiguration[kIdentityProvidersKey];
+    
+    for(NSString *key in self.securityConfiguration[kIdentityProvidersKey]) {
+        NSDictionary *protocolsDictionary = providerDictionary[key];
+        NSString *obj = protocolsDictionary[kProtocolKey];
+        [self.identityProviders setValue:obj forKey:key];
+    }
+
+}
+
+- (void)initializePushNotifications
+{
+    self.pushNotifications = [[KZNotification alloc] initWithEndpoint:self.configuration[kNotificationKey]
+                                                              andName:self.applicationName];
+    [self.pushNotifications setBypassSSL:self.strictSSL];
+    
 }
 
 - (void) handleAuthenticationViaApplicationKeyWithConfig:(id)configResponse
@@ -153,45 +213,54 @@ static NSMutableDictionary * tokenCache;
 {
     
     __weak KZApplication *safeMe = self;
+    __block NSTimer *safeToken = self.tokenExpirationTimer;
     
-    [self authenticateWithApplicationKey:self.applicationKey
-                                callback:^(id responseForToken, NSError *error) {
-                                    
-                                    // Where Do I cache the token?
-                                    safeMe.kzToken = responseForToken[@"access_token"];
-                                    safeMe.ipToken = @"";
+    self.oAuthTokenEndPoint = self.securityConfiguration[kOauthTokenEndpointKey];
+    self.applicationScope = self.securityConfiguration[kApplicationScopeKey];
+    self.domain = self.configuration[kDomainKey];
+    
+    if (safeMe.applicationKey != nil && [safeMe.applicationKey length] > 0) {
 
-                                    [safeMe willChangeValueForKey:KVO_KEY_VALUE];
-                                    
-                                    [safeMe parseUserInfo:safeMe.kzToken];
-                                    
-                                    [safeMe setCacheWithIPToken:@"" andKzToken:safeMe.kzToken];
-                                    
-                                    if (safeMe.KidoZenUser.expiresOn > 0) {
-                                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                            tokenExpirationTimer = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
-                                                                                                    target:safeMe
-                                                                                                  selector:@selector(tokenExpires:)
-                                                                                                  userInfo:nil
-                                                                                                   repeats:NO];
-                                            [[NSRunLoop currentRunLoop] addTimer:tokenExpirationTimer forMode:NSDefaultRunLoopMode];
-                                            [[NSRunLoop currentRunLoop] run];
-                                        });
-                                    }
-                                    else {
-                                        NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
-                                    }
-                                    
-                                    if (_onInitializationComplete) {
-                                        if (_onInitializationComplete) {
-                                            KZResponse * kzresponse = [[KZResponse alloc] initWithResponse:configResponse
-                                                                                               urlResponse:configUrlResponse
-                                                                                                  andError:error];
-                                            [kzresponse setApplication:safeMe];
-                                            _onInitializationComplete (kzresponse);
+        [self authenticateWithApplicationKey:self.applicationKey
+                                    callback:^(id responseForToken, NSError *error) {
+                                        
+                                        // Where Do I cache the token?
+                                        safeMe.kzToken = responseForToken[kAccessTokenKey];
+                                        safeMe.ipToken = @""; // Don't have an identity provider token.
+                                        
+                                        [safeMe willChangeValueForKey:KVO_KEY_VALUE];
+                                        
+                                        [safeMe parseUserInfo:safeMe.kzToken];
+                                        
+                                        [safeMe setCacheWithIPToken:@"" andKzToken:safeMe.kzToken];
+                                        
+                                        
+                                        if (safeMe.KidoZenUser.expiresOn > 0) {
+                                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                                safeToken = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
+                                                                                             target:safeMe
+                                                                                           selector:@selector(tokenExpires:)
+                                                                                           userInfo:nil
+                                                                                            repeats:NO];
+                                                [[NSRunLoop currentRunLoop] addTimer:safeToken forMode:NSDefaultRunLoopMode];
+                                                [[NSRunLoop currentRunLoop] run];
+                                            });
                                         }
-                                    }
-                                }];
+                                        else {
+                                            NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
+                                        }
+                                        
+                                        if (_onInitializationComplete) {
+                                            if (_onInitializationComplete) {
+                                                KZResponse * kzresponse = [[KZResponse alloc] initWithResponse:configResponse
+                                                                                                   urlResponse:configUrlResponse
+                                                                                                      andError:error];
+                                                [kzresponse setApplication:safeMe];
+                                                _onInitializationComplete (kzresponse);
+                                            }
+                                        }
+                                    }];
+    }
 
 }
 -(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey
@@ -215,78 +284,81 @@ static NSMutableDictionary * tokenCache;
 
 -(void) invokeAuthServices:(NSString *) user withPassword:(NSString *) password andProvider:(NSString *) providerKey
 {
-    NSString * authServiceScope = [_securityConfiguration objectForKey:AUTH_SVC_KEY_SCOPE];
-    NSString * authServiceEndpoint = [_securityConfiguration objectForKey:AUTH_SVC_KEY_ENDPOINT];
-    NSString * applicationScope = [_securityConfiguration objectForKey:@"applicationScope"];
+    NSString * authServiceScope = [self.securityConfiguration objectForKey:AUTH_SVC_KEY_SCOPE];
+    NSString * authServiceEndpoint = [self.securityConfiguration objectForKey:AUTH_SVC_KEY_ENDPOINT];
+    NSString * applicationScope = [self.securityConfiguration objectForKey:@"applicationScope"];
 
-    NSDictionary *provider = [[_securityConfiguration objectForKey:@"identityProviders"] objectForKey:providerKey];
+    NSDictionary *provider = [[self.securityConfiguration objectForKey:@"identityProviders"] objectForKey:providerKey];
     NSString * providerProtocol = [provider objectForKey:@"protocol"];
     NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
     
-    if (!ip)
-        ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:_strictSSL ];
+    __weak KZApplication *safeMe = self;
+    __block NSTimer *safeExpirationTimer = self.tokenExpirationTimer;
     
-    [ip initializeWithUserName:user password:password andScope:authServiceScope];
-    [ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
+    if (!self.ip)
+        self.ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:_strictSSL ];
+    
+    [self.ip initializeWithUserName:user password:password andScope:authServiceScope];
+    [self.ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
         if (error) {
-            if (_authCompletionBlock) {
-                _authCompletionBlock(error);
+            if (safeMe.authCompletionBlock) {
+                safeMe.authCompletionBlock(error);
                 return ;         
             }
         }
         NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:applicationScope ,@"wrap_scope", @"SAML",@"wrap_assertion_format", ipToken,@"wrap_assertion", nil];
         
-        if (!_defaultClient) {
-            _defaultClient = [[SVHTTPClient alloc] init];
-            [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
-        }
+        [safeMe initializeHttpClient];
         
-        [_defaultClient setBasePath:authServiceEndpoint];
-        [_defaultClient POST:@"" parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [safeMe.defaultClient setBasePath:authServiceEndpoint];
+        [safeMe.defaultClient POST:@"" parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
             if ([urlResponse statusCode]>300) {
                 NSMutableDictionary* details = [NSMutableDictionary dictionary];
                 [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
               _authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
             }
             else {
-                self.isAuthenticated = true;
-                self.KidoZenUser.user = user;
-                self.KidoZenUser.pass = password;
+                safeMe.isAuthenticated = true;
+                safeMe.KidoZenUser.user = user;
+                safeMe.KidoZenUser.pass = password;
                 
                 NSString * kzToken = [NSString stringWithFormat:@"WRAP access_token=\"%@\"", [response objectForKey:@"rawToken"]];
                 
-                [self willChangeValueForKey:KVO_KEY_VALUE];
+                [safeMe willChangeValueForKey:KVO_KEY_VALUE];
                 
-                self.kzToken = kzToken;
-                self.ipToken = ipToken;
+                safeMe.kzToken = kzToken;
+                safeMe.ipToken = ipToken;
                 
-                [self setCacheWithIPToken:ipToken andKzToken:kzToken];
+                [safeMe setCacheWithIPToken:ipToken
+                                 andKzToken:kzToken];
                 
-                [self parseUserInfo:kzToken];
+                [safeMe parseUserInfo:kzToken];
                 
-                if (self.KidoZenUser.expiresOn > 0) {
+                if (safeMe.KidoZenUser.expiresOn > 0) {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        tokenExpirationTimer = [NSTimer scheduledTimerWithTimeInterval:self.KidoZenUser.expiresOn
-                                                                                target:self
+                        safeExpirationTimer = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
+                                                                                target:safeMe
                                                                               selector:@selector(tokenExpires:)
                                                                               userInfo:nil
                                                                                repeats:NO];
-                        [[NSRunLoop currentRunLoop] addTimer:tokenExpirationTimer forMode:NSDefaultRunLoopMode];
+                        [[NSRunLoop currentRunLoop] addTimer:safeExpirationTimer forMode:NSDefaultRunLoopMode];
                         [[NSRunLoop currentRunLoop] run];
                     });
                 }
                 else {
                     NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
                 }
-                if (_authCompletionBlock) {
-                    if (![self.KidoZenUser.claims objectForKey:@"system"] && ![self.KidoZenUser.claims objectForKey:@"usersource"] )
+                
+                
+                if (safeMe.authCompletionBlock) {
+                    if (![safeMe.KidoZenUser.claims objectForKey:@"system"] && ![safeMe.KidoZenUser.claims objectForKey:@"usersource"] )
                     {
                         NSError * err = [[NSError alloc] initWithDomain:@"Authentication" code:0 userInfo:[NSDictionary dictionaryWithObject:@"User is not authenticated" forKey:@"description"]];
                         _authCompletionBlock(err);
                     }
                     else
                     {
-                        _authCompletionBlock(self.KidoZenUser);
+                        _authCompletionBlock(safeMe.KidoZenUser);
                     }
                 }
             }
@@ -296,41 +368,51 @@ static NSMutableDictionary * tokenCache;
 
 -(void) tokenExpires:(NSTimer*)theTimer
 {
-    if (_tokenExpiresBlock) {
-        _tokenExpiresBlock(self.KidoZenUser);
+    if (self.tokenExpiresBlock) {
+        self.tokenExpiresBlock(self.KidoZenUser);
     }
     else
     {
         [self removeTokensFromCache];
-        [self  authenticateUser:_lastUserName withProvider:_lastProviderKey andPassword:_lastPassword];
+        
+        // Have to handle both cases, where the application key is being used, and the user/password one.
+        [self  authenticateUser:self.lastUserName withProvider:self.lastProviderKey andPassword:self.lastPassword];
+    }
+}
+
+-(void) initializeHttpClient
+{
+    if (!self.defaultClient) {
+        self.defaultClient = [[SVHTTPClient alloc] init];
+        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
     }
 }
 
 -(void) sendMailTo:(NSString *)to from:(NSString *) from withSubject:(NSString *) subject andHtmlBody:(NSString *) htmlBody andTextBody:(NSString *)textBody  completion:(void (^)(KZResponse *))block
 {
     NSDictionary * mail = [[NSDictionary alloc] initWithObjectsAndKeys:to,@"to", from, @"from", subject, @"subject", htmlBody, @"bodyHtml", textBody, @"bodyText", nil];
-    [_mail send:mail completion:^(KZResponse * k) {
+    [self.mail send:mail completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
 }
 
 -(void) writeLog:(id) message withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block
 {
-    [_log write:message withLevel:level completion:^(KZResponse * k) {
+    [self.log write:message withLevel:level completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
 }
 
 -(void) clearLog:(void (^)(KZResponse *))block
 {
-    [_log clear:^(KZResponse * k) {
+    [self.log clear:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
 }
 
 -(void) allLogMessages:(void (^)(KZResponse *))block
 {
-    [_log all:^(KZResponse * k) {
+    [self.log all:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
 }
@@ -338,70 +420,70 @@ static NSMutableDictionary * tokenCache;
 
 -(KZConfiguration *) ConfigurationWithName:(NSString *) name
 {
-    if (!_configurations) {
-        _configurations = [[NSMutableDictionary alloc] init];
+    if (!self.configurations) {
+        self.configurations = [[NSMutableDictionary alloc] init];
     }
-    NSString * ep = [_configuration valueForKey:@"config"] ;
+    NSString * ep = [self.configuration valueForKey:@"config"] ;
     KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:ep andName:name];
     [c setBypassSSL:_strictSSL];
     c.kzToken = self.kzToken;
-    [_configurations setObject:c forKey:name];
+    [self.configurations setObject:c forKey:name];
     return c;
 }
 
 -(KZSMSSender *) SMSSenderWithNumber:(NSString *) number
 {
-    if (!_smssenders) {
-        _smssenders = [[NSMutableDictionary alloc] init];
+    if (!self.smssenders) {
+        self.smssenders = [[NSMutableDictionary alloc] init];
     }
-    NSString * ep = [_configuration valueForKey:@"sms"] ;
+    NSString * ep = [self.configuration valueForKey:@"sms"] ;
     KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:ep andName:number];
     [s setBypassSSL:_strictSSL];
     s.kzToken = self.kzToken;
-    [_smssenders setObject:s forKey:number];
+    [self.smssenders setObject:s forKey:number];
     return s;
 }
 
 
 -(KZQueue *) QueueWithName:(NSString *) name
 {
-    if (!_queues) {
-        _queues = [[NSMutableDictionary alloc] init];
+    if (!self.queues) {
+        self.queues = [[NSMutableDictionary alloc] init];
     }
     
-    NSString * ep = [_configuration valueForKey:@"queue"] ;
+    NSString * ep = [self.configuration valueForKey:@"queue"] ;
     KZQueue * q = [[KZQueue alloc] initWithEndpoint:ep andName:name];
     [q setBypassSSL:_strictSSL];
     q.kzToken = self.kzToken;
-    [_queues setObject:q forKey:name];
+    [self.queues setObject:q forKey:name];
     return q;
 }
 -(KZStorage *) StorageWithName:(NSString *) name
 {
-    if (!_storages) {
-        _storages = [[NSMutableDictionary alloc] init];
+    if (!self.storages) {
+        self.storages = [[NSMutableDictionary alloc] init];
     }
-    NSString * ep = [[_configuration valueForKey:@"storage"] stringByAppendingString:@"/"];
+    NSString * ep = [[self.configuration valueForKey:@"storage"] stringByAppendingString:@"/"];
     KZStorage * s= [[KZStorage alloc] initWithEndpoint:ep andName:name];
     [s setBypassSSL:_strictSSL];
     s.kzToken = self.kzToken;
-    [_storages setObject:s forKey:name];
+    [self.storages setObject:s forKey:name];
     return s;
 }
 #if TARGET_OS_IPHONE
 
 -(KZPubSubChannel *) PubSubChannelWithName:(NSString *) name
 {
-    if (!_channels) {
-        _channels = [[NSMutableDictionary alloc] init];
+    if (!self.channels) {
+        self.channels = [[NSMutableDictionary alloc] init];
     }
     
-    NSString * ep = [_configuration valueForKey:@"pubsub"];
-    NSString * wsep = [_configuration valueForKey:@"ws"];
+    NSString * ep = [self.configuration valueForKey:@"pubsub"];
+    NSString * wsep = [self.configuration valueForKey:@"ws"];
     KZPubSubChannel * ch =[[KZPubSubChannel alloc] initWithEndpoint:ep wsEndpoint:wsep andName:name];
     [ch setBypassSSL:_strictSSL];
     ch.kzToken = self.kzToken;
-    [_channels setObject:ch forKey:name];
+    [self.channels setObject:ch forKey:name];
     return ch;
 }
 
@@ -423,17 +505,14 @@ static NSMutableDictionary * tokenCache;
 - (void)authenticateWithApplicationKey:(NSString *)applicationKey
                               callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback
 {
-    NSDictionary *postContentDictionary = [self dictionaryForTokenUsingApplicationKey];
-    [_defaultClient setSendParametersAsJSON:YES];
-    NSString * tokenPathEndPoint = self.oAuthTokenEndPoint;
-    if (!_defaultClient) {
-        _defaultClient = [[SVHTTPClient alloc] init];
-        [_defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
-    }
     
-    [_defaultClient setBasePath:@""];
+    NSDictionary *postContentDictionary = [self dictionaryForTokenUsingApplicationKey];
+    [self initializeHttpClient];
 
-    [_defaultClient POST:tokenPathEndPoint
+    [self.defaultClient setSendParametersAsJSON:YES];
+    [self.defaultClient setBasePath:@""];
+
+    [self.defaultClient POST:self.oAuthTokenEndPoint
               parameters:postContentDictionary
               completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                   // Handle error.
@@ -451,18 +530,18 @@ static NSMutableDictionary * tokenCache;
 -(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
 {
     _authCompletionBlock = block;
-    _lastUserName = user;
-    _lastPassword = password;
-    _lastProviderKey = provider;
+    self.lastUserName = user;
+    self.lastPassword = password;
+    self.lastProviderKey = provider;
     
     [self authenticateUser:user withProvider:provider andPassword:password];
 }
 
 -(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password
 {
-    _lastUserName = user;
-    _lastPassword = password;
-    _lastProviderKey = provider;
+    self.lastUserName = user;
+    self.lastPassword = password;
+    self.lastProviderKey = provider;
 
     [self loadTokensFromCache];
     
@@ -480,32 +559,32 @@ static NSMutableDictionary * tokenCache;
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [_queues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_queues objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.queues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[self.queues objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
     }];
-    [_storages enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_storages objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.storages enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[self.storages objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
     }];
-    [_configurations enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_configurations objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.configurations enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[self.configurations objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
     }];
-    [_smssenders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_smssenders objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.smssenders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[self.smssenders objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
     }];
-    [_channels enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_channels objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.channels enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[self.channels objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
     }];
-    [_pushNotifications setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    [_mail setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    [_log setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.pushNotifications setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.mail setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+    [self.log setKzToken:[change objectForKey:KVO_NEW_VALUE]];
 }
 
 -(KZDatasource *) DataSourceWithName:(NSString *)name
 {
-    if (!_datasources) {
-        _datasources = [[NSMutableDictionary alloc] init];
+    if (!self.datasources) {
+        self.datasources = [[NSMutableDictionary alloc] init];
     }
-    NSString * ep =[[_configuration valueForKey:@"datasource"] stringByAppendingString:@"/"];
+    NSString * ep =[[self.configuration valueForKey:@"datasource"] stringByAppendingString:@"/"];
     
     KZDatasource * s= [[KZDatasource alloc] initWithEndpoint:ep andName:name];
     [s setBypassSSL:_strictSSL];
@@ -513,18 +592,18 @@ static NSMutableDictionary * tokenCache;
     s.kzToken = self.kzToken;
     s.ipToken = self.ipToken;
     
-    [_datasources setObject:s forKey:name];
+    [self.datasources setObject:s forKey:name];
     
     return s;
 }
 
 -(KZService *) LOBServiceWithName:(NSString *) name
 {
-    if (!_services) {
-        _services = [[NSMutableDictionary alloc] init];
+    if (!self.services) {
+        self.services = [[NSMutableDictionary alloc] init];
     }
     //url: "/api/services/" + name + "/invoke/" + method,
-    NSString * ep = [[_configuration valueForKey:@"url"] stringByAppendingString:
+    NSString * ep = [[self.configuration valueForKey:@"url"] stringByAppendingString:
                      [NSString stringWithFormat:@"api/services/%@/",name]];
     
     KZService * s= [[KZService alloc] initWithEndpoint:ep andName:name];
@@ -533,7 +612,7 @@ static NSMutableDictionary * tokenCache;
     s.kzToken = self.kzToken;
     s.ipToken = self.ipToken;
     
-    [_services setObject:s forKey:name];
+    [self.services setObject:s forKey:name];
     
     return s;
 }
@@ -543,8 +622,8 @@ static NSMutableDictionary * tokenCache;
     NSString * kzKey = [self getKzCacheKey];
     NSString * ipKey = [self getIpCacheKey];
     
-    [tokenCache setValue:kzToken forKey:kzKey];
-    [tokenCache setValue:ipToken forKey:ipKey];
+    [staticTokenCache setValue:kzToken forKey:kzKey];
+    [staticTokenCache setValue:ipToken forKey:ipKey];
     
     [self didChangeValueForKey:KVO_KEY_VALUE];
 }
@@ -554,8 +633,8 @@ static NSMutableDictionary * tokenCache;
     NSString * kzKey = [self getKzCacheKey];
     NSString * ipKey = [self getIpCacheKey];
      
-    self.kzToken = [tokenCache objectForKey:kzKey];
-    self.ipToken = [tokenCache objectForKey:ipKey];
+    self.kzToken = [staticTokenCache objectForKey:kzKey];
+    self.ipToken = [staticTokenCache objectForKey:ipKey];
 
     [self willChangeValueForKey:KVO_KEY_VALUE];
     [self didChangeValueForKey:KVO_KEY_VALUE];
@@ -566,18 +645,18 @@ static NSMutableDictionary * tokenCache;
     NSString * kzKey = [self getKzCacheKey];
     NSString * ipKey = [self getIpCacheKey];
     
-    [tokenCache removeObjectForKey:kzKey];
-    [tokenCache removeObjectForKey:ipKey];
+    [staticTokenCache removeObjectForKey:kzKey];
+    [staticTokenCache removeObjectForKey:ipKey];
 }
 
 - (NSString *) getIpCacheKey
 {
-    return [[NSString stringWithFormat:@"%@%@%@%@-ipToken", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword] createHash];
+    return [[NSString stringWithFormat:@"%@%@%@%@-ipToken", self.tennantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword] createHash];
 }
 
 - (NSString *) getKzCacheKey
 {
-    return [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword]
+    return [[NSString stringWithFormat:@"%@%@%@%@", self.tennantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword]
             createHash];
 }
 

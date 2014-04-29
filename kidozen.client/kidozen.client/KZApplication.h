@@ -35,23 +35,6 @@ typedef void (^TokenExpiresBlock)(id);
  *
  */
 @interface KZApplication : KZBaseService <KZAuthentication>
-{
-    id<KZIdentityProvider>  ip ;
-    NSString *_tennantMarketPlace;
-    NSString *_applicationName;
-    NSString *_notificationUrl;
-
-    NSMutableDictionary * _queues;
-    NSMutableDictionary * _configurations;
-    NSMutableDictionary * _storages;
-    NSMutableDictionary * _smssenders;
-    NSMutableDictionary * _channels;
-    NSMutableDictionary * _files;
-    NSMutableDictionary * _services;
-    NSMutableDictionary * _datasources;
-    
-    __block NSTimer* tokenExpirationTimer ;
-}
 
 /**
  * Constructor
