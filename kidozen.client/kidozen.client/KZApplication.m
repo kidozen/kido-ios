@@ -231,7 +231,7 @@ static NSMutableDictionary * staticTokenCache;
     
 }
 
-- (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^void)(NSError *))callback
+- (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *))callback
 {
     __weak KZApplication *safeMe = self;
     [self authenticateWithApplicationKey:self.applicationKey
