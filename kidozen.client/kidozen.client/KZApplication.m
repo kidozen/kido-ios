@@ -150,8 +150,8 @@ static NSMutableDictionary * staticTokenCache;
     
     [self.defaultClient GET:appSettingsPath
                  parameters:@{kApplicationNameKey: self.applicationName}
-                 completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *error) {
-          
+                 completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
+
                      safeMe.configuration = [NSDictionary dictionaryWithDictionary:[configResponse objectAtIndex:0]];
                      safeMe.securityConfiguration = [NSDictionary dictionaryWithDictionary:self.configuration[kAuthConfigKey]];
                      
@@ -163,12 +163,19 @@ static NSMutableDictionary * staticTokenCache;
                      [safeMe initializeApplicationKeysValues];
                      
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
-                         [safeMe handleAuthenticationViaApplicationKeyWithConfig:configResponse
-                                                           urlConfigResponse:configUrlResponse];
+                         
+                         [safeMe handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
+                             
+                             NSError *firstError = configError ?:error;
+                             [safeMe didFinishInitializationWithResponse:configResponse
+                                                             urlResponse:configUrlResponse
+                                                                   error:firstError];
+                         }];
+
                      } else {
                          [safeMe didFinishInitializationWithResponse:configResponse
                                                          urlResponse:configUrlResponse
-                                                               error:error];
+                                                               error:configError];
                      }
       }];
 }
@@ -224,18 +231,20 @@ static NSMutableDictionary * staticTokenCache;
     
 }
 
-- (void) handleAuthenticationViaApplicationKeyWithConfig:(id)configResponse
-                                       urlConfigResponse:(NSHTTPURLResponse *)configUrlResponse
+- (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^void)(NSError *))callback
 {
-    
     __weak KZApplication *safeMe = self;
-    __block NSTimer *safeToken = self.tokenExpirationTimer;
-    
-    
     [self authenticateWithApplicationKey:self.applicationKey
                                 callback:^(id responseForToken, NSError *error) {
                                     
-                                    // Where Do I cache the token?
+                                    if (error != nil) {
+                                        callback(error);
+                                    }
+                                    
+                                    safeMe.lastProviderKey = nil;
+                                    safeMe.lastPassword = nil;
+                                    safeMe.lastUserName = nil;
+                                    
                                     safeMe.kzToken = responseForToken[kAccessTokenKey];
                                     safeMe.ipToken = @""; // Don't have an identity provider token.
                                     
@@ -243,31 +252,37 @@ static NSMutableDictionary * staticTokenCache;
                                     
                                     [safeMe parseUserInfo:safeMe.kzToken];
                                     
-                                    [safeMe setCacheWithIPToken:@"" andKzToken:safeMe.kzToken];
+                                    [safeMe setCacheWithIPToken:@""
+                                                     andKzToken:safeMe.kzToken];
                                     
-                                    // [safeMe handleTokenExpiration];
+                                    [safeMe handleTokenExpiration];
                                     
-                                    if (safeMe.KidoZenUser.expiresOn > 0) {
-                                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                            safeToken = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
-                                                                                         target:safeMe
-                                                                                       selector:@selector(tokenExpires:)
-                                                                                       userInfo:nil
-                                                                                        repeats:NO];
-                                            [[NSRunLoop currentRunLoop] addTimer:safeToken forMode:NSDefaultRunLoopMode];
-                                            [[NSRunLoop currentRunLoop] run];
-                                        });
+                                    if (callback != nil) {
+                                        callback(nil);
                                     }
-                                    else {
-                                        NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
-                                    }
-                                    
-                                    [safeMe didFinishInitializationWithResponse:configResponse
-                                                                    urlResponse:configUrlResponse
-                                                                          error:error];
-                                    
                                 }];
     
+}
+
+- (void)handleTokenExpiration
+{
+    __block NSTimer *safeToken = self.tokenExpirationTimer;
+    __weak KZApplication *safeMe = self;
+    
+    if (self.KidoZenUser.expiresOn > 0) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            safeToken = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
+                                                         target:safeMe
+                                                       selector:@selector(tokenExpires:)
+                                                       userInfo:nil
+                                                        repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:safeToken forMode:NSDefaultRunLoopMode];
+            [[NSRunLoop currentRunLoop] run];
+        });
+    }
+    else {
+        NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
+    }
 }
 
 - (void) didFinishInitializationWithResponse:(id)configResponse
@@ -309,9 +324,9 @@ static NSMutableDictionary * staticTokenCache;
 {
     NSString * authServiceScope = [self.securityConfiguration objectForKey:AUTH_SVC_KEY_SCOPE];
     NSString * authServiceEndpoint = [self.securityConfiguration objectForKey:AUTH_SVC_KEY_ENDPOINT];
-    NSString * applicationScope = [self.securityConfiguration objectForKey:@"applicationScope"];
+    NSString * applicationScope = [self.securityConfiguration objectForKey:kApplicationScopeKey];
 
-    NSDictionary *provider = [[self.securityConfiguration objectForKey:@"identityProviders"] objectForKey:providerKey];
+    NSDictionary *provider = [[self.securityConfiguration objectForKey:kIdentityProvidersKey] objectForKey:providerKey];
     NSString * providerProtocol = [provider objectForKey:@"protocol"];
     NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
     
@@ -329,7 +344,10 @@ static NSMutableDictionary * staticTokenCache;
                 return ;         
             }
         }
-        NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:applicationScope ,@"wrap_scope", @"SAML",@"wrap_assertion_format", ipToken,@"wrap_assertion", nil];
+        
+        NSDictionary *params = @{@"wrap_scope": applicationScope,
+                                 @"wrap_assertion_format" : @"SAML",
+                                 @"wrap_assertion" : ipToken};
         
         [safeMe initializeHttpClient];
         
@@ -338,7 +356,7 @@ static NSMutableDictionary * staticTokenCache;
             if ([urlResponse statusCode]>300) {
                 NSMutableDictionary* details = [NSMutableDictionary dictionary];
                 [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
-              _authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
+              safeMe.authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
             }
             else {
                 safeMe.isAuthenticated = true;
@@ -357,31 +375,17 @@ static NSMutableDictionary * staticTokenCache;
                 
                 [safeMe parseUserInfo:kzToken];
                 
-                if (safeMe.KidoZenUser.expiresOn > 0) {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        safeExpirationTimer = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
-                                                                                target:safeMe
-                                                                              selector:@selector(tokenExpires:)
-                                                                              userInfo:nil
-                                                                               repeats:NO];
-                        [[NSRunLoop currentRunLoop] addTimer:safeExpirationTimer forMode:NSDefaultRunLoopMode];
-                        [[NSRunLoop currentRunLoop] run];
-                    });
-                }
-                else {
-                    NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
-                }
-                
+                [safeMe handleTokenExpiration];
                 
                 if (safeMe.authCompletionBlock) {
                     if (![safeMe.KidoZenUser.claims objectForKey:@"system"] && ![safeMe.KidoZenUser.claims objectForKey:@"usersource"] )
                     {
                         NSError * err = [[NSError alloc] initWithDomain:@"Authentication" code:0 userInfo:[NSDictionary dictionaryWithObject:@"User is not authenticated" forKey:@"description"]];
-                        _authCompletionBlock(err);
+                        safeMe.authCompletionBlock(err);
                     }
                     else
                     {
-                        _authCompletionBlock(safeMe.KidoZenUser);
+                        safeMe.authCompletionBlock(safeMe.KidoZenUser);
                     }
                 }
             }
@@ -398,9 +402,32 @@ static NSMutableDictionary * staticTokenCache;
     {
         [self removeTokensFromCache];
         
-        // Have to handle both cases, where the application key is being used, and the user/password one.
-        [self  authenticateUser:self.lastUserName withProvider:self.lastProviderKey andPassword:self.lastPassword];
+        if ([self shouldAuthenticateWithUsernameAndPassword])
+        {
+            [self authenticateUser:self.lastUserName withProvider:self.lastProviderKey andPassword:self.lastPassword];
+        } else {
+            [self refreshApplicationKeyToken];
+        }
     }
+}
+
+- (void)refreshApplicationKeyToken
+{
+    __weak KZApplication *safeMe = self;
+    
+    [self handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
+        if (error != nil) {
+            safeMe.authCompletionBlock(error);
+        } else {
+            safeMe.authCompletionBlock(safeMe.KidoZenUser);
+        }
+    }];
+
+}
+
+- (BOOL) shouldAuthenticateWithUsernameAndPassword
+{
+    return (self.lastPassword != nil) && (self.lastUserName != nil) && (self.lastProviderKey != nil);
 }
 
 -(void) initializeHttpClient
@@ -411,7 +438,12 @@ static NSMutableDictionary * staticTokenCache;
     }
 }
 
--(void) sendMailTo:(NSString *)to from:(NSString *) from withSubject:(NSString *) subject andHtmlBody:(NSString *) htmlBody andTextBody:(NSString *)textBody  completion:(void (^)(KZResponse *))block
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+        completion:(void (^)(KZResponse *))block
 {
     NSDictionary * mail = [[NSDictionary alloc] initWithObjectsAndKeys:to,@"to", from, @"from", subject, @"subject", htmlBody, @"bodyHtml", textBody, @"bodyText", nil];
     [self.mail send:mail completion:^(KZResponse * k) {
@@ -419,7 +451,9 @@ static NSMutableDictionary * staticTokenCache;
     }];
 }
 
--(void) writeLog:(id) message withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block
+-(void) writeLog:(id)message
+       withLevel:(LogLevel)level
+      completion:(void (^)(KZResponse *))block
 {
     [self.log write:message withLevel:level completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
@@ -552,7 +586,7 @@ static NSMutableDictionary * staticTokenCache;
 
 -(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
 {
-    _authCompletionBlock = block;
+    self.authCompletionBlock = block;
     self.lastUserName = user;
     self.lastPassword = password;
     self.lastProviderKey = provider;
@@ -571,8 +605,8 @@ static NSMutableDictionary * staticTokenCache;
     if (self.kzToken && self.ipToken) {
         [self parseUserInfo:self.kzToken];
         
-        if (_authCompletionBlock) {
-            _authCompletionBlock(self.kzToken);
+        if (self.authCompletionBlock) {
+            self.authCompletionBlock(self.kzToken);
         }
     }
     else {
