@@ -30,31 +30,16 @@
     if (!self.application) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         
-//        self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
-//                                                             applicationName:kzAppName
-//                                                                   strictSSL:NO
-//                                                                 andCallback:^(KZResponse * r) {
-//                                                                     XCTAssertNotNil(r.response,@"Invalid response");
-//                                                                     [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
-//                                                                         XCTAssertNotNil(c,@"User not authenticated");
-//                                                                         dispatch_semaphore_signal(semaphore);
-//                                                                     }];
-//                                                                 }];
-//        
-//        
-//        
         self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
                                                              applicationName:kzAppName
-                                                              applicationKey:@"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjCzH/viM="
                                                                    strictSSL:NO
                                                                  andCallback:^(KZResponse * r) {
                                                                      XCTAssertNotNil(r.response,@"Invalid response");
-                                                                     NSLog(@"%@", r);
-                                                                     dispatch_semaphore_signal(semaphore);
+                                                                     [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
+                                                                         XCTAssertNotNil(c,@"User not authenticated");
+                                                                         dispatch_semaphore_signal(semaphore);
+                                                                     }];
                                                                  }];
-
-        
-        
         
         assert(self.application);
         while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
@@ -66,23 +51,6 @@
 {
     // Put teardown code here; it will be run once, after the last test case.
     [super tearDown];
-}
-
-- (void)testShouldExecuteLog
-{
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    
-    [self.application writeLog:@{@"key" : @"value"}
-                     withLevel:LogLevelVerbose completion:^(KZResponse *r) {
-                         
-        XCTAssertNotNil(r,@"invalid response");
-        XCTAssertEqual(201, r.urlResponse.statusCode, @"Invalid status code");
-        dispatch_semaphore_signal(semaphore);
-                         
-    }];
-    
-    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
 - (void)testShouldExecuteGet
