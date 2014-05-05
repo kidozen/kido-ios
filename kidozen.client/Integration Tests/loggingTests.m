@@ -116,9 +116,7 @@ static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjC
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     self.application.authCompletionBlock = ^(id response) {
-        NSLog(@"%@", response);
         dispatch_semaphore_signal(semaphore);
-
     };
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];

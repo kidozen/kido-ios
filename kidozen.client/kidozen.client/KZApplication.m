@@ -280,7 +280,7 @@ static NSMutableDictionary * staticTokenCache;
     __block NSTimer *safeToken = self.tokenExpirationTimer;
     __weak KZApplication *safeMe = self;
 #ifdef CURRENTLY_TESTING
-    int timeout = 2;
+    int timeout = 6;
 #else
     int timeout = self.KidoZenUser.expiresOn;
 #endif
