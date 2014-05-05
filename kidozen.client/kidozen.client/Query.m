@@ -8,7 +8,7 @@
     self = [super init];
     if (self) {
         _dictionary = [NSMutableDictionary dictionaryWithObject:object forKey:name];
-        _baseDictionary = [NSDictionary dictionaryWithDictionary:_dictionary];
+        _baseDictionary = [NSMutableDictionary dictionaryWithDictionary:_dictionary];
     }
     return self;
 }
