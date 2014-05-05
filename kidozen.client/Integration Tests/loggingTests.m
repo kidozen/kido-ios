@@ -10,6 +10,8 @@
 #import "Constants.h"
 #import "KZApplication.h"
 
+static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjCzH/viM=";
+
 @interface loggingTests : XCTestCase
 
 @property (nonatomic, strong) KZApplication *application;
@@ -34,7 +36,7 @@
 
         self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
                                                              applicationName:kzAppName
-                                                              applicationKey:@"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjCzH/viM="
+                                                              applicationKey:kApplicationKey
                                                                    strictSSL:NO
                                                                  andCallback:^(KZResponse * r) {
                                                                      XCTAssertNotNil(r.response,@"Invalid response");
