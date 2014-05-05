@@ -13,3 +13,9 @@ NSString * const kzAppName = @"tasks"; // app name
 NSString * const kzUser = @"tests@kidozen.com";// @"armonia@kidozen.com"; //kidozen user
 NSString * const kzPassword = @"pass"; //kidozen password
 NSString * const kzProvider = @"Kidozen";
+
+//NSString * const kzAppCenterUrl = @"https://tests.qa.kidozen.com"; // @"https://armonia.kidocloud.com"; //URL of the tenant's marketplece
+//NSString * const kzAppName = @"tasks"; // app name
+//NSString * const kzUser = @"tests@kidozen.com";// @"armonia@kidozen.com"; //kidozen user
+//NSString * const kzPassword = @"pass"; //kidozen password
+//NSString * const kzProvider = @"Kidozen";

@@ -279,10 +279,14 @@ static NSMutableDictionary * staticTokenCache;
 {
     __block NSTimer *safeToken = self.tokenExpirationTimer;
     __weak KZApplication *safeMe = self;
-    
+#ifdef CURRENTLY_TESTING
+    int timeout = 2;
+#else
+    int timeout = self.KidoZenUser.expiresOn;
+#endif
     if (self.KidoZenUser.expiresOn > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            safeToken = [NSTimer scheduledTimerWithTimeInterval:safeMe.KidoZenUser.expiresOn
+            safeToken = [NSTimer scheduledTimerWithTimeInterval:timeout
                                                          target:safeMe
                                                        selector:@selector(tokenExpires:)
                                                        userInfo:nil
@@ -425,11 +429,13 @@ static NSMutableDictionary * staticTokenCache;
 {
     __weak KZApplication *safeMe = self;
     
-    [self handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
-        if (error != nil) {
-            safeMe.authCompletionBlock(error);
-        } else {
-            safeMe.authCompletionBlock(safeMe.KidoZenUser);
+    [self handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error) {
+        if (safeMe.authCompletionBlock != nil) {
+            if (error != nil) {
+                safeMe.authCompletionBlock(error);
+            } else {
+                safeMe.authCompletionBlock(safeMe.KidoZenUser);
+            }
         }
     }];
 
