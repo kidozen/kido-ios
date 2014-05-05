@@ -677,7 +677,7 @@
 				ORGANIZATIONNAME = "Tellago Studios";
 				TargetAttributes = {
 					AAE6E8D618C10D8100FB046A = {
-						TestTargetID = 6DF1EBBA18EDF726000C3AA7;
+						TestTargetID = 8EB865261614D11800DD60E6;
 					};
 				};
 			};
@@ -1020,6 +1020,11 @@
 				DSTROOT = /tmp/kidozen_client.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"CURRENTLY_TESTING=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
 					../SocketRocket/,
@@ -1085,6 +1090,11 @@
 		6D1C85C8191819FA00E59BD8 /* Testing */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"CURRENTLY_TESTING=1",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Testing;
