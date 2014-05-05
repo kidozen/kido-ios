@@ -134,7 +134,7 @@ static NSMutableDictionary * staticTokenCache;
 {
     if (!self.defaultClient) {
         self.defaultClient = [[SVHTTPClient alloc] init];
-        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
+        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:self.strictSSL];
     }
 
 }
@@ -331,10 +331,9 @@ static NSMutableDictionary * staticTokenCache;
     NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
     
     __weak KZApplication *safeMe = self;
-    __block NSTimer *safeExpirationTimer = self.tokenExpirationTimer;
     
     if (!self.ip)
-        self.ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:_strictSSL ];
+        self.ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:self.strictSSL ];
     
     [self.ip initializeWithUserName:user password:password andScope:authServiceScope];
     [self.ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
@@ -434,7 +433,7 @@ static NSMutableDictionary * staticTokenCache;
 {
     if (!self.defaultClient) {
         self.defaultClient = [[SVHTTPClient alloc] init];
-        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:_strictSSL];
+        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:self.strictSSL];
     }
 }
 
@@ -482,7 +481,7 @@ static NSMutableDictionary * staticTokenCache;
     }
     NSString * ep = [self.configuration valueForKey:@"config"] ;
     KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:ep andName:name];
-    [c setBypassSSL:_strictSSL];
+    [c setBypassSSL:self.strictSSL];
     c.kzToken = self.kzToken;
     [self.configurations setObject:c forKey:name];
     return c;
@@ -495,7 +494,7 @@ static NSMutableDictionary * staticTokenCache;
     }
     NSString * ep = [self.configuration valueForKey:@"sms"] ;
     KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:ep andName:number];
-    [s setBypassSSL:_strictSSL];
+    [s setBypassSSL:self.strictSSL];
     s.kzToken = self.kzToken;
     [self.smssenders setObject:s forKey:number];
     return s;
@@ -510,7 +509,7 @@ static NSMutableDictionary * staticTokenCache;
     
     NSString * ep = [self.configuration valueForKey:@"queue"] ;
     KZQueue * q = [[KZQueue alloc] initWithEndpoint:ep andName:name];
-    [q setBypassSSL:_strictSSL];
+    [q setBypassSSL:self.strictSSL];
     q.kzToken = self.kzToken;
     [self.queues setObject:q forKey:name];
     return q;
@@ -522,7 +521,7 @@ static NSMutableDictionary * staticTokenCache;
     }
     NSString * ep = [[self.configuration valueForKey:@"storage"] stringByAppendingString:@"/"];
     KZStorage * s= [[KZStorage alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_strictSSL];
+    [s setBypassSSL:self.strictSSL];
     s.kzToken = self.kzToken;
     [self.storages setObject:s forKey:name];
     return s;
@@ -538,7 +537,7 @@ static NSMutableDictionary * staticTokenCache;
     NSString * ep = [self.configuration valueForKey:@"pubsub"];
     NSString * wsep = [self.configuration valueForKey:@"ws"];
     KZPubSubChannel * ch =[[KZPubSubChannel alloc] initWithEndpoint:ep wsEndpoint:wsep andName:name];
-    [ch setBypassSSL:_strictSSL];
+    [ch setBypassSSL:self.strictSSL];
     ch.kzToken = self.kzToken;
     [self.channels setObject:ch forKey:name];
     return ch;
@@ -644,7 +643,7 @@ static NSMutableDictionary * staticTokenCache;
     NSString * ep =[[self.configuration valueForKey:@"datasource"] stringByAppendingString:@"/"];
     
     KZDatasource * s= [[KZDatasource alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_strictSSL];
+    [s setBypassSSL:self.strictSSL];
     
     s.kzToken = self.kzToken;
     s.ipToken = self.ipToken;
@@ -664,7 +663,7 @@ static NSMutableDictionary * staticTokenCache;
                      [NSString stringWithFormat:@"api/services/%@/",name]];
     
     KZService * s= [[KZService alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_strictSSL];
+    [s setBypassSSL:self.strictSSL];
     
     s.kzToken = self.kzToken;
     s.ipToken = self.ipToken;
