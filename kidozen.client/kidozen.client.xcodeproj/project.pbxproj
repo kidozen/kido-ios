@@ -38,6 +38,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C85AE1917B71A00E59BD8 /* loggingTests.m */; };
 		6D6C85ED18F2D160002CA3A0 /* libCrashReporter-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FEB318E5CE4800DE42F7 /* libCrashReporter-iphonesimulator.a */; };
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
 		8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */; };
@@ -300,6 +301,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D1C85AE1917B71A00E59BD8 /* loggingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loggingTests.m; sourceTree = "<group>"; };
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZADFSIdentityProvider.h; sourceTree = "<group>"; };
 		8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZADFSIdentityProvider.m; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				AAE6E8E118C10D8100FB046A /* Integration_Tests.m */,
 				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
 				AACBD73A18CA579400518D14 /* applicationtests.m */,
+				6D1C85AE1917B71A00E59BD8 /* loggingTests.m */,
 			);
 			path = "Integration Tests";
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				AACBD73B18CA579400518D14 /* applicationtests.m in Sources */,
 				AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */,
 				AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */,
+				6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */,
 				AAE6E8EB18C10DBF00FB046A /* datasourcetests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
