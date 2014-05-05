@@ -142,7 +142,8 @@ static NSMutableDictionary * staticTokenCache;
 -(void) initializeServices
 {
     __weak KZApplication *safeMe = self;
-
+    [self initializeBaseDictionaryServices];
+    
     NSString * appSettingsPath = [NSString stringWithFormat:KZ_APP_CONFIG_PATH];
     [self initializeHttpClient];
     
@@ -178,6 +179,16 @@ static NSMutableDictionary * staticTokenCache;
                                                                error:configError];
                      }
       }];
+}
+
+- (void)initializeBaseDictionaryServices
+{
+    self.configurations = [[NSMutableDictionary alloc] init];
+    self.smssenders = [[NSMutableDictionary alloc] init];
+    self.queues = [[NSMutableDictionary alloc] init];
+    self.storages = [[NSMutableDictionary alloc] init];
+    self.channels = [[NSMutableDictionary alloc] init];
+
 }
 
 - (void)initializeApplicationKeysValues
@@ -476,9 +487,8 @@ static NSMutableDictionary * staticTokenCache;
 
 -(KZConfiguration *) ConfigurationWithName:(NSString *) name
 {
-    if (!self.configurations) {
-        self.configurations = [[NSMutableDictionary alloc] init];
-    }
+    NSAssert(self.configurations, @"Should have already a configurations dictionary");
+    
     NSString * ep = [self.configuration valueForKey:@"config"] ;
     KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:ep andName:name];
     [c setBypassSSL:self.strictSSL];
@@ -489,9 +499,8 @@ static NSMutableDictionary * staticTokenCache;
 
 -(KZSMSSender *) SMSSenderWithNumber:(NSString *) number
 {
-    if (!self.smssenders) {
-        self.smssenders = [[NSMutableDictionary alloc] init];
-    }
+    NSAssert(self.smssenders, @"Should have already a smsSenders dictionary");
+
     NSString * ep = [self.configuration valueForKey:@"sms"] ;
     KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:ep andName:number];
     [s setBypassSSL:self.strictSSL];
@@ -503,10 +512,8 @@ static NSMutableDictionary * staticTokenCache;
 
 -(KZQueue *) QueueWithName:(NSString *) name
 {
-    if (!self.queues) {
-        self.queues = [[NSMutableDictionary alloc] init];
-    }
-    
+    NSAssert(self.queues, @"Should have already a queues dictionary");
+
     NSString * ep = [self.configuration valueForKey:@"queue"] ;
     KZQueue * q = [[KZQueue alloc] initWithEndpoint:ep andName:name];
     [q setBypassSSL:self.strictSSL];
@@ -516,9 +523,8 @@ static NSMutableDictionary * staticTokenCache;
 }
 -(KZStorage *) StorageWithName:(NSString *) name
 {
-    if (!self.storages) {
-        self.storages = [[NSMutableDictionary alloc] init];
-    }
+    NSAssert(self.storages, @"Should have already a storages dictionary");
+
     NSString * ep = [[self.configuration valueForKey:@"storage"] stringByAppendingString:@"/"];
     KZStorage * s= [[KZStorage alloc] initWithEndpoint:ep andName:name];
     [s setBypassSSL:self.strictSSL];
@@ -530,9 +536,7 @@ static NSMutableDictionary * staticTokenCache;
 
 -(KZPubSubChannel *) PubSubChannelWithName:(NSString *) name
 {
-    if (!self.channels) {
-        self.channels = [[NSMutableDictionary alloc] init];
-    }
+    NSAssert(self.channels, @"Should have already a channels dictionary");
     
     NSString * ep = [self.configuration valueForKey:@"pubsub"];
     NSString * wsep = [self.configuration valueForKey:@"ws"];
@@ -615,24 +619,25 @@ static NSMutableDictionary * staticTokenCache;
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [self.queues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[self.queues objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [self.storages enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[self.storages objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [self.configurations enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[self.configurations objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [self.smssenders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[self.smssenders objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [self.channels enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[self.channels objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
+    [self updateKZTokenForBaseServices:@[self.queues,
+                                         self.storages,
+                                         self.configurations,
+                                         self.smssenders,
+                                         self.channels]
+                                change:change];
+    
     [self.pushNotifications setKzToken:[change objectForKey:KVO_NEW_VALUE]];
     [self.mail setKzToken:[change objectForKey:KVO_NEW_VALUE]];
     [self.log setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+}
+
+- (void)updateKZTokenForBaseServices:(NSArray *)baseServices change:(NSDictionary *)change
+{
+    for (NSMutableDictionary *serviceDictionary in baseServices) {
+        [serviceDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [[serviceDictionary objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
+        }];
+    }
 }
 
 -(KZDatasource *) DataSourceWithName:(NSString *)name
