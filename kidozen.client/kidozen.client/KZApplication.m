@@ -22,6 +22,7 @@ NSString *const kDomainKey = @"domain";
 NSString *const kOauthTokenEndpointKey = @"oauthTokenEndpoint";
 NSString *const kApplicationScopeKey = @"applicationScope";
 NSString *const kAccessTokenKey = @"access_token";
+NSString *const kURLKey = @"url";
 
 @interface KZApplication ()
 
@@ -48,22 +49,13 @@ NSString *const kAccessTokenKey = @"access_token";
 @property (nonatomic, assign) id<KZIdentityProvider> ip;
 @property (nonatomic, strong) NSTimer *tokenExpirationTimer;
 
-
+@property (nonatomic, strong) KZCrashReporter *crashreporter;
 @end
 
 @implementation KZApplication
 
 static NSMutableDictionary * staticTokenCache;
 
-+ (KZCrashReporter *) sharedCrashReporter {
-    static dispatch_once_t once;
-    static KZCrashReporter *instance;
-    dispatch_once(&once, ^{
-        instance = [[KZCrashReporter alloc] init];
-    });
-    return instance;
-}
-    
 - (void) dealloc
 {
     [self removeObserver:self forKeyPath:KVO_KEY_VALUE];
@@ -80,7 +72,10 @@ static NSMutableDictionary * staticTokenCache;
                                andCallback:callback];
 }
 
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName strictSSL:(BOOL) strictSSL andCallback:(void (^)(KZResponse *))callback
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+                 applicationName:(NSString *) applicationName
+                       strictSSL:(BOOL) strictSSL
+                     andCallback:(void (^)(KZResponse *))callback
 {
     return [self initWithTennantMarketPlace:tennantMarketPlace
                             applicationName:applicationName
@@ -160,10 +155,10 @@ static NSMutableDictionary * staticTokenCache;
                      [safeMe initializePushNotifications];
                      [safeMe initializeLogging];
                      [safeMe initializeMail];
-                     
                      [safeMe initializeApplicationKeysValues];
                      
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
+                         [safeMe enableCrashReporter];
                          
                          [safeMe handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
                              
@@ -179,6 +174,16 @@ static NSMutableDictionary * staticTokenCache;
                                                                error:configError];
                      }
       }];
+}
+
+-(void)enableCrashReporter
+{
+    self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.configuration[kURLKey]];
+}
+
+- (void)disableCrashReporter
+{
+    self.crashreporter = nil;
 }
 
 - (void)initializeBaseDictionaryServices

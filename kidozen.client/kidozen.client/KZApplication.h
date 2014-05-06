@@ -76,6 +76,18 @@ typedef void (^TokenExpiresBlock)(id);
                        strictSSL:(BOOL)strictSSL
                      andCallback:(void (^)(KZResponse *))callback;
 
+/* Will create an instance of crash reporter.
+ * When initializing KZApplication with an application key, crash reporting
+ * Will be enabled by default.
+ */
+- (void)enableCrashReporter;
+
+/* Will remove the crash reporting capabilities of the KZApplication
+ */
+- (void)disableCrashReporter;
+
+@property (nonatomic, readonly) KZCrashReporter *crashreporter;
+
 @property (nonatomic, strong) NSMutableDictionary * identityProviders ;
 @property (nonatomic, strong) NSDictionary * configuration ;
 @property (nonatomic, strong) NSDictionary * securityConfiguration ;
@@ -94,20 +106,13 @@ typedef void (^TokenExpiresBlock)(id);
 @property (strong, nonatomic) KZLogging * log;
 @property (strong, nonatomic) SVHTTPClient * defaultClient;
 
-
-/**
- * Crash reporter
- *
- * @return crash reporter object
- */
-+ (KZCrashReporter *) sharedCrashReporter;
-
 /**
  * Push notification service main entry point
  *
  * @return The Push notification object that allows to interact with the Apple Push Notification Services (APNS)
  */
 @property (strong, nonatomic) KZNotification * pushNotifications;
+
 /**
  * Creates a new Queue object
  *
