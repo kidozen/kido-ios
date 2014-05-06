@@ -76,9 +76,11 @@ typedef void (^TokenExpiresBlock)(id);
                        strictSSL:(BOOL)strictSSL
                      andCallback:(void (^)(KZResponse *))callback;
 
-/* Will create an instance of crash reporter.
+/**
+ * Will create an instance of crash reporter.
  * When initializing KZApplication with an application key, crash reporting
- * Will be enabled by default.
+ * will be enabled by default.
+ *
  */
 - (void)enableCrashReporter;
 
