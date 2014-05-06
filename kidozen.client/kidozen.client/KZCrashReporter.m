@@ -15,19 +15,22 @@
 
 NSMutableDictionary * internalCrashReporterInfo;
 
-- (id) init {
+- (id) initWithURLString:(NSString *)url
+{
     self = [super init];
+    
     if (self) {
         internalCrashReporterInfo = [[NSMutableDictionary alloc] init];
         _client = [[SVHTTPClient alloc] init];
+        [self enableCrashReporterWithUrl:url];
     }
     return self;
 }
 
-- (void) setReporterServiceUrl:(NSString *)reporterServiceUrl
+- (void) setReporterServiceUrl:(NSString *)aURL
 {
-    NSMutableString * url = [ NSMutableString stringWithString:reporterServiceUrl];
-    if ([reporterServiceUrl indexOf:@"/"] == [reporterServiceUrl length] ) {
+    NSMutableString * url = [ NSMutableString stringWithString:aURL];
+    if ([aURL indexOf:@"/"] == [aURL length] ) {
         [url appendString:@"/"];
     }
     [url appendString: @"api/v3/logging/crash/ios/dump"];

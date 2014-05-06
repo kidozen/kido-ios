@@ -12,12 +12,13 @@
 
 @interface KZCrashReporter : KZBaseService
 
+- (id) initWithURLString:(NSString *)url;
+
 @property (atomic) BOOL isInitialized ;
 @property (atomic, strong) PLCrashReporter * baseReporter;
 @property (atomic, strong) NSString * reporterServiceUrl;
 @property (atomic, strong) NSString * crashReportContentAsString;
 @property (atomic, strong) NSError * crashReporterError;
 @property (atomic, strong) NSDictionary * crashReporterInfo;
--(void) enableCrashReporter;
--(void) enableCrashReporterWithUrl:(NSString *) url;
+
 @end
