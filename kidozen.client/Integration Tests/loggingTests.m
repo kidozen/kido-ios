@@ -54,7 +54,58 @@ static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjC
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
-    [self.application writeLog:@{@"key" : @"value"}
+    [self.application writeLog:@2
+                     withLevel:LogLevelVerbose completion:^(KZResponse *r) {
+                         
+                         XCTAssertNotNil(r,@"invalid response");
+                         XCTAssertEqual(201, r.urlResponse.statusCode, @"Invalid status code");
+                         dispatch_semaphore_signal(semaphore);
+                         
+                     }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+- (void)testShouldExecuteLogWithNumber
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [self.application writeLog:@2
+                     withLevel:LogLevelVerbose completion:^(KZResponse *r) {
+                         
+                         XCTAssertNotNil(r,@"invalid response");
+                         XCTAssertEqual(201, r.urlResponse.statusCode, @"Invalid status code");
+                         dispatch_semaphore_signal(semaphore);
+                         
+                     }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+- (void)testShouldExecuteLogWithDictionary
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [self.application writeLog:@{@"key": @2, @"key2" : @"value"}
+                     withLevel:LogLevelVerbose completion:^(KZResponse *r) {
+                         
+                         XCTAssertNotNil(r,@"invalid response");
+                         XCTAssertEqual(201, r.urlResponse.statusCode, @"Invalid status code");
+                         dispatch_semaphore_signal(semaphore);
+                         
+                     }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+- (void)testShouldExecuteLogWithArray
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [self.application writeLog:@[@1,@2,@"value"]
                      withLevel:LogLevelVerbose completion:^(KZResponse *r) {
                          
                          XCTAssertNotNil(r,@"invalid response");
