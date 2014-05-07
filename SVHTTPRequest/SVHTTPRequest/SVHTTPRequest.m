@@ -40,7 +40,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
 @property (nonatomic, strong) NSMutableData *operationData;
 @property (nonatomic, strong) NSFileHandle *operationFileHandle;
 @property (nonatomic, strong) NSURLConnection *operationConnection;
-@property (nonatomic, strong) NSDictionary *operationParameters;
+@property (nonatomic, strong) NSObject *operationParameters;
 @property (nonatomic, strong) NSHTTPURLResponse *operationURLResponse;
 @property (nonatomic, strong) NSString *operationSavePath;
 @property (nonatomic, assign) CFRunLoopRef operationRunLoop;
@@ -69,7 +69,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
 @property (nonatomic, readwrite) float expectedContentLength;
 @property (nonatomic, readwrite) float receivedContentLength;
 
-- (void)addParametersToRequest:(NSDictionary*)paramsDict;
+- (void)addParametersToRequest:(NSObject*)paramsDict;
 - (void)finish;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
@@ -175,11 +175,11 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
 
 #pragma mark -
 
-- (SVHTTPRequest*)initWithAddress:(NSString *)urlString method:(SVHTTPRequestMethod)method parameters:(NSDictionary *)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock {
+- (SVHTTPRequest*)initWithAddress:(NSString *)urlString method:(SVHTTPRequestMethod)method parameters:(NSObject *)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock {
     return [(id<SVHTTPRequestPrivateMethods>)self initWithAddress:urlString method:method parameters:parameters saveToPath:nil progress:NULL completion:completionBlock];
 }
 
-- (SVHTTPRequest*)initWithAddress:(NSString*)urlString method:(SVHTTPRequestMethod)method parameters:(NSDictionary*)parameters saveToPath:(NSString*)savePath progress:(void (^)(float))progressBlock completion:(SVHTTPRequestCompletionHandler)completionBlock  {
+- (SVHTTPRequest*)initWithAddress:(NSString*)urlString method:(SVHTTPRequestMethod)method parameters:(NSObject*)parameters saveToPath:(NSString*)savePath progress:(void (^)(float))progressBlock completion:(SVHTTPRequestCompletionHandler)completionBlock  {
     self = [super init];
     self.operationCompletionBlock = completionBlock;
     self.operationProgressBlock = progressBlock;
@@ -216,15 +216,31 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
     NSString *method = self.operationRequest.HTTPMethod;
     
     if([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"]) {
-        if(self.sendParametersAsJSON) {
-            if([parameters isKindOfClass:[NSArray class]] || [parameters isKindOfClass:[NSDictionary class]]) {
+        
+        if (self.sendParametersAsJSON) {
                 [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-                NSError *jsonError;
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&jsonError];
-                [self.operationRequest setHTTPBody:jsonData];
-            }
-            else
-                [NSException raise:NSInvalidArgumentException format:@"POST and PUT parameters must be provided as NSDictionary or NSArray when sendParametersAsJSON is set to YES."];
+            
+                if ([parameters isKindOfClass:[NSArray class]] ||
+                    [parameters isKindOfClass:[NSDictionary class]]) {
+                    
+                        NSError *jsonError;
+                        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&jsonError];
+                        [self.operationRequest setHTTPBody:jsonData];
+                    
+                }
+                else if ([parameters isKindOfClass:[NSString class]] ||
+                         [parameters isKindOfClass:[NSNumber class]]) {
+                    
+                    NSString *str = [NSString stringWithFormat:@"\"%@\"", parameters];
+                    NSData *jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
+                    
+                    [self.operationRequest setHTTPBody:jsonData];
+                    
+                }
+                else {
+                    
+                    [NSException raise:NSInvalidArgumentException format:@"POST and PUT parameters must be provided as NSNumber, NSString, NSDictionary or NSArray when sendParametersAsJSON is set to YES."];
+                }
         }
         else if([parameters isKindOfClass:[NSDictionary class]]) {
             __block BOOL hasData = NO;

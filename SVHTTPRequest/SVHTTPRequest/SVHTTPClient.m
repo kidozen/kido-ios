@@ -127,7 +127,7 @@
 
 - (SVHTTPRequest*)queueRequest:(NSString*)path
                         method:(SVHTTPRequestMethod)method
-                    parameters:(NSDictionary*)parameters
+                    parameters:(NSObject*)parameters
                     saveToPath:(NSString*)savePath
                       progress:(void (^)(float))progressBlock
                     completion:(SVHTTPRequestCompletionHandler)completionBlock  {
