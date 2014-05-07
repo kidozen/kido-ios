@@ -53,6 +53,17 @@
     [super tearDown];
 }
 
+- (void)testQueryAllLog
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.application.log all:^(KZResponse *r) {
+        XCTAssertEqual(200,r.urlResponse.statusCode, @"Invalid status code");
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+
 - (void)testShouldExecuteGet
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query"];
