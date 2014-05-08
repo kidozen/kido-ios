@@ -466,17 +466,50 @@ static NSMutableDictionary * staticTokenCache;
        andTextBody:(NSString *)textBody
         completion:(void (^)(KZResponse *))block
 {
-    NSDictionary * mail = [[NSDictionary alloc] initWithObjectsAndKeys:to,@"to", from, @"from", subject, @"subject", htmlBody, @"bodyHtml", textBody, @"bodyText", nil];
+    NSDictionary *mail = @{@"to": to,
+                           @"from" : from,
+                           @"subject" : subject,
+                           @"bodyHtml": htmlBody,
+                           @"bodyText" : textBody};
+    
     [self.mail send:mail completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
+}
+
+-(id) sanitizeLogMessage:(NSObject *)message
+{
+    NSMutableDictionary *sanitizedDictionary;
+    
+    if ([message isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dictionaryMessage = (NSDictionary *)message;
+        sanitizedDictionary = [NSMutableDictionary dictionary];
+        [dictionaryMessage enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            if ([key isKindOfClass:[NSString class]]) {
+                key = [key stringByReplacingOccurrencesOfString:@"." withString:@"_"];
+            }
+            
+            if ([obj isKindOfClass:[NSDictionary class]]) {
+                obj = [self sanitizeLogMessage:obj];
+            }
+            
+            sanitizedDictionary[key] = obj;
+            
+        }];
+    } else {
+        return message;
+    }
+    
+    return sanitizedDictionary;
 }
 
 -(void) writeLog:(id)message
        withLevel:(LogLevel)level
       completion:(void (^)(KZResponse *))block
 {
-    [self.log write:message withLevel:level completion:^(KZResponse * k) {
+    NSDictionary *d = [self sanitizeLogMessage:(NSObject *)message];
+
+    [self.log write:d withLevel:level completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
 }
