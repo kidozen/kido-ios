@@ -1,9 +1,15 @@
 #import "KZConfiguration.h"
+#import "NSDictionary+Mongo.h"
 
 @implementation KZConfiguration
 
 -(void) save:(id)object completion:(void (^)(KZResponse *))block
 {
+    if ( [(NSObject *)object isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *d = (NSDictionary *)object;
+        object = [d dictionaryWithoutDotsInKeys];
+    }
+
     [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
     [_client setSendParametersAsJSON:YES];
     [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
