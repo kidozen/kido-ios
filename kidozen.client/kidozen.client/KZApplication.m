@@ -1,6 +1,7 @@
 #import "KZApplication.h"
 #import "NSString+Utilities.h"
 #import "KZIdentityProviderFactory.h"
+#import "NSDictionary+Mongo.h"
 
 NSString *const KVO_KEY_VALUE = @"kzToken";
 NSString *const KVO_NEW_VALUE = @"new";
@@ -507,9 +508,12 @@ static NSMutableDictionary * staticTokenCache;
        withLevel:(LogLevel)level
       completion:(void (^)(KZResponse *))block
 {
-    NSDictionary *d = [self sanitizeLogMessage:(NSObject *)message];
-
-    [self.log write:d withLevel:level completion:^(KZResponse * k) {
+    if ( [(NSObject *)message isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *d = (NSDictionary *)message;
+        message = [d dictionaryWithoutDotsInKeys];
+    }
+    
+    [self.log write:message withLevel:level completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
 }

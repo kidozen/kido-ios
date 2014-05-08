@@ -1,5 +1,6 @@
 #import "KZStorage.h"
 #import "KZStorageMetadata.h"
+#import "NSDictionary+Mongo.h"
 
 NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 #define ENULLMETADATA       2
@@ -8,35 +9,53 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 
 -(void) create:(id)object completion:(void (^)(KZResponse *))block
 {
-    if (!object || !self.name) {
-        block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
-        return;
-    }
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:self.name parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response
-                                        urlResponse:urlResponse
-                                           andError:error] );
-    }];
+    [self create:object completion:block options:nil];
 }
 
 -(void) createPrivate:(id)object completion:(void (^)(KZResponse *))block;
+{
+    [self create:object completion:block options:@{@"isPrivate" : @"true"}];
+}
+
+- (void) create:(id)object completion:(void (^)(KZResponse *))block options:(NSDictionary *)options
 {
     if (!object || !self.name) {
         block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
         return;
     }
-
-    NSString * scapedUrl = [[NSString stringWithFormat:@"%@?isPrivate=true",self.name] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    
+    if ( [(NSObject *)object isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *d = (NSDictionary *)object;
+        object = [d dictionaryWithoutDotsInKeys];
+    }
+    
+    NSString *urlString = [self urlStringWithOptions:options];
+    
     [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
     [_client setSendParametersAsJSON:YES];
-    [_client POST:scapedUrl parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [_client POST:urlString parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         block( [[KZResponse alloc] initWithResponse:response
                                         urlResponse:urlResponse
                                            andError:error] );
+    }];
 
-}];
+    
+}
+
+- (NSString *)urlStringWithOptions:(NSDictionary *)options
+{
+    NSMutableString *urlString  = [NSMutableString stringWithString:self.name];
+    if ([options count] > 0) {
+        [urlString appendString:@"?"];
+        
+        [options enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            [urlString appendFormat:@"%@=%@&", key, obj];
+            
+        }];
+        return [urlString substringToIndex:[urlString length] - 1];
+    } else {
+        return urlString;
+    }
 }
 
 -(void) updateUsingId:(NSString *) objectId object:(id)object
