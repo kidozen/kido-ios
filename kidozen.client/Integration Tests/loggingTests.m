@@ -118,6 +118,29 @@ static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjC
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
+- (void)testShouldExecuteLogWithDictionariesWithDotsAsKeys
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    NSDictionary *dictionaryWithDotsAsKeys = @{@"first.key": @{@"second.key": @{ @"third.key": @"value" }
+                                                            }
+                                               };
+    
+    [self.application writeLog:dictionaryWithDotsAsKeys
+                     withLevel:LogLevelVerbose
+                    completion:^(KZResponse *r) {
+                         
+                         XCTAssertNotNil(r,@"invalid response");
+                         XCTAssertEqual(201, r.urlResponse.statusCode, @"Invalid status code");
+                         dispatch_semaphore_signal(semaphore);
+                         
+                     }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+
 - (void)testShouldOverrideApplicationKeyWithUsernameAndPassword
 {
     
