@@ -4,7 +4,7 @@
 
 -(void) send:(id)email completion:(void (^)(KZResponse *))block
 {
-    [_client POST:@"/" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [_client POST:@"" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;

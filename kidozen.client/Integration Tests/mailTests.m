@@ -7,8 +7,14 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "KZApplication.h"
+#import "Constants.h"
+#import "KZMail.h"
 
 @interface mailTests : XCTestCase
+
+@property (nonatomic, strong) KZApplication * application;
+@property (nonatomic, strong) KZMail *mailService;
 
 @end
 
@@ -17,18 +23,46 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+
+    // Put setup code here; it will be run once, before the first test case.
+    if (!self.application) {
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        
+        self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
+                                                             applicationName:kzAppName
+                                                                   strictSSL:NO
+                                                                 andCallback:^(KZResponse * r) {
+                                                                     XCTAssertNotNil(r.response,@"Invalid response");
+                                                                     [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
+                                                                         XCTAssertNotNil(c,@"User not authenticated");
+                                                                         dispatch_semaphore_signal(semaphore);
+                                                                     }];
+                                                                 }];
+        
+        assert(self.application);
+        while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+    }
 }
 
-- (void)tearDown
+- (void)testSendEmail
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+
+    [self.application sendMailTo:@"nicolas.miyasato@kidozen.com"
+                            from:@"nicolas.miyasato@kidozen.com"
+                     withSubject:@"testSubject"
+                     andHtmlBody:@"htmlBody here"
+                     andTextBody:@"hola"
+                      completion:^(KZResponse *r) {
+                          NSLog(@"response is %@", r.urlResponse);
+                          dispatch_semaphore_signal(semaphore);
+                      }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+
 }
 
-- (void)testExample
-{
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-}
 
 @end

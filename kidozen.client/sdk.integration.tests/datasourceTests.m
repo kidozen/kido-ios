@@ -47,12 +47,6 @@
     }
 }
 
-- (void)tearDown
-{
-    // Put teardown code here; it will be run once, after the last test case.
-    [super tearDown];
-}
-
 - (void)testQueryAllLog
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);

@@ -467,13 +467,11 @@ static NSMutableDictionary * staticTokenCache;
        andTextBody:(NSString *)textBody
         completion:(void (^)(KZResponse *))block
 {
-    NSData *data = [@"qwerty" dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *mail = @{@"to": to,
                            @"from" : from,
                            @"subject" : subject,
                            @"bodyHtml": htmlBody,
-                           @"bodyText" : textBody,
-                           @"attachments": @[data]};
+                           @"bodyText" : textBody};
     
     [self.mail send:mail completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
