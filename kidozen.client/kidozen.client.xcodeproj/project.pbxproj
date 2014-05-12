@@ -43,6 +43,7 @@
 		6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */; };
 		6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
 		6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
+		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
 		6D6C85ED18F2D160002CA3A0 /* libCrashReporter-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FEB318E5CE4800DE42F7 /* libCrashReporter-iphonesimulator.a */; };
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
 		8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */; };
@@ -97,7 +98,7 @@
 		AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
-		AACBD73B18CA579400518D14 /* applicationtests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationtests.m */; };
+		AACBD73B18CA579400518D14 /* applicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationTests.m */; };
 		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6B2A6166915AF00AED1AF /* KZConstants.m */; };
 		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -108,7 +109,7 @@
 		AAE6E8E018C10D8100FB046A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAE6E8DE18C10D8100FB046A /* InfoPlist.strings */; };
 		AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33E1843BAEB00CBCFC2 /* Constants.h */; };
 		AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33F1843BAEB00CBCFC2 /* Constants.m */; };
-		AAE6E8EB18C10DBF00FB046A /* datasourcetests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88418C0E80B00FB046A /* datasourcetests.m */; };
+		AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88418C0E80B00FB046A /* datasourceTests.m */; };
 		AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB865271614D11800DD60E6 /* libkidozen.client.a */; };
 		AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */; };
@@ -309,6 +310,7 @@
 		6D291A87191BFE28003AEFAF /* storageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = storageTests.m; sourceTree = "<group>"; };
 		6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mongo.h"; sourceTree = "<group>"; };
 		6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Mongo.m"; sourceTree = "<group>"; };
+		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZADFSIdentityProvider.h; sourceTree = "<group>"; };
 		8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZADFSIdentityProvider.m; sourceTree = "<group>"; };
@@ -370,19 +372,18 @@
 		AA68A33F1843BAEB00CBCFC2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ../sdk.integration.tests/Constants.m; sourceTree = "<group>"; };
 		AAC92C451725954200D1FF88 /* KZService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZService.h; sourceTree = "<group>"; };
 		AAC92C461725954200D1FF88 /* KZService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZService.m; sourceTree = "<group>"; };
-		AACBD73A18CA579400518D14 /* applicationtests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = applicationtests.m; sourceTree = "<group>"; };
+		AACBD73A18CA579400518D14 /* applicationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = applicationTests.m; sourceTree = "<group>"; };
 		AADA4204165D327400EB6443 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		AADA4206165D32B900EB6443 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AADA4208165D32BE00EB6443 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		AAE6B2A5166915AF00AED1AF /* KZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZConstants.h; sourceTree = "<group>"; };
 		AAE6B2A6166915AF00AED1AF /* KZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZConstants.m; sourceTree = "<group>"; };
-		AAE6E88418C0E80B00FB046A /* datasourcetests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = datasourcetests.m; path = ../sdk.integration.tests/datasourcetests.m; sourceTree = "<group>"; };
+		AAE6E88418C0E80B00FB046A /* datasourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = datasourceTests.m; path = ../sdk.integration.tests/datasourceTests.m; sourceTree = "<group>"; };
 		AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDatasource.h; sourceTree = "<group>"; };
 		AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDatasource.m; sourceTree = "<group>"; };
 		AAE6E8D718C10D8100FB046A /* Integration Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Integration Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE6E8DD18C10D8100FB046A /* Integration Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Integration Tests-Info.plist"; sourceTree = "<group>"; };
 		AAE6E8DF18C10D8100FB046A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AAE6E8E118C10D8100FB046A /* Integration_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Integration_Tests.m; sourceTree = "<group>"; };
 		AAE6E8E318C10D8100FB046A /* Integration Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Integration Tests-Prefix.pch"; sourceTree = "<group>"; };
 		AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Conversion.h"; sourceTree = "<group>"; };
 		AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Conversion.m"; sourceTree = "<group>"; };
@@ -582,12 +583,12 @@
 			children = (
 				AA68A33E1843BAEB00CBCFC2 /* Constants.h */,
 				AA68A33F1843BAEB00CBCFC2 /* Constants.m */,
-				AAE6E88418C0E80B00FB046A /* datasourcetests.m */,
-				AAE6E8E118C10D8100FB046A /* Integration_Tests.m */,
-				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
-				AACBD73A18CA579400518D14 /* applicationtests.m */,
+				AAE6E88418C0E80B00FB046A /* datasourceTests.m */,
+				AACBD73A18CA579400518D14 /* applicationTests.m */,
 				6D1C85AE1917B71A00E59BD8 /* loggingTests.m */,
 				6D291A87191BFE28003AEFAF /* storageTests.m */,
+				6D677C3F1921073B000DF367 /* mailTests.m */,
+				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
 			);
 			path = "Integration Tests";
 			sourceTree = "<group>";
@@ -933,11 +934,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
-				AACBD73B18CA579400518D14 /* applicationtests.m in Sources */,
+				AACBD73B18CA579400518D14 /* applicationTests.m in Sources */,
 				AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */,
 				AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */,
+				6D677C401921073B000DF367 /* mailTests.m in Sources */,
 				6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */,
-				AAE6E8EB18C10DBF00FB046A /* datasourcetests.m in Sources */,
+				AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */,
 				6D291A88191BFE28003AEFAF /* storageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

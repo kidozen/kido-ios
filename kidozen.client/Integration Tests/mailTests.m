@@ -1,18 +1,18 @@
 //
-//  Integration_Tests.m
-//  Integration Tests
+//  mailTests.m
+//  kidozen.client
 //
-//  Created by Christian Carnero on 2/28/14.
+//  Created by Nicolas Miyasato on 5/12/14.
 //  Copyright (c) 2014 Tellago Studios. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface Integration_Tests : XCTestCase
+@interface mailTests : XCTestCase
 
 @end
 
-@implementation Integration_Tests
+@implementation mailTests
 
 - (void)setUp
 {

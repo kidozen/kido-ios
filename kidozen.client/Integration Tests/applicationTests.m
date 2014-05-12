@@ -10,11 +10,11 @@
 #import "KZApplication.h"
 #import "Constants.h"
 
-@interface applicationtests : XCTestCase
+@interface applicationTests : XCTestCase
 @property (nonatomic, retain) KZApplication * application;
 @end
 
-@implementation applicationtests
+@implementation applicationTests
 
 - (void)setUp
 {

@@ -10,13 +10,13 @@
 #import "KZApplication.h"
 #import "Constants.h"
 
-@interface datasourcetests : XCTestCase
+@interface datasourceTests : XCTestCase
 @property (nonatomic, strong) KZApplication * application;
 @property (nonatomic, strong) NSDictionary * nestedDataDict;
 @property (nonatomic, strong) NSDictionary * dataDict;
 @end
 
-@implementation datasourcetests
+@implementation datasourceTests
 
 - (void)setUp
 {
