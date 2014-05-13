@@ -162,8 +162,10 @@ static NSMutableDictionary * staticTokenCache;
                          
                          [safeMe handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
                              
-                             [safeMe enableCrashReporter];
                              NSError *firstError = configError ?:error;
+                             if (firstError != nil) {
+                                 [safeMe enableCrashReporter];
+                             }
                              [safeMe didFinishInitializationWithResponse:configResponse
                                                              urlResponse:configUrlResponse
                                                                    error:firstError];
