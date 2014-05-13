@@ -12,7 +12,7 @@
 
 @interface KZCrashReporter : KZBaseService
 
-- (id) initWithURLString:(NSString *)url;
+- (id) initWithURLString:(NSString *)url withToken:(NSString *)token;
 
 @property (atomic) BOOL isInitialized ;
 @property (atomic, strong) PLCrashReporter * baseReporter;

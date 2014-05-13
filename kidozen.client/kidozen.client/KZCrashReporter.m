@@ -7,7 +7,11 @@
 //
 
 #import "KZCrashReporter.h"
+@interface KZCrashReporter()
 
+@property (nonatomic, copy) NSString *token;
+
+@end
 
 @implementation KZCrashReporter
 
@@ -15,11 +19,12 @@
 
 NSMutableDictionary * internalCrashReporterInfo;
 
-- (id) initWithURLString:(NSString *)url
+- (id) initWithURLString:(NSString *)url withToken:(NSString *)token
 {
     self = [super init];
     
     if (self) {
+        self.token = token;
         internalCrashReporterInfo = [[NSMutableDictionary alloc] init];
         _client = [[SVHTTPClient alloc] init];
         [self enableCrashReporterWithUrl:url];
@@ -101,6 +106,8 @@ NSMutableDictionary * internalCrashReporterInfo;
     [_client setBasePath:_reporterServiceUrl];
     [_client setSendParametersAsJSON:YES];
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
+    [_client setHeaders:@{@"Authorization": self.token}];
+     
     [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (!error) {
                 [_baseReporter purgePendingCrashReport];

@@ -159,14 +159,15 @@ static NSMutableDictionary * staticTokenCache;
                      [safeMe initializeApplicationKeysValues];
                      
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
-                         [safeMe enableCrashReporter];
                          
                          [safeMe handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
                              
+                             [safeMe enableCrashReporter];
                              NSError *firstError = configError ?:error;
                              [safeMe didFinishInitializationWithResponse:configResponse
                                                              urlResponse:configUrlResponse
                                                                    error:firstError];
+                             
                          }];
 
                      } else {
@@ -179,7 +180,7 @@ static NSMutableDictionary * staticTokenCache;
 
 -(void)enableCrashReporter
 {
-    self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.configuration[kURLKey]];
+    self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.configuration[kURLKey] withToken:self.kzToken];
 }
 
 - (void)disableCrashReporter
