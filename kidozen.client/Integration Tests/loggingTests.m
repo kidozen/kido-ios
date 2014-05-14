@@ -10,7 +10,11 @@
 #import "Constants.h"
 #import "KZApplication.h"
 
-static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjCzH/viM=";
+//static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjCzH/viM=";
+//static NSString *const kApplicationKey = @"tb9iTz/6ruV1bCiPzpSG2d17CyXL5KYtYo9I+1F7gTI=";
+static NSString *const kApplicationKey = @"ja/PnOSiznPHpUQ7DwI3ELCk6OMpkl5XjO6u0WQXq38=";
+static NSString *const kLoggingLogEndPoint = @"https://crashtestapp.contoso.local.kidozen.com/api/v3/logging/log";
+
 
 @interface loggingTests : XCTestCase
 
@@ -33,6 +37,12 @@ static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjC
                                                                    strictSSL:NO
                                                                  andCallback:^(KZResponse * r) {
                                                                      XCTAssertNotNil(r.response,@"Invalid response");
+                                                                     if (r.error != nil) {
+                                                                         NSLog(@"Error is %@", r.error);
+                                                                         XCTAssertNil(r.error, @"Found error");
+                                                                         
+                                                                     }
+
                                                                      dispatch_semaphore_signal(semaphore);
                                                                  }];
         
@@ -48,6 +58,40 @@ static NSString *const kApplicationKey = @"TG2wIc9xnCsZmcYaiC/+g1FpAP96X+G0ZKXjC
 - (void)tearDown
 {
     [super tearDown];
+}
+
+- (void)testShouldQuery {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+
+    NSDictionary *params = @{@"query":
+                                 @{@"field":
+                                       @{ @"user": @"anonymous" }
+                                   }
+                             };
+    
+    SVHTTPClient *client = [self.application defaultClient];
+    
+    assert(self.application.log.kzToken);
+    [client setHeaders:[NSDictionary dictionaryWithObject:self.application.log.kzToken forKey:@"Authorization"]];
+    [client setSendParametersAsJSON:YES];
+    
+    [client GET:kLoggingLogEndPoint
+     parameters:params
+     completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+         if (error != nil) {
+             NSLog(@"Error is %@", error);
+             XCTAssertNil(error, @"Found error");
+             
+         }
+
+         NSLog(@"response is %@", response);
+         dispatch_semaphore_signal(semaphore);
+
+         
+     }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+
 }
 
 - (void)testShouldExecuteLog
