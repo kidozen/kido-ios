@@ -4,6 +4,8 @@
 
 -(void) send:(id)email completion:(void (^)(KZResponse *))block
 {
+    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    
     [_client POST:@"" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
