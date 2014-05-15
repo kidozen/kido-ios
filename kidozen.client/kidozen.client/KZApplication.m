@@ -25,6 +25,10 @@ NSString *const kApplicationScopeKey = @"applicationScope";
 NSString *const kAccessTokenKey = @"access_token";
 NSString *const kURLKey = @"url";
 
+NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
+
+NSString *const kPassiveAuthenticationLoginUrlKey = @"loginUrl";
+
 @interface KZApplication ()
 
 @property (nonatomic, copy) NSString *applicationScope;
@@ -425,6 +429,8 @@ static NSMutableDictionary * staticTokenCache;
     {
         [self removeTokensFromCache];
         
+        
+        // TODO: Have to check for passive authentication.
         if ([self shouldAuthenticateWithUsernameAndPassword])
         {
             [self authenticateUser:self.lastUserName withProvider:self.lastProviderKey andPassword:self.lastPassword];
@@ -636,6 +642,27 @@ static NSMutableDictionary * staticTokenCache;
                   callback(response, nil);
                   
               }];
+}
+
+- (void)startPassiveAuthenticationWithProvider:(NSString *)provider
+{
+    NSDictionary *passiveProviderInfo = [self.configurations[kPassiveIdentityProvidersKey] objectForKey:provider];
+    NSString *passiveUrlString = [passiveProviderInfo objectForKey:kPassiveAuthenticationLoginUrlKey];
+    NSAssert(passiveUrlString, ##passiveUrlString);
+    self.lastProviderKey = provider;
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveProviderInfo]];
+}
+
+
+- (void)completePassiveAuthenticationWithUrl:(NSString *)url fragment:(NSString *)fragment completion:(void (^)(id))block
+{
+    self.authCompletionBlock = block;
+    
+    // get token.
+    
+    // save token.
+    
 }
 
 -(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
