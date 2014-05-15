@@ -652,7 +652,7 @@ static NSMutableDictionary * staticTokenCache;
     NSAssert(passiveUrlString, @"Must not be nil");
     self.lastProviderKey = provider;
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveProviderInfo]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
 }
 
 
