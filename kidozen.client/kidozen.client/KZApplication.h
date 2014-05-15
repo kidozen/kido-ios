@@ -95,7 +95,7 @@ typedef void (^TokenExpiresBlock)(id);
  *
  *
  */
-- (void)completePassiveAuthenticationWithUrl:(NSString *)url fragment:(NSString *)fragment completion:(void (^)(id))block;
+- (void)completePassiveAuthenticationWithUrl:(NSURL *)url completion:(void (^)(id))block;
 
 /**
  * Will create an instance of crash reporter.

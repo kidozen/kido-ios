@@ -2,6 +2,7 @@
 #import "NSString+Utilities.h"
 #import "KZIdentityProviderFactory.h"
 #import "NSDictionary+Mongo.h"
+#import <UIKit/UIKit.h>
 
 NSString *const KVO_KEY_VALUE = @"kzToken";
 NSString *const KVO_NEW_VALUE = @"new";
@@ -646,22 +647,21 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)startPassiveAuthenticationWithProvider:(NSString *)provider
 {
-    NSDictionary *passiveProviderInfo = [self.configurations[kPassiveIdentityProvidersKey] objectForKey:provider];
+    NSDictionary *passiveProviderInfo = [self.securityConfiguration[kPassiveIdentityProvidersKey] objectForKey:provider];
     NSString *passiveUrlString = [passiveProviderInfo objectForKey:kPassiveAuthenticationLoginUrlKey];
-    NSAssert(passiveUrlString, ##passiveUrlString);
+    NSAssert(passiveUrlString, @"Must not be nil");
     self.lastProviderKey = provider;
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveProviderInfo]];
 }
 
 
-- (void)completePassiveAuthenticationWithUrl:(NSString *)url fragment:(NSString *)fragment completion:(void (^)(id))block
+- (void)completePassiveAuthenticationWithUrl:(NSURL *)url completion:(void (^)(id))block
 {
     self.authCompletionBlock = block;
     
-    // get token.
-    
-    // save token.
+    self.kzToken = [[[[[url fragment] componentsSeparatedByString:@"&"] objectAtIndex:0] componentsSeparatedByString:@"="] objectAtIndex:1];
+    [self completeAuthenticationFlow];
     
 }
 
@@ -675,6 +675,15 @@ static NSMutableDictionary * staticTokenCache;
     [self authenticateUser:user withProvider:provider andPassword:password];
 }
 
+- (void) completeAuthenticationFlow
+{
+    [self parseUserInfo:self.kzToken];
+    
+    if (self.authCompletionBlock) {
+        self.authCompletionBlock(self.kzToken);
+    }
+}
+
 -(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password
 {
     self.lastUserName = user;
@@ -684,11 +693,7 @@ static NSMutableDictionary * staticTokenCache;
     [self loadTokensFromCache];
     
     if (self.kzToken && self.ipToken) {
-        [self parseUserInfo:self.kzToken];
-        
-        if (self.authCompletionBlock) {
-            self.authCompletionBlock(self.kzToken);
-        }
+        [self completeAuthenticationFlow];
     }
     else {
         [self invokeAuthServices:user withPassword:password andProvider:provider];
