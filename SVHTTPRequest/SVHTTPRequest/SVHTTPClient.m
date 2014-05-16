@@ -139,7 +139,7 @@
         mergedParameters = parameters;
     else {
         mergedParameters = [NSMutableDictionary dictionary];
-        [mergedParameters addEntriesFromDictionary:parameters];
+        [mergedParameters addEntriesFromDictionary:(NSDictionary *)parameters];
         [mergedParameters addEntriesFromDictionary:self.baseParameters];
     }
     
