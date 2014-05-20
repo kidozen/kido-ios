@@ -631,18 +631,18 @@ static NSMutableDictionary * staticTokenCache;
     [self.defaultClient setBasePath:@""];
 
     [self.defaultClient POST:self.oAuthTokenEndPoint
-              parameters:postContentDictionary
-              completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-                  // Handle error.
-                  if ([urlResponse statusCode] > 300) {
-                      NSMutableDictionary* details = [NSMutableDictionary dictionary];
-                      [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
-                      callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
-                  }
-                  
-                  callback(response, nil);
-                  
-              }];
+                  parameters:postContentDictionary
+                  completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                      // Handle error.
+                      if ([urlResponse statusCode] > 300) {
+                          NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                          [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
+                          callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
+                      }
+                      
+                      callback(response, nil);
+                      
+                  }];
 }
 
 - (void)startPassiveAuthenticationWithProvider:(NSString *)provider
