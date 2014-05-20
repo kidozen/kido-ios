@@ -28,7 +28,7 @@ NSString *const kURLKey = @"url";
 
 NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
 
-NSString *const kPassiveAuthenticationLoginUrlKey = @"loginUrl";
+NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 
 @interface KZApplication ()
 
