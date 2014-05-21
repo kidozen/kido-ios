@@ -36,9 +36,31 @@ typedef void (^TokenExpiresBlock)(id);
  */
 @interface KZApplication : KZBaseService <KZAuthentication>
 
+
+@property (nonatomic, readonly) KZCrashReporter *crashreporter;
+
+@property (nonatomic, strong) NSMutableDictionary * identityProviders ;
+@property (nonatomic, strong) NSDictionary * configuration ;
+@property (nonatomic, strong) NSDictionary * securityConfiguration ;
+@property (nonatomic, copy, readonly) NSString *applicationKeyName;
+@property (atomic) BOOL strictSSL ;
+
+@property (nonatomic, strong) NSString * lastProviderKey;
+@property (nonatomic, strong) NSString * lastUserName;
+@property (nonatomic, strong) NSString * lastPassword;
+
+@property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
+@property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
+@property (copy, nonatomic) void (^onInitializationComplete) (KZResponse *) ;
+
+@property (strong, nonatomic) KZMail * mail;
+@property (strong, nonatomic) KZLogging * log;
+@property (strong, nonatomic) SVHTTPClient * defaultClient;
+
+
 /**
  * Constructor
- *
+ *  Defaults to using strictSSL
  * @param tenantMarketPlace The url of the KidoZen marketplace
  * @param applicationName The application name
  * @param callback The ServiceEventListener callback with the operation results
@@ -76,27 +98,6 @@ typedef void (^TokenExpiresBlock)(id);
                        strictSSL:(BOOL)strictSSL
                      andCallback:(void (^)(KZResponse *))callback;
 
-
-/**
- * Starts a passive authentication flow. Please keep in mind that the AppDelegate method named
- *
- * - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
- *
- * will get called when you finish authenticating.
- *
- * @param tenantMarketPlace The url of the KidoZen marketplace
- * @param applicationName The application name
- * @param strictSSL Whether we want SSL to be bypassed or not,  only use in development
- */
-- (void)startPassiveAuthenticationWithProvider:(NSString *)provider;
-
-/**
- *
- *
- *
- */
-- (void)completePassiveAuthenticationWithUrl:(NSURL *)url completion:(void (^)(id))block;
-
 /**
  * Will create an instance of crash reporter.
  * When initializing KZApplication with an application key, crash reporting
@@ -108,26 +109,6 @@ typedef void (^TokenExpiresBlock)(id);
 /* Will remove the crash reporting capabilities of the KZApplication
  */
 - (void)disableCrashReporter;
-
-@property (nonatomic, readonly) KZCrashReporter *crashreporter;
-
-@property (nonatomic, strong) NSMutableDictionary * identityProviders ;
-@property (nonatomic, strong) NSDictionary * configuration ;
-@property (nonatomic, strong) NSDictionary * securityConfiguration ;
-@property (atomic) BOOL strictSSL ;
-@property (nonatomic, copy, readonly) NSString *applicationKeyName;
-
-@property (nonatomic, strong) NSString * lastProviderKey;
-@property (nonatomic, strong) NSString * lastUserName;
-@property (nonatomic, strong) NSString * lastPassword;
-
-@property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
-@property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
-@property (copy, nonatomic) void (^onInitializationComplete) (KZResponse *) ;
-
-@property (strong, nonatomic) KZMail * mail;
-@property (strong, nonatomic) KZLogging * log;
-@property (strong, nonatomic) SVHTTPClient * defaultClient;
 
 /**
  * Push notification service main entry point
