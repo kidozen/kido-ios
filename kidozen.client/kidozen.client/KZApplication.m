@@ -2,6 +2,8 @@
 #import "NSString+Utilities.h"
 #import "KZIdentityProviderFactory.h"
 #import "NSDictionary+Mongo.h"
+#import "Base64.h"
+
 #import <UIKit/UIKit.h>
 
 NSString *const KVO_KEY_VALUE = @"kzToken";
@@ -30,6 +32,8 @@ NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
 
 NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 
+static NSString const *kWrapAccessTokenPrefix = @"WRAP access_token=";
+
 @interface KZApplication ()
 
 @property (nonatomic, copy) NSString *applicationScope;
@@ -56,6 +60,10 @@ NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 @property (nonatomic, strong) NSTimer *tokenExpirationTimer;
 
 @property (nonatomic, strong) KZCrashReporter *crashreporter;
+
+@property (nonatomic, assign) BOOL passiveAuthenticated;
+@property (nonatomic, copy) NSString *rawAccessToken;
+
 @end
 
 @implementation KZApplication
@@ -109,6 +117,7 @@ static NSMutableDictionary * staticTokenCache;
         self.applicationName = applicationName;
         self.onInitializationComplete = callback;
         self.strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
+        self.passiveAuthenticated = NO;
         
         [self initializeServices];
         [self addObserver:self
@@ -187,7 +196,10 @@ static NSMutableDictionary * staticTokenCache;
 
 -(void)enableCrashReporter
 {
-    self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.configuration[kURLKey] withToken:self.kzToken];
+    if (![self.crashreporter isInitialized]) {
+        self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.configuration[kURLKey] withToken:self.kzToken];
+    }
+    
 }
 
 - (void)disableCrashReporter
@@ -256,14 +268,16 @@ static NSMutableDictionary * staticTokenCache;
     
 }
 
-- (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *))callback
+- (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *outerError))callback
 {
     __weak KZApplication *safeMe = self;
     [self authenticateWithApplicationKey:self.applicationKey
+                   postContentDictionary:[self dictionaryForTokenUsingApplicationKey]
                                 callback:^(id responseForToken, NSError *error) {
                                     
                                     if (error != nil) {
                                         callback(error);
+                                        return;
                                     }
                                     
                                     safeMe.lastProviderKey = nil;
@@ -390,18 +404,17 @@ static NSMutableDictionary * staticTokenCache;
                 safeMe.isAuthenticated = true;
                 safeMe.KidoZenUser.user = user;
                 safeMe.KidoZenUser.pass = password;
-                
-                NSString * kzToken = [NSString stringWithFormat:@"WRAP access_token=\"%@\"", [response objectForKey:@"rawToken"]];
+                safeMe.rawAccessToken = [response objectForKey:@"rawToken"];
                 
                 [safeMe willChangeValueForKey:KVO_KEY_VALUE];
                 
-                safeMe.kzToken = kzToken;
+                safeMe.kzToken = [safeMe kzTokenFromRawAccessToken];;
                 safeMe.ipToken = ipToken;
                 
                 [safeMe setCacheWithIPToken:ipToken
-                                 andKzToken:kzToken];
+                                 andKzToken:safeMe.kzToken];
                 
-                [safeMe parseUserInfo:kzToken];
+                [safeMe parseUserInfo:safeMe.kzToken];
                 
                 [safeMe handleTokenExpiration];
                 
@@ -430,15 +443,76 @@ static NSMutableDictionary * staticTokenCache;
     {
         [self removeTokensFromCache];
         
-        
-        // TODO: Have to check for passive authentication.
         if ([self shouldAuthenticateWithUsernameAndPassword])
         {
             [self authenticateUser:self.lastUserName withProvider:self.lastProviderKey andPassword:self.lastPassword];
-        } else {
+        } else if (self.passiveAuthenticated == YES ) {
+            [self refreshPassiveToken];
+        }
+        else {
             [self refreshApplicationKeyToken];
         }
     }
+}
+
+- (void)refreshPassiveToken
+{
+    __weak KZApplication *safeMe = self;
+    
+    [self refreshPassiveToken:^(NSError *error) {
+        if (safeMe.authCompletionBlock != nil) {
+            if (error != nil) {
+                safeMe.authCompletionBlock(error);
+            } else {
+                safeMe.authCompletionBlock(safeMe.KidoZenUser);
+            }
+        }
+    }];
+
+}
+
+- (void)refreshPassiveToken:(void(^)(NSError *))callback
+{
+    __weak KZApplication *safeMe = self;
+    [self authenticateWithApplicationKey:self.applicationKey
+                   postContentDictionary:[self dictionaryForPassiveAuthRefresh]
+                                callback:^(id responseForToken, NSError *error) {
+                                    
+                                    if (error != nil) {
+                                        callback(error);
+                                    }
+                                    
+                                    safeMe.rawAccessToken = responseForToken[kAccessTokenKey];
+                                    safeMe.kzToken = [safeMe kzTokenFromRawAccessToken];
+                                    
+                                    safeMe.ipToken = @""; // Don't have an identity provider token.
+                                    
+                                    [safeMe willChangeValueForKey:KVO_KEY_VALUE];
+                                    
+                                    [safeMe parseUserInfo:safeMe.kzToken];
+                                    
+                                    [safeMe setCacheWithIPToken:@""
+                                                     andKzToken:safeMe.kzToken];
+                                    
+                                    [safeMe handleTokenExpiration];
+
+                                    if (callback != nil) {
+                                        callback(nil);
+                                    }
+ 
+                                }];
+}
+
+- (NSDictionary *)dictionaryForPassiveAuthRefresh
+{
+    NSMutableDictionary *postContentDictionary = [NSMutableDictionary dictionary];
+    
+    postContentDictionary[@"grant_type"] = @"refresh_token";
+    postContentDictionary[@"client_id"] = self.applicationName;
+    postContentDictionary[@"client_secret"] = self.applicationKey;
+    postContentDictionary[@"refresh_token"] = [self.rawAccessToken base64EncodedString];
+    
+    return postContentDictionary;
 }
 
 - (void)refreshApplicationKeyToken
@@ -621,10 +695,10 @@ static NSMutableDictionary * staticTokenCache;
 }
 
 - (void)authenticateWithApplicationKey:(NSString *)applicationKey
+                 postContentDictionary:(NSDictionary *)postContentDictionary
                               callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback
 {
     
-    NSDictionary *postContentDictionary = [self dictionaryForTokenUsingApplicationKey];
     [self initializeHttpClient];
 
     [self.defaultClient setSendParametersAsJSON:YES];
@@ -660,7 +734,12 @@ static NSMutableDictionary * staticTokenCache;
 {
     self.authCompletionBlock = block;
     
-    self.kzToken = [[[[[url fragment] componentsSeparatedByString:@"&"] objectAtIndex:0] componentsSeparatedByString:@"="] objectAtIndex:1];
+    // Should assert the url.
+    NSString *token = [[[[[[url fragment] componentsSeparatedByString:@"&"] objectAtIndex:0] componentsSeparatedByString:@"="] objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    self.rawAccessToken = token;
+    self.kzToken = [self kzTokenFromRawAccessToken];
+
     [self completeAuthenticationFlow];
     
 }
@@ -677,8 +756,16 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void) completeAuthenticationFlow
 {
-    [self parseUserInfo:self.kzToken];
+    self.passiveAuthenticated = YES;
     
+    [self willChangeValueForKey:KVO_KEY_VALUE];
+
+    [self parseUserInfo:self.kzToken];
+    [self setCacheWithIPToken:@""
+                   andKzToken:self.kzToken];
+    
+    [self handleTokenExpiration];
+
     if (self.authCompletionBlock) {
         self.authCompletionBlock(self.kzToken);
     }
@@ -804,5 +891,16 @@ static NSMutableDictionary * staticTokenCache;
             createHash];
 }
 
+- (NSString *)rawAccessTokenFromKZToken
+{
+    // KZToken is something like this:
+    // WRAP access_token=@"..."
+    
+}
+
+- (NSString *)kzTokenFromRawAccessToken
+{
+    return [NSString stringWithFormat:@"%@=\"%@\"",kWrapAccessTokenPrefix, self.rawAccessToken];
+}
 
 @end
