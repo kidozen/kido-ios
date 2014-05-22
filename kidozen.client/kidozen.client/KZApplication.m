@@ -154,9 +154,6 @@ static NSMutableDictionary * staticTokenCache;
                          [safeMe handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
                              
                              NSError *firstError = configError ?:error;
-                             if (firstError == nil) {
-                                 [safeMe enableCrashReporter];
-                             }
                              [safeMe didFinishInitializationWithResponse:configResponse
                                                              urlResponse:configUrlResponse
                                                                    error:firstError];
@@ -176,11 +173,11 @@ static NSMutableDictionary * staticTokenCache;
     if (![self.crashreporter isInitialized]) {
         self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.configuration[kURLKey] withToken:self.kzToken];
     }
-    
 }
 
 - (void)disableCrashReporter
 {
+    // We just nilify
     self.crashreporter = nil;
 }
 
