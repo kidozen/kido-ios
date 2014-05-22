@@ -57,31 +57,6 @@ typedef void (^TokenExpiresBlock)(id);
 @property (strong, nonatomic) KZLogging * log;
 @property (strong, nonatomic) SVHTTPClient * defaultClient;
 
-
-/**
- * Constructor
- *  Defaults to using strictSSL
- * @param tenantMarketPlace The url of the KidoZen marketplace
- * @param applicationName The application name
- * @param callback The ServiceEventListener callback with the operation results
- */
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
-                 applicationName:(NSString *) applicationName
-                     andCallback:(void (^)(KZResponse *))callback;
-
-/**
- * Constructor
- *
- * @param tenantMarketPlace The url of the KidoZen marketplace
- * @param application The application name
- * @param strictSSL Whether we want SSL to be bypassed or not, only use in development
- * @param callback The ServiceEventListener callback with the operation results
- */
--(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
-                 applicationName:(NSString *)applicationName
-                       strictSSL:(BOOL)strictSSL
-                     andCallback:(void (^)(KZResponse *))callback;
-
 /**
  * Constructor
  *

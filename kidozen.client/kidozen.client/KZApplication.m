@@ -74,29 +74,6 @@ static NSMutableDictionary * staticTokenCache;
 {
     [self removeObserver:self forKeyPath:KVO_KEY_VALUE];
 }
-    
-
--(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
-                 applicationName:(NSString *)applicationName
-                     andCallback:(void (^)(KZResponse *))callback
-{
-   return [self initWithTennantMarketPlace:tennantMarketPlace
-                           applicationName:applicationName
-                                 strictSSL:YES
-                               andCallback:callback];
-}
-
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
-                 applicationName:(NSString *) applicationName
-                       strictSSL:(BOOL) strictSSL
-                     andCallback:(void (^)(KZResponse *))callback
-{
-    return [self initWithTennantMarketPlace:tennantMarketPlace
-                            applicationName:applicationName
-                             applicationKey:nil
-                                  strictSSL:strictSSL
-                                andCallback:callback];
-}
 
 -(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
                  applicationName:(NSString *)applicationName
