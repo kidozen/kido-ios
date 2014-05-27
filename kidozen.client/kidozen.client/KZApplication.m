@@ -890,13 +890,6 @@ static NSMutableDictionary * staticTokenCache;
             createHash];
 }
 
-- (NSString *)rawAccessTokenFromKZToken
-{
-    // KZToken is something like this:
-    // WRAP access_token=@"..."
-    
-}
-
 - (NSString *)kzTokenFromRawAccessToken
 {
     return [NSString stringWithFormat:@"WRAP access_token=\"%@\"", self.rawAccessToken];

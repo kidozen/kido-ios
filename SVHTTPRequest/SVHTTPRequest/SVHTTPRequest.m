@@ -313,40 +313,26 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
             [NSException raise:NSInvalidArgumentException format:@"POST and PUT parameters must be provided as NSDictionary when sendParametersAsJSON is set to NO."];
     }
     else if([parameters isKindOfClass:[NSDictionary class]]) {
-        if (self.sendParametersAsJSON) {
+        NSDictionary *paramsDict = (NSDictionary*)parameters;
+        
+        if (self.sendParametersAsJSON && (paramsDict.count > 0)) {
+            
             [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
             
-            if ([parameters isKindOfClass:[NSArray class]] ||
-                [parameters isKindOfClass:[NSDictionary class]]) {
-                
-                NSError *jsonError;
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&jsonError];
-                [self.operationRequest setHTTPBody:jsonData];
-                NSLog(@"json data is %@", jsonData);
-            }
-            else if ([parameters isKindOfClass:[NSString class]] ||
-                     [parameters isKindOfClass:[NSNumber class]]) {
-                
-                NSString *str = [NSString stringWithFormat:@"\"%@\"", parameters];
-                NSData *jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
-                
-                [self.operationRequest setHTTPBody:jsonData];
-                
-            }
-            else {
-                [NSException raise:NSInvalidArgumentException format:@"GET parameters must be provided as NSNumber, NSString, NSDictionary or NSArray when sendParametersAsJSON is set to YES."];
-            }
+            NSError *jsonError;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&jsonError];
+            [self.operationRequest setHTTPBody:jsonData];
         } else {
-            NSDictionary *paramsDict = (NSDictionary*)parameters;
             NSString *baseAddress = self.operationRequest.URL.absoluteString;
             if(paramsDict.count > 0)
                 baseAddress = [baseAddress stringByAppendingFormat:@"?%@", [self parameterStringForDictionary:paramsDict]];
             [self.operationRequest setURL:[NSURL URLWithString:baseAddress]];
+            
         }
-    }
-    else
+    } else {
         [NSException raise:NSInvalidArgumentException format:@"GET and DELETE parameters must be provided as NSDictionary."];
+    }
 }
 
 - (NSString*)parameterStringForDictionary:(NSDictionary*)params {
