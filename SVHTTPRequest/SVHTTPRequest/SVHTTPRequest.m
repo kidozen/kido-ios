@@ -314,10 +314,12 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
     }
     else if([parameters isKindOfClass:[NSDictionary class]]) {
         NSDictionary *paramsDict = (NSDictionary*)parameters;
-
+        
         if (self.sendParametersAsJSON && (paramsDict.count > 0)) {
+            
             [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+            
             NSError *jsonError;
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&jsonError];
             [self.operationRequest setHTTPBody:jsonData];
@@ -326,10 +328,11 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
             if(paramsDict.count > 0)
                 baseAddress = [baseAddress stringByAppendingFormat:@"?%@", [self parameterStringForDictionary:paramsDict]];
             [self.operationRequest setURL:[NSURL URLWithString:baseAddress]];
+            
         }
-    }
-    else
+    } else {
         [NSException raise:NSInvalidArgumentException format:@"GET and DELETE parameters must be provided as NSDictionary."];
+    }
 }
 
 - (NSString*)parameterStringForDictionary:(NSDictionary*)params {
