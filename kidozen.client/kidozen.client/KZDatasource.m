@@ -34,6 +34,7 @@
 {
     NSDictionary *headers = [self headersWithTimeout:timeout];
     [_client setHeaders:headers];
+    _client.sendParametersAsJSON = NO;
     
     [_client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
