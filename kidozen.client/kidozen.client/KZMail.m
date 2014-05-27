@@ -15,20 +15,27 @@
     
     if (attachments != nil) {
         _client.sendParametersAsJSON = NO;
+
+#ifdef DEBUG
+        [attachments enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSAssert([obj isKindOfClass:[NSData class]], @"Not an NSData class");
+        }];
+#endif
         
         [self sendEmailToPath:@"/attachments"
                    parameters:attachments
-                   completion:^(KZResponse *response) {
+                   completion:^(KZResponse *kzResponse) {
                        
-                       if ([response.urlResponse statusCode]>KZHttpErrorStatusCode)
+                       if ([kzResponse.urlResponse statusCode]>KZHttpErrorStatusCode)
                        {
-                           block(response);
+                           block(kzResponse);
                        }
                        else
                        {
+                           _client.sendParametersAsJSON = YES;
                            NSMutableDictionary *mailDictionary = [NSMutableDictionary dictionaryWithDictionary:email];
-                           mailDictionary[@"attachments"] = response;
-                           [safeMe sendEmailToPath:@"" parameters:email completion:block];
+                           mailDictionary[@"attachments"] = kzResponse.response;
+                           [safeMe sendEmailToPath:@"" parameters:mailDictionary completion:block];
                        }
                    }];
         
@@ -53,8 +60,7 @@
         }
         block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
     }];
-
-    
 }
+
 
 @end

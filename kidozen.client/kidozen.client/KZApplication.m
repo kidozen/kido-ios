@@ -554,11 +554,6 @@ static NSMutableDictionary * staticTokenCache;
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
     
-//    
-//    [self.mail send:mail completion:^(KZResponse * k) {
-//        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-//    }];
-    
 }
 
 -(id) sanitizeLogMessage:(NSObject *)message
