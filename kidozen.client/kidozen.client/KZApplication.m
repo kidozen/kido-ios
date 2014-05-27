@@ -32,7 +32,7 @@ NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
 
 NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 
-static NSString const *kWrapAccessTokenPrefix = @"WRAP access_token=";
+static NSString const *kWrapAccessTokenPrefix = @"";
 
 @interface KZApplication ()
 
@@ -865,16 +865,9 @@ static NSMutableDictionary * staticTokenCache;
             createHash];
 }
 
-- (NSString *)rawAccessTokenFromKZToken
-{
-    // KZToken is something like this:
-    // WRAP access_token=@"..."
-    
-}
-
 - (NSString *)kzTokenFromRawAccessToken
 {
-    return [NSString stringWithFormat:@"%@=\"%@\"",kWrapAccessTokenPrefix, self.rawAccessToken];
+    return [NSString stringWithFormat:@"WRAP access_token=\"%@\"", self.rawAccessToken];
 }
 
 @end
