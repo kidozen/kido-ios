@@ -148,6 +148,25 @@ typedef void (^TokenExpiresBlock)(id);
         completion:(void (^)(KZResponse *))block;
 
 /**
+ * Sends an email with attachments.
+ *
+ * @param to Destination email address
+ * @param from Source email address
+ * @param subject The email subject
+ * @param htmlBody The email body in HTML format
+ * @param textBody The email body
+ * @parm attachments is an array with all attachements you want to send.
+ * @param callback The callback with the result of the service call
+ */
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+       attachments:(NSDictionary *)attachments
+        completion:(void (^)(KZResponse *))block;
+
+/**
  * Creates a new entry in the KZApplication log
  *
  * @param message a NSDictionary object with the message to write

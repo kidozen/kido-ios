@@ -323,6 +323,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
                 NSError *jsonError;
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:&jsonError];
                 [self.operationRequest setHTTPBody:jsonData];
+                NSLog(@"json data is %@", jsonData);
             }
             else if ([parameters isKindOfClass:[NSString class]] ||
                      [parameters isKindOfClass:[NSNumber class]]) {

@@ -2,10 +2,45 @@
 
 @implementation KZMail
 
--(void) send:(id)email completion:(void (^)(KZResponse *))block
+-(void) send:(NSDictionary *)email completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
     
+    [self send:email attachments:nil completion:block];
+}
+
+-(void) send:(NSDictionary *)email attachments:(NSDictionary*)attachments completion:(void (^)(KZResponse *))block
+{
+    if (attachments != nil) {
+        _client.sendParametersAsJSON = NO;
+        [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+        
+        [_client POST:@"/attachments" parameters:attachments completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSError * restError = nil;
+            if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
+                restError = error;
+            }
+
+//            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            _client.sendParametersAsJSON = YES;
+
+            [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+            
+            [_client POST:@"" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                NSError * restError = nil;
+                if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
+                    restError = error;
+                }
+                block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            }];
+            
+        }];
+        
+    } else {
+//    
+//    
+    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+        [_client setHeaders:@{@"Authorization": self.kzToken,
+                              @"Accept" :@"application/json"}];
     [_client POST:@"" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -13,5 +48,6 @@
         }
         block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
     }];
+    }
 }
 @end

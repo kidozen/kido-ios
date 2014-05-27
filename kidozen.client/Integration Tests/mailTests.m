@@ -52,9 +52,9 @@
 
     [self.application sendMailTo:@"nicolas.miyasato@kidozen.com"
                             from:@"nicolas.miyasato@kidozen.com"
-                     withSubject:@"testSubject"
+                     withSubject:@"Subject 0"
                      andHtmlBody:@"htmlBody here"
-                     andTextBody:@"hola"
+                     andTextBody:@"howefqwfela"
                       completion:^(KZResponse *r) {
                           NSLog(@"response is %@", r.urlResponse);
                           dispatch_semaphore_signal(semaphore);
@@ -65,5 +65,29 @@
 
 }
 
+
+- (void)testSendEmailWithAttachments
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *path = [bundle pathsForResourcesOfType:@"png" inDirectory:@""];
+    
+    
+    
+    [self.application sendMailTo:@"nicolas.miyasato@kidozen.com"
+                            from:@"nicolas.miyasato@kidozen.com"
+                     withSubject:@"Subject 0"
+                     andHtmlBody:@"htmlBody here"
+                     andTextBody:@"howefqwfela"
+                     attachments:nil // filenamePath or data.
+                      completion:^(KZResponse *r) {
+                          NSLog(@"response is %@", r.urlResponse);
+                          dispatch_semaphore_signal(semaphore);
+                      }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+    
+}
 
 @end

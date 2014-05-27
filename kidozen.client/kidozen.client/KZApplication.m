@@ -32,7 +32,7 @@ NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
 
 NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 
-static NSString const *kWrapAccessTokenPrefix = @"WRAP access_token=";
+static NSString const *kWrapAccessTokenPrefix = @"";
 
 @interface KZApplication ()
 
@@ -281,11 +281,11 @@ static NSMutableDictionary * staticTokenCache;
 {
     __block NSTimer *safeToken = self.tokenExpirationTimer;
     __weak KZApplication *safeMe = self;
-#ifdef CURRENTLY_TESTING
-    int timeout = 6;
-#else
-    int timeout = self.KidoZenUser.expiresOn;
-#endif
+//#ifdef CURRENTLY_TESTING
+    int timeout = 6000;
+//#else
+//    int timeout = self.KidoZenUser.expiresOn;
+//#endif
     if (self.KidoZenUser.expiresOn > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             safeToken = [NSTimer scheduledTimerWithTimeInterval:timeout
@@ -525,15 +525,40 @@ static NSMutableDictionary * staticTokenCache;
        andTextBody:(NSString *)textBody
         completion:(void (^)(KZResponse *))block
 {
-    NSDictionary *mail = @{@"to": to,
-                           @"from" : from,
-                           @"subject" : subject,
-                           @"bodyHtml": htmlBody,
-                           @"bodyText" : textBody};
+    [self sendMailTo:to
+                from:from
+         withSubject:subject
+         andHtmlBody:htmlBody
+         andTextBody:textBody
+         attachments:nil
+          completion:block];
+}
+
+
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+       attachments:(NSDictionary *)attachments
+        completion:(void (^)(KZResponse *))block
+{
+    NSMutableDictionary *mail = [NSMutableDictionary dictionaryWithDictionary:@{@"to": to,
+                                                                                @"from" : from,
+                                                                                @"subject" : subject,
+                                                                                @"bodyHtml": htmlBody,
+                                                                                @"bodyText" : textBody,
+                                                                                }];
     
-    [self.mail send:mail completion:^(KZResponse * k) {
+    [self.mail send:mail attachments:attachments completion:^(KZResponse *k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
+    
+//    
+//    [self.mail send:mail completion:^(KZResponse * k) {
+//        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+//    }];
+    
 }
 
 -(id) sanitizeLogMessage:(NSObject *)message
@@ -874,7 +899,7 @@ static NSMutableDictionary * staticTokenCache;
 
 - (NSString *)kzTokenFromRawAccessToken
 {
-    return [NSString stringWithFormat:@"%@=\"%@\"",kWrapAccessTokenPrefix, self.rawAccessToken];
+    return [NSString stringWithFormat:@"WRAP access_token=\"%@\"", self.rawAccessToken];
 }
 
 @end
