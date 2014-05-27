@@ -12,7 +12,8 @@
 {
     if (attachments != nil) {
         _client.sendParametersAsJSON = NO;
-        [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+        [_client setHeaders:@{@"Authorization": self.kzToken,
+                              @"Accept" :@"application/json"}];
         
         [_client POST:@"/attachments" parameters:attachments completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
             NSError * restError = nil;
@@ -20,12 +21,12 @@
                 restError = error;
             }
 
-//            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
             _client.sendParametersAsJSON = YES;
 
             [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-            
-            [_client POST:@"" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSMutableDictionary *mailDictionary = [NSMutableDictionary dictionaryWithDictionary:email];
+            mailDictionary[@"attachments"] = response;
+            [_client POST:@"" parameters:mailDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                 NSError * restError = nil;
                 if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
                     restError = error;
@@ -36,18 +37,16 @@
         }];
         
     } else {
-//    
-//    
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
         [_client setHeaders:@{@"Authorization": self.kzToken,
                               @"Accept" :@"application/json"}];
-    [_client POST:@"" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
-    }];
+        [_client POST:@"" parameters:email completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+            NSError * restError = nil;
+            if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
+                restError = error;
+            }
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }];
     }
 }
+
 @end
