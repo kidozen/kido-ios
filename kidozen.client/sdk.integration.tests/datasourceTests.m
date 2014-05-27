@@ -53,6 +53,8 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     [self.application.log all:^(KZResponse *r) {
         XCTAssertEqual(200,r.urlResponse.statusCode, @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
+
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
@@ -121,7 +123,7 @@
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query-params"];
 
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [ds QueryWithData:_dataDict completion:^(KZResponse *r) {
+    [ds QueryWithData:self.dataDict completion:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
         NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
         XCTAssertEqual(200,[status intValue], @"Invalid status code");
