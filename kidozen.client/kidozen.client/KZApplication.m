@@ -139,7 +139,6 @@ static NSMutableDictionary * staticTokenCache;
                  parameters:@{kApplicationNameKey: self.applicationName}
                  completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
                      safeMe.applicationConfig = [[KZApplicationConfiguration alloc] initWithDictionary:[configResponse objectAtIndex:0]];
-                     safeMe.securityConfiguration = [NSDictionary dictionaryWithDictionary:self.applicationConfig.authConfig];
                      
                      [safeMe initializeIdentityProviders];
                      [safeMe initializePushNotifications];
@@ -192,8 +191,8 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)initializeApplicationKeysValues
 {
-    self.oAuthTokenEndPoint = self.securityConfiguration[kOauthTokenEndpointKey];
-    self.applicationScope = self.securityConfiguration[kApplicationScopeKey];
+    self.oAuthTokenEndPoint = self.applicationConfig.authConfig[kOauthTokenEndpointKey];
+    self.applicationScope = self.applicationConfig.authConfig[kApplicationScopeKey];
     self.domain = self.applicationConfig.domain;
 }
 
@@ -223,9 +222,9 @@ static NSMutableDictionary * staticTokenCache;
 {
     self.identityProviders = [[NSMutableDictionary alloc] init];
     
-    NSDictionary *providerDictionary = self.securityConfiguration[kIdentityProvidersKey];
+    NSDictionary *providerDictionary = self.applicationConfig.authConfig[kIdentityProvidersKey];
     
-    for(NSString *key in self.securityConfiguration[kIdentityProvidersKey]) {
+    for(NSString *key in self.applicationConfig.authConfig[kIdentityProvidersKey]) {
         NSDictionary *protocolsDictionary = providerDictionary[key];
         NSString *obj = protocolsDictionary[kProtocolKey];
         [self.identityProviders setValue:obj forKey:key];
@@ -338,11 +337,11 @@ static NSMutableDictionary * staticTokenCache;
 
 -(void) invokeAuthServices:(NSString *) user withPassword:(NSString *) password andProvider:(NSString *) providerKey
 {
-    NSString * authServiceScope = [self.securityConfiguration objectForKey:AUTH_SVC_KEY_SCOPE];
-    NSString * authServiceEndpoint = [self.securityConfiguration objectForKey:AUTH_SVC_KEY_ENDPOINT];
-    NSString * applicationScope = [self.securityConfiguration objectForKey:kApplicationScopeKey];
+    NSString * authServiceScope = [self.applicationConfig.authConfig objectForKey:AUTH_SVC_KEY_SCOPE];
+    NSString * authServiceEndpoint = [self.applicationConfig.authConfig objectForKey:AUTH_SVC_KEY_ENDPOINT];
+    NSString * applicationScope = [self.applicationConfig.authConfig objectForKey:kApplicationScopeKey];
 
-    NSDictionary *provider = [[self.securityConfiguration objectForKey:kIdentityProvidersKey] objectForKey:providerKey];
+    NSDictionary *provider = [[self.applicationConfig.authConfig objectForKey:kIdentityProvidersKey] objectForKey:providerKey];
     NSString * providerProtocol = [provider objectForKey:@"protocol"];
     NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
     
@@ -715,7 +714,7 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)startPassiveAuthenticationWithProvider:(NSString *)provider
 {
-    NSDictionary *passiveProviderInfo = [self.securityConfiguration[kPassiveIdentityProvidersKey] objectForKey:provider];
+    NSDictionary *passiveProviderInfo = [self.applicationConfig.authConfig[kPassiveIdentityProvidersKey] objectForKey:provider];
     NSString *passiveUrlString = [passiveProviderInfo objectForKey:kPassiveAuthenticationLoginUrlKey];
     NSAssert(passiveUrlString, @"Must not be nil");
     self.lastProviderKey = provider;

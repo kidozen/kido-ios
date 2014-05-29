@@ -25,6 +25,8 @@
 #import "KZWRAPv09IdentityProvider.h"
 #import <SVHTTPRequest.h>
 
+@class KZApplicationConfiguration;
+
 
 typedef void (^AuthCompletionBlock)(id);
 typedef void (^TokenExpiresBlock)(id);
@@ -40,7 +42,7 @@ typedef void (^TokenExpiresBlock)(id);
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 
 @property (nonatomic, strong) NSMutableDictionary * identityProviders ;
-@property (nonatomic, strong) NSDictionary * securityConfiguration ;
+
 @property (nonatomic, copy, readonly) NSString *applicationKeyName;
 @property (atomic) BOOL strictSSL ;
 
@@ -51,6 +53,8 @@ typedef void (^TokenExpiresBlock)(id);
 @property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
 @property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
 @property (copy, nonatomic) void (^onInitializationComplete) (KZResponse *) ;
+
+@property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
 @property (strong, nonatomic) KZMail * mail;
 @property (strong, nonatomic) KZLogging * log;
