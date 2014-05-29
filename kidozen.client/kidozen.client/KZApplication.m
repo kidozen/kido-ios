@@ -281,11 +281,11 @@ static NSMutableDictionary * staticTokenCache;
 {
     __block NSTimer *safeToken = self.tokenExpirationTimer;
     __weak KZApplication *safeMe = self;
-//#ifdef CURRENTLY_TESTING
+#ifdef CURRENTLY_TESTING
     int timeout = 6000;
-//#else
-//    int timeout = self.KidoZenUser.expiresOn;
-//#endif
+#else
+    int timeout = self.KidoZenUser.expiresOn;
+#endif
     if (self.KidoZenUser.expiresOn > 0) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             safeToken = [NSTimer scheduledTimerWithTimeInterval:timeout

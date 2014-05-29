@@ -67,45 +67,45 @@
 		8E0774B11619D9AF00FA21D9 /* NSDictionary+JSONCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E07749E1619D9AF00FA21D9 /* NSDictionary+JSONCategories.m */; };
 		8E0774B31619D9AF00FA21D9 /* Query.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774A21619D9AF00FA21D9 /* Query.m */; };
 		8E0774B61619DC7E00FA21D9 /* KZApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774B51619DC7E00FA21D9 /* KZApplication.m */; };
-		8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774B41619DC7E00FA21D9 /* KZApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774811619D9AF00FA21D9 /* KZAuthentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774821619D9AF00FA21D9 /* KZConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CF1619F35500FA21D9 /* KZLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774871619D9AF00FA21D9 /* KZLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D01619F35500FA21D9 /* KZMail.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774891619D9AF00FA21D9 /* KZMail.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D11619F35500FA21D9 /* KZNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07748B1619D9AF00FA21D9 /* KZNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D21619F35500FA21D9 /* KZPubSubChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07748D1619D9AF00FA21D9 /* KZPubSubChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D31619F35500FA21D9 /* KZQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07748F1619D9AF00FA21D9 /* KZQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D41619F35500FA21D9 /* KZResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774911619D9AF00FA21D9 /* KZResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D51619F35500FA21D9 /* KZBaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774931619D9AF00FA21D9 /* KZBaseService.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D61619F35500FA21D9 /* KZSMSSender.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774951619D9AF00FA21D9 /* KZSMSSender.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D71619F35500FA21D9 /* KZStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774971619D9AF00FA21D9 /* KZStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D81619F35500FA21D9 /* KZUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774991619D9AF00FA21D9 /* KZUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774D91619F35500FA21D9 /* KZWRAPv09IdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749B1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749D1619D9AF00FA21D9 /* NSDictionary+JSONCategories.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774DC1619F35500FA21D9 /* Query.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774A11619D9AF00FA21D9 /* Query.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774B41619DC7E00FA21D9 /* KZApplication.h */; };
+		8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */; };
+		8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774811619D9AF00FA21D9 /* KZAuthentication.h */; };
+		8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774821619D9AF00FA21D9 /* KZConfiguration.h */; };
+		8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */; };
+		8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */; };
+		8E0774CF1619F35500FA21D9 /* KZLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774871619D9AF00FA21D9 /* KZLogging.h */; };
+		8E0774D01619F35500FA21D9 /* KZMail.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774891619D9AF00FA21D9 /* KZMail.h */; };
+		8E0774D11619F35500FA21D9 /* KZNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07748B1619D9AF00FA21D9 /* KZNotification.h */; };
+		8E0774D21619F35500FA21D9 /* KZPubSubChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07748D1619D9AF00FA21D9 /* KZPubSubChannel.h */; };
+		8E0774D31619F35500FA21D9 /* KZQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07748F1619D9AF00FA21D9 /* KZQueue.h */; };
+		8E0774D41619F35500FA21D9 /* KZResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774911619D9AF00FA21D9 /* KZResponse.h */; };
+		8E0774D51619F35500FA21D9 /* KZBaseService.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774931619D9AF00FA21D9 /* KZBaseService.h */; };
+		8E0774D61619F35500FA21D9 /* KZSMSSender.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774951619D9AF00FA21D9 /* KZSMSSender.h */; };
+		8E0774D71619F35500FA21D9 /* KZStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774971619D9AF00FA21D9 /* KZStorage.h */; };
+		8E0774D81619F35500FA21D9 /* KZUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774991619D9AF00FA21D9 /* KZUser.h */; };
+		8E0774D91619F35500FA21D9 /* KZWRAPv09IdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749B1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.h */; };
+		8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749D1619D9AF00FA21D9 /* NSDictionary+JSONCategories.h */; };
+		8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */; };
+		8E0774DC1619F35500FA21D9 /* Query.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774A11619D9AF00FA21D9 /* Query.h */; };
 		8EB8652B1614D11800DD60E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
 		8EE16FAD161B52B6006BAA59 /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */; };
 		AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4208165D32BE00EB6443 /* CFNetwork.framework */; };
 		AA0F7EAD1730514000C55706 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4206165D32B900EB6443 /* Security.framework */; };
 		AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0F7EB01730515200C55706 /* UIKit.framework */; };
-		AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = AA211CDA1667B35600848407 /* KZStorageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = AA211CDA1667B35600848407 /* KZStorageMetadata.h */; };
 		AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = AA211CDB1667B35600848407 /* KZStorageMetadata.m */; };
 		AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */; };
-		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; };
 		AA50FEC918E5D2F900DE42F7 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FE3F18E5C2DD00DE42F7 /* libSocketRocket.a */; };
 		AA50FECA18E5D30D00DE42F7 /* libSVHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FE9218E5C6E100DE42F7 /* libSVHTTPRequest.a */; };
 		AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
-		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; };
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
 		AACBD73B18CA579400518D14 /* applicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationTests.m */; };
-		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; };
 		AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6B2A6166915AF00AED1AF /* KZConstants.m */; };
-		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; };
 		AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */; };
 		AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1E4B88183127860059314D /* XCTest.framework */; };
 		AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
@@ -115,7 +115,7 @@
 		AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33F1843BAEB00CBCFC2 /* Constants.m */; };
 		AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88418C0E80B00FB046A /* datasourceTests.m */; };
 		AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB865271614D11800DD60E6 /* libkidozen.client.a */; };
-		AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */; };
 		AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */; };
 /* End PBXBuildFile section */
 
@@ -428,6 +428,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D4ACD1D1937A39800958E65 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8E0774931619D9AF00FA21D9 /* KZBaseService.h */,
+				8E0774941619D9AF00FA21D9 /* KZBaseService.m */,
+				AAC92C451725954200D1FF88 /* KZService.h */,
+				AAC92C461725954200D1FF88 /* KZService.m */,
+				8E0774821619D9AF00FA21D9 /* KZConfiguration.h */,
+				8E0774831619D9AF00FA21D9 /* KZConfiguration.m */,
+				8E07748F1619D9AF00FA21D9 /* KZQueue.h */,
+				8E0774901619D9AF00FA21D9 /* KZQueue.m */,
+				8E07748D1619D9AF00FA21D9 /* KZPubSubChannel.h */,
+				8E07748E1619D9AF00FA21D9 /* KZPubSubChannel.m */,
+				8E0774871619D9AF00FA21D9 /* KZLogging.h */,
+				8E0774881619D9AF00FA21D9 /* KZLogging.m */,
+				8E0774891619D9AF00FA21D9 /* KZMail.h */,
+				8E07748A1619D9AF00FA21D9 /* KZMail.m */,
+				8E0774971619D9AF00FA21D9 /* KZStorage.h */,
+				8E0774981619D9AF00FA21D9 /* KZStorage.m */,
+				8E0774951619D9AF00FA21D9 /* KZSMSSender.h */,
+				8E0774961619D9AF00FA21D9 /* KZSMSSender.m */,
+				AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */,
+				AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */,
+				8E07748B1619D9AF00FA21D9 /* KZNotification.h */,
+				8E07748C1619D9AF00FA21D9 /* KZNotification.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		6D4ACD331937A3A900958E65 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */,
+				6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */,
+				AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */,
+				AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */,
+				8E07749D1619D9AF00FA21D9 /* NSDictionary+JSONCategories.h */,
+				8E07749E1619D9AF00FA21D9 /* NSDictionary+JSONCategories.m */,
+				8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */,
+				8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */,
+				6D859798192BDA4100237277 /* Base64.h */,
+				6D859799192BDA4100237277 /* Base64.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		6D4ACD341937A48000958E65 /* IdentityProviders */ = {
+			isa = PBXGroup;
+			children = (
+				8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */,
+				8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */,
+				8E0774861619D9AF00FA21D9 /* KZIdentityProviderFactory.m */,
+				8E07749B1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.h */,
+				8E07749C1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m */,
+				8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */,
+				8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */,
+			);
+			name = IdentityProviders;
+			sourceTree = "<group>";
+		};
 		8E5A61A91641872800038364 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,61 +541,25 @@
 		8EB8652C1614D11800DD60E6 /* kidozen.client */ = {
 			isa = PBXGroup;
 			children = (
-				6D859798192BDA4100237277 /* Base64.h */,
-				6D859799192BDA4100237277 /* Base64.m */,
+				6D4ACD341937A48000958E65 /* IdentityProviders */,
+				6D4ACD331937A3A900958E65 /* Categories */,
+				6D4ACD1D1937A39800958E65 /* Services */,
 				AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */,
 				AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */,
 				8E0774B41619DC7E00FA21D9 /* KZApplication.h */,
 				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
-				8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */,
-				8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */,
 				8E0774811619D9AF00FA21D9 /* KZAuthentication.h */,
-				8E0774821619D9AF00FA21D9 /* KZConfiguration.h */,
-				8E0774831619D9AF00FA21D9 /* KZConfiguration.m */,
-				8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */,
-				8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */,
-				8E0774861619D9AF00FA21D9 /* KZIdentityProviderFactory.m */,
-				8E0774871619D9AF00FA21D9 /* KZLogging.h */,
-				8E0774881619D9AF00FA21D9 /* KZLogging.m */,
-				8E0774891619D9AF00FA21D9 /* KZMail.h */,
-				8E07748A1619D9AF00FA21D9 /* KZMail.m */,
-				8E07748B1619D9AF00FA21D9 /* KZNotification.h */,
-				8E07748C1619D9AF00FA21D9 /* KZNotification.m */,
-				8E07748D1619D9AF00FA21D9 /* KZPubSubChannel.h */,
-				8E07748E1619D9AF00FA21D9 /* KZPubSubChannel.m */,
-				8E07748F1619D9AF00FA21D9 /* KZQueue.h */,
-				8E0774901619D9AF00FA21D9 /* KZQueue.m */,
 				8E0774911619D9AF00FA21D9 /* KZResponse.h */,
 				8E0774921619D9AF00FA21D9 /* KZResponse.m */,
-				8E0774931619D9AF00FA21D9 /* KZBaseService.h */,
-				8E0774941619D9AF00FA21D9 /* KZBaseService.m */,
-				8E0774951619D9AF00FA21D9 /* KZSMSSender.h */,
-				8E0774961619D9AF00FA21D9 /* KZSMSSender.m */,
-				8E0774971619D9AF00FA21D9 /* KZStorage.h */,
-				8E0774981619D9AF00FA21D9 /* KZStorage.m */,
 				8E0774991619D9AF00FA21D9 /* KZUser.h */,
 				8E07749A1619D9AF00FA21D9 /* KZUser.m */,
-				8E07749B1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.h */,
-				8E07749C1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m */,
-				8E07749D1619D9AF00FA21D9 /* NSDictionary+JSONCategories.h */,
-				8E07749E1619D9AF00FA21D9 /* NSDictionary+JSONCategories.m */,
-				8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */,
-				8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */,
 				8E0774A11619D9AF00FA21D9 /* Query.h */,
 				8E0774A21619D9AF00FA21D9 /* Query.m */,
 				AA211CDA1667B35600848407 /* KZStorageMetadata.h */,
 				AA211CDB1667B35600848407 /* KZStorageMetadata.m */,
 				AAE6B2A5166915AF00AED1AF /* KZConstants.h */,
 				AAE6B2A6166915AF00AED1AF /* KZConstants.m */,
-				AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */,
-				AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */,
-				AAC92C451725954200D1FF88 /* KZService.h */,
-				AAC92C461725954200D1FF88 /* KZService.m */,
-				AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */,
-				AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */,
 				8EB8652D1614D11800DD60E6 /* Supporting Files */,
-				6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */,
-				6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */,
 			);
 			path = kidozen.client;
 			sourceTree = "<group>";
@@ -620,10 +644,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D85979A192BDA4100237277 /* Base64.h in Headers */,
 				8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */,
 				AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */,
 				AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */,
-				6D85979A192BDA4100237277 /* Base64.h in Headers */,
 				8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */,
 				8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */,
 				8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */,
@@ -646,8 +670,8 @@
 				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
 				AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */,
 				8E0774DC1619F35500FA21D9 /* Query.h in Headers */,
-				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
 				AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */,
+				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,6 +1065,7 @@
 					"-allLoad",
 				);
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Testing;
 		};
@@ -1197,6 +1222,7 @@
 					"-allLoad",
 				);
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -1223,6 +1249,7 @@
 					"-allLoad",
 				);
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
