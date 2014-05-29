@@ -25,7 +25,7 @@
         self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
                                                              applicationName:kzAppName
                                                               applicationKey:nil
-                                                         strictSSL:NO
+                                                                   strictSSL:NO
                                                                  andCallback:^(KZResponse * r) {
                                                                      XCTAssertNotNil(r.response,@"Invalid response");
                                                                      dispatch_semaphore_signal(semaphore);
