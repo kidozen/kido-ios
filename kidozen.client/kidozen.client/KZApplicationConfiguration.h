@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KZObject.h"
 
-@interface KZApplicationConfiguration : NSObject
+@interface KZApplicationConfiguration : KZObject
 
 - (id)initWithDictionary:(NSDictionary *)configDictionary;
 
 @property (nonatomic, copy, readonly) NSString *displayName;
+@property (nonatomic, copy, readonly) NSString *customUrl;
 @property (nonatomic, copy, readonly) NSString *domain;
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *path;
@@ -43,6 +45,6 @@
 @property (nonatomic, copy, readonly) NSString *img;
 @property (nonatomic, readonly) NSNumber *rating;
 @property (nonatomic, copy, readonly) NSString *html5Url;
-@property (nonatomic, readonly) NSArray *authConfig;
+@property (nonatomic, readonly) NSDictionary *authConfig;
 
 @end

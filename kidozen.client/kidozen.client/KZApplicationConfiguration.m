@@ -9,9 +9,16 @@
 #import "KZApplicationConfiguration.h"
 #import <objc/runtime.h>
 
+@interface KZObject()
+
+@property (nonatomic, strong) NSDictionary *propertiesMapper;
+
+@end
+
 @interface KZApplicationConfiguration()
 
 @property (nonatomic, copy, readwrite) NSString *displayName;
+@property (nonatomic, copy, readwrite) NSString *customUrl;
 @property (nonatomic, copy, readwrite) NSString *domain;
 @property (nonatomic, copy, readwrite) NSString *name;
 @property (nonatomic, copy, readwrite) NSString *path;
@@ -42,9 +49,7 @@
 @property (nonatomic, copy, readwrite) NSString *img;
 @property (nonatomic, strong) NSNumber *rating;
 @property (nonatomic, copy, readwrite) NSString *html5Url;
-@property (nonatomic, strong) NSArray *authConfig;
-
-@property (nonatomic, strong) NSDictionary *propertiesMapper;
+@property (nonatomic, strong) NSDictionary *authConfig;
 
 @end
 
@@ -66,20 +71,4 @@
     return self;
 }
 
-- (void) initializeWithDictionary:(NSDictionary *)dictionary
-{
-    for (NSString *key in [dictionary allKeys]) {
-
-        NSString *mappedKey = [self.propertiesMapper objectForKey:key] ?: key;
-        @try {
-            [self setValue:dictionary[key] forKey:mappedKey];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"The proerty %@ does not exist", key);
-        }
-    }
-    
-    NSLog(@"%d", self.published);
-
-}
 @end

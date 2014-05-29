@@ -40,7 +40,6 @@ typedef void (^TokenExpiresBlock)(id);
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 
 @property (nonatomic, strong) NSMutableDictionary * identityProviders ;
-@property (nonatomic, strong) NSDictionary * configuration ;
 @property (nonatomic, strong) NSDictionary * securityConfiguration ;
 @property (nonatomic, copy, readonly) NSString *applicationKeyName;
 @property (atomic) BOOL strictSSL ;

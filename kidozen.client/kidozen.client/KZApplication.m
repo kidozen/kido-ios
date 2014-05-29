@@ -3,6 +3,7 @@
 #import "KZIdentityProviderFactory.h"
 #import "NSDictionary+Mongo.h"
 #import "Base64.h"
+#import "KZApplicationConfiguration.h"
 
 #import <UIKit/UIKit.h>
 
@@ -15,18 +16,13 @@ NSString *const IP_KEY_ENDPOINT = @"ipEndpoint";
 NSString *const AUTH_SVC_KEY_ENDPOINT = @"authServiceEndpoint";
 NSString *const AUTH_SVC_KEY_SCOPE = @"authServiceScope";
 
-NSString *const kAuthConfigKey = @"authConfig";
 NSString *const kIdentityProvidersKey = @"identityProviders";
 NSString *const kProtocolKey = @"protocol";
 NSString *const kApplicationNameKey = @"name";
-NSString *const kLoggingKey = @"logging";
-NSString *const kEmailKey = @"email";
-NSString *const kNotificationKey = @"notification";
-NSString *const kDomainKey = @"domain";
+
 NSString *const kOauthTokenEndpointKey = @"oauthTokenEndpoint";
 NSString *const kApplicationScopeKey = @"applicationScope";
 NSString *const kAccessTokenKey = @"access_token";
-NSString *const kURLKey = @"url";
 
 NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
 
@@ -63,6 +59,9 @@ static NSString const *kWrapAccessTokenPrefix = @"";
 
 @property (nonatomic, assign) BOOL passiveAuthenticated;
 @property (nonatomic, copy) NSString *rawAccessToken;
+
+
+@property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
 
 @end
 
@@ -139,9 +138,8 @@ static NSMutableDictionary * staticTokenCache;
     [self.defaultClient GET:appSettingsPath
                  parameters:@{kApplicationNameKey: self.applicationName}
                  completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
-
-                     safeMe.configuration = [NSDictionary dictionaryWithDictionary:[configResponse objectAtIndex:0]];
-                     safeMe.securityConfiguration = [NSDictionary dictionaryWithDictionary:self.configuration[kAuthConfigKey]];
+                     safeMe.applicationConfig = [[KZApplicationConfiguration alloc] initWithDictionary:[configResponse objectAtIndex:0]];
+                     safeMe.securityConfiguration = [NSDictionary dictionaryWithDictionary:self.applicationConfig.authConfig];
                      
                      [safeMe initializeIdentityProviders];
                      [safeMe initializePushNotifications];
@@ -171,7 +169,8 @@ static NSMutableDictionary * staticTokenCache;
 -(void)enableCrashReporter
 {
     if (![self.crashreporter isInitialized]) {
-        self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.configuration[kURLKey] withToken:self.kzToken];
+        self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.applicationConfig.url
+                                                              withToken:self.kzToken];
     }
 }
 
@@ -195,7 +194,7 @@ static NSMutableDictionary * staticTokenCache;
 {
     self.oAuthTokenEndPoint = self.securityConfiguration[kOauthTokenEndpointKey];
     self.applicationScope = self.securityConfiguration[kApplicationScopeKey];
-    self.domain = self.configuration[kDomainKey];
+    self.domain = self.applicationConfig.domain;
 }
 
 - (BOOL)shouldAskTokenWithForApplicationKey
@@ -205,7 +204,7 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)initializeMail
 {
-    self.mail = [[KZMail alloc] initWithEndpoint:self.configuration[kEmailKey]
+    self.mail = [[KZMail alloc] initWithEndpoint:self.applicationConfig.email
                                          andName:nil];
     [self.mail setBypassSSL:self.strictSSL];
     self.mail.kzToken = self.kzToken;
@@ -213,7 +212,7 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void) initializeLogging
 {
-    self.log = [[KZLogging alloc] initWithEndpoint:self.configuration[kLoggingKey]
+    self.log = [[KZLogging alloc] initWithEndpoint:self.applicationConfig.logging
                                            andName:nil];
     
     [self.log setBypassSSL:self.strictSSL];
@@ -236,7 +235,7 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)initializePushNotifications
 {
-    self.pushNotifications = [[KZNotification alloc] initWithEndpoint:self.configuration[kNotificationKey]
+    self.pushNotifications = [[KZNotification alloc] initWithEndpoint:self.applicationConfig.notification
                                                               andName:self.applicationName];
     [self.pushNotifications setBypassSSL:self.strictSSL];
     
@@ -615,8 +614,8 @@ static NSMutableDictionary * staticTokenCache;
 {
     NSAssert(self.configurations, @"Should have already a configurations dictionary");
     
-    NSString * ep = [self.configuration valueForKey:@"config"] ;
-    KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:ep andName:name];
+    KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:self.applicationConfig.config
+                                                            andName:name];
     [c setBypassSSL:self.strictSSL];
     c.kzToken = self.kzToken;
     [self.configurations setObject:c forKey:name];
@@ -627,8 +626,8 @@ static NSMutableDictionary * staticTokenCache;
 {
     NSAssert(self.smssenders, @"Should have already a smsSenders dictionary");
 
-    NSString * ep = [self.configuration valueForKey:@"sms"] ;
-    KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:ep andName:number];
+    KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:self.applicationConfig.sms
+                                                   andName:number];
     [s setBypassSSL:self.strictSSL];
     s.kzToken = self.kzToken;
     [self.smssenders setObject:s forKey:number];
@@ -640,8 +639,8 @@ static NSMutableDictionary * staticTokenCache;
 {
     NSAssert(self.queues, @"Should have already a queues dictionary");
 
-    NSString * ep = [self.configuration valueForKey:@"queue"] ;
-    KZQueue * q = [[KZQueue alloc] initWithEndpoint:ep andName:name];
+    KZQueue * q = [[KZQueue alloc] initWithEndpoint:self.applicationConfig.queue
+                                            andName:name];
     [q setBypassSSL:self.strictSSL];
     q.kzToken = self.kzToken;
     [self.queues setObject:q forKey:name];
@@ -651,22 +650,23 @@ static NSMutableDictionary * staticTokenCache;
 {
     NSAssert(self.storages, @"Should have already a storages dictionary");
 
-    NSString * ep = [[self.configuration valueForKey:@"storage"] stringByAppendingString:@"/"];
+    NSString * ep = [self.applicationConfig.storage stringByAppendingString:@"/"];
     KZStorage * s= [[KZStorage alloc] initWithEndpoint:ep andName:name];
     [s setBypassSSL:self.strictSSL];
     s.kzToken = self.kzToken;
     [self.storages setObject:s forKey:name];
     return s;
 }
+
 #if TARGET_OS_IPHONE
 
 -(KZPubSubChannel *) PubSubChannelWithName:(NSString *) name
 {
     NSAssert(self.channels, @"Should have already a channels dictionary");
-    
-    NSString * ep = [self.configuration valueForKey:@"pubsub"];
-    NSString * wsep = [self.configuration valueForKey:@"ws"];
-    KZPubSubChannel * ch =[[KZPubSubChannel alloc] initWithEndpoint:ep wsEndpoint:wsep andName:name];
+
+    KZPubSubChannel * ch =[[KZPubSubChannel alloc] initWithEndpoint:self.applicationConfig.pubsub
+                                                         wsEndpoint:self.applicationConfig.ws
+                                                            andName:name];
     [ch setBypassSSL:self.strictSSL];
     ch.kzToken = self.kzToken;
     [self.channels setObject:ch forKey:name];
@@ -809,8 +809,8 @@ static NSMutableDictionary * staticTokenCache;
     if (!self.datasources) {
         self.datasources = [[NSMutableDictionary alloc] init];
     }
-    NSString * ep =[[self.configuration valueForKey:@"datasource"] stringByAppendingString:@"/"];
-    
+    NSString * ep = [self.applicationConfig.datasource stringByAppendingString:@"/"];
+
     KZDatasource * s= [[KZDatasource alloc] initWithEndpoint:ep andName:name];
     [s setBypassSSL:self.strictSSL];
     
@@ -828,8 +828,8 @@ static NSMutableDictionary * staticTokenCache;
         self.services = [[NSMutableDictionary alloc] init];
     }
     //url: "/api/services/" + name + "/invoke/" + method,
-    NSString * ep = [[self.configuration valueForKey:@"url"] stringByAppendingString:
-                     [NSString stringWithFormat:@"api/services/%@/",name]];
+    NSString *ep = [self.applicationConfig.url stringByAppendingString:
+    [NSString stringWithFormat:@"api/services/%@/",name]];
     
     KZService * s= [[KZService alloc] initWithEndpoint:ep andName:name];
     [s setBypassSSL:self.strictSSL];

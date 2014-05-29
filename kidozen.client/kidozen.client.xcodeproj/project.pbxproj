@@ -43,6 +43,12 @@
 		6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */; };
 		6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
 		6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
+		6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */; };
+		6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */; };
+		6D4ACD491937CBA400958E65 /* KZObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD471937CBA400958E65 /* KZObject.h */; };
+		6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD481937CBA400958E65 /* KZObject.m */; };
+		6D4ACD631937CD1000958E65 /* KZSecurityConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD611937CD1000958E65 /* KZSecurityConfiguration.h */; };
+		6D4ACD641937CD1000958E65 /* KZSecurityConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */; };
 		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
 		6D6C85ED18F2D160002CA3A0 /* libCrashReporter-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FEB318E5CE4800DE42F7 /* libCrashReporter-iphonesimulator.a */; };
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
@@ -314,6 +320,12 @@
 		6D291A87191BFE28003AEFAF /* storageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = storageTests.m; sourceTree = "<group>"; };
 		6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mongo.h"; sourceTree = "<group>"; };
 		6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Mongo.m"; sourceTree = "<group>"; };
+		6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationConfiguration.h; sourceTree = "<group>"; };
+		6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationConfiguration.m; sourceTree = "<group>"; };
+		6D4ACD471937CBA400958E65 /* KZObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZObject.h; sourceTree = "<group>"; };
+		6D4ACD481937CBA400958E65 /* KZObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZObject.m; sourceTree = "<group>"; };
+		6D4ACD611937CD1000958E65 /* KZSecurityConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZSecurityConfiguration.h; sourceTree = "<group>"; };
+		6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZSecurityConfiguration.m; sourceTree = "<group>"; };
 		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D859798192BDA4100237277 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../Base64/Base64.h; sourceTree = "<group>"; };
@@ -488,6 +500,17 @@
 			name = IdentityProviders;
 			sourceTree = "<group>";
 		};
+		6D4ACD601937CCC300958E65 /* ConfigurationModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */,
+				6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */,
+				6D4ACD611937CD1000958E65 /* KZSecurityConfiguration.h */,
+				6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */,
+			);
+			name = ConfigurationModel;
+			sourceTree = "<group>";
+		};
 		8E5A61A91641872800038364 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +564,9 @@
 		8EB8652C1614D11800DD60E6 /* kidozen.client */ = {
 			isa = PBXGroup;
 			children = (
+				6D4ACD471937CBA400958E65 /* KZObject.h */,
+				6D4ACD481937CBA400958E65 /* KZObject.m */,
+				6D4ACD601937CCC300958E65 /* ConfigurationModel */,
 				6D4ACD341937A48000958E65 /* IdentityProviders */,
 				6D4ACD331937A3A900958E65 /* Categories */,
 				6D4ACD1D1937A39800958E65 /* Services */,
@@ -645,6 +671,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D85979A192BDA4100237277 /* Base64.h in Headers */,
+				6D4ACD631937CD1000958E65 /* KZSecurityConfiguration.h in Headers */,
+				6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */,
 				8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */,
 				AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */,
 				AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */,
@@ -669,6 +697,7 @@
 				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
 				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
 				AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */,
+				6D4ACD491937CBA400958E65 /* KZObject.h in Headers */,
 				8E0774DC1619F35500FA21D9 /* Query.h in Headers */,
 				AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */,
 				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
@@ -938,6 +967,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D85979B192BDA4100237277 /* Base64.m in Sources */,
+				6D4ACD641937CD1000958E65 /* KZSecurityConfiguration.m in Sources */,
 				6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
 				8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */,
 				8E0774A41619D9AF00FA21D9 /* KZConfiguration.m in Sources */,
@@ -946,6 +976,7 @@
 				8E0774A71619D9AF00FA21D9 /* KZMail.m in Sources */,
 				8E0774A81619D9AF00FA21D9 /* KZNotification.m in Sources */,
 				AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */,
+				6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */,
 				8E0774A91619D9AF00FA21D9 /* KZPubSubChannel.m in Sources */,
 				8E0774AA1619D9AF00FA21D9 /* KZQueue.m in Sources */,
 				8E0774AB1619D9AF00FA21D9 /* KZResponse.m in Sources */,
@@ -954,6 +985,7 @@
 				8E0774AE1619D9AF00FA21D9 /* KZStorage.m in Sources */,
 				8EE16FAD161B52B6006BAA59 /* NSString+Utilities.m in Sources */,
 				8E0774AF1619D9AF00FA21D9 /* KZUser.m in Sources */,
+				6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */,
 				8E0774B01619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m in Sources */,
 				8E0774B11619D9AF00FA21D9 /* NSDictionary+JSONCategories.m in Sources */,
 				8E0774B31619D9AF00FA21D9 /* Query.m in Sources */,
