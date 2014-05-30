@@ -4,6 +4,7 @@
 #import "NSDictionary+Mongo.h"
 #import "Base64.h"
 #import "KZApplicationConfiguration.h"
+#import "KZAuthenticationConfig.h"
 
 #import <UIKit/UIKit.h>
 
@@ -28,13 +29,10 @@ NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
 
 NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 
-static NSString const *kWrapAccessTokenPrefix = @"";
-
 @interface KZApplication ()
 
 @property (nonatomic, copy) NSString *applicationScope;
 @property (nonatomic, copy) NSString *oAuthTokenEndPoint;
-@property (nonatomic, copy) NSString *domain;
 
 @property (nonatomic, copy, readwrite) NSString *applicationKey;
 
@@ -191,9 +189,8 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)initializeApplicationKeysValues
 {
-    self.oAuthTokenEndPoint = self.applicationConfig.authConfig[kOauthTokenEndpointKey];
-    self.applicationScope = self.applicationConfig.authConfig[kApplicationScopeKey];
-    self.domain = self.applicationConfig.domain;
+    self.oAuthTokenEndPoint = self.applicationConfig.authConfig.oauthTokenEndpoint;
+    self.applicationScope = self.applicationConfig.authConfig.applicationScope;
 }
 
 - (BOOL)shouldAskTokenWithForApplicationKey
@@ -222,9 +219,9 @@ static NSMutableDictionary * staticTokenCache;
 {
     self.identityProviders = [[NSMutableDictionary alloc] init];
     
-    NSDictionary *providerDictionary = self.applicationConfig.authConfig[kIdentityProvidersKey];
+    NSDictionary *providerDictionary = self.applicationConfig.authConfig.identityProviders;
     
-    for(NSString *key in self.applicationConfig.authConfig[kIdentityProvidersKey]) {
+    for(NSString *key in providerDictionary) {
         NSDictionary *protocolsDictionary = providerDictionary[key];
         NSString *obj = protocolsDictionary[kProtocolKey];
         [self.identityProviders setValue:obj forKey:key];
@@ -337,11 +334,11 @@ static NSMutableDictionary * staticTokenCache;
 
 -(void) invokeAuthServices:(NSString *) user withPassword:(NSString *) password andProvider:(NSString *) providerKey
 {
-    NSString * authServiceScope = [self.applicationConfig.authConfig objectForKey:AUTH_SVC_KEY_SCOPE];
-    NSString * authServiceEndpoint = [self.applicationConfig.authConfig objectForKey:AUTH_SVC_KEY_ENDPOINT];
-    NSString * applicationScope = [self.applicationConfig.authConfig objectForKey:kApplicationScopeKey];
+    NSString * authServiceScope = self.applicationConfig.authConfig.authServiceScope;
+    NSString * authServiceEndpoint = self.applicationConfig.authConfig.authServiceEndpoint;
+    NSString * applicationScope = self.applicationConfig.authConfig.applicationScope;
 
-    NSDictionary *provider = [[self.applicationConfig.authConfig objectForKey:kIdentityProvidersKey] objectForKey:providerKey];
+    NSDictionary *provider = self.applicationConfig.authConfig.identityProviders[providerKey];
     NSString * providerProtocol = [provider objectForKey:@"protocol"];
     NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
     
@@ -679,7 +676,7 @@ static NSMutableDictionary * staticTokenCache;
 {
     NSMutableDictionary *postContentDictionary = [NSMutableDictionary dictionary];
     
-    postContentDictionary[@"client_id"] = self.domain;
+    postContentDictionary[@"client_id"] = self.applicationConfig.domain;
     postContentDictionary[@"client_secret"] = self.applicationKey;
     postContentDictionary[@"grant_type"] = @"client_credentials";
     postContentDictionary[@"scope"] = self.applicationScope;
@@ -714,7 +711,8 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)startPassiveAuthenticationWithProvider:(NSString *)provider
 {
-    NSDictionary *passiveProviderInfo = [self.applicationConfig.authConfig[kPassiveIdentityProvidersKey] objectForKey:provider];
+//    NSDictionary *passiveProviderInfo = [self.applicationConfig.authConfig [kPassiveIdentityProvidersKey] objectForKey:provider];
+    NSDictionary *passiveProviderInfo = @{};
     NSString *passiveUrlString = [passiveProviderInfo objectForKey:kPassiveAuthenticationLoginUrlKey];
     NSAssert(passiveUrlString, @"Must not be nil");
     self.lastProviderKey = provider;
