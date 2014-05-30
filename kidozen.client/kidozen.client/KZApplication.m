@@ -13,16 +13,9 @@ NSString *const KVO_NEW_VALUE = @"new";
 NSString *const KZ_APP_CONFIG_PATH = @"/publicapi/apps";
 NSString *const KZ_SEC_CONFIG_PATH = @"/publicapi/auth/config";
 
-NSString *const IP_KEY_ENDPOINT = @"ipEndpoint";
-NSString *const AUTH_SVC_KEY_ENDPOINT = @"authServiceEndpoint";
-NSString *const AUTH_SVC_KEY_SCOPE = @"authServiceScope";
-
-NSString *const kIdentityProvidersKey = @"identityProviders";
 NSString *const kProtocolKey = @"protocol";
 NSString *const kApplicationNameKey = @"name";
 
-NSString *const kOauthTokenEndpointKey = @"oauthTokenEndpoint";
-NSString *const kApplicationScopeKey = @"applicationScope";
 NSString *const kAccessTokenKey = @"access_token";
 
 NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
@@ -33,7 +26,6 @@ NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 @property (nonatomic, copy) NSString *oAuthTokenEndPoint;
 
 @property (nonatomic, copy, readwrite) NSString *applicationKey;
-
 
 @property (nonatomic, copy) NSString *tennantMarketPlace;
 @property (nonatomic, copy) NSString *applicationName;
