@@ -49,7 +49,7 @@
 @property (nonatomic, copy, readwrite) NSString *img;
 @property (nonatomic, strong) NSNumber *rating;
 @property (nonatomic, copy, readwrite) NSString *html5Url;
-@property (nonatomic, strong) NSDictionary *authConfig;
+@property (nonatomic, strong) KZAuthenticationConfig *authConfig;
 
 @end
 
@@ -65,7 +65,7 @@
                                    @"tile-color" : @"tileColor",
                                    @"description" : @"applicationDescription"};
         
-        [self initializeWithDictionary:configDictionary];
+        [self configureWithDictionary:configDictionary];
         
     }
     return self;

@@ -55,6 +55,8 @@
 		6D85979A192BDA4100237277 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D859798192BDA4100237277 /* Base64.h */; };
 		6D85979B192BDA4100237277 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D859799192BDA4100237277 /* Base64.m */; };
 		6D85979C192BDA4100237277 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D859799192BDA4100237277 /* Base64.m */; };
+		6DCEDD9F1938D26600A38C39 /* KZAuthenticationConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */; };
+		6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */; };
 		6DE2A0B11925502B0020C69A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DE2A0B01925502B0020C69A /* Media.xcassets */; };
 		8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */; };
 		8E0774A41619D9AF00FA21D9 /* KZConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774831619D9AF00FA21D9 /* KZConfiguration.m */; };
@@ -330,6 +332,8 @@
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D859798192BDA4100237277 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../Base64/Base64.h; sourceTree = "<group>"; };
 		6D859799192BDA4100237277 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../Base64/Base64.m; sourceTree = "<group>"; };
+		6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAuthenticationConfig.h; sourceTree = "<group>"; };
+		6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAuthenticationConfig.m; sourceTree = "<group>"; };
 		6DE2A0B01925502B0020C69A /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZADFSIdentityProvider.h; sourceTree = "<group>"; };
 		8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZADFSIdentityProvider.m; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 				6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */,
 				6D4ACD611937CD1000958E65 /* KZSecurityConfiguration.h */,
 				6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */,
+				6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */,
+				6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */,
 			);
 			name = ConfigurationModel;
 			sourceTree = "<group>";
@@ -679,6 +685,7 @@
 				8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */,
 				8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */,
 				8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */,
+				6DCEDD9F1938D26600A38C39 /* KZAuthenticationConfig.h in Headers */,
 				8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */,
 				8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */,
 				8E0774CF1619F35500FA21D9 /* KZLogging.h in Headers */,
@@ -994,6 +1001,7 @@
 				AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */,
 				AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */,
 				AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */,
+				6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */,
 				AAC92C481725954200D1FF88 /* KZService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

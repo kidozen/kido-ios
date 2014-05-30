@@ -10,7 +10,9 @@
 
 @interface KZObject : NSObject
 
-- (void) initializeWithDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+- (void)configureWithDictionary:(NSDictionary *)dictionary;
 
 // This dictionary should be used in case
 @property (nonatomic, readonly) NSDictionary *propertiesMapper;

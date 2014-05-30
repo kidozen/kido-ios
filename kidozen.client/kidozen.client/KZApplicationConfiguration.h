@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "KZObject.h"
 
+@class KZAuthenticationConfig;
+
 @interface KZApplicationConfiguration : KZObject
 
 - (id)initWithDictionary:(NSDictionary *)configDictionary;
@@ -45,6 +47,6 @@
 @property (nonatomic, copy, readonly) NSString *img;
 @property (nonatomic, readonly) NSNumber *rating;
 @property (nonatomic, copy, readonly) NSString *html5Url;
-@property (nonatomic, readonly) NSDictionary *authConfig;
+@property (nonatomic, readonly) KZAuthenticationConfig *authConfig;
 
 @end
