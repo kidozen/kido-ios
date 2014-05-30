@@ -5,6 +5,7 @@
 #import "Base64.h"
 #import "KZApplicationConfiguration.h"
 #import "KZAuthenticationConfig.h"
+#import "KZTokenController.h"
 
 #import <UIKit/UIKit.h>
 
@@ -19,9 +20,6 @@ NSString *const kApplicationNameKey = @"name";
 NSString *const kAccessTokenKey = @"access_token";
 
 @interface KZApplication ()
-
-@property (nonatomic, copy) NSString *applicationScope;
-@property (nonatomic, copy) NSString *oAuthTokenEndPoint;
 
 @property (nonatomic, copy, readwrite) NSString *applicationKey;
 
@@ -48,6 +46,7 @@ NSString *const kAccessTokenKey = @"access_token";
 
 
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
+@property (nonatomic, strong) KZTokenController *tokenControler;
 
 @end
 
@@ -80,6 +79,7 @@ static NSMutableDictionary * staticTokenCache;
         self.onInitializationComplete = callback;
         self.strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
         self.passiveAuthenticated = NO;
+        self.tokenControler = [[KZTokenController alloc] init];
         
         [self initializeServices];
         [self addObserver:self
@@ -173,12 +173,6 @@ static NSMutableDictionary * staticTokenCache;
     self.storages = [[NSMutableDictionary alloc] init];
     self.channels = [[NSMutableDictionary alloc] init];
 
-}
-
-- (void)initializeApplicationKeysValues
-{
-    self.oAuthTokenEndPoint = self.applicationConfig.authConfig.oauthTokenEndpoint;
-    self.applicationScope = self.applicationConfig.authConfig.applicationScope;
 }
 
 - (BOOL)shouldAskTokenWithForApplicationKey
@@ -666,7 +660,7 @@ static NSMutableDictionary * staticTokenCache;
     postContentDictionary[@"client_id"] = self.applicationConfig.domain;
     postContentDictionary[@"client_secret"] = self.applicationKey;
     postContentDictionary[@"grant_type"] = @"client_credentials";
-    postContentDictionary[@"scope"] = self.applicationScope;
+    postContentDictionary[@"scope"] = self.applicationConfig.authConfig.applicationScope;
     
     return postContentDictionary;
 }
@@ -681,7 +675,7 @@ static NSMutableDictionary * staticTokenCache;
     [self.defaultClient setSendParametersAsJSON:YES];
     [self.defaultClient setBasePath:@""];
 
-    [self.defaultClient POST:self.oAuthTokenEndPoint
+    [self.defaultClient POST:self.applicationConfig.authConfig.oauthTokenEndpoint
                   parameters:postContentDictionary
                   completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                       // Handle error.
