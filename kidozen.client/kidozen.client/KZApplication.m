@@ -25,8 +25,6 @@ NSString *const kOauthTokenEndpointKey = @"oauthTokenEndpoint";
 NSString *const kApplicationScopeKey = @"applicationScope";
 NSString *const kAccessTokenKey = @"access_token";
 
-NSString *const kPassiveIdentityProvidersKey = @"passiveIdentityProviders";
-
 NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
 
 @interface KZApplication ()
@@ -711,8 +709,8 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)startPassiveAuthenticationWithProvider:(NSString *)provider
 {
-//    NSDictionary *passiveProviderInfo = [self.applicationConfig.authConfig [kPassiveIdentityProvidersKey] objectForKey:provider];
-    NSDictionary *passiveProviderInfo = @{};
+    NSDictionary *passiveProviderInfo = [self.applicationConfig.authConfig.passiveIdentityProviders objectForKey:provider];
+    
     NSString *passiveUrlString = [passiveProviderInfo objectForKey:kPassiveAuthenticationLoginUrlKey];
     NSAssert(passiveUrlString, @"Must not be nil");
     self.lastProviderKey = provider;

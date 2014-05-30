@@ -17,5 +17,6 @@
 @property (nonatomic, copy, readonly) NSString *authServiceEndpoint;
 @property (nonatomic, copy, readonly) NSString *oauthTokenEndpoint;
 @property (nonatomic, readonly) NSDictionary *identityProviders;
+@property (nonatomic, readonly) NSDictionary *passiveIdentityProviders;
 
 @end
