@@ -84,6 +84,7 @@
             // Getting the property class.
             NSString *stringClass = [NSString stringWithUTF8String:property_copyAttributeValue(*oneProperty, "T")];
 
+            // removing @" characters.
             [propertyMapper setValue:[[stringClass stringByReplacingOccurrencesOfString:@"\"" withString:@""] stringByReplacingOccurrencesOfString:@"@" withString:@""]
                               forKey:propertyName];
             
@@ -93,7 +94,6 @@
         currentClass = [currentClass superclass];
         
     }
-    NSLog(@"%@", propertyMapper);
     
     return propertyMapper;
 }
