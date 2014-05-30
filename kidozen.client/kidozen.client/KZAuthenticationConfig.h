@@ -10,13 +10,19 @@
 
 @interface KZAuthenticationConfig : KZObject
 
-- (id)initWithDictionary:(NSDictionary *)configDictionary;
-
 @property (nonatomic, copy, readonly) NSString *applicationScope;
 @property (nonatomic, copy, readonly) NSString *authServiceScope;
 @property (nonatomic, copy, readonly) NSString *authServiceEndpoint;
 @property (nonatomic, copy, readonly) NSString *oauthTokenEndpoint;
 @property (nonatomic, readonly) NSDictionary *identityProviders;
 @property (nonatomic, readonly) NSDictionary *passiveIdentityProviders;
+
+
+- (id)initWithDictionary:(NSDictionary *)configDictionary;
+- (NSString *)passiveEndPointStringForProvider:(NSString *)provider;
+
+
+- (NSString *)protocolForProvider:(NSString *)provider;
+- (NSString *)endPointForProvider:(NSString *)provider;
 
 @end

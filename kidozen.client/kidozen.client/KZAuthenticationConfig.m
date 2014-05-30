@@ -8,6 +8,9 @@
 
 #import "KZAuthenticationConfig.h"
 
+NSString *const kProtocolKey = @"protocol";
+NSString *const kEndPointKey = @"endpoint";
+
 @interface KZAuthenticationConfig()
 
 @property (nonatomic, copy, readwrite) NSString *applicationScope;
@@ -28,6 +31,24 @@
         [self configureWithDictionary:configDictionary];
     }
     return self;
+}
+
+
+- (NSString *)passiveEndPointStringForProvider:(NSString *)provider
+{
+    NSDictionary *providerInfo = [self.passiveIdentityProviders objectForKey:provider];
+    return providerInfo[kEndPointKey];
+}
+
+
+- (NSString *)protocolForProvider:(NSString *)provider {
+    NSDictionary *providerInfo = [self.identityProviders objectForKey:provider];
+    return providerInfo[kProtocolKey];
+}
+
+- (NSString *)endPointForProvider:(NSString *)provider {
+    NSDictionary *providerInfo = [self.identityProviders objectForKey:provider];
+    return providerInfo[kEndPointKey];
 }
 
 @end

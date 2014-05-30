@@ -18,8 +18,6 @@ NSString *const kApplicationNameKey = @"name";
 
 NSString *const kAccessTokenKey = @"access_token";
 
-NSString *const kPassiveAuthenticationLoginUrlKey = @"endpoint";
-
 @interface KZApplication ()
 
 @property (nonatomic, copy) NSString *applicationScope;
@@ -328,9 +326,8 @@ static NSMutableDictionary * staticTokenCache;
     NSString * authServiceEndpoint = self.applicationConfig.authConfig.authServiceEndpoint;
     NSString * applicationScope = self.applicationConfig.authConfig.applicationScope;
 
-    NSDictionary *provider = self.applicationConfig.authConfig.identityProviders[providerKey];
-    NSString * providerProtocol = [provider objectForKey:@"protocol"];
-    NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
+    NSString * providerProtocol = [self.applicationConfig.authConfig protocolForProvider:providerKey];
+    NSString * providerIPEndpoint = [self.applicationConfig.authConfig endPointForProvider:providerKey];
     
     __weak KZApplication *safeMe = self;
     
@@ -701,10 +698,9 @@ static NSMutableDictionary * staticTokenCache;
 
 - (void)startPassiveAuthenticationWithProvider:(NSString *)provider
 {
-    NSDictionary *passiveProviderInfo = [self.applicationConfig.authConfig.passiveIdentityProviders objectForKey:provider];
-    
-    NSString *passiveUrlString = [passiveProviderInfo objectForKey:kPassiveAuthenticationLoginUrlKey];
+    NSString *passiveUrlString = [self.applicationConfig.authConfig passiveEndPointStringForProvider:provider];
     NSAssert(passiveUrlString, @"Must not be nil");
+    
     self.lastProviderKey = provider;
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
