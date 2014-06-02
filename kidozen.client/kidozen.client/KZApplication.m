@@ -130,7 +130,6 @@ static NSMutableDictionary * staticTokenCache;
                      [safeMe initializePushNotifications];
                      [safeMe initializeLogging];
                      [safeMe initializeMail];
-                     [safeMe initializeApplicationKeysValues];
                      
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
                          
