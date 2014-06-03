@@ -20,18 +20,33 @@
 
 - (void) updateAccessTokenWith:(NSString *)accessToken
 {
-    self.rawAccessToken = accessToken;
-    self.kzToken = [self kzTokenFromRawAccessToken];
+    if (accessToken != nil && accessToken.length > 0) {
+        self.rawAccessToken = accessToken;
+        self.kzToken = [self kzTokenFromRawAccessToken];
+    }
 }
 
 - (void) updateIPTokenWith:(NSString *)ipToken
 {
-    self.ipToken = ipToken;
+    if (ipToken != nil && ipToken.length > 0) {
+        self.ipToken = ipToken;
+    }
 }
 
 - (NSString *)kzTokenFromRawAccessToken
 {
     return [NSString stringWithFormat:@"WRAP access_token=\"%@\"", self.rawAccessToken];
+}
+
+- (void) clearAccessToken
+{
+    self.rawAccessToken = nil;
+    self.kzToken = nil;
+}
+
+- (void) clearIPToken
+{
+    self.ipToken = nil;
 }
 
 

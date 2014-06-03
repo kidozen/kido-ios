@@ -9,8 +9,6 @@
 
 #import <UIKit/UIKit.h>
 
-NSString *const KVO_KEY_VALUE = @"kzToken";
-NSString *const KVO_NEW_VALUE = @"new";
 NSString *const KZ_APP_CONFIG_PATH = @"/publicapi/apps";
 NSString *const KZ_SEC_CONFIG_PATH = @"/publicapi/auth/config";
 
@@ -51,11 +49,6 @@ NSString *const kAccessTokenKey = @"access_token";
 
 static NSMutableDictionary * staticTokenCache;
 
-- (void) dealloc
-{
-    [self removeObserver:self forKeyPath:KVO_KEY_VALUE];
-}
-
 -(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
                  applicationName:(NSString *)applicationName
                   applicationKey:(NSString *)applicationKey
@@ -79,11 +72,6 @@ static NSMutableDictionary * staticTokenCache;
         self.tokenControler = [[KZTokenController alloc] init];
         
         [self initializeServices];
-        [self addObserver:self
-               forKeyPath:KVO_KEY_VALUE
-                  options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld)
-                  context:nil];
-        
     }
     return self;
     
@@ -231,15 +219,13 @@ static NSMutableDictionary * staticTokenCache;
                                     safeMe.lastPassword = nil;
                                     safeMe.lastUserName = nil;
                                     [safeMe.tokenControler updateAccessTokenWith:responseForToken[kAccessTokenKey]];
-                                    [safeMe.tokenControler updateIPTokenWith:@""];
-                                    
-                                    [safeMe willChangeValueForKey:KVO_KEY_VALUE];
+                                    [safeMe.tokenControler clearIPToken];
                                     
                                     [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
                                     // TODO: Should be moved to the tokenController
                                     [safeMe setCacheWithIPToken:@""
-                                                     andKzToken:safeMe.tokenControler.kzToken];
+                                                 andAccessToken:safeMe.tokenControler.rawAccessToken];
                                     
                                     [safeMe handleTokenExpiration];
                                     
@@ -353,12 +339,10 @@ static NSMutableDictionary * staticTokenCache;
                 
                 [safeMe.tokenControler updateAccessTokenWith:[response objectForKey:@"rawToken"]];
                 
-                [safeMe willChangeValueForKey:KVO_KEY_VALUE];
-                
                 [safeMe.tokenControler updateIPTokenWith:ipToken];
                 
                 [safeMe setCacheWithIPToken:ipToken
-                                 andKzToken:safeMe.tokenControler.kzToken];
+                                 andAccessToken:safeMe.tokenControler.rawAccessToken];
                 
                 [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                 
@@ -429,14 +413,12 @@ static NSMutableDictionary * staticTokenCache;
                                     }
                                     
                                     [safeMe.tokenControler updateAccessTokenWith:responseForToken[kAccessTokenKey]];
-                                    [safeMe.tokenControler updateIPTokenWith:@""]; // Don't have an identity provider token.
-                                    
-                                    [safeMe willChangeValueForKey:KVO_KEY_VALUE];
+                                    [safeMe.tokenControler clearIPToken];
                                     
                                     [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
                                     [safeMe setCacheWithIPToken:@""
-                                                     andKzToken:safeMe.tokenControler.kzToken];
+                                                     andAccessToken:safeMe.tokenControler.rawAccessToken];
                                     
                                     [safeMe handleTokenExpiration];
 
@@ -722,11 +704,9 @@ static NSMutableDictionary * staticTokenCache;
 {
     self.passiveAuthenticated = YES;
     
-    [self willChangeValueForKey:KVO_KEY_VALUE];
-
     [self parseUserInfo:self.tokenControler.kzToken];
     [self setCacheWithIPToken:@""
-                   andKzToken:self.tokenControler.kzToken];
+                   andAccessToken:self.tokenControler.rawAccessToken];
     
     [self handleTokenExpiration];
 
@@ -786,20 +766,18 @@ static NSMutableDictionary * staticTokenCache;
     return s;
 }
 
--(void) setCacheWithIPToken:(NSString *) ipToken andKzToken:(NSString *) kzToken
+-(void) setCacheWithIPToken:(NSString *) ipToken andAccessToken:(NSString *) accessToken
 {
-    NSString * kzKey = [self getKzCacheKey];
+    NSString * kzKey = [self getAccessTokenCacheKey];
     NSString * ipKey = [self getIpCacheKey];
     
-    [staticTokenCache setValue:kzToken forKey:kzKey];
+    [staticTokenCache setValue:accessToken forKey:kzKey];
     [staticTokenCache setValue:ipToken forKey:ipKey];
-    
-    [self didChangeValueForKey:KVO_KEY_VALUE];
 }
 
 -(void) loadTokensFromCache
 {
-    NSString * kzKey = [self getKzCacheKey];
+    NSString * accessTokenKey = [self getAccessTokenCacheKey];
     NSString * ipKey = [self getIpCacheKey];
     
     if (self.tokenControler == nil) {
@@ -807,18 +785,16 @@ static NSMutableDictionary * staticTokenCache;
     }
     
     
-    NSString *kzToken = [staticTokenCache objectForKey:kzKey];
+    NSString *accessToken = [staticTokenCache objectForKey:accessTokenKey];
     NSString *ipToken = [staticTokenCache objectForKey:ipKey];
 
-    
-    
-    [self willChangeValueForKey:KVO_KEY_VALUE];
-    [self didChangeValueForKey:KVO_KEY_VALUE];
+    [self.tokenControler updateAccessTokenWith:accessToken];
+    [self.tokenControler updateIPTokenWith:ipToken];
 }
 
 -(void) removeTokensFromCache
 {
-    NSString * kzKey = [self getKzCacheKey];
+    NSString * kzKey = [self getAccessTokenCacheKey];
     NSString * ipKey = [self getIpCacheKey];
     
     [staticTokenCache removeObjectForKey:kzKey];
@@ -830,7 +806,7 @@ static NSMutableDictionary * staticTokenCache;
     return [[NSString stringWithFormat:@"%@%@%@%@-ipToken", self.tennantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword] createHash];
 }
 
-- (NSString *) getKzCacheKey
+- (NSString *) getAccessTokenCacheKey
 {
     return [[NSString stringWithFormat:@"%@%@%@%@", self.tennantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword]
             createHash];

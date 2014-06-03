@@ -17,4 +17,7 @@
 - (void) updateAccessTokenWith:(NSString *)accessToken;
 - (void) updateIPTokenWith:(NSString *)ipToken;
 
+- (void) clearAccessToken;
+- (void) clearIPToken;
+
 @end
