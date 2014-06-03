@@ -14,6 +14,10 @@
 
 - (id) initWithURLString:(NSString *)url withToken:(NSString *)token;
 
+- (void)log:(NSString *)logString;
+
+@property (nonatomic, copy) NSString *version;
+
 @property (atomic) BOOL isInitialized ;
 @property (atomic, strong) PLCrashReporter * baseReporter;
 @property (atomic, strong) NSString * reporterServiceUrl;

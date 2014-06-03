@@ -10,6 +10,7 @@
 @interface KZCrashReporter()
 
 @property (nonatomic, copy) NSString *token;
+@property (nonatomic, copy) NSFileHandle *logFileHandler;
 
 @end
 
@@ -106,28 +107,27 @@ NSMutableDictionary * internalCrashReporterInfo;
     [_client setBasePath:_reporterServiceUrl];
     [_client setSendParametersAsJSON:YES];
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
-    [_client setHeaders:@{@"Authorization": self.token}];
+    [self addAuthorizationHeader];
     NSLog(@"------ %@", jsonDictionary);
     
-    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (!error) {
-                [_baseReporter purgePendingCrashReport];
-        }
-        _crashReporterError = error;
-        if (response) {
-            [internalCrashReporterInfo setObject:response forKey:@"ServiceResponse"];
-        }
-        if (urlResponse) {
-            [internalCrashReporterInfo setObject:urlResponse forKey:@"UrlRepsonse"];
-        }
-    }];
+//    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+//        if (!error) {
+//                [_baseReporter purgePendingCrashReport];
+//        }
+//        _crashReporterError = error;
+//        if (response) {
+//            [internalCrashReporterInfo setObject:response forKey:@"ServiceResponse"];
+//        }
+//        if (urlResponse) {
+//            [internalCrashReporterInfo setObject:urlResponse forKey:@"UrlRepsonse"];
+//        }
+//    }];
 }
 
 - (void) saveReportToFile:(NSString *) reportdataasstring {
-    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [pathArray objectAtIndex:0];
-    NSString *outputPath = [documentsDirectory stringByAppendingPathComponent: @"KidozenCrashReport.crash"];
 
+    NSString *outputPath = [self pathForFilename:@"KidozenCrashReport.crash"];
+ 
     if (![reportdataasstring writeToFile:outputPath atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
         _crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Failed to write crash report" forKey:@"description"]];
         NSLog(@"Failed to write crash report");
@@ -153,5 +153,30 @@ finish:
     return [PLCrashReportTextFormatter stringValueForCrashReport: report withTextFormat:PLCrashReportTextFormatiOS];
 }
 
+- (void)log:(NSString *)logString
+{
+    // TODO
+    // Max of 255 bytes.
+    if(!self.logFileHandler) {
+        [[NSFileManager defaultManager] createFileAtPath:[self logFilename] contents:nil attributes:nil];
+        self.logFileHandler = [NSFileHandle fileHandleForWritingAtPath:[self logFilename]];        
+    }
+    
+    [self.logFileHandler writeData:[logString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+}
+
+- (NSString *)logFilename
+{
+    return [self pathForFilename:@"CrashUserLogs.log"];
+}
+
+- (NSString *)pathForFilename:(NSString *)filename
+{
+    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [pathArray objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:filename];
+    
+}
 @end
 
