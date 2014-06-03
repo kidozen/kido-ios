@@ -1,5 +1,6 @@
 #import "KZService.h"
 #import "NSData+SRB64Additions.h"
+#import "KZTokenController.h"
 
 @implementation KZService
 
@@ -40,7 +41,8 @@
         [NSException exceptionWithName:@"KZException" reason:@"The parameter is null" userInfo:nil];
     }
     
-    NSMutableDictionary *headersToUse = [NSMutableDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"];
+    NSMutableDictionary *headersToUse = [NSMutableDictionary dictionaryWithObject:self.tokenControler.kzToken forKey:@"Authorization"];
+    
     
     if  (headers) {
         [headersToUse addEntriesFromDictionary:headers];
@@ -60,7 +62,7 @@
 
 - (NSString *)authHeaderString
 {
-    NSData *plainData = [self.ipToken dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *plainData = [self.tokenControler.ipToken dataUsingEncoding:NSUTF8StringEncoding];
     NSString *encodedToken = [plainData SR_stringByBase64Encoding];
     
     return [NSString stringWithFormat:@"Bearer %@", encodedToken];

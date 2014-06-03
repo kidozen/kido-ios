@@ -21,7 +21,7 @@
     if (timeout > 0) {
         headers[@"timeout"] = [NSString stringWithFormat:@"%d", timeout];
     }
-    [headers setObject:self.kzToken forKey:@"Authorization"];
+    [self addAuthorizationHeader];
 
     return headers;
 }

@@ -50,8 +50,7 @@
               parameters:(NSDictionary *)parameters
               completion:(void (^)(KZResponse *r))block
 {
-    [_client setHeaders:@{@"Authorization": self.kzToken,
-                          @"Accept" :@"application/json"}];
+    [self addAuthorizationHeader];
     
     [_client POST:path parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;

@@ -8,7 +8,7 @@
     if (!object || !self.name) {
         [NSException exceptionWithName:@"KZException" reason:@"The parameter is null" userInfo:nil];
     }
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -25,7 +25,7 @@
         block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
         return;
     }
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -41,7 +41,7 @@
         block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
         return;
     }
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client DELETE:[NSString stringWithFormat:@"/%@/next",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {

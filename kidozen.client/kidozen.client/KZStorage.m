@@ -31,7 +31,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     
     NSString *urlString = [self urlStringWithOptions:options];
     
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client POST:urlString parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         block( [[KZResponse alloc] initWithResponse:response
@@ -88,7 +88,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:error] );
         return;
     }
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client PUT:[NSString stringWithFormat:@"%@/%@",self.name, objectId]
       parameters:[self updateMetadataDates:object]
@@ -108,7 +108,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         return;
     }
 
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"%@/%@",self.name, objectId] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -136,7 +136,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         return;
     }
 
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client DELETE:[NSString stringWithFormat:@"%@/%@",self.name, objectId]  parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -155,7 +155,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 -(void) drop:(void (^)(KZResponse *))block
 {
     
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client DELETE:[NSString stringWithFormat:@"%@",self.name]  parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -169,7 +169,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 
 -(void) all:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         block( [[KZResponse alloc] initWithResponse:response
                                         urlResponse:urlResponse
@@ -184,7 +184,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         return;
     }
 
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     NSString * scapedUrl = [[NSString stringWithFormat:@"%@?query=%@",self.name, query] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     [_client GET:scapedUrl parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         block( [[KZResponse alloc] initWithResponse:response
@@ -200,7 +200,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         return;
     }
 
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@",self.name, query, options] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         block( [[KZResponse alloc] initWithResponse:response
                                         urlResponse:urlResponse
@@ -215,7 +215,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         return;
     }
     
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@&fields=%@",self.name, query, options, fields] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         block( [[KZResponse alloc] initWithResponse:response
                                         urlResponse:urlResponse

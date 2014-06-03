@@ -18,7 +18,7 @@
 
 -(void) publish:(id)object completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     if ([object isKindOfClass:[NSString class]]) {
         [_client setSendParametersAsJSON:YES];
     }

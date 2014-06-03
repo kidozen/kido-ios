@@ -107,7 +107,8 @@ NSMutableDictionary * internalCrashReporterInfo;
     [_client setSendParametersAsJSON:YES];
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [_client setHeaders:@{@"Authorization": self.token}];
-     
+    NSLog(@"------ %@", jsonDictionary);
+    
     [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (!error) {
                 [_baseReporter purgePendingCrashReport];

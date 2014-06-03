@@ -46,7 +46,6 @@ NSString *const kAccessTokenKey = @"access_token";
 
 
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
-@property (nonatomic, strong) KZTokenController *tokenControler;
 
 @end
 
@@ -154,7 +153,7 @@ static NSMutableDictionary * staticTokenCache;
 {
     if (![self.crashreporter isInitialized]) {
         self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.applicationConfig.url
-                                                              withToken:self.kzToken];
+                                                              withToken:self.tokenControler.kzToken];
     }
 }
 
@@ -184,7 +183,7 @@ static NSMutableDictionary * staticTokenCache;
     self.mail = [[KZMail alloc] initWithEndpoint:self.applicationConfig.email
                                          andName:nil];
     [self.mail setBypassSSL:self.strictSSL];
-    self.mail.kzToken = self.kzToken;
+    self.mail.tokenControler = self.tokenControler;
 }
 
 - (void) initializeLogging
@@ -193,7 +192,7 @@ static NSMutableDictionary * staticTokenCache;
                                            andName:nil];
     
     [self.log setBypassSSL:self.strictSSL];
-    self.log.kzToken = self.kzToken;
+    self.log.tokenControler = self.tokenControler;
 }
 
 - (void)initializeIdentityProviders
@@ -233,16 +232,16 @@ static NSMutableDictionary * staticTokenCache;
                                     safeMe.lastProviderKey = nil;
                                     safeMe.lastPassword = nil;
                                     safeMe.lastUserName = nil;
-                                    
-                                    safeMe.kzToken = responseForToken[kAccessTokenKey];
-                                    safeMe.ipToken = @""; // Don't have an identity provider token.
+                                    [safeMe.tokenControler updateAccessTokenWith:responseForToken[kAccessTokenKey]];
+                                    [safeMe.tokenControler updateIPTokenWith:@""];
                                     
                                     [safeMe willChangeValueForKey:KVO_KEY_VALUE];
                                     
-                                    [safeMe parseUserInfo:safeMe.kzToken];
+                                    [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
+                                    // TODO: Should be moved to the tokenController
                                     [safeMe setCacheWithIPToken:@""
-                                                     andKzToken:safeMe.kzToken];
+                                                     andKzToken:safeMe.tokenControler.kzToken];
                                     
                                     [safeMe handleTokenExpiration];
                                     
@@ -357,13 +356,13 @@ static NSMutableDictionary * staticTokenCache;
                 
                 [safeMe willChangeValueForKey:KVO_KEY_VALUE];
                 
-                safeMe.kzToken = [safeMe kzTokenFromRawAccessToken];;
-                safeMe.ipToken = ipToken;
+                [safeMe.tokenControler updateAccessTokenWith:[safeMe kzTokenFromRawAccessToken]];
+                [safeMe.tokenControler updateIPTokenWith:ipToken];
                 
                 [safeMe setCacheWithIPToken:ipToken
-                                 andKzToken:safeMe.kzToken];
+                                 andKzToken:safeMe.tokenControler.kzToken];
                 
-                [safeMe parseUserInfo:safeMe.kzToken];
+                [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                 
                 [safeMe handleTokenExpiration];
                 
@@ -432,16 +431,15 @@ static NSMutableDictionary * staticTokenCache;
                                     }
                                     
                                     safeMe.rawAccessToken = responseForToken[kAccessTokenKey];
-                                    safeMe.kzToken = [safeMe kzTokenFromRawAccessToken];
-                                    
-                                    safeMe.ipToken = @""; // Don't have an identity provider token.
+                                    [safeMe.tokenControler updateIPTokenWith:[safeMe kzTokenFromRawAccessToken]];
+                                    [safeMe.tokenControler updateIPTokenWith:@""]; // Don't have an identity provider token.
                                     
                                     [safeMe willChangeValueForKey:KVO_KEY_VALUE];
                                     
-                                    [safeMe parseUserInfo:safeMe.kzToken];
+                                    [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
                                     [safeMe setCacheWithIPToken:@""
-                                                     andKzToken:safeMe.kzToken];
+                                                     andKzToken:safeMe.tokenControler.kzToken];
                                     
                                     [safeMe handleTokenExpiration];
 

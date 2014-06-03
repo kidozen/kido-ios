@@ -50,7 +50,7 @@
 
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@", self.name, channel];
     NSDictionary * body = [NSDictionary dictionaryWithObjectsAndKeys:@"apns",@"platform", deviceToken, @"subscriptionId", deviceMacAddress, @"deviceId", nil];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client POST:path parameters:body completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -74,7 +74,7 @@
         return;
     }
     NSString * path= [NSString stringWithFormat:@"/push/%@/%@", self.name, channel];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client POST:path parameters:notification completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -88,7 +88,7 @@
 -(void) getSubscriptions:(void (^)(KZResponse *))block
 {
     NSString * path= [NSString stringWithFormat:@"/devices/%@/%@", deviceMacAddress, self.name];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -101,7 +101,7 @@
 -(void) getApplicationChannels:(void (^)(KZResponse *))block
 {
     NSString * path= [NSString stringWithFormat:@"/channels/%@", self.name];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -127,7 +127,7 @@
         return;
     }
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@/%@", self.name, channel, deviceToken];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client DELETE:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {

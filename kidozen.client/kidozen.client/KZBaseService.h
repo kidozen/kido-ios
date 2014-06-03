@@ -6,6 +6,8 @@
 
 extern NSInteger const KZHttpErrorStatusCode;
 
+@class KZTokenController;
+
 @interface KZBaseService : NSObject
 {
     NSString * _endpoint;
@@ -14,8 +16,9 @@ extern NSInteger const KZHttpErrorStatusCode;
     BOOL _bypassSSL;
 
 }
-@property (atomic, strong) NSString * kzToken;
-@property (atomic, strong) NSString * ipToken;
+
+// This property will be in charge of managing all token related things.
+@property (nonatomic, strong) KZTokenController *tokenControler;
 
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSURL * serviceUrl;
@@ -27,4 +30,7 @@ extern NSInteger const KZHttpErrorStatusCode;
 -(NSError *) createNilReferenceError;
 -(void) setBypassSSL:(BOOL)bypass;
 -(BOOL) bypassSSL;
+
+- (void)addAuthorizationHeader;
+
 @end

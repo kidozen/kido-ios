@@ -5,7 +5,7 @@
 
 -(void) send:(NSString *)message completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     NSString * nr = [[[[[self.name stringByReplacingOccurrencesOfString:@"(" withString:@""]
                                     stringByReplacingOccurrencesOfString:@")" withString:@""]
                                         stringByReplacingOccurrencesOfString:@"-" withString:@""]
@@ -26,7 +26,7 @@
 }
 -(void) getStatus:(NSString *)messageId completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"/%@",messageId] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {

@@ -1,5 +1,6 @@
 #import "KZBaseService.h"
 #import "KZWRAPv09IdentityProvider.h"
+#import "KZTokenController.h"
 
 #define ENULLPARAM       1
 
@@ -48,6 +49,15 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
                              dictionaryWithObject:@"Parameter must not be nil"
                              forKey:NSLocalizedDescriptionKey];
     return [NSError errorWithDomain:KZServiceErrorDomain code:ENULLPARAM userInfo:details];
+}
+
+- (void)addAuthorizationHeader
+{
+    if (self.tokenControler != nil && self.tokenControler.kzToken != nil && self.tokenControler.kzToken.length > 0) {
+        NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:_client.headers];
+        headers[@"Authorization"] = self.tokenControler.kzToken;
+        [_client setHeaders:headers];
+    }
 }
 
 @end

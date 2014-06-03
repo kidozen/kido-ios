@@ -4,7 +4,7 @@
 
 -(void) write:(id)object withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client POST:[NSString stringWithFormat:@"?level=%d", level] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -17,7 +17,7 @@
 
 -(void) all:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -29,7 +29,7 @@
 }
 -(void) clear:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     [_client DELETE:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -41,7 +41,7 @@
 }
 -(void) query:(NSString *)query withOptions:(NSString *)options andBlock:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:query,@"query", optopt, @"options", nil];
     [_client GET:@"/" parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
