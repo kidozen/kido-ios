@@ -21,11 +21,18 @@
 - (void) updateAccessTokenWith:(NSString *)accessToken
 {
     self.rawAccessToken = accessToken;
+    self.kzToken = [self kzTokenFromRawAccessToken];
 }
 
 - (void) updateIPTokenWith:(NSString *)ipToken
 {
     self.ipToken = ipToken;
 }
+
+- (NSString *)kzTokenFromRawAccessToken
+{
+    return [NSString stringWithFormat:@"WRAP access_token=\"%@\"", self.rawAccessToken];
+}
+
 
 @end
