@@ -15,25 +15,28 @@
 
 @implementation KZDatasource
 
--(NSDictionary *)headersWithTimeout:(int)timeout
+-(void)addHeadersWithTimeout:(int)timeout
 {
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     if (timeout > 0) {
         headers[@"timeout"] = [NSString stringWithFormat:@"%d", timeout];
     }
+    
+    [_client setHeaders:headers];
+
     [self addAuthorizationHeader];
 
-    return headers;
 }
 
 -(void) queryWithData: (id) data completion:(void (^)(KZResponse *))block
 {
     [self QueryWithData:data timeout:0 completion:block];
 }
+
 -(void) QueryWithData:(NSDictionary *)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
 {
-    NSDictionary *headers = [self headersWithTimeout:timeout];
-    [_client setHeaders:headers];
+    [self addHeadersWithTimeout:timeout];
+    
     _client.sendParametersAsJSON = NO;
     
     [_client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -53,8 +56,7 @@
 }
 -(void) InvokeWithData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
 {
-    NSDictionary *headers = [self headersWithTimeout:timeout];
-    [_client setHeaders:headers];
+    [self addHeadersWithTimeout:timeout];
     
     [_client setSendParametersAsJSON:YES];
     [_client POST:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {

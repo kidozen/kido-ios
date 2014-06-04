@@ -116,6 +116,8 @@ static NSMutableDictionary * staticTokenCache;
                      [safeMe initializeLogging];
                      [safeMe initializeMail];
                      
+                     
+                     // TODO: Only when enabling crash reporter
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
                          
                          [safeMe handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
@@ -651,6 +653,9 @@ static NSMutableDictionary * staticTokenCache;
     [self.defaultClient setSendParametersAsJSON:YES];
     [self.defaultClient setBasePath:@""];
 
+//    NSAssert(self.applicationConfig.authConfig.oauthTokenEndpoint != nil, @"Must not be nil");
+//    NSAssert(self.applicationConfig.authConfig.oauthTokenEndpoint.length > 0, @"Must have an url");
+    
     [self.defaultClient POST:self.applicationConfig.authConfig.oauthTokenEndpoint
                   parameters:postContentDictionary
                   completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
