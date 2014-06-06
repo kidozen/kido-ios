@@ -7,6 +7,7 @@
 //
 
 #import "KZCrashReporter.h"
+
 @interface KZCrashReporter()
 
 @property (nonatomic, copy) NSString *token;
@@ -102,13 +103,23 @@ NSMutableDictionary * internalCrashReporterInfo;
     return;
 }
 
-- (void) postReport:(NSString *) reportdataasstring {
-    NSDictionary * jsonDictionary = [NSDictionary dictionaryWithObject:_crashReportContentAsString forKey:@"report"];
+- (void) postReport:(NSString *) reportdataasstring
+{
+    
+    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:kCFBundleVersionKey];
+    NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self logFilename] encoding:NSUTF8StringEncoding error:NULL];
+
+    NSDictionary *jsonDictionary = @{@"report": _crashReportContentAsString,
+                                     @"version" : versionString,
+                                     @"build" : build,
+                                     @"breadcrumbs" : breadcrumbs};
+    
     [_client setBasePath:_reporterServiceUrl];
     [_client setSendParametersAsJSON:YES];
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
-    NSLog(@"------ %@", jsonDictionary);
+//    NSLog(@"------ %@", jsonDictionary);
     
 //    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 //        if (!error) {
@@ -153,16 +164,17 @@ finish:
     return [PLCrashReportTextFormatter stringValueForCrashReport: report withTextFormat:PLCrashReportTextFormatiOS];
 }
 
-- (void)log:(NSString *)logString
+- (void)addBreadCrumb:(NSString *)logString
 {
     // TODO
-    // Max of 255 bytes.
+    // Cap to 512 bytes.
     if(!self.logFileHandler) {
         [[NSFileManager defaultManager] createFileAtPath:[self logFilename] contents:nil attributes:nil];
         self.logFileHandler = [NSFileHandle fileHandleForWritingAtPath:[self logFilename]];        
     }
     
     [self.logFileHandler writeData:[logString dataUsingEncoding:NSUTF8StringEncoding]];
+    [self.logFileHandler synchronizeFile];
     
 }
 
