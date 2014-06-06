@@ -107,7 +107,7 @@ NSMutableDictionary * internalCrashReporterInfo;
 {
     
     NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:kCFBundleVersionKey];
+    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
     NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self logFilename] encoding:NSUTF8StringEncoding error:NULL];
 
     NSDictionary *jsonDictionary = @{@"report": _crashReportContentAsString,
@@ -119,7 +119,8 @@ NSMutableDictionary * internalCrashReporterInfo;
     [_client setSendParametersAsJSON:YES];
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
-//    NSLog(@"------ %@", jsonDictionary);
+    
+    NSLog(@"------ %@", jsonDictionary);
     
 //    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 //        if (!error) {
