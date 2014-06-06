@@ -125,16 +125,17 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 - (void) postReport:(NSString *) reportdataasstring
 {
     
-    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    versionString = versionString && versionString.length > 0 ? versionString : @"not set";
-    build = build && build.length > 0 ? build : @"0";
+    self.version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    self.build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+    
+    self.version = self.version && self.version.length > 0 ? self.version : @"0";
+    self.build = self.build && self.build.length > 0 ? self.build : @"not set";
     
     NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self breadcrumbFilename] encoding:NSUTF8StringEncoding error:NULL];
 
     NSDictionary *jsonDictionary = @{@"report": _crashReportContentAsString,
-                                     @"version" : versionString,
-                                     @"build" : build,
+                                     @"version" : self.version,
+                                     @"build" : self.build,
                                      @"breadcrumbs" : breadcrumbs};
     
     [_client setBasePath:_reporterServiceUrl];

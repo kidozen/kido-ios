@@ -17,6 +17,7 @@
 - (void)addBreadCrumb:(NSString *)logString;
 
 @property (nonatomic, copy) NSString *version;
+@property (nonatomic, copy) NSString *build;
 
 @property (atomic) BOOL isInitialized ;
 @property (atomic, strong) PLCrashReporter * baseReporter;
