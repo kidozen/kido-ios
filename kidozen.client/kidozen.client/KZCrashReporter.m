@@ -129,8 +129,9 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     
     NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self logFilename] encoding:NSUTF8StringEncoding error:NULL];
-
+    NSError *error;
+    NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self logFilename] encoding:NSUTF8StringEncoding error:&error];
+    
     NSDictionary *jsonDictionary = @{@"report": _crashReportContentAsString,
                                      @"version" : versionString,
                                      @"build" : build,
@@ -191,8 +192,10 @@ finish:
     // TODO
     // Cap to N kBytes.
     if (!breadCrumbsFd) {
-        breadCrumbsFd = open([[self logFilename] UTF8String], O_CREAT | O_WRONLY);
+        breadCrumbsFd = open([[self logFilename] UTF8String], O_RDWR | O_TRUNC );
     }
+    
+    // get the size of the file
     
     const char *logStr = [logString UTF8String];
     write(breadCrumbsFd, logStr,  strlen(logStr));
