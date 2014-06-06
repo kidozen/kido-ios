@@ -13,6 +13,8 @@
 @interface KZCrashReporter()
 
 @property (nonatomic, copy) NSString *token;
+@property (nonatomic, copy, readwrite) NSString *version;
+@property (nonatomic, copy, readwrite) NSString *build;
 
 @end
 
