@@ -61,6 +61,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 -(void) enableCrashReporter {
     PLCrashReporter *crashReporter = [PLCrashReporter sharedReporter];
     NSError *error;
+    self.baseReporter = crashReporter;
     
     if ([crashReporter hasPendingCrashReport]) {
         [self manageCrashReport];
@@ -97,24 +98,24 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     if (crashData == nil) {
         NSLog(@"Could not load crash report: %@", error);
         if (error) {
-            _crashReporterError = error;
+            self.crashReporterError = error;
         }
         else {
-            _crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Could not load crash report" forKey:@"description"]];
+            self.crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Could not load crash report" forKey:@"description"]];
         }
     }
     else {
-        _crashReportContentAsString = [self getReportAsString:crashData withError:error];
+        self.crashReportContentAsString = [self getReportAsString:crashData withError:error];
         if (error) {
-            _crashReporterError = error;
+            self.crashReporterError = error;
         }
         else {
-            [internalCrashReporterInfo setObject:_crashReportContentAsString forKey:@"ReporterDataAsString"];
-            if (_reporterServiceUrl) {
-                [self postReport:_crashReportContentAsString];
+            [internalCrashReporterInfo setObject:self.crashReportContentAsString forKey:@"ReporterDataAsString"];
+            if (self.reporterServiceUrl) {
+                [self postReport:self.crashReportContentAsString];
             }
             else {
-                [self saveReportToFile:_crashReportContentAsString];
+                [self saveReportToFile:self.crashReportContentAsString];
             }
         }
     }
@@ -132,8 +133,12 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     self.build = self.build && self.build.length > 0 ? self.build : @"not set";
     
     NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self breadcrumbFilename] encoding:NSUTF8StringEncoding error:NULL];
-
-    NSDictionary *jsonDictionary = @{@"report": _crashReportContentAsString,
+    
+    if (breadcrumbs == nil) {
+        breadcrumbs = @"";
+    };
+    
+    NSDictionary *jsonDictionary = @{@"report": self.crashReportContentAsString,
                                      @"version" : self.version,
                                      @"build" : self.build,
                                      @"breadcrumbs" : breadcrumbs};
@@ -143,17 +148,21 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
     
-//    NSLog(@"------ %@", jsonDictionary);
+    NSLog(@"------ %@", jsonDictionary);
     
     __weak KZCrashReporter *safeMe = self;
     
     [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (!error) {
-            [_baseReporter purgePendingCrashReport];
+            NSError *purgeError;
+            if (![safeMe.baseReporter purgePendingCrashReportAndReturnError:&purgeError]) {
+                NSLog(@"Something happened while removing dump. Error is %@", purgeError);
+            };
+
             [safeMe removeBreadcrumbsFile];
         }
         
-        _crashReporterError = error;
+        safeMe.crashReporterError = error;
         if (response) {
             [internalCrashReporterInfo setObject:response forKey:@"ServiceResponse"];
         }
@@ -179,21 +188,21 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     NSString *outputPath = [self pathForFilename:@"KidozenCrashReport.crash"];
  
     if (![reportdataasstring writeToFile:outputPath atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
-        _crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Failed to write crash report" forKey:@"description"]];
+        self.crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Failed to write crash report" forKey:@"description"]];
         NSLog(@"Failed to write crash report");
     } else {
         [internalCrashReporterInfo setObject:[NSString stringWithFormat:@"Saved crash report to: %@", outputPath] forKey:@"CrashOutputPath"];
         NSLog(@"Saved crash report to: %@", outputPath);
     }
 finish:
-    [_baseReporter purgePendingCrashReport];
+    [self.baseReporter purgePendingCrashReport];
     return;
 }
 
 - (NSString *) getReportAsString :(NSData *) crashData withError:(NSError *) error {
     PLCrashReport *report = [[PLCrashReport alloc] initWithData: crashData error: &error];
     if (report == nil) {
-        _crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Could not parse crash report" forKey:@"description"]];
+        self.crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Could not parse crash report" forKey:@"description"]];
         return Nil;
     }
     NSLog(@"Crashed on %@", report.systemInfo.timestamp);

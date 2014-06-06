@@ -20,7 +20,7 @@
 @property (nonatomic, copy) NSString *build;
 
 @property (atomic) BOOL isInitialized ;
-@property (atomic, strong) PLCrashReporter * baseReporter;
+@property (atomic, weak) PLCrashReporter * baseReporter;
 @property (atomic, strong) NSString * reporterServiceUrl;
 @property (atomic, strong) NSString * crashReportContentAsString;
 @property (atomic, strong) NSError * crashReporterError;
