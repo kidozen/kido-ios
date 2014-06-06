@@ -140,7 +140,7 @@ static NSMutableDictionary * staticTokenCache;
 - (void)addBreadCrumb:(NSString *)breadCrumb
 {
     if (self.crashreporter != nil) {
-        [self.crashreporter addBreadCrumb:breadCrumb];
+        [self.crashreporter addBreadCrumb:[breadCrumb stringByAppendingString:@"\n"]];
     }
 }
 
