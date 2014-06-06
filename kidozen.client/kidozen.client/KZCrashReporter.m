@@ -22,9 +22,7 @@
 
 NSMutableDictionary * internalCrashReporterInfo;
 
-//static FILE *breadCrumbsFd;
 static int breadCrumbsFd;
-
 
 /* A custom post-crash callback */
 void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
@@ -129,7 +127,11 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     
     NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString *build = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self logFilename] encoding:NSUTF8StringEncoding error:NULL];
+    
+    versionString = versionString && versionString.length > 0 ? versionString : @"not set";
+    build = build && build.length > 0 ? build : "0";
+    
+    NSString *breadcrumbs = [NSString stringWithContentsOfFile:[self breadcrumbFilename] encoding:NSUTF8StringEncoding error:NULL];
 
     NSDictionary *jsonDictionary = @{@"report": _crashReportContentAsString,
                                      @"version" : versionString,
@@ -141,20 +143,35 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
     
-    NSLog(@"------ %@", jsonDictionary);
+//    NSLog(@"------ %@", jsonDictionary);
     
-//    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-//        if (!error) {
-//                [_baseReporter purgePendingCrashReport];
-//        }
-//        _crashReporterError = error;
-//        if (response) {
-//            [internalCrashReporterInfo setObject:response forKey:@"ServiceResponse"];
-//        }
-//        if (urlResponse) {
-//            [internalCrashReporterInfo setObject:urlResponse forKey:@"UrlRepsonse"];
-//        }
-//    }];
+    __weak KZCrashReporter *safeMe = self;
+    
+    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (!error) {
+            [_baseReporter purgePendingCrashReport];
+            [safeMe removeBreadcrumbsFile];
+            
+        }
+        _crashReporterError = error;
+        if (response) {
+            [internalCrashReporterInfo setObject:response forKey:@"ServiceResponse"];
+        }
+        if (urlResponse) {
+            [internalCrashReporterInfo setObject:urlResponse forKey:@"UrlRepsonse"];
+        }
+    }];
+}
+
+- (void) removeBreadcrumbsFile
+{
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[self breadcrumbFilename]]) {
+        NSError *removeError;
+        [[NSFileManager defaultManager] removeItemAtPath:[self breadcrumbFilename] error:&removeError];
+        if (removeError != nil) {
+            NSLog(@"Could note remove %@. Error is %@", [self breadcrumbFilename], removeError);
+        }
+    }
 }
 
 - (void) saveReportToFile:(NSString *) reportdataasstring {
@@ -191,7 +208,7 @@ finish:
     // TODO
     // Cap to N kBytes.
     if (!breadCrumbsFd) {
-        breadCrumbsFd = open([[self logFilename] UTF8String], O_CREAT | O_WRONLY);
+        breadCrumbsFd = open([[self breadcrumbFilename] UTF8String], O_CREAT | O_WRONLY, 0644);
     }
     
     const char *logStr = [logString UTF8String];
@@ -199,7 +216,7 @@ finish:
 
 }
 
-- (NSString *)logFilename
+- (NSString *)breadcrumbFilename
 {
     return [self pathForFilename:@"CrashUserLogs.log"];
 }
