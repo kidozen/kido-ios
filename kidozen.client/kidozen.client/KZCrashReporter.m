@@ -141,20 +141,20 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
     
-    NSLog(@"------ %@", jsonDictionary);
+//    NSLog(@"------ %@", jsonDictionary);
     
-//    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-//        if (!error) {
-//                [_baseReporter purgePendingCrashReport];
-//        }
-//        _crashReporterError = error;
-//        if (response) {
-//            [internalCrashReporterInfo setObject:response forKey:@"ServiceResponse"];
-//        }
-//        if (urlResponse) {
-//            [internalCrashReporterInfo setObject:urlResponse forKey:@"UrlRepsonse"];
-//        }
-//    }];
+    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (!error) {
+                [_baseReporter purgePendingCrashReport];
+        }
+        _crashReporterError = error;
+        if (response) {
+            [internalCrashReporterInfo setObject:response forKey:@"ServiceResponse"];
+        }
+        if (urlResponse) {
+            [internalCrashReporterInfo setObject:urlResponse forKey:@"UrlRepsonse"];
+        }
+    }];
 }
 
 - (void) saveReportToFile:(NSString *) reportdataasstring {
