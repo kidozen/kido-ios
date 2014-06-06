@@ -137,6 +137,13 @@ static NSMutableDictionary * staticTokenCache;
       }];
 }
 
+- (void)addBreadCrumb:(NSString *)breadCrumb
+{
+    if (self.crashreporter != nil) {
+        [self.crashreporter addBreadCrumb:breadCrumb];
+    }
+}
+
 -(void)enableCrashReporter
 {
     if (![self.crashreporter isInitialized]) {

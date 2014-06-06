@@ -88,6 +88,12 @@ typedef void (^TokenExpiresBlock)(id);
  */
 - (void)disableCrashReporter;
 
+/*
+ * Will send a string when the app crashes.
+ * @TODO: Cap to a certain amount of bytes.
+ */
+- (void)addBreadCrumb:(NSString *)breadCrumb;
+
 /**
  * Push notification service main entry point
  *

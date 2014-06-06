@@ -14,7 +14,7 @@
 
 - (id) initWithURLString:(NSString *)url withToken:(NSString *)token;
 
-- (void)log:(NSString *)logString;
+- (void)addBreadCrumb:(NSString *)logString;
 
 @property (nonatomic, copy) NSString *version;
 
