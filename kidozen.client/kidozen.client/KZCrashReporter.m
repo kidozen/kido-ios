@@ -8,10 +8,11 @@
 
 #import "KZCrashReporter.h"
 
+
+
 @interface KZCrashReporter()
 
 @property (nonatomic, copy) NSString *token;
-@property (nonatomic, copy) NSFileHandle *logFileHandler;
 
 @end
 
@@ -20,6 +21,16 @@
 @synthesize reporterServiceUrl = _reporterServiceUrl;
 
 NSMutableDictionary * internalCrashReporterInfo;
+
+//static FILE *breadCrumbsFd;
+static int breadCrumbsFd;
+
+
+/* A custom post-crash callback */
+void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
+    close(breadCrumbsFd);
+}
+
 
 - (id) initWithURLString:(NSString *)url withToken:(NSString *)token
 {
@@ -56,6 +67,16 @@ NSMutableDictionary * internalCrashReporterInfo;
     if ([crashReporter hasPendingCrashReport]) {
         [self manageCrashReport];
     }
+    
+    
+    /* Set up post-crash callbacks */
+    PLCrashReporterCallbacks cb = {
+        .version = 0,
+        .context = nil,
+        .handleSignal = post_crash_callback
+    };
+    
+    [self.baseReporter setCrashCallbacks: &cb];
     
     if (![crashReporter enableCrashReporterAndReturnError:&error]) {
         NSLog(@"coult not enable crash reporter : %@", error);
@@ -168,15 +189,14 @@ finish:
 - (void)addBreadCrumb:(NSString *)logString
 {
     // TODO
-    // Cap to 512 bytes.
-    if(!self.logFileHandler) {
-        [[NSFileManager defaultManager] createFileAtPath:[self logFilename] contents:nil attributes:nil];
-        self.logFileHandler = [NSFileHandle fileHandleForWritingAtPath:[self logFilename]];        
+    // Cap to N kBytes.
+    if (!breadCrumbsFd) {
+        breadCrumbsFd = open([[self logFilename] UTF8String], O_CREAT | O_WRONLY);
     }
     
-    [self.logFileHandler writeData:[logString dataUsingEncoding:NSUTF8StringEncoding]];
-    [self.logFileHandler synchronizeFile];
-    
+    const char *logStr = [logString UTF8String];
+    write(breadCrumbsFd, logStr,  strlen(logStr));
+
 }
 
 - (NSString *)logFilename
