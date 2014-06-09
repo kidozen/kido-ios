@@ -686,17 +686,16 @@ static NSMutableDictionary * staticTokenCache;
     
     self.lastProviderKey = provider;
     
-    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
-    
-    KZPassiveAuthViewController *passiveAuthVC = [[KZPassiveAuthViewController alloc] initWithURLString:passiveUrlString];
-//    passiveUrlString.callback
-    
-    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:passiveAuthVC];
-    
-    [rootController presentModalViewController:webNavigation animated:YES];
+//    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
+//    
+//    KZPassiveAuthViewController *passiveAuthVC = [[KZPassiveAuthViewController alloc] initWithURLString:passiveUrlString];
+//    
+//    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:passiveAuthVC];
+//    
+//    [rootController presentModalViewController:webNavigation animated:YES];
     
     // open modal uiwebview.
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
 }
 
 
