@@ -679,7 +679,7 @@ static NSMutableDictionary * staticTokenCache;
                   }];
 }
 
-- (void)startPassiveAuthenticationWithProvider:(NSString *)provider completion:(void (^)(id))block
+- (void)startPassiveAuthenticationWithProvider:(NSString *)provider completion:(void (^)(id p))block
 {
     NSString *passiveUrlString = [self.applicationConfig.authConfig passiveEndPointStringForProvider:provider];
     NSAssert(passiveUrlString, @"Must not be nil");
