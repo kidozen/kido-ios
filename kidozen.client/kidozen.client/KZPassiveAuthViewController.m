@@ -8,17 +8,20 @@
 
 #import "KZPassiveAuthViewController.h"
 
-@interface KZPassiveAuthViewController ()
+@interface KZPassiveAuthViewController ()<UIWebViewDelegate>
+
+@property (nonatomic, strong) NSURL *url;
 
 @end
 
 @implementation KZPassiveAuthViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (id) initWithURLString:(NSString *)urlString
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        // Custom initialization
+        self.url = [NSURL URLWithString:urlString];
     }
     return self;
 }
@@ -26,24 +29,68 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self loadBarButtonItem];
+    [self configureWebView];
+    [self loadRequest];
+    
 }
 
-- (void)didReceiveMemoryWarning
+- (void) configureWebView
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
+    self.webView.delegate = self;
+    [self.view addSubview:self.webView];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void) loadRequest
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:self.url];
+    [self.webView loadRequest:urlRequest];
 }
-*/
+
+- (void) loadBarButtonItem
+{
+    self.navigationItem.leftBarButtonItem = [self cancelBarButtonItem];
+}
+
+-(UIBarButtonItem*) cancelBarButtonItem
+{
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                         target:self
+                                                         action:@selector(cancelAuth)];
+}
+
+
+- (void)cancelAuth
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+
+    NSLog(@"shouldStartLoadWithRequest %@", request);
+    return YES;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    NSLog(@"webViewDidStartLoad");
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSLog(@"webViewDidFinishLoad");
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    NSLog(@"didFailLoadWithError");
+}
 
 @end

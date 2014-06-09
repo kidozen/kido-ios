@@ -6,6 +6,7 @@
 #import "KZApplicationConfiguration.h"
 #import "KZAuthenticationConfig.h"
 #import "KZTokenController.h"
+#import "KZPassiveAuthViewController.h"
 
 #import <UIKit/UIKit.h>
 
@@ -685,7 +686,17 @@ static NSMutableDictionary * staticTokenCache;
     
     self.lastProviderKey = provider;
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
+    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
+    
+    KZPassiveAuthViewController *passiveAuthVC = [[KZPassiveAuthViewController alloc] initWithURLString:passiveUrlString];
+//    passiveUrlString.callback
+    
+    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:passiveAuthVC];
+    
+    [rootController presentModalViewController:webNavigation animated:YES];
+    
+    // open modal uiwebview.
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
 }
 
 
