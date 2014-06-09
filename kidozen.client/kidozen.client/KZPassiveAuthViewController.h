@@ -12,7 +12,6 @@
 
 - (id) initWithURLString:(NSString *)urlString;
 
-@property (nonatomic, copy) didReceiveResponse
 @property (nonatomic, strong) UIWebView *webView;
 
 @end
