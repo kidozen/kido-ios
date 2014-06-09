@@ -679,33 +679,33 @@ static NSMutableDictionary * staticTokenCache;
                   }];
 }
 
-- (void)startPassiveAuthenticationWithProvider:(NSString *)provider
+- (void)startPassiveAuthenticationWithProvider:(NSString *)provider completion:(void (^)(id))block
 {
     NSString *passiveUrlString = [self.applicationConfig.authConfig passiveEndPointStringForProvider:provider];
     NSAssert(passiveUrlString, @"Must not be nil");
     
     self.lastProviderKey = provider;
     
-//    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
-//    
-//    KZPassiveAuthViewController *passiveAuthVC = [[KZPassiveAuthViewController alloc] initWithURLString:passiveUrlString];
-//    
-//    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:passiveAuthVC];
-//    
-//    [rootController presentModalViewController:webNavigation animated:YES];
+    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     
-    // open modal uiwebview.
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
+    KZPassiveAuthViewController *passiveAuthVC = [[KZPassiveAuthViewController alloc] initWithURLString:passiveUrlString];
+    __weak KZApplication *safeMe = self;
+    
+    passiveAuthVC.completion = ^(NSString *token) {
+        [safeMe completePassiveAuthenticationWithToken:token completion:block];
+    };
+    
+    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:passiveAuthVC];
+    
+    [rootController presentModalViewController:webNavigation animated:YES];
+    
 }
 
 
-- (void)completePassiveAuthenticationWithUrl:(NSURL *)url completion:(void (^)(id))block
+- (void)completePassiveAuthenticationWithToken:(NSString *)token completion:(void (^)(id))block
 {
     self.authCompletionBlock = block;
-    
-    // Should assert the url.
-    NSString *token = [[[[[[url fragment] componentsSeparatedByString:@"&"] objectAtIndex:0] componentsSeparatedByString:@"="] objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
+
     [self.tokenControler updateAccessTokenWith:token];
 
     [self completeAuthenticationFlow];

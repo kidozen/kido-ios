@@ -72,8 +72,16 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-
-    NSLog(@"shouldStartLoadWithRequest %@", request);
+    if ([[[request URL] absoluteString] hasPrefix:@"ios:"]) {
+        // can get a different method.
+        // get token
+        NSString *token = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        if (self.completion != nil) {
+            self.completion(token);
+        }
+        
+        return NO;
+    }
     return YES;
 }
 

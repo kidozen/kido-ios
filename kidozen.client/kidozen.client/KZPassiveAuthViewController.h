@@ -12,7 +12,7 @@
 
 - (id) initWithURLString:(NSString *)urlString;
 
-@property (nonatomic, copy) didReceiveResponse
+@property (nonatomic, copy) void(^completion)(NSString *token);
 @property (nonatomic, strong) UIWebView *webView;
 
 @end
