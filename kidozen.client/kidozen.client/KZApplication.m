@@ -148,6 +148,11 @@ static NSMutableDictionary * staticTokenCache;
 -(void)enableCrashReporter
 {
     if (![self.crashreporter isInitialized]) {
+        
+        if (NSGetUncaughtExceptionHandler() != nil) {
+            NSLog(@"Warning -- NSSetUncaughtExceptionHandler is not nil. Overriding will occur");
+        }
+        
         self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.applicationConfig.url
                                                               withToken:self.tokenControler.kzToken];
     }
