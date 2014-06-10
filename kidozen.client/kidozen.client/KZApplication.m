@@ -158,12 +158,6 @@ static NSMutableDictionary * staticTokenCache;
     }
 }
 
-- (void)disableCrashReporter
-{
-    // We just nilify
-    self.crashreporter = nil;
-}
-
 - (void)initializeBaseDictionaryServices
 {
     self.configurations = [[NSMutableDictionary alloc] init];
