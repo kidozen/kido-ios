@@ -46,7 +46,7 @@
                 [self setValue:[dictionary objectForKey:key] forKey:mappedKey];
             }
         } else {
-            NSLog(@"warning - %@ not as a property", mappedKey);
+//            NSLog(@"warning - %@ not as a property", mappedKey);
         }
     }
 }

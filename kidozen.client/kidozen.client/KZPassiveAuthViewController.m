@@ -72,19 +72,16 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSString *myAppScheme = @"kidozen";
-    
-    if (![request.URL.scheme isEqualToString:myAppScheme]) {
-        return YES;
+    if ([[[request URL] absoluteString] hasPrefix:@"ios:"]) {
+        NSString *token = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        
+        if (self.completion != nil) {
+            self.completion(token);
+            [self dismissModalViewControllerAnimated:YES];
+        }
+        return NO;
     }
-    
-    NSString *token = request.URL.fragment ?:nil;
-    
-    if (self.completion != nil) {
-        self.completion(token);
-    }
-
-    return NO;
+    return YES;
     
 }
 
