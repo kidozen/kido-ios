@@ -131,8 +131,8 @@
                     saveToPath:(NSString*)savePath
                       progress:(void (^)(float))progressBlock
                     completion:(SVHTTPRequestCompletionHandler)completionBlock  {
-    
-    NSString *completeURLString = [NSString stringWithFormat:@"%@%@", self.basePath, path];
+    NSString *basePath = [self.basePath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString *completeURLString = [NSString stringWithFormat:@"%@%@", basePath , [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     id mergedParameters;
     
     if((method == SVHTTPRequestMethodPOST || method == SVHTTPRequestMethodPUT) && self.sendParametersAsJSON && ![parameters isKindOfClass:[NSDictionary class]])
