@@ -15,6 +15,8 @@
 @property (nonatomic, copy, readwrite) NSString *kzToken;
 @property (nonatomic, copy, readwrite) NSString *ipToken;
 
+@property (nonatomic, copy) void(^timerCallback)(void);
+
 @end
 
 @implementation KZTokenController
@@ -63,6 +65,31 @@
 -(void) removeTokensFromCache
 {
     [self.tokenCache removeAllObjects];
+}
+
+- (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
+{
+    self.timerCallback = callback;
+    
+    __block NSTimer *tokenTimer;
+    __weak KZTokenController *safeMe = self;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60
+                                                     target:safeMe
+                                                   selector:@selector(tokenExpires)
+                                                   userInfo:callback
+                                                    repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:tokenTimer forMode:NSDefaultRunLoopMode];
+        [[NSRunLoop currentRunLoop] run];
+    });
+}
+
+- (void) tokenExpires
+{
+    if (self.timerCallback != nil) {
+        self.timerCallback();
+    }
 }
 
 @end

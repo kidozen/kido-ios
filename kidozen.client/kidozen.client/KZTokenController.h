@@ -15,13 +15,15 @@
 @property (nonatomic, copy, readonly) NSString *ipToken;
 
 
-- (void) updateAccessTokenWith:(NSString *)accessToken accessTokenKey:(NSString *)accessTokenKey;
-- (void) updateIPTokenWith:(NSString *)ipToken ipKey:(NSString *)ipKey;
+- (void)updateAccessTokenWith:(NSString *)accessToken accessTokenKey:(NSString *)accessTokenKey;
+- (void)updateIPTokenWith:(NSString *)ipToken ipKey:(NSString *)ipKey;
 
-- (void) clearAccessTokenForKey:(NSString *)key;
-- (void) clearIPTokenForKey:(NSString *)key;
+- (void)clearAccessTokenForKey:(NSString *)key;
+- (void)clearIPTokenForKey:(NSString *)key;
 
--(void) loadTokensFromCacheForIpKey:(NSString *)ipKey accessTokenKey:(NSString *)accessTokenKey;
--(void) removeTokensFromCache;
+- (void)loadTokensFromCacheForIpKey:(NSString *)ipKey accessTokenKey:(NSString *)accessTokenKey;
+- (void)removeTokensFromCache;
+
+- (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback;
 
 @end

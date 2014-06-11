@@ -230,38 +230,16 @@ NSString *const kAccessTokenKey = @"access_token";
                                     
                                     [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
-                                    [safeMe handleTokenExpiration];
+                                    [safeMe.tokenControler startTokenExpirationTimer:safeMe.KidoZenUser.expiresOn
+                                                                            callback:^{
+                                                                                [safeMe tokenExpires];
+                                                                            }];
                                     
                                     if (callback != nil) {
                                         callback(nil);
                                     }
                                 }];
     
-}
-
-- (void)handleTokenExpiration
-{
-    __block NSTimer *safeToken = self.tokenExpirationTimer;
-    __weak KZApplication *safeMe = self;
-#ifdef CURRENTLY_TESTING
-    int timeout = 30;
-#else
-    int timeout = self.KidoZenUser.expiresOn;
-#endif
-    if (self.KidoZenUser.expiresOn > 0) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            safeToken = [NSTimer scheduledTimerWithTimeInterval:timeout
-                                                         target:safeMe
-                                                       selector:@selector(tokenExpires:)
-                                                       userInfo:nil
-                                                        repeats:NO];
-            [[NSRunLoop currentRunLoop] addTimer:safeToken forMode:NSDefaultRunLoopMode];
-            [[NSRunLoop currentRunLoop] run];
-        });
-    }
-    else {
-        NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
-    }
 }
 
 - (void) didFinishInitializationWithResponse:(id)configResponse
@@ -348,7 +326,10 @@ NSString *const kAccessTokenKey = @"access_token";
                 
                 [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                 
-                [safeMe handleTokenExpiration];
+                [safeMe.tokenControler startTokenExpirationTimer:safeMe.KidoZenUser.expiresOn
+                                                        callback:^{
+                                                            [safeMe tokenExpires];
+                                                        }];
                 
                 if (safeMe.authCompletionBlock) {
                     if (![safeMe.KidoZenUser.claims objectForKey:@"system"] && ![safeMe.KidoZenUser.claims objectForKey:@"usersource"] )
@@ -366,7 +347,7 @@ NSString *const kAccessTokenKey = @"access_token";
     }];
 }
 
--(void) tokenExpires:(NSTimer*)theTimer
+-(void) tokenExpires
 {
     if (self.tokenExpiresBlock) {
         self.tokenExpiresBlock(self.KidoZenUser);
@@ -421,7 +402,10 @@ NSString *const kAccessTokenKey = @"access_token";
                                     
                                     [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
-                                    [safeMe handleTokenExpiration];
+                                    [safeMe.tokenControler startTokenExpirationTimer:safeMe.KidoZenUser.expiresOn
+                                                                            callback:^{
+                                                                                [safeMe tokenExpires];
+                                                                            }];
 
                                     if (callback != nil) {
                                         callback(nil);
@@ -652,9 +636,6 @@ NSString *const kAccessTokenKey = @"access_token";
     [self.defaultClient setSendParametersAsJSON:YES];
     [self.defaultClient setBasePath:@""];
 
-//    NSAssert(self.applicationConfig.authConfig.oauthTokenEndpoint != nil, @"Must not be nil");
-//    NSAssert(self.applicationConfig.authConfig.oauthTokenEndpoint.length > 0, @"Must have an url");
-    
     [self.defaultClient POST:self.applicationConfig.authConfig.oauthTokenEndpoint
                   parameters:postContentDictionary
                   completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -676,14 +657,6 @@ NSString *const kAccessTokenKey = @"access_token";
     NSAssert(passiveUrlString, @"Must not be nil");
     
     self.lastProviderKey = provider;
-    
-//    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
-//    
-//    KZPassiveAuthViewController *passiveAuthVC = [[KZPassiveAuthViewController alloc] initWithURLString:passiveUrlString];
-//    
-//    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:passiveAuthVC];
-//    
-//    [rootController presentModalViewController:webNavigation animated:YES];
     
     // open modal uiwebview.
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:passiveUrlString]];
@@ -720,7 +693,10 @@ NSString *const kAccessTokenKey = @"access_token";
     
     [self parseUserInfo:self.tokenControler.kzToken];
 
-    [self handleTokenExpiration];
+    [self.tokenControler startTokenExpirationTimer:self.KidoZenUser.expiresOn
+                                            callback:^{
+                                                [self tokenExpires];
+                                            }];
 
     if (self.authCompletionBlock) {
         self.authCompletionBlock(self.tokenControler.kzToken);
@@ -732,8 +708,9 @@ NSString *const kAccessTokenKey = @"access_token";
     self.lastUserName = user;
     self.lastPassword = password;
     self.lastProviderKey = provider;
-
-    [self loadTokensFromCache];
+    
+    [self.tokenControler loadTokensFromCacheForIpKey:[self getIpCacheKey]
+                                      accessTokenKey:[self getAccessTokenCacheKey]];
     
     if (self.tokenControler.kzToken && self.tokenControler.ipToken) {
         [self completeAuthenticationFlow];
@@ -776,16 +753,6 @@ NSString *const kAccessTokenKey = @"access_token";
     [self.services setObject:s forKey:name];
     
     return s;
-}
-
--(void) loadTokensFromCache
-{
-    if (self.tokenControler == nil) {
-        self.tokenControler = [[KZTokenController alloc] init];
-    }
-    
-    [self.tokenControler loadTokensFromCacheForIpKey:[self getIpCacheKey]
-                                      accessTokenKey:[self getAccessTokenCacheKey]];
 }
 
 - (NSString *) getIpCacheKey
