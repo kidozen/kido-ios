@@ -82,7 +82,7 @@ static NSMutableDictionary * staticTokenCache;
     
 -(NSString *)sanitizeTennantMarketPlace:(NSString *)tennant
 {
-    NSMutableCharacterSet *characterSet = [NSCharacterSet whitespaceCharacterSet];
+    NSMutableCharacterSet *characterSet = [NSMutableCharacterSet whitespaceCharacterSet];
     [characterSet addCharactersInString:@"/"];
     
     return [tennant stringByTrimmingCharactersInSet:characterSet];
