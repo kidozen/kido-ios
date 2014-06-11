@@ -10,6 +10,7 @@
 
 @interface KZTokenController()
 
+@property (nonatomic, strong) NSMutableDictionary *tokenCache;
 @property (nonatomic, copy, readwrite) NSString *rawAccessToken;
 @property (nonatomic, copy, readwrite) NSString *kzToken;
 @property (nonatomic, copy, readwrite) NSString *ipToken;
@@ -18,18 +19,20 @@
 
 @implementation KZTokenController
 
-- (void) updateAccessTokenWith:(NSString *)accessToken
+- (void) updateAccessTokenWith:(NSString *)accessToken accessTokenKey:(NSString *)accessTokenKey
 {
     if (accessToken != nil && accessToken.length > 0) {
         self.rawAccessToken = accessToken;
         self.kzToken = [self kzTokenFromRawAccessToken];
+        self.tokenCache[accessTokenKey] = accessToken;
     }
 }
 
-- (void) updateIPTokenWith:(NSString *)ipToken
+- (void) updateIPTokenWith:(NSString *)ipToken ipKey:(NSString *)ipKey
 {
     if (ipToken != nil && ipToken.length > 0) {
         self.ipToken = ipToken;
+        self.tokenCache[ipKey] = ipToken;
     }
 }
 
@@ -40,14 +43,26 @@
 
 - (void) clearAccessToken
 {
-    self.rawAccessToken = nil;
-    self.kzToken = nil;
+//    self.rawAccessToken = nil;
+//    self.kzToken = nil;
+//    [self.tokenCache removeObjectForKey:self.accessTokenCacheKey];
 }
 
 - (void) clearIPToken
 {
-    self.ipToken = nil;
+//    self.ipToken = nil;
+//    [self.tokenCache removeObjectForKey:self.ipTokenCacheKey];
 }
 
+-(void) loadTokensFromCacheForIpKey:(NSString *)ipKey accessTokenKey:(NSString *)accessTokenKey
+{
+    [self setRawAccessToken:self.tokenCache[accessTokenKey]];
+    self.ipToken = self.tokenCache[ipKey];
+}
+
+-(void) removeTokensFromCache
+{
+    [self.tokenCache removeAllObjects];
+}
 
 @end

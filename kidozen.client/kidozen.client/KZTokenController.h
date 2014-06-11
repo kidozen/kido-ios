@@ -14,10 +14,14 @@
 @property (nonatomic, copy, readonly) NSString *kzToken;
 @property (nonatomic, copy, readonly) NSString *ipToken;
 
-- (void) updateAccessTokenWith:(NSString *)accessToken;
-- (void) updateIPTokenWith:(NSString *)ipToken;
 
-- (void) clearAccessToken;
-- (void) clearIPToken;
+- (void) updateAccessTokenWith:(NSString *)accessToken accessTokenKey:(NSString *)accessTokenKey;
+- (void) updateIPTokenWith:(NSString *)ipToken ipKey:(NSString *)ipKey;
+
+//- (void) clearAccessToken;
+//- (void) clearIPToken;
+
+-(void) loadTokensFromCacheForIpKey:(NSString *)ipKey accessTokenKey:(NSString *)accessTokenKey;
+-(void) removeTokensFromCache;
 
 @end
