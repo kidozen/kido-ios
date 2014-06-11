@@ -66,8 +66,7 @@ NSString *const kAccessTokenKey = @"access_token";
         self.passiveAuthenticated = NO;
         
         [self initializeServices];
-        self.tokenControler = [[KZTokenController alloc] initWithIPTokenCacheKey:[self getIpCacheKey]
-                                                                  accessCacheKey:[self getAccessTokenCacheKey]];
+        self.tokenControler = [[KZTokenController alloc] init];
 
     }
     return self;
@@ -224,8 +223,10 @@ NSString *const kAccessTokenKey = @"access_token";
                                     safeMe.lastPassword = nil;
                                     safeMe.lastUserName = nil;
                                     
-                                    [safeMe.tokenControler updateAccessTokenWith:responseForToken[kAccessTokenKey]];
-                                    [safeMe.tokenControler clearIPToken];
+                                    [safeMe.tokenControler updateAccessTokenWith:responseForToken[kAccessTokenKey]
+                                                                  accessTokenKey:[safeMe getAccessTokenCacheKey]];
+                                    
+                                    [safeMe.tokenControler clearIPTokenForKey:[safeMe getIpCacheKey]];
                                     
                                     [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
@@ -339,9 +340,11 @@ NSString *const kAccessTokenKey = @"access_token";
                 safeMe.KidoZenUser.user = user;
                 safeMe.KidoZenUser.pass = password;
                 
-                [safeMe.tokenControler updateAccessTokenWith:[response objectForKey:@"rawToken"]];
+                [safeMe.tokenControler updateAccessTokenWith:[response objectForKey:@"rawToken"]
+                                              accessTokenKey:[safeMe getAccessTokenCacheKey]];
                 
-                [safeMe.tokenControler updateIPTokenWith:ipToken];
+                [safeMe.tokenControler updateIPTokenWith:ipToken
+                                                   ipKey:[safeMe getIpCacheKey]];
                 
                 [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                 
@@ -411,8 +414,10 @@ NSString *const kAccessTokenKey = @"access_token";
                                         callback(error);
                                     }
                                     
-                                    [safeMe.tokenControler updateAccessTokenWith:responseForToken[kAccessTokenKey]];
-                                    [safeMe.tokenControler clearIPToken];
+                                    [safeMe.tokenControler updateAccessTokenWith:responseForToken[kAccessTokenKey]
+                                                                  accessTokenKey:[safeMe getAccessTokenCacheKey]];
+                                    
+                                    [safeMe.tokenControler clearIPTokenForKey:[safeMe getIpCacheKey]];
                                     
                                     [safeMe parseUserInfo:safeMe.tokenControler.kzToken];
                                     
@@ -692,7 +697,8 @@ NSString *const kAccessTokenKey = @"access_token";
     // Should assert the url.
     NSString *token = [[[[[[url fragment] componentsSeparatedByString:@"&"] objectAtIndex:0] componentsSeparatedByString:@"="] objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    [self.tokenControler updateAccessTokenWith:token];
+    [self.tokenControler updateAccessTokenWith:token
+                                accessTokenKey:[self getAccessTokenCacheKey]];
 
     [self completeAuthenticationFlow];
     
@@ -775,9 +781,11 @@ NSString *const kAccessTokenKey = @"access_token";
 -(void) loadTokensFromCache
 {
     if (self.tokenControler == nil) {
-        self.tokenControler = [[KZTokenController alloc] initWithIPTokenCacheKey:[self getIpCacheKey]
-                                                                  accessCacheKey:[self getAccessTokenCacheKey]];
+        self.tokenControler = [[KZTokenController alloc] init];
     }
+    
+    [self.tokenControler loadTokensFromCacheForIpKey:[self getIpCacheKey]
+                                      accessTokenKey:[self getAccessTokenCacheKey]];
 }
 
 - (NSString *) getIpCacheKey

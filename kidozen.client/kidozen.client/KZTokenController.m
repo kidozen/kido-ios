@@ -41,17 +41,17 @@
     return [NSString stringWithFormat:@"WRAP access_token=\"%@\"", self.rawAccessToken];
 }
 
-- (void) clearAccessToken
+- (void) clearAccessTokenForKey:(NSString *)key
 {
-//    self.rawAccessToken = nil;
-//    self.kzToken = nil;
-//    [self.tokenCache removeObjectForKey:self.accessTokenCacheKey];
+    self.rawAccessToken = nil;
+    self.kzToken = nil;
+    [self.tokenCache removeObjectForKey:key];
 }
 
-- (void) clearIPToken
+- (void) clearIPTokenForKey:(NSString *)key
 {
-//    self.ipToken = nil;
-//    [self.tokenCache removeObjectForKey:self.ipTokenCacheKey];
+    self.ipToken = nil;
+    [self.tokenCache removeObjectForKey:key];
 }
 
 -(void) loadTokensFromCacheForIpKey:(NSString *)ipKey accessTokenKey:(NSString *)accessTokenKey
