@@ -158,6 +158,10 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     __weak KZCrashReporter *safeMe = self;
     
     [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        NSLog(@"Respose for post is %@:", response);
+        NSLog(@"URLResponse for post is %@", urlResponse);
+        NSLog(@"Error is %@", error);
+        
         if (!error) {
             NSError *purgeError;
             if (![safeMe.baseReporter purgePendingCrashReportAndReturnError:&purgeError]) {
