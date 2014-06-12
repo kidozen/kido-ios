@@ -12,7 +12,6 @@
 
 @interface KZCrashReporter()
 
-@property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy, readwrite) NSString *version;
 @property (nonatomic, copy, readwrite) NSString *build;
 
@@ -32,12 +31,14 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 }
 
 
-- (id) initWithURLString:(NSString *)url withToken:(NSString *)token
+- (id) initWithURLString:(NSString *)url tokenController:(KZTokenController *)tokenController
 {
     self = [super init];
     
     if (self) {
-        self.token = token;
+        
+        self.tokenControler = tokenController;
+        
         internalCrashReporterInfo = [[NSMutableDictionary alloc] init];
         _client = [[SVHTTPClient alloc] init];
         [self enableCrashReporterWithUrl:url];
@@ -140,10 +141,12 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
         breadcrumbs = @"";
     };
     
+    NSArray *breadcrumbsArray = [breadcrumbs componentsSeparatedByString:@"\n"];
+    
     NSDictionary *jsonDictionary = @{@"report": self.crashReportContentAsString,
                                      @"version" : self.version,
                                      @"build" : self.build,
-                                     @"breadcrumbs" : breadcrumbs};
+                                     @"breadcrumbs" : breadcrumbsArray};
     
     [_client setBasePath:_reporterServiceUrl];
     [_client setSendParametersAsJSON:YES];

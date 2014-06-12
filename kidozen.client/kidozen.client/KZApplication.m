@@ -154,7 +154,7 @@ static NSMutableDictionary * staticTokenCache;
         }
         
         self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.applicationConfig.url
-                                                              withToken:self.tokenControler.kzToken];
+                                                              tokenController:self.tokenControler];
     }
 }
 
