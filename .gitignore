@@ -2,3 +2,6 @@
 *.xcuserdatad
 kidozen.client/.DS_Store
 
+kidozen.client/kidozen.client.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+plcrashreporter-1.2-rc4/CrashReporter.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+plcrashreporter-1.2-rc4/CrashReporter.xcodeproj/project.xcworkspace/xcshareddata/CrashReporter.xccheckout
