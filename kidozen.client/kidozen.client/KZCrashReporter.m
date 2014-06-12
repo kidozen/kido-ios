@@ -153,7 +153,8 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
     
-    NSLog(@"------ %@", jsonDictionary);
+    NSLog(@"------ Breadcrumbs %@", breadcrumbsArray);
+    NSLog(@"------ BUILD %@", self.build);
     
     __weak KZCrashReporter *safeMe = self;
     
