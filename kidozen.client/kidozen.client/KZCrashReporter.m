@@ -143,10 +143,10 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     
     NSArray *breadcrumbsArray = [breadcrumbs componentsSeparatedByString:@"\n"];
     
-    NSDictionary *jsonDictionary = @{@"report": self.crashReportContentAsString,
-                                     @"version" : self.version,
-                                     @"build" : self.build,
-                                     @"breadcrumbs" : breadcrumbsArray};
+    NSDictionary *jsonDictionary = @{@"REPORT": self.crashReportContentAsString,
+                                     @"VERSION" : self.version,
+                                     @"BUILD" : self.build,
+                                     @"BREADCRUMBS" : breadcrumbsArray};
     
     [_client setBasePath:_reporterServiceUrl];
     [_client setSendParametersAsJSON:YES];
