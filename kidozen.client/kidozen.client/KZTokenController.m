@@ -86,7 +86,7 @@
                                                         selector:@selector(tokenExpires)
                                                         userInfo:callback
                                                          repeats:NO];
-            [[NSRunLoop currentRunLoop] addTimer:tokenTimer forMode:NSDefaultRunLoopMode];
+            [[NSRunLoop currentRunLoop] addTimer:safeTokenTimer forMode:NSDefaultRunLoopMode];
             [[NSRunLoop currentRunLoop] run];
         });
     }
