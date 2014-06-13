@@ -8,9 +8,7 @@
  *
  */
 @interface KZUser : NSObject
-{
-    NSString * _kzToken;
-}
+
 -(id) initWithToken:(NSString *) token;
 /**
  * Checks if the user belongs to the role

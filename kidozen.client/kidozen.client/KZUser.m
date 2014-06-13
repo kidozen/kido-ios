@@ -2,7 +2,7 @@
 
 @interface KZUser()
 
-@property (nonatomic, copy) NSString *rawAccessToken;
+@property (nonatomic, copy) NSString *kzToken;
 - (void) parse;
 @end
 
@@ -23,16 +23,15 @@ NSString *const KEY_EXPIRES = @"ExpiresOn";
     {
         _roles = [[NSArray alloc] init];
         _claims = [[NSMutableDictionary alloc] init];
-        self.rawAccessToken = [token decodeHTMLEntities:token];
+        self.kzToken = [token decodeHTMLEntities:token];
         [self parse];
-        _kzToken = [[token decodeHTMLEntities:token] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
     return self;
 }
 
 -(void)parse
 {
-    NSArray * parts = [self.rawAccessToken componentsSeparatedByString:@"&"];
+    NSArray * parts = [self.kzToken componentsSeparatedByString:@"&"];
     for (NSString *obj in parts) {
         NSArray *components = [obj componentsSeparatedByString:@"="];
         NSString *key = [[[components objectAtIndex:0] componentsSeparatedByString:@"/"] lastObject];

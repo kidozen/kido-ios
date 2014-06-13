@@ -14,6 +14,7 @@
 @property (nonatomic, copy, readwrite) NSString *rawAccessToken;
 @property (nonatomic, copy, readwrite) NSString *kzToken;
 @property (nonatomic, copy, readwrite) NSString *ipToken;
+@property (nonatomic, strong) NSTimer *tokenTimer;
 
 @property (nonatomic, copy) void(^timerCallback)(void);
 
@@ -69,24 +70,33 @@
 
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
 {
-    self.timerCallback = callback;
-    
-    __block NSTimer *tokenTimer;
-    __weak KZTokenController *safeMe = self;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        tokenTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
-                                                     target:safeMe
-                                                   selector:@selector(tokenExpires)
-                                                   userInfo:callback
-                                                    repeats:NO];
-        [[NSRunLoop currentRunLoop] addTimer:tokenTimer forMode:NSDefaultRunLoopMode];
-        [[NSRunLoop currentRunLoop] run];
-    });
+    if (timeout > 0) {
+        self.timerCallback = callback;
+        if (self.tokenTimer != nil) {
+            [self.tokenTimer invalidate];
+            self.tokenTimer = nil;
+        }
+        
+        __block NSTimer *safeTokenTimer = self.tokenTimer;
+        __weak KZTokenController *safeMe = self;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            safeTokenTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
+                                                          target:safeMe
+                                                        selector:@selector(tokenExpires)
+                                                        userInfo:callback
+                                                         repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:tokenTimer forMode:NSDefaultRunLoopMode];
+            [[NSRunLoop currentRunLoop] run];
+        });
+    }
 }
 
 - (void) tokenExpires
 {
+    [self.tokenTimer invalidate];
+    self.tokenTimer = nil;
+    
     if (self.timerCallback != nil) {
         self.timerCallback();
     }

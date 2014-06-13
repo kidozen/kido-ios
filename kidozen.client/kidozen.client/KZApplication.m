@@ -701,10 +701,12 @@ NSString *const kAccessTokenKey = @"access_token";
     
     [self parseUserInfo:self.tokenControler.kzToken];
 
-    [self.tokenControler startTokenExpirationTimer:self.KidoZenUser.expiresOn
-                                            callback:^{
-                                                [self tokenExpires];
-                                            }];
+    if (self.KidoZenUser.expiresOn > 0) {
+        [self.tokenControler startTokenExpirationTimer:self.KidoZenUser.expiresOn
+                                              callback:^{
+                                                  [self tokenExpires];
+                                              }];
+    }
 
     if (self.authCompletionBlock) {
         self.authCompletionBlock(self.tokenControler.kzToken);
