@@ -75,7 +75,7 @@
     __weak KZTokenController *safeMe = self;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        tokenTimer = [NSTimer scheduledTimerWithTimeInterval:60
+        tokenTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
                                                      target:safeMe
                                                    selector:@selector(tokenExpires)
                                                    userInfo:callback
