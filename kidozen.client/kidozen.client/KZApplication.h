@@ -84,10 +84,6 @@ typedef void (^TokenExpiresBlock)(id);
  */
 - (void)enableCrashReporter;
 
-/* Will remove the crash reporting capabilities of the KZApplication
- */
-- (void)disableCrashReporter;
-
 /*
  * Will send a string when the app crashes.
  * @TODO: Cap to a certain amount of bytes.

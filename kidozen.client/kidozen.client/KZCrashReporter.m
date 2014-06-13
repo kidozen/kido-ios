@@ -12,7 +12,6 @@
 
 @interface KZCrashReporter()
 
-@property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy, readwrite) NSString *version;
 @property (nonatomic, copy, readwrite) NSString *build;
 
@@ -32,12 +31,14 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 }
 
 
-- (id) initWithURLString:(NSString *)url withToken:(NSString *)token
+- (id) initWithURLString:(NSString *)url tokenController:(KZTokenController *)tokenController
 {
     self = [super init];
     
     if (self) {
-        self.token = token;
+        
+        self.tokenControler = tokenController;
+        
         internalCrashReporterInfo = [[NSMutableDictionary alloc] init];
         _client = [[SVHTTPClient alloc] init];
         [self enableCrashReporterWithUrl:url];
@@ -140,21 +141,28 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
         breadcrumbs = @"";
     };
     
-    NSDictionary *jsonDictionary = @{@"report": self.crashReportContentAsString,
-                                     @"version" : self.version,
-                                     @"build" : self.build,
-                                     @"breadcrumbs" : breadcrumbs};
+    NSArray *breadcrumbsArray = [breadcrumbs componentsSeparatedByString:@"\n"];
+    
+    NSDictionary *jsonDictionary = @{@"REPORT": self.crashReportContentAsString,
+                                     @"VERSION" : self.version,
+                                     @"BUILD" : self.build,
+                                     @"BREADCRUMBS" : breadcrumbsArray};
     
     [_client setBasePath:_reporterServiceUrl];
     [_client setSendParametersAsJSON:YES];
     [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
     
-    NSLog(@"------ %@", jsonDictionary);
+    NSLog(@"------ Breadcrumbs %@", breadcrumbsArray);
+    NSLog(@"------ BUILD %@", self.build);
     
     __weak KZCrashReporter *safeMe = self;
     
     [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        NSLog(@"Respose for post is %@:", response);
+        NSLog(@"URLResponse for post is %@", urlResponse);
+        NSLog(@"Error is %@", error);
+        
         if (!error) {
             NSError *purgeError;
             if (![safeMe.baseReporter purgePendingCrashReportAndReturnError:&purgeError]) {

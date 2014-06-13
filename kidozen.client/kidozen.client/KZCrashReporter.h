@@ -12,7 +12,7 @@
 
 @interface KZCrashReporter : KZBaseService
 
-- (id) initWithURLString:(NSString *)url withToken:(NSString *)token;
+- (id) initWithURLString:(NSString *)url tokenController:(KZTokenController *)tokenController;
 
 - (void)addBreadCrumb:(NSString *)logString;
 
