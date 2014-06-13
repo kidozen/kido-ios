@@ -16,8 +16,9 @@ NSString *const kEndPointKey = @"endpoint";
 @property (nonatomic, copy, readwrite) NSString *authServiceScope;
 @property (nonatomic, copy, readwrite) NSString *authServiceEndpoint;
 @property (nonatomic, copy, readwrite) NSString *oauthTokenEndpoint;
+@property (nonatomic, copy, readwrite) NSString *signInUrl;
+
 @property (nonatomic, strong) NSDictionary *identityProviders;
-//@property (nonatomic, strong) NSDictionary *passiveIdentityProviders;
 
 @end
 
@@ -31,14 +32,6 @@ NSString *const kEndPointKey = @"endpoint";
     }
     return self;
 }
-
-
-- (NSString *)passiveEndPointStringForProvider:(NSString *)provider
-{
-    NSDictionary *providerInfo = [self.passiveIdentityProviders objectForKey:provider];
-    return providerInfo[kEndPointKey];
-}
-
 
 - (NSString *)protocolForProvider:(NSString *)provider {
     NSString *const kProtocolKey = @"protocol";

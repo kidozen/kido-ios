@@ -7,12 +7,8 @@
 
 /**
  * Starts a passive authentication flow.
- *
- * @param tenantMarketPlace The url of the KidoZen marketplace
- * @param applicationName The application name
- * @param strictSSL Whether we want SSL to be bypassed or not,  only use in development
  */
-- (void)startPassiveAuthenticationWithProvider:(NSString *)provider completion:(void (^)(id))block;
+- (void)startPassiveAuthenticationWithCompletion:(void (^)(id response))block;
 
 //custom provider
 -(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey;

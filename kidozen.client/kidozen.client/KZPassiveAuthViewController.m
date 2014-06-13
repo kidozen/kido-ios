@@ -7,6 +7,9 @@
 //
 
 #import "KZPassiveAuthViewController.h"
+#import "Base64.h"
+
+#define SUCCESS_PAYLOAD_PREFIX @"Success payload="
 
 @interface KZPassiveAuthViewController ()<UIWebViewDelegate>
 
@@ -72,15 +75,6 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    if ([[[request URL] absoluteString] hasPrefix:@"ios:"]) {
-        NSString *token = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-        
-        if (self.completion != nil) {
-            self.completion(token);
-            [self dismissModalViewControllerAnimated:YES];
-        }
-        return NO;
-    }
     return YES;
     
 }
@@ -93,7 +87,19 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"webViewDidFinishLoad");
+    NSString *payload = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    
+    if ([payload hasPrefix:SUCCESS_PAYLOAD_PREFIX]) {
+        NSString *b64 = [payload stringByReplacingOccurrencesOfString:SUCCESS_PAYLOAD_PREFIX withString:@""];
+        NSString *json = [b64 base64DecodedString];
+        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
+                                                                       options:nil
+                                                                         error:nil];
+        if (self.completion != nil) {
+            self.completion(jsonDictionary[@"access_token"]);
+            [self dismissModalViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error

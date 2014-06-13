@@ -14,15 +14,11 @@
 @property (nonatomic, copy, readonly) NSString *authServiceScope;
 @property (nonatomic, copy, readonly) NSString *authServiceEndpoint;
 @property (nonatomic, copy, readonly) NSString *oauthTokenEndpoint;
+@property (nonatomic, copy, readonly) NSString *signInUrl;
+
 @property (nonatomic, readonly) NSDictionary *identityProviders;
 
-// should be readonly
-@property (nonatomic, strong) NSDictionary *passiveIdentityProviders;
-
-
 - (id)initWithDictionary:(NSDictionary *)configDictionary;
-- (NSString *)passiveEndPointStringForProvider:(NSString *)provider;
-
 
 - (NSString *)protocolForProvider:(NSString *)provider;
 - (NSString *)endPointForProvider:(NSString *)provider;

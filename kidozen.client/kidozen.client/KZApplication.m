@@ -651,12 +651,12 @@ NSString *const kAccessTokenKey = @"access_token";
                   }];
 }
 
-- (void)startPassiveAuthenticationWithProvider:(NSString *)provider completion:(void (^)(id p))block
+- (void)startPassiveAuthenticationWithCompletion:(void (^)(id p))block
 {
-    NSString *passiveUrlString = [self.applicationConfig.authConfig passiveEndPointStringForProvider:provider];
+    NSString *passiveUrlString = self.applicationConfig.authConfig.signInUrl;
     NSAssert(passiveUrlString, @"Must not be nil");
     
-    self.lastProviderKey = provider;
+    self.lastProviderKey = @"Passive - TODO: SOCIAL select.";
     
     UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     
