@@ -79,12 +79,6 @@
     
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    NSLog(@"webViewDidStartLoad");
-    
-}
-
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     NSString *payload = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
@@ -100,11 +94,6 @@
             [self dismissModalViewControllerAnimated:YES];
         }
     }
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    NSLog(@"didFailLoadWithError");
 }
 
 @end
