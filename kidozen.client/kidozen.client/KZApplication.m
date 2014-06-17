@@ -48,6 +48,7 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @implementation KZApplication
 
+
 -(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
                  applicationName:(NSString *)applicationName
                   applicationKey:(NSString *)applicationKey
@@ -128,7 +129,21 @@ NSString *const kAccessTokenKey = @"access_token";
     
     [self.defaultClient GET:appSettingsPath
                  parameters:@{kApplicationNameKey: self.applicationName}
-                 completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
+                 completion:^(NSArray *configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
+                     if (configError != nil) {
+                         return [safeMe failWithError:configError];
+                     }
+                     
+                     
+                     if ([configResponse count] == 0) {
+                         NSDictionary *userInfo = @{ @"error": @"configResponse dictionary is empty"};
+                         
+                         NSError *error = [NSError errorWithDomain:@"KZApplicationError"
+                                                              code:0
+                                                          userInfo:userInfo];
+                         return [safeMe failWithError:error];
+                     }
+                     
                      safeMe.applicationConfig = [[KZApplicationConfiguration alloc] initWithDictionary:[configResponse objectAtIndex:0]];
                      
                      [safeMe initializeIdentityProviders];
@@ -155,6 +170,13 @@ NSString *const kAccessTokenKey = @"access_token";
                                                                error:configError];
                      }
       }];
+}
+
+- (void) failWithError:(NSError *)error
+{
+    [self didFinishInitializationWithResponse:nil
+                                  urlResponse:nil
+                                        error:error];
 }
 
 - (void)addBreadCrumb:(NSString *)breadCrumb
@@ -680,7 +702,7 @@ NSString *const kAccessTokenKey = @"access_token";
     NSString *passiveUrlString = self.applicationConfig.authConfig.signInUrl;
     NSAssert(passiveUrlString, @"Must not be nil");
     
-    self.lastProviderKey = @"Passive - TODO: SOCIAL select.";
+    self.lastProviderKey = @"SOCIAL";
     
     UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     
