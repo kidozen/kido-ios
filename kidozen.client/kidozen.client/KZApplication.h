@@ -77,6 +77,21 @@ typedef void (^TokenExpiresBlock)(id);
                      andCallback:(void (^)(KZResponse *))callback;
 
 /**
+ * StrictSSL will default to YES.
+ */
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+                 applicationName:(NSString *)applicationName
+                  applicationKey:(NSString *)applicationKey
+                     andCallback:(void (^)(KZResponse *))callback;
+
+/** 
+ * ApplicationKey will be nil and strictSSL will be YES.
+ */
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+                 applicationName:(NSString *)applicationName
+                     andCallback:(void (^)(KZResponse *))callback;
+
+/**
  * Will create an instance of crash reporter.
  * When initializing KZApplication with an application key, crash reporting
  * will be enabled by default.

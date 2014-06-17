@@ -73,6 +73,30 @@ NSString *const kAccessTokenKey = @"access_token";
     
 }
 
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+                 applicationName:(NSString *)applicationName
+                  applicationKey:(NSString *)applicationKey
+                     andCallback:(void (^)(KZResponse *))callback
+{
+    return [self initWithTennantMarketPlace:tennantMarketPlace
+                            applicationName:applicationName
+                             applicationKey:applicationKey
+                                  strictSSL:YES
+                                andCallback:callback];
+}
+
+-(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+                 applicationName:(NSString *)applicationName
+                     andCallback:(void (^)(KZResponse *))callback
+{
+    return [self initWithTennantMarketPlace:tennantMarketPlace
+                            applicationName:applicationName
+                             applicationKey:nil
+                                  strictSSL:YES
+                                andCallback:callback];
+}
+
+
 #pragma mark private methods
     
 -(NSString *)sanitizeTennantMarketPlace:(NSString *)tennant
