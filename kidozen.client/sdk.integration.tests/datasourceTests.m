@@ -35,7 +35,9 @@
                                                               applicationKey:nil
                                                                    strictSSL:NO
                                                                  andCallback:^(KZResponse * r) {
-                                                                     XCTAssertNotNil(r.response,@"Invalid response");
+                                                                     XCTAssertNotNil(r.response, @"Invalid response");
+                                                                     XCTAssertNil(r.error, @"Should not have an error");
+                                                                     
                                                                      [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
                                                                          XCTAssertNotNil(c,@"User not authenticated");
                                                                          dispatch_semaphore_signal(semaphore);

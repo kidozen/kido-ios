@@ -13,7 +13,7 @@
 
 @interface KZApplicationConfiguration : KZObject
 
-- (id)initWithDictionary:(NSDictionary *)configDictionary;
+- (id)initWithDictionary:(NSDictionary *)configDictionary error:(NSError **)error;
 
 @property (nonatomic, copy, readonly) NSString *displayName;
 @property (nonatomic, copy, readonly) NSString *customUrl;

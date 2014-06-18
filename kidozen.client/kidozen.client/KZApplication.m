@@ -134,7 +134,6 @@ NSString *const kAccessTokenKey = @"access_token";
                          return [safeMe failWithError:configError];
                      }
                      
-                     
                      if ([configResponse count] == 0) {
                          NSDictionary *userInfo = @{ @"error": @"configResponse dictionary is empty"};
                          
@@ -144,7 +143,13 @@ NSString *const kAccessTokenKey = @"access_token";
                          return [safeMe failWithError:error];
                      }
                      
-                     safeMe.applicationConfig = [[KZApplicationConfiguration alloc] initWithDictionary:[configResponse objectAtIndex:0]];
+                     NSError *error;
+                     safeMe.applicationConfig = [[KZApplicationConfiguration alloc] initWithDictionary:[configResponse objectAtIndex:0]
+                                                                                                 error:&error];
+                     
+                     if (error != nil) {
+                         return [safeMe failWithError:error];
+                     }
                      
                      [safeMe initializeIdentityProviders];
                      [safeMe initializePushNotifications];

@@ -57,7 +57,7 @@
 @implementation KZApplicationConfiguration
 
 
-- (id)initWithDictionary:(NSDictionary *)configDictionary
+- (id)initWithDictionary:(NSDictionary *)configDictionary error:(NSError **)error
 {
     self = [super init];
     if (self) {
@@ -67,8 +67,34 @@
         
         [self configureWithDictionary:configDictionary];
         
+        *error = [self validateServices];
+        
     }
+    
     return self;
+}
+
+- (NSError *) validateServices
+{
+    if (self.authConfig == nil) {
+        return [NSError errorWithDomain:@"KZApplicationConfigurationDomain"
+                                   code:0
+                               userInfo:@{@"Message"  : @"No authConfig found"}];
+        
+    }
+    if (self.logging == nil) {
+        return [NSError errorWithDomain:@"KZApplicationConfigurationDomain"
+                                   code:0
+                               userInfo:@{@"Message"  : @"No logging service found"}];
+    }
+    
+    if (self.email == nil) {
+        return [NSError errorWithDomain:@"KZApplicationConfigurationDomain"
+                                   code:0
+                               userInfo:@{@"Message"  : @"No email service found"}];
+    }
+    
+    return nil;
 }
 
 @end
