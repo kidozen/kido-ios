@@ -10,6 +10,7 @@
 #import "Base64.h"
 
 #define SUCCESS_PAYLOAD_PREFIX @"Success payload="
+#define ERROR_PAYLOAD_PREFIX @"Error message="
 
 @interface KZPassiveAuthViewController ()<UIWebViewDelegate>
 
@@ -94,15 +95,31 @@
             self.completion(jsonDictionary[@"access_token"], nil);
             [self dismissModalViewControllerAnimated:YES];
         }
+        
+    } else if ([payload hasPrefix:ERROR_PAYLOAD_PREFIX]) {
+        
+        NSString *errorMessage = [payload stringByReplacingOccurrencesOfString:ERROR_PAYLOAD_PREFIX withString:@""];
+        NSError *error = [NSError errorWithDomain:@"KZPassiveAuthenticationError"
+                                             code:0
+                                         userInfo:@{@"Error message": errorMessage}];
+        [self handleError:error];
+        
     }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    self.completion(nil, error);
-    [self dismissModalViewControllerAnimated:YES];
-    
+    [self handleError:error];
 }
 
+
+- (void) handleError:(NSError *)error
+{
+    if (self.completion) {
+        self.completion(nil, error);
+    }
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
 
 @end
