@@ -36,7 +36,7 @@ typedef void (^TokenExpiresBlock)(id);
  * Main KidoZen application object
  *
  */
-@interface KZApplication : KZBaseService <KZAuthentication>
+@interface KZApplication : KZBaseService
 
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
@@ -56,9 +56,9 @@ typedef void (^TokenExpiresBlock)(id);
 
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
-@property (strong, nonatomic) KZMail * mail;
-@property (strong, nonatomic) KZLogging * log;
-@property (strong, nonatomic) SVHTTPClient * defaultClient;
+@property (readonly, nonatomic) KZMail * mail;
+@property (readonly, nonatomic) KZLogging * log;
+@property (readonly, nonatomic) SVHTTPClient * defaultClient;
 
 /**
  * Constructor
@@ -223,3 +223,4 @@ typedef void (^TokenExpiresBlock)(id);
  */
 -(KZDatasource *) DataSourceWithName:(NSString *) name;
 @end
+

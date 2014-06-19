@@ -55,6 +55,8 @@
 		6D85979A192BDA4100237277 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D859798192BDA4100237277 /* Base64.h */; };
 		6D85979B192BDA4100237277 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D859799192BDA4100237277 /* Base64.m */; };
 		6D85979C192BDA4100237277 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D859799192BDA4100237277 /* Base64.m */; };
+		6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */; };
+		6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */; };
 		6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */; };
 		6DCB876819462C64005B75B9 /* KZPassiveAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB876619462C64005B75B9 /* KZPassiveAuthViewController.m */; };
 		6DCEDD9F1938D26600A38C39 /* KZAuthenticationConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -336,6 +338,8 @@
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D859798192BDA4100237277 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../Base64/Base64.h; sourceTree = "<group>"; };
 		6D859799192BDA4100237277 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../Base64/Base64.m; sourceTree = "<group>"; };
+		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
+		6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationServices.m; sourceTree = "<group>"; };
 		6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZPassiveAuthViewController.h; sourceTree = "<group>"; };
 		6DCB876619462C64005B75B9 /* KZPassiveAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZPassiveAuthViewController.m; sourceTree = "<group>"; };
 		6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAuthenticationConfig.h; sourceTree = "<group>"; };
@@ -600,6 +604,8 @@
 				AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */,
 				8E0774B41619DC7E00FA21D9 /* KZApplication.h */,
 				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
+				6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */,
+				6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */,
 				8E0774811619D9AF00FA21D9 /* KZAuthentication.h */,
 				8E0774911619D9AF00FA21D9 /* KZResponse.h */,
 				8E0774921619D9AF00FA21D9 /* KZResponse.m */,
@@ -727,6 +733,7 @@
 				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
 				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
 				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
+				6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */,
 				8E0774D81619F35500FA21D9 /* KZUser.h in Headers */,
 				6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */,
 				6DCEDD9F1938D26600A38C39 /* KZAuthenticationConfig.h in Headers */,
@@ -1003,6 +1010,7 @@
 				8E0774A51619D9AF00FA21D9 /* KZIdentityProviderFactory.m in Sources */,
 				8E0774A61619D9AF00FA21D9 /* KZLogging.m in Sources */,
 				6DCEDDD719391E9F00A38C39 /* KZTokenController.m in Sources */,
+				6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */,
 				8E0774A71619D9AF00FA21D9 /* KZMail.m in Sources */,
 				6DCB876819462C64005B75B9 /* KZPassiveAuthViewController.m in Sources */,
 				8E0774A81619D9AF00FA21D9 /* KZNotification.m in Sources */,

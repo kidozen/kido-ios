@@ -43,6 +43,11 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
 
+@property (strong, nonatomic) KZMail * mail;
+@property (strong, nonatomic) KZLogging * log;
+@property (strong, nonatomic) SVHTTPClient * defaultClient;
+
+
 @end
 
 @implementation KZApplication
