@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @end
 
@@ -37,8 +38,21 @@
     
     [self loadBarButtonItem];
     [self configureWebView];
+    [self configureActivityView];
     [self loadRequest];
     
+    
+}
+
+- (void) configureActivityView
+{
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.activityView.color = [UIColor darkGrayColor];
+    [self.view addSubview:self.activityView];
+    self.activityView.hidesWhenStopped = YES;
+    self.activityView.center = self.webView.center;
+    
+    [self.activityView stopAnimating];
 }
 
 - (void) configureWebView
@@ -78,11 +92,17 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     return YES;
-    
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [self.activityView startAnimating];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    [self.activityView stopAnimating];
+    
     NSString *payload = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
     if ([payload hasPrefix:SUCCESS_PAYLOAD_PREFIX]) {
@@ -109,6 +129,8 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    [self.activityView stopAnimating];
+
     [self handleError:error];
 }
 
