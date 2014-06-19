@@ -177,12 +177,8 @@ NSString *const kAccessTokenKey = @"access_token";
 
 - (void) failAuthenticationWithError:(NSError *)error
 {
-    KZResponse *kzresponse = [[KZResponse alloc] initWithResponse:nil
-                                                      urlResponse:nil
-                                                         andError:error];
-    [kzresponse setApplication:self];
     if (self.authCompletionBlock) {
-        self.authCompletionBlock(kzresponse);
+        self.authCompletionBlock(error);
     }
 }
 
@@ -711,7 +707,7 @@ NSString *const kAccessTokenKey = @"access_token";
                   }];
 }
 
-- (void)startPassiveAuthenticationWithCompletion:(void (^)(KZResponse *r))block
+- (void)startPassiveAuthenticationWithCompletion:(void (^)(id))block
 {
     NSString *passiveUrlString = self.applicationConfig.authConfig.signInUrl;
     NSAssert(passiveUrlString, @"Must not be nil");
@@ -765,10 +761,12 @@ NSString *const kAccessTokenKey = @"access_token";
     
     [self parseUserInfo:self.tokenControler.kzToken];
 
+    __weak KZApplication *safeMe = self;
+    
     if (self.KidoZenUser.expiresOn > 0) {
         [self.tokenControler startTokenExpirationTimer:self.KidoZenUser.expiresOn
                                               callback:^{
-                                                  [self tokenExpires];
+                                                  [safeMe tokenExpires];
                                               }];
     }
 
