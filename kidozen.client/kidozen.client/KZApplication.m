@@ -130,7 +130,7 @@ NSString *const kAccessTokenKey = @"access_token";
                  parameters:@{kApplicationNameKey: self.applicationName}
                  completion:^(NSArray *configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
                      if (configError != nil) {
-                         return [safeMe failWithError:configError];
+                         return [safeMe failInitializationWithError:configError];
                      }
                      
                      if ([configResponse count] == 0) {
@@ -139,7 +139,7 @@ NSString *const kAccessTokenKey = @"access_token";
                          NSError *error = [NSError errorWithDomain:@"KZApplicationError"
                                                               code:0
                                                           userInfo:userInfo];
-                         return [safeMe failWithError:error];
+                         return [safeMe failInitializationWithError:error];
                      }
                      
                      NSError *error;
@@ -147,7 +147,7 @@ NSString *const kAccessTokenKey = @"access_token";
                                                                                                  error:&error];
                      
                      if (error != nil) {
-                         return [safeMe failWithError:error];
+                         return [safeMe failInitializationWithError:error];
                      }
                      
                      [safeMe initializeIdentityProviders];
@@ -175,7 +175,18 @@ NSString *const kAccessTokenKey = @"access_token";
       }];
 }
 
-- (void) failWithError:(NSError *)error
+- (void) failAuthenticationWithError:(NSError *)error
+{
+    KZResponse *kzresponse = [[KZResponse alloc] initWithResponse:nil
+                                                      urlResponse:nil
+                                                         andError:error];
+    [kzresponse setApplication:self];
+    if (self.authCompletionBlock) {
+        self.authCompletionBlock(kzresponse);
+    }
+}
+
+- (void) failInitializationWithError:(NSError *)error
 {
     [self didFinishInitializationWithResponse:nil
                                   urlResponse:nil
@@ -700,7 +711,7 @@ NSString *const kAccessTokenKey = @"access_token";
                   }];
 }
 
-- (void)startPassiveAuthenticationWithCompletion:(void (^)(id p))block
+- (void)startPassiveAuthenticationWithCompletion:(void (^)(KZResponse *r))block
 {
     NSString *passiveUrlString = self.applicationConfig.authConfig.signInUrl;
     NSAssert(passiveUrlString, @"Must not be nil");
@@ -712,8 +723,14 @@ NSString *const kAccessTokenKey = @"access_token";
     KZPassiveAuthViewController *passiveAuthVC = [[KZPassiveAuthViewController alloc] initWithURLString:passiveUrlString];
     __weak KZApplication *safeMe = self;
     
-    passiveAuthVC.completion = ^(NSString *token) {
-        [safeMe completePassiveAuthenticationWithToken:token completion:block];
+    self.authCompletionBlock = block;
+
+    passiveAuthVC.completion = ^(NSString *token, NSError *error) {
+        if (error != nil) {
+            return [safeMe failAuthenticationWithError:error];
+        } else {
+            [safeMe completePassiveAuthenticationWithToken:token];
+        }
     };
     
     UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:passiveAuthVC];
@@ -722,10 +739,8 @@ NSString *const kAccessTokenKey = @"access_token";
 }
 
 
-- (void)completePassiveAuthenticationWithToken:(NSString *)token completion:(void (^)(id))block
+- (void)completePassiveAuthenticationWithToken:(NSString *)token
 {
-    self.authCompletionBlock = block;
-
     [self.tokenControler updateAccessTokenWith:token
                                 accessTokenKey:[self getAccessTokenCacheKey]];
 

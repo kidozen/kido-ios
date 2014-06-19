@@ -8,7 +8,7 @@
 /**
  * Starts a passive authentication flow.
  */
-- (void)startPassiveAuthenticationWithCompletion:(void (^)(id response))block;
+- (void)startPassiveAuthenticationWithCompletion:(void (^)(KZResponse *response))block;
 
 //custom provider
 -(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey;

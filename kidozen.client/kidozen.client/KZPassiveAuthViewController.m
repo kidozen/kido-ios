@@ -14,6 +14,7 @@
 @interface KZPassiveAuthViewController ()<UIWebViewDelegate>
 
 @property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) UIWebView *webView;
 
 @end
 
@@ -90,10 +91,18 @@
                                                                        options:nil
                                                                          error:nil];
         if (self.completion != nil) {
-            self.completion(jsonDictionary[@"access_token"]);
+            self.completion(jsonDictionary[@"access_token"], nil);
             [self dismissModalViewControllerAnimated:YES];
         }
     }
 }
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    self.completion(nil, error);
+    [self dismissModalViewControllerAnimated:YES];
+    
+}
+
 
 @end
