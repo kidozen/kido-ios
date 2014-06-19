@@ -41,7 +41,7 @@
         [NSException exceptionWithName:@"KZException" reason:@"The parameter is null" userInfo:nil];
     }
     
-    NSMutableDictionary *headersToUse = [NSMutableDictionary dictionaryWithObject:self.tokenControler.kzToken forKey:@"Authorization"];
+    NSMutableDictionary *headersToUse = [NSMutableDictionary dictionaryWithObject:self.tokenController.kzToken forKey:@"Authorization"];
     
     
     if  (headers) {
@@ -62,7 +62,7 @@
 
 - (NSString *)authHeaderString
 {
-    NSData *plainData = [self.tokenControler.ipToken dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *plainData = [self.tokenController.ipToken dataUsingEncoding:NSUTF8StringEncoding];
     NSString *encodedToken = [plainData SR_stringByBase64Encoding];
     
     return [NSString stringWithFormat:@"Bearer %@", encodedToken];

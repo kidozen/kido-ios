@@ -53,9 +53,9 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
 
 - (void)addAuthorizationHeader
 {
-    if (self.tokenControler != nil && self.tokenControler.kzToken != nil && self.tokenControler.kzToken.length > 0) {
+    if (self.tokenController != nil && self.tokenController.kzToken != nil && self.tokenController.kzToken.length > 0) {
         NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:_client.headers];
-        headers[@"Authorization"] = self.tokenControler.kzToken;
+        headers[@"Authorization"] = self.tokenController.kzToken;
         [_client setHeaders:headers];
     } else {
         NSLog(@"WARNING - NO AUTH HEADER");

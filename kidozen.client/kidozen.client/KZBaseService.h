@@ -18,7 +18,7 @@ extern NSInteger const KZHttpErrorStatusCode;
 }
 
 // This property will be in charge of managing all token related things.
-@property (nonatomic, strong) KZTokenController *tokenControler;
+@property (nonatomic, strong) KZTokenController *tokenController;
 
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSURL * serviceUrl;

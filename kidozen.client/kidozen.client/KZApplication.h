@@ -36,12 +36,10 @@ typedef void (^TokenExpiresBlock)(id);
  * Main KidoZen application object
  *
  */
-@interface KZApplication : KZBaseService
+@interface KZApplication : KZBaseService<KZAuthentication>
 
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
-
-@property (nonatomic, strong) NSMutableDictionary * identityProviders ;
 
 @property (nonatomic, copy, readonly) NSString *applicationKeyName;
 @property (atomic) BOOL strictSSL ;
@@ -58,6 +56,15 @@ typedef void (^TokenExpiresBlock)(id);
 
 @property (readonly, nonatomic) KZMail * mail;
 @property (readonly, nonatomic) KZLogging * log;
+@property (nonatomic, strong) NSMutableDictionary * identityProviders ;
+
+/**
+ * Push notification service main entry point
+ *
+ * @return The Push notification object that allows to interact with the Apple Push Notification Services (APNS)
+ */
+@property (strong, nonatomic) KZNotification * pushNotifications;
+
 @property (readonly, nonatomic) SVHTTPClient * defaultClient;
 
 /**
@@ -105,50 +112,6 @@ typedef void (^TokenExpiresBlock)(id);
  */
 - (void)addBreadCrumb:(NSString *)breadCrumb;
 
-/**
- * Push notification service main entry point
- *
- * @return The Push notification object that allows to interact with the Apple Push Notification Services (APNS)
- */
-@property (strong, nonatomic) KZNotification * pushNotifications;
-
-/**
- * Creates a new Queue object
- *
- * @param name The name that references the Queue instance
- * @return a new Queue object
- */
--(KZQueue *) QueueWithName:(NSString *) name;
-/**
- * Creates a new Storage object
- *
- * @param name The name that references the Storage instance
- * @return a new Storage object
- */
--(KZStorage *) StorageWithName:(NSString *) name;
-/**
- * Creates a new Configuration object
- *
- * @param name The name that references the Configuration instance
- * @return a new Configuration object
- */
--(KZConfiguration *) ConfigurationWithName:(NSString *) name;
-/**
- * Creates a new SMSSender object
- *
- * @param number The phone number to send messages.
- * @return a new SMSSender object
- */
--(KZSMSSender *) SMSSenderWithNumber:(NSString *) number;
-#if TARGET_OS_IPHONE
-/**
- * Creates a new PubSubChannel object
- *
- * @param name The name that references the channel instance
- * @return A new PubSubChannel object
- */
--(KZPubSubChannel *) PubSubChannelWithName:(NSString *) name;
-#endif
 /**
  * Sends an EMail
  *
@@ -207,13 +170,50 @@ typedef void (^TokenExpiresBlock)(id);
  */
 -(void) allLogMessages:(void (^)(KZResponse *))block;
 
+@end
+
+
+@interface KZApplication(Services)
+
+/**
+ * Creates a new Queue object
+ *
+ * @param name The name that references the Queue instance
+ * @return a new Queue object
+ */
+- (KZQueue *)QueueWithName:(NSString *)name;
+
+/**
+ * Creates a new Storage object
+ *
+ * @param name The name that references the Storage instance
+ * @return a new Storage object
+ */
+- (KZStorage *)StorageWithName:(NSString *)name;
+
 /**
  * Creates a new LOBService object
  *
  * @param name the service name.
  * @return a new LOBService object
  */
--(KZService *) LOBServiceWithName:(NSString *) name;
+- (KZService *)LOBServiceWithName:(NSString *)name;
+
+/**
+ * Creates a new Configuration object
+ *
+ * @param name The name that references the Configuration instance
+ * @return a new Configuration object
+ */
+- (KZConfiguration *)ConfigurationWithName:(NSString *)name;
+
+/**
+ * Creates a new SMSSender object
+ *
+ * @param number The phone number to send messages.
+ * @return a new SMSSender object
+ */
+- (KZSMSSender *)SMSSenderWithNumber:(NSString *)number;
 
 /**
  * Creates a new DataSource object
@@ -221,6 +221,17 @@ typedef void (^TokenExpiresBlock)(id);
  * @param name the service name.
  * @return a new DataSource object
  */
--(KZDatasource *) DataSourceWithName:(NSString *) name;
+- (KZDatasource *)DataSourceWithName:(NSString *)name;
+
+#if TARGET_OS_IPHONE
+/**
+ * Creates a new PubSubChannel object
+ *
+ * @param name The name that references the channel instance
+ * @return A new PubSubChannel object
+ */
+- (KZPubSubChannel *)PubSubChannelWithName:(NSString *)name;
+#endif
+
 @end
 

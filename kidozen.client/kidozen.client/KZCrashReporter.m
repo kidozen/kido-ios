@@ -37,7 +37,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     
     if (self) {
         
-        self.tokenControler = tokenController;
+        self.tokenController = tokenController;
         
         internalCrashReporterInfo = [[NSMutableDictionary alloc] init];
         _client = [[SVHTTPClient alloc] init];
