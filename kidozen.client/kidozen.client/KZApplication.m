@@ -36,7 +36,6 @@ NSString *const kAccessTokenKey = @"access_token";
 @property (nonatomic, strong) NSMutableDictionary *datasources;
 
 @property (nonatomic, assign) id<KZIdentityProvider> ip;
-@property (nonatomic, strong) NSTimer *tokenExpirationTimer;
 
 @property (nonatomic, strong) KZCrashReporter *crashreporter;
 
@@ -157,7 +156,6 @@ NSString *const kAccessTokenKey = @"access_token";
                      [safeMe initializeMail];
                      
                      
-                     // TODO: Only when enabling crash reporter
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
                          
                          [safeMe handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error){
