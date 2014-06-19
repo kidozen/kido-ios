@@ -12,7 +12,6 @@
 
 - (id) initWithURLString:(NSString *)urlString;
 
-@property (nonatomic, copy) void(^completion)(NSString *token);
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, copy) void(^completion)(NSString *token, NSError *error);
 
 @end
