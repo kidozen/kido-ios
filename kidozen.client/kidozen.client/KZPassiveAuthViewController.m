@@ -53,6 +53,7 @@
     self.activityView.center = self.webView.center;
     
     [self.activityView stopAnimating];
+    self.view.userInteractionEnabled = YES;
 }
 
 - (void) configureWebView
@@ -97,12 +98,13 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [self.activityView startAnimating];
+    self.view.userInteractionEnabled = NO;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.activityView stopAnimating];
-    
+    self.view.userInteractionEnabled = YES;
     NSString *payload = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
     if ([payload hasPrefix:SUCCESS_PAYLOAD_PREFIX]) {
@@ -130,7 +132,7 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [self.activityView stopAnimating];
-
+    self.view.userInteractionEnabled = YES;
     [self handleError:error];
 }
 
