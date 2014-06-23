@@ -48,13 +48,11 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 @property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
 @property (copy, nonatomic) InitializationCompleteBlock onInitializationComplete;
 
-@property (nonatomic, copy) NSString * lastProviderKey;
-
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
-@property (nonatomic, strong) NSMutableDictionary * identityProviders ;
-
 @property (readonly, nonatomic) SVHTTPClient * defaultClient;
+
+@property (nonatomic, copy) NSString * lastProviderKey;
 
 /**
  * Constructor
@@ -70,21 +68,6 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
                  applicationName:(NSString *)applicationName
                   applicationKey:(NSString *)applicationKey
                        strictSSL:(BOOL)strictSSL
-                     andCallback:(void (^)(KZResponse *))callback;
-
-/**
- * StrictSSL will default to YES.
- */
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
-                 applicationName:(NSString *)applicationName
-                  applicationKey:(NSString *)applicationKey
-                     andCallback:(void (^)(KZResponse *))callback;
-
-/** 
- * ApplicationKey will be nil and strictSSL will be YES.
- */
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
-                 applicationName:(NSString *)applicationName
                      andCallback:(void (^)(KZResponse *))callback;
 
 /**
@@ -167,6 +150,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 
 
+
 #pragma mark - Logging
 
 @property (readonly, nonatomic) KZLogging * log;
@@ -179,6 +163,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * @throws Exception
  */
 - (void)writeLog:(id)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block;
+
 /**
  * Clears the KZApplication log
  *

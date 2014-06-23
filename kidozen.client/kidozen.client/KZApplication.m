@@ -15,7 +15,6 @@
 NSString *const KZ_APP_CONFIG_PATH = @"/publicapi/apps";
 NSString *const KZ_SEC_CONFIG_PATH = @"/publicapi/auth/config";
 
-NSString *const kProtocolKey = @"protocol";
 NSString *const kApplicationNameKey = @"name";
 
 NSString *const kAccessTokenKey = @"access_token";
@@ -39,7 +38,6 @@ NSString *const kAccessTokenKey = @"access_token";
 @property (strong, nonatomic) SVHTTPClient * defaultClient;
 
 @property (strong, nonatomic) KZApplicationServices *appServices;
-
 
 @property (nonatomic, copy) NSString * lastUserName;
 @property (nonatomic, copy) NSString * lastPassword;
@@ -73,30 +71,6 @@ NSString *const kAccessTokenKey = @"access_token";
     return self;
     
 }
-
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
-                 applicationName:(NSString *)applicationName
-                  applicationKey:(NSString *)applicationKey
-                     andCallback:(void (^)(KZResponse *))callback
-{
-    return [self initWithTennantMarketPlace:tennantMarketPlace
-                            applicationName:applicationName
-                             applicationKey:applicationKey
-                                  strictSSL:YES
-                                andCallback:callback];
-}
-
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
-                 applicationName:(NSString *)applicationName
-                     andCallback:(void (^)(KZResponse *))callback
-{
-    return [self initWithTennantMarketPlace:tennantMarketPlace
-                            applicationName:applicationName
-                             applicationKey:nil
-                                  strictSSL:YES
-                                andCallback:callback];
-}
-
 
 #pragma mark private methods
     
@@ -176,7 +150,6 @@ NSString *const kAccessTokenKey = @"access_token";
     self.appServices = [[KZApplicationServices alloc] initWithApplicationConfig:self.applicationConfig
                                                                 tokenController:self.tokenController
                                                                       strictSSL:self.strictSSL];
-    [self initializeIdentityProviders];
     
 }
 
@@ -217,20 +190,6 @@ NSString *const kAccessTokenKey = @"access_token";
 - (BOOL)shouldAskTokenWithForApplicationKey
 {
     return self.applicationKey != nil && [self.applicationKey length] > 0;
-}
-
-- (void)initializeIdentityProviders
-{
-    self.identityProviders = [[NSMutableDictionary alloc] init];
-    
-    NSDictionary *providerDictionary = self.applicationConfig.authConfig.identityProviders;
-    
-    for(NSString *key in providerDictionary) {
-        NSDictionary *protocolsDictionary = providerDictionary[key];
-        NSString *obj = protocolsDictionary[kProtocolKey];
-        [self.identityProviders setValue:obj forKey:key];
-    }
-
 }
 
 - (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *outerError))callback
@@ -657,6 +616,7 @@ NSString *const kAccessTokenKey = @"access_token";
 }
 
 #endif
+
 
 #pragma mark - Logging
 -(void) writeLog:(id)message
