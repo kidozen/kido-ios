@@ -7,6 +7,8 @@
 //
 
 #import "KZApplicationServices.h"
+#import "NSDictionary+Mongo.h"
+
 #import "KZApplicationConfiguration.h"
 #import "KZTokenController.h"
 
@@ -17,6 +19,7 @@
 #import "KZSMSSender.h"
 #import "KZDatasource.h"
 #import "KZPubSubChannel.h"
+#import "KZLogging.h"
 
 @interface KZApplicationServices()
 
@@ -31,6 +34,8 @@
 @property (nonatomic, strong) NSMutableDictionary *channels;
 @property (nonatomic, strong) NSMutableDictionary *services;
 @property (nonatomic, strong) NSMutableDictionary *datasources;
+
+@property (strong, nonatomic) KZLogging * log;
 
 @end
 
@@ -53,6 +58,8 @@
         self.smssenders = [[NSMutableDictionary alloc] init];
         self.datasources = [[NSMutableDictionary alloc] init];
         self.channels = [[NSMutableDictionary alloc] init];
+        
+        [self initializeLogging];
         
     }
     return self;
@@ -152,6 +159,49 @@
     [ch setBypassSSL:self.strictSSL];
     [self.channels setObject:ch forKey:name];
     return ch;
+}
+
+#pragma mark - Logging
+
+- (void) initializeLogging
+{
+    self.log = [[KZLogging alloc] initWithEndpoint:self.applicationConfig.logging
+                                           andName:nil];
+    self.log.tokenController = self.tokenController;
+    [self.log setBypassSSL:self.strictSSL];
+}
+
+-(void) writeLog:(id)message
+       withLevel:(LogLevel)level
+      completion:(void (^)(KZResponse *))block
+{
+    if ( [(NSObject *)message isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *d = (NSDictionary *)message;
+        message = [d dictionaryWithoutDotsInKeys];
+    }
+    
+    [self.log write:message withLevel:level completion:^(KZResponse * k) {
+        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+    }];
+}
+
+-(void) clearLog:(void (^)(KZResponse *))block
+{
+    [self.log clear:^(KZResponse * k) {
+        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+    }];
+}
+
+-(void) allLogMessages:(void (^)(KZResponse *))block
+{
+    [self.log all:^(KZResponse * k) {
+        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+    }];
+}
+
+- (KZLogging *)log
+{
+    return self.log;
 }
 
 @end

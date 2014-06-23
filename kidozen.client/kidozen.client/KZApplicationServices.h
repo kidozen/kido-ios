@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KZLogging.h"
 
 @class KZQueue;
 @class KZStorage;
@@ -17,6 +18,7 @@
 @class KZPubSubChannel;
 @class KZApplicationConfiguration;
 @class KZTokenController;
+@class KZResponse;
 
 @interface KZApplicationServices : NSObject
 
@@ -31,5 +33,12 @@
 - (KZSMSSender *)SMSSenderWithNumber:(NSString *)number;
 - (KZDatasource *)DataSourceWithName:(NSString *)name;
 - (KZPubSubChannel *)PubSubChannelWithName:(NSString *) name;
+
+#pragma mark - Logging
+
+- (void)writeLog:(id)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block;
+- (void)clearLog:(void (^)(KZResponse *))block;
+- (void)allLogMessages:(void (^)(KZResponse *))block;
+- (KZLogging *)log;
 
 @end

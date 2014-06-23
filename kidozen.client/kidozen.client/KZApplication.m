@@ -37,9 +37,7 @@ NSString *const kAccessTokenKey = @"access_token";
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
 
 @property (strong, nonatomic) KZMail * mail;
-@property (strong, nonatomic) KZLogging * log;
 @property (strong, nonatomic) SVHTTPClient * defaultClient;
-
 
 @property (strong, nonatomic) KZApplicationServices *appServices;
 
@@ -177,7 +175,6 @@ NSString *const kAccessTokenKey = @"access_token";
                                                                       strictSSL:self.strictSSL];
     [self initializeIdentityProviders];
     [self initializePushNotifications];
-    [self initializeLogging];
     [self initializeMail];
     
 }
@@ -227,14 +224,6 @@ NSString *const kAccessTokenKey = @"access_token";
                                          andName:nil];
     self.mail.tokenController = self.tokenController;
     [self.mail setBypassSSL:self.strictSSL];
-}
-
-- (void) initializeLogging
-{
-    self.log = [[KZLogging alloc] initWithEndpoint:self.applicationConfig.logging
-                                           andName:nil];    
-    self.log.tokenController = self.tokenController;
-    [self.log setBypassSSL:self.strictSSL];
 }
 
 - (void)initializeIdentityProviders
@@ -546,60 +535,6 @@ NSString *const kAccessTokenKey = @"access_token";
     
 }
 
--(id) sanitizeLogMessage:(NSObject *)message
-{
-    NSMutableDictionary *sanitizedDictionary;
-    
-    if ([message isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *dictionaryMessage = (NSDictionary *)message;
-        sanitizedDictionary = [NSMutableDictionary dictionary];
-        [dictionaryMessage enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            if ([key isKindOfClass:[NSString class]]) {
-                key = [key stringByReplacingOccurrencesOfString:@"." withString:@"_"];
-            }
-            
-            if ([obj isKindOfClass:[NSDictionary class]]) {
-                obj = [self sanitizeLogMessage:obj];
-            }
-            
-            sanitizedDictionary[key] = obj;
-            
-        }];
-    } else {
-        return message;
-    }
-    
-    return sanitizedDictionary;
-}
-
--(void) writeLog:(id)message
-       withLevel:(LogLevel)level
-      completion:(void (^)(KZResponse *))block
-{
-    if ( [(NSObject *)message isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *d = (NSDictionary *)message;
-        message = [d dictionaryWithoutDotsInKeys];
-    }
-    
-    [self.log write:message withLevel:level completion:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
-}
-
--(void) clearLog:(void (^)(KZResponse *))block
-{
-    [self.log clear:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
-}
-
--(void) allLogMessages:(void (^)(KZResponse *))block
-{
-    [self.log all:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
-}
-
 - (NSDictionary *)dictionaryForTokenUsingApplicationKey
 {
     NSMutableDictionary *postContentDictionary = [NSMutableDictionary dictionary];
@@ -776,5 +711,30 @@ NSString *const kAccessTokenKey = @"access_token";
 }
 
 #endif
+
+#pragma mark - Logging
+-(void) writeLog:(id)message
+       withLevel:(LogLevel)level
+      completion:(void (^)(KZResponse *))block
+{
+    return [self.appServices writeLog:message
+                            withLevel:level
+                           completion:block];
+}
+
+-(void) clearLog:(void (^)(KZResponse *))block
+{
+    [self.appServices clearLog:block];
+}
+
+-(void) allLogMessages:(void (^)(KZResponse *))block
+{
+    [self.appServices allLogMessages:block];
+}
+
+- (KZLogging *)log
+{
+    return self.appServices.log;
+}
 
 @end

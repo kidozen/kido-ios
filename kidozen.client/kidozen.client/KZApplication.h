@@ -55,7 +55,6 @@ typedef void (^TokenExpiresBlock)(id);
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
 @property (readonly, nonatomic) KZMail * mail;
-@property (readonly, nonatomic) KZLogging * log;
 @property (nonatomic, strong) NSMutableDictionary * identityProviders ;
 
 /**
@@ -149,27 +148,6 @@ typedef void (^TokenExpiresBlock)(id);
        attachments:(NSDictionary *)attachments
         completion:(void (^)(KZResponse *))block;
 
-/**
- * Creates a new entry in the KZApplication log
- *
- * @param message a NSDictionary object with the message to write
- * @param level The log level: Verbose, Information, Warning, Error, Critical
- * @throws Exception
- */
--(void) writeLog:(id) message withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block;
-/**
- * Clears the KZApplication log
- *
- * @param callback The callback with the result of the service call */
--(void) clearLog:(void (^)(KZResponse *))block;
-
-/**
- * Creates a new entry in the KZApplication log
- *
- * @param callback The callback with the result of the service call
- */
--(void) allLogMessages:(void (^)(KZResponse *))block;
-
 @end
 
 
@@ -232,6 +210,31 @@ typedef void (^TokenExpiresBlock)(id);
  */
 - (KZPubSubChannel *)PubSubChannelWithName:(NSString *)name;
 #endif
+
+#pragma mark - Logging
+
+@property (readonly, nonatomic) KZLogging * log;
+
+/**
+ * Creates a new entry in the KZApplication log
+ *
+ * @param message a NSDictionary object with the message to write
+ * @param level The log level: Verbose, Information, Warning, Error, Critical
+ * @throws Exception
+ */
+- (void)writeLog:(id)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block;
+/**
+ * Clears the KZApplication log
+ *
+ * @param callback The callback with the result of the service call */
+- (void)clearLog:(void (^)(KZResponse *))block;
+
+/**
+ * Creates a new entry in the KZApplication log
+ *
+ * @param callback The callback with the result of the service call
+ */
+- (void)allLogMessages:(void (^)(KZResponse *))block;
 
 @end
 
