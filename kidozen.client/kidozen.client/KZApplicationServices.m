@@ -29,7 +29,6 @@
 @property (nonatomic, strong) NSMutableDictionary *storages;
 @property (nonatomic, strong) NSMutableDictionary *smssenders;
 @property (nonatomic, strong) NSMutableDictionary *channels;
-//@property (nonatomic, strong) NSMutableDictionary *files;
 @property (nonatomic, strong) NSMutableDictionary *services;
 @property (nonatomic, strong) NSMutableDictionary *datasources;
 
