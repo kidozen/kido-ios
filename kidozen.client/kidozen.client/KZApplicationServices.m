@@ -21,6 +21,7 @@
 #import "KZPubSubChannel.h"
 #import "KZLogging.h"
 #import "KZMail.h"
+#import "KZNotification.h"
 
 @interface KZApplicationServices()
 
@@ -38,6 +39,8 @@
 
 @property (strong, nonatomic) KZLogging *log;
 @property (strong, nonatomic) KZMail *mail;
+@property (strong, nonatomic) KZNotification *pushNotifications;
+
 @end
 
 @implementation KZApplicationServices
@@ -62,6 +65,7 @@
         
         [self initializeLogging];
         [self initializeMail];
+        [self initializePushNotifications];
         
     }
     return self;
@@ -243,4 +247,19 @@
     return self.mail;
 }
 
+#pragma mark - PushNotifications
+
+- (void)initializePushNotifications
+{
+    self.pushNotifications = [[KZNotification alloc] initWithEndpoint:self.applicationConfig.notification
+                                                              andName:self.applicationConfig.name];
+    self.pushNotifications.tokenController = self.tokenController;
+    [self.pushNotifications setBypassSSL:self.strictSSL];
+    
+}
+
+- (KZNotification *)pushNotifications
+{
+    return self.pushNotifications;
+}
 @end

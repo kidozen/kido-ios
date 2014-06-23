@@ -20,6 +20,7 @@
 @class KZTokenController;
 @class KZResponse;
 @class KZMail;
+@class KZNotification;
 
 @interface KZApplicationServices : NSObject
 
@@ -55,4 +56,9 @@
         completion:(void (^)(KZResponse *))block;
 
 - (KZMail *)mail;
+
+#pragma mark - PushNotifications
+
+- (KZNotification *)pushNotifications;
+
 @end

@@ -30,6 +30,7 @@
 
 typedef void (^AuthCompletionBlock)(id);
 typedef void (^TokenExpiresBlock)(id);
+typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 /**
  *
@@ -41,24 +42,17 @@ typedef void (^TokenExpiresBlock)(id);
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 
-@property (nonatomic, copy, readonly) NSString *applicationKeyName;
 @property (atomic) BOOL strictSSL ;
 
 @property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
 @property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
-@property (copy, nonatomic) void (^onInitializationComplete) (KZResponse *) ;
+@property (copy, nonatomic) InitializationCompleteBlock onInitializationComplete;
+
 @property (nonatomic, copy) NSString * lastProviderKey;
 
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
 @property (nonatomic, strong) NSMutableDictionary * identityProviders ;
-
-/**
- * Push notification service main entry point
- *
- * @return The Push notification object that allows to interact with the Apple Push Notification Services (APNS)
- */
-@property (strong, nonatomic) KZNotification * pushNotifications;
 
 @property (readonly, nonatomic) SVHTTPClient * defaultClient;
 
@@ -240,6 +234,17 @@ typedef void (^TokenExpiresBlock)(id);
        andTextBody:(NSString *)textBody
        attachments:(NSDictionary *)attachments
         completion:(void (^)(KZResponse *))block;
+
+
+
+#pragma mark - PushNotifications
+
+/**
+ * Push notification service main entry point
+ *
+ * @return The Push notification object that allows to interact with the Apple Push Notification Services (APNS)
+ */
+@property (readonly, nonatomic) KZNotification * pushNotifications;
 
 @end
 

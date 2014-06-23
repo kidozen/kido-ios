@@ -36,7 +36,6 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
 
-@property (strong, nonatomic) KZMail * mail;
 @property (strong, nonatomic) SVHTTPClient * defaultClient;
 
 @property (strong, nonatomic) KZApplicationServices *appServices;
@@ -178,7 +177,6 @@ NSString *const kAccessTokenKey = @"access_token";
                                                                 tokenController:self.tokenController
                                                                       strictSSL:self.strictSSL];
     [self initializeIdentityProviders];
-    [self initializePushNotifications];
     
 }
 
@@ -233,15 +231,6 @@ NSString *const kAccessTokenKey = @"access_token";
         [self.identityProviders setValue:obj forKey:key];
     }
 
-}
-
-- (void)initializePushNotifications
-{
-    self.pushNotifications = [[KZNotification alloc] initWithEndpoint:self.applicationConfig.notification
-                                                              andName:self.applicationName];
-    self.pushNotifications.tokenController = self.tokenController;
-    [self.pushNotifications setBypassSSL:self.strictSSL];
-    
 }
 
 - (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *outerError))callback
@@ -733,6 +722,13 @@ NSString *const kAccessTokenKey = @"access_token";
 - (KZMail *)mail
 {
     return self.appServices.mail;
+}
+
+#pragma mark - PushNotifications
+
+- (KZNotification *)pushNotifications
+{
+    return self.appServices.pushNotifications;
 }
 
 @end
