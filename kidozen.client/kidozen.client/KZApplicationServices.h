@@ -45,6 +45,7 @@
 - (KZLogging *)log;
 
 
+
 #pragma mark - Email
 
 -(void) sendMailTo:(NSString *)to
@@ -57,8 +58,13 @@
 
 - (KZMail *)mail;
 
+
+
 #pragma mark - PushNotifications
 
 - (KZNotification *)pushNotifications;
+
+
+
 
 @end
