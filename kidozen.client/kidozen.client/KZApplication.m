@@ -175,7 +175,6 @@ NSString *const kAccessTokenKey = @"access_token";
                                                                       strictSSL:self.strictSSL];
     [self initializeIdentityProviders];
     [self initializePushNotifications];
-    [self initializeMail];
     
 }
 
@@ -216,14 +215,6 @@ NSString *const kAccessTokenKey = @"access_token";
 - (BOOL)shouldAskTokenWithForApplicationKey
 {
     return self.applicationKey != nil && [self.applicationKey length] > 0;
-}
-
-- (void)initializeMail
-{
-    self.mail = [[KZMail alloc] initWithEndpoint:self.applicationConfig.email
-                                         andName:nil];
-    self.mail.tokenController = self.tokenController;
-    [self.mail setBypassSSL:self.strictSSL];
 }
 
 - (void)initializeIdentityProviders
@@ -497,44 +488,6 @@ NSString *const kAccessTokenKey = @"access_token";
     }
 }
 
--(void) sendMailTo:(NSString *)to
-              from:(NSString *)from
-       withSubject:(NSString *)subject
-       andHtmlBody:(NSString *)htmlBody
-       andTextBody:(NSString *)textBody
-        completion:(void (^)(KZResponse *))block
-{
-    [self sendMailTo:to
-                from:from
-         withSubject:subject
-         andHtmlBody:htmlBody
-         andTextBody:textBody
-         attachments:nil
-          completion:block];
-}
-
-
--(void) sendMailTo:(NSString *)to
-              from:(NSString *)from
-       withSubject:(NSString *)subject
-       andHtmlBody:(NSString *)htmlBody
-       andTextBody:(NSString *)textBody
-       attachments:(NSDictionary *)attachments
-        completion:(void (^)(KZResponse *))block
-{
-    NSMutableDictionary *mail = [NSMutableDictionary dictionaryWithDictionary:@{@"to": to,
-                                                                                @"from" : from,
-                                                                                @"subject" : subject,
-                                                                                @"bodyHtml": htmlBody,
-                                                                                @"bodyText" : textBody,
-                                                                                }];
-    
-    [self.mail send:mail attachments:attachments completion:^(KZResponse *k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
-    
-}
-
 - (NSDictionary *)dictionaryForTokenUsingApplicationKey
 {
     NSMutableDictionary *postContentDictionary = [NSMutableDictionary dictionary];
@@ -735,6 +688,47 @@ NSString *const kAccessTokenKey = @"access_token";
 - (KZLogging *)log
 {
     return self.appServices.log;
+}
+
+#pragma mark - Email
+
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+        completion:(void (^)(KZResponse *))block
+{
+    [self.appServices sendMailTo:to
+                from:from
+         withSubject:subject
+         andHtmlBody:htmlBody
+         andTextBody:textBody
+         attachments:nil
+          completion:block];
+}
+
+
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+       attachments:(NSDictionary *)attachments
+        completion:(void (^)(KZResponse *))block
+{
+    [self.appServices sendMailTo:to
+                            from:from
+                     withSubject:subject
+                     andHtmlBody:htmlBody
+                     andTextBody:textBody
+                     attachments:attachments
+                      completion:block];
+}
+
+- (KZMail *)mail
+{
+    return self.appServices.mail;
 }
 
 @end

@@ -19,6 +19,7 @@
 @class KZApplicationConfiguration;
 @class KZTokenController;
 @class KZResponse;
+@class KZMail;
 
 @interface KZApplicationServices : NSObject
 
@@ -34,6 +35,7 @@
 - (KZDatasource *)DataSourceWithName:(NSString *)name;
 - (KZPubSubChannel *)PubSubChannelWithName:(NSString *) name;
 
+
 #pragma mark - Logging
 
 - (void)writeLog:(id)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block;
@@ -41,4 +43,16 @@
 - (void)allLogMessages:(void (^)(KZResponse *))block;
 - (KZLogging *)log;
 
+
+#pragma mark - Email
+
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+       attachments:(NSDictionary *)attachments
+        completion:(void (^)(KZResponse *))block;
+
+- (KZMail *)mail;
 @end

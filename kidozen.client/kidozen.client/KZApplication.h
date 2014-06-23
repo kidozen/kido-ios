@@ -54,7 +54,6 @@ typedef void (^TokenExpiresBlock)(id);
 
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
-@property (readonly, nonatomic) KZMail * mail;
 @property (nonatomic, strong) NSMutableDictionary * identityProviders ;
 
 /**
@@ -111,42 +110,6 @@ typedef void (^TokenExpiresBlock)(id);
  */
 - (void)addBreadCrumb:(NSString *)breadCrumb;
 
-/**
- * Sends an EMail
- *
- * @param to Destination email address
- * @param from Source email address
- * @param subject The email subject
- * @param htmlBody The email body in HTML format
- * @param textBody The email body
- * @param callback The callback with the result of the service call
- * @throws Exception
- */
--(void) sendMailTo:(NSString *)to
-              from:(NSString *)from
-       withSubject:(NSString *)subject
-       andHtmlBody:(NSString *)htmlBody
-       andTextBody:(NSString *)textBody
-        completion:(void (^)(KZResponse *))block;
-
-/**
- * Sends an email with attachments.
- *
- * @param to Destination email address
- * @param from Source email address
- * @param subject The email subject
- * @param htmlBody The email body in HTML format
- * @param textBody The email body
- * @parm attachments is an array with all attachements you want to send.
- * @param callback The callback with the result of the service call
- */
--(void) sendMailTo:(NSString *)to
-              from:(NSString *)from
-       withSubject:(NSString *)subject
-       andHtmlBody:(NSString *)htmlBody
-       andTextBody:(NSString *)textBody
-       attachments:(NSDictionary *)attachments
-        completion:(void (^)(KZResponse *))block;
 
 @end
 
@@ -211,6 +174,8 @@ typedef void (^TokenExpiresBlock)(id);
 - (KZPubSubChannel *)PubSubChannelWithName:(NSString *)name;
 #endif
 
+
+
 #pragma mark - Logging
 
 @property (readonly, nonatomic) KZLogging * log;
@@ -235,6 +200,49 @@ typedef void (^TokenExpiresBlock)(id);
  * @param callback The callback with the result of the service call
  */
 - (void)allLogMessages:(void (^)(KZResponse *))block;
+
+
+
+#pragma mark - Mail
+
+@property (readonly, nonatomic) KZMail * mail;
+
+/**
+ * Sends an EMail
+ *
+ * @param to Destination email address
+ * @param from Source email address
+ * @param subject The email subject
+ * @param htmlBody The email body in HTML format
+ * @param textBody The email body
+ * @param callback The callback with the result of the service call
+ * @throws Exception
+ */
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+        completion:(void (^)(KZResponse *))block;
+
+/**
+ * Sends an email with attachments.
+ *
+ * @param to Destination email address
+ * @param from Source email address
+ * @param subject The email subject
+ * @param htmlBody The email body in HTML format
+ * @param textBody The email body
+ * @parm attachments is an array with all attachements you want to send.
+ * @param callback The callback with the result of the service call
+ */
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+       attachments:(NSDictionary *)attachments
+        completion:(void (^)(KZResponse *))block;
 
 @end
 

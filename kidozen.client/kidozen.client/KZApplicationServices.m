@@ -20,6 +20,7 @@
 #import "KZDatasource.h"
 #import "KZPubSubChannel.h"
 #import "KZLogging.h"
+#import "KZMail.h"
 
 @interface KZApplicationServices()
 
@@ -35,8 +36,8 @@
 @property (nonatomic, strong) NSMutableDictionary *services;
 @property (nonatomic, strong) NSMutableDictionary *datasources;
 
-@property (strong, nonatomic) KZLogging * log;
-
+@property (strong, nonatomic) KZLogging *log;
+@property (strong, nonatomic) KZMail *mail;
 @end
 
 @implementation KZApplicationServices
@@ -60,6 +61,7 @@
         self.channels = [[NSMutableDictionary alloc] init];
         
         [self initializeLogging];
+        [self initializeMail];
         
     }
     return self;
@@ -202,6 +204,43 @@
 - (KZLogging *)log
 {
     return self.log;
+}
+
+#pragma mark - Email
+
+
+- (void)initializeMail
+{
+    self.mail = [[KZMail alloc] initWithEndpoint:self.applicationConfig.email
+                                         andName:nil];
+    self.mail.tokenController = self.tokenController;
+    [self.mail setBypassSSL:self.strictSSL];
+}
+
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+       attachments:(NSDictionary *)attachments
+        completion:(void (^)(KZResponse *))block
+{
+    NSMutableDictionary *mail = [NSMutableDictionary dictionaryWithDictionary:@{@"to": to,
+                                                                                @"from" : from,
+                                                                                @"subject" : subject,
+                                                                                @"bodyHtml": htmlBody,
+                                                                                @"bodyText" : textBody,
+                                                                                }];
+    
+    [self.mail send:mail attachments:attachments completion:^(KZResponse *k) {
+        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+    }];
+    
+}
+
+- (KZMail *)mail
+{
+    return self.mail;
 }
 
 @end
