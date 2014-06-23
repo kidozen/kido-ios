@@ -41,6 +41,10 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @property (strong, nonatomic) KZApplicationServices *appServices;
 
+
+@property (nonatomic, copy) NSString * lastUserName;
+@property (nonatomic, copy) NSString * lastPassword;
+
 @end
 
 @implementation KZApplication

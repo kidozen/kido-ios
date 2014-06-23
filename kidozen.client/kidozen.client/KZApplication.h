@@ -44,13 +44,10 @@ typedef void (^TokenExpiresBlock)(id);
 @property (nonatomic, copy, readonly) NSString *applicationKeyName;
 @property (atomic) BOOL strictSSL ;
 
-@property (nonatomic, strong) NSString * lastProviderKey;
-@property (nonatomic, strong) NSString * lastUserName;
-@property (nonatomic, strong) NSString * lastPassword;
-
 @property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
 @property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
 @property (copy, nonatomic) void (^onInitializationComplete) (KZResponse *) ;
+@property (nonatomic, copy) NSString * lastProviderKey;
 
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
