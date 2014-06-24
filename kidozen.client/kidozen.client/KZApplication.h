@@ -57,12 +57,12 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 /**
  * Constructor
  *
- * @param tenantMarketPlace The url of the KidoZen marketplace
- * @param applicationName The application name
- * @param applicationKey Is the application key that gives you access to logging services
+ * @param tenantMarketPlace The url of the KidoZen marketplace. (Required)
+ * @param applicationName The application name (Required)
+ * @param applicationKey Is the application key that gives you access to logging services (Required)
  * without username/password authentication.
- * @param strictSSL Whether we want SSL to be bypassed or not,  only use in development
- * @param callback The ServiceEventListener callback with the operation results
+ * @param strictSSL Whether we want SSL to be bypassed or not,  only use in development (Required)
+ * @param callback The ServiceEventListener callback with the operation results (optional)
  */
 -(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
                  applicationName:(NSString *)applicationName

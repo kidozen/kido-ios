@@ -47,15 +47,20 @@ NSString *const kAccessTokenKey = @"access_token";
 @implementation KZApplication
 
 
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace
+-(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
                  applicationName:(NSString *)applicationName
                   applicationKey:(NSString *)applicationKey
                        strictSSL:(BOOL)strictSSL
                      andCallback:(void (^)(KZResponse *))callback
 {
     self = [super init];
+    
     if (self)
     {
+        [self validateMarketPlace:tennantMarketPlace
+                  applicationName:applicationName
+                   applicationKey:applicationKey];
+        
         self.applicationKey = applicationKey;
         
         self.tennantMarketPlace = [self sanitizeTennantMarketPlace:tennantMarketPlace];
@@ -71,6 +76,22 @@ NSString *const kAccessTokenKey = @"access_token";
     return self;
     
 }
+
+
+- (void)validateMarketPlace:(NSString *)marketPlaceString applicationName:(NSString *)applicationName applicationKey:(NSString *)appKey
+{
+    if (marketPlaceString == nil || [marketPlaceString length] == 0 ||
+        applicationName == nil || [applicationName length] == 0 ||
+        appKey == nil || [appKey length] == 0) {
+        
+        NSString *message = [NSString stringWithFormat:@"marketPlace is %@, applicationName is %@, appKey is %@", marketPlaceString, applicationName, appKey];
+        @throw [NSException exceptionWithName:@"Fail to initialize KZApplication"
+                                       reason:@"marketPlace, applicationName and applicationKey are required."
+                                     userInfo:@{@"message" : message}];
+    }
+    
+}
+
 
 #pragma mark private methods
     
