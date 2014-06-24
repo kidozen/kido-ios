@@ -154,7 +154,7 @@ static NSString *const kApplicationKey = @"GZJQetc+VH9JLWoHnLEwlk7tw+XPSniMUSuIz
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
                                                          applicationName:kzAppName
-                                                          applicationKey:nil
+                                                          applicationKey:kzApplicationKey
                                                                strictSSL:NO
                                                              andCallback:^(KZResponse * r) {
                                                                  XCTAssertNotNil(r.response,@"Invalid response");
