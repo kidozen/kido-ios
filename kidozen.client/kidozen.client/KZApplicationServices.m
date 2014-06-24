@@ -205,11 +205,6 @@
     }];
 }
 
-- (KZLogging *)log
-{
-    return self.log;
-}
-
 #pragma mark - Email
 
 
@@ -242,11 +237,6 @@
     
 }
 
-- (KZMail *)mail
-{
-    return self.mail;
-}
-
 #pragma mark - PushNotifications
 
 - (void)initializePushNotifications
@@ -258,8 +248,4 @@
     
 }
 
-- (KZNotification *)pushNotifications
-{
-    return self.pushNotifications;
-}
 @end
