@@ -63,7 +63,8 @@
     if (self) {
         self.propertiesMapper = @{ @"tile-icon" : @"tileIcon",
                                    @"tile-color" : @"tileColor",
-                                   @"description" : @"applicationDescription"};
+                                   @"description" : @"applicationDescription",
+                                   @"logging-v3" : @"loggingV3"};
         
         [self configureWithDictionary:configDictionary];
         

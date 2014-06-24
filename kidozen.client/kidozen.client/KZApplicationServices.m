@@ -171,7 +171,7 @@
 
 - (void) initializeLogging
 {
-    self.log = [[KZLogging alloc] initWithEndpoint:self.applicationConfig.logging
+    self.log = [[KZLogging alloc] initWithEndpoint:self.applicationConfig.loggingV3
                                            andName:nil];
     self.log.tokenController = self.tokenController;
     [self.log setBypassSSL:self.strictSSL];

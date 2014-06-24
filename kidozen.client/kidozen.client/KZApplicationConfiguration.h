@@ -39,6 +39,7 @@
 @property (nonatomic, copy, readonly) NSString *pubsub;
 @property (nonatomic, copy, readonly) NSString *config;
 @property (nonatomic, copy, readonly) NSString *logging;
+@property (nonatomic, copy, readonly) NSString *loggingV3;
 @property (nonatomic, copy, readonly) NSString *email;
 @property (nonatomic, copy, readonly) NSString *sms;
 @property (nonatomic, copy, readonly) NSString *service;
