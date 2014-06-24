@@ -14,6 +14,8 @@
 @property (nonatomic, copy, readonly) NSString *kzToken;
 @property (nonatomic, copy, readonly) NSString *ipToken;
 
+@property (nonatomic, copy, readonly) NSString *refreshToken;
+
 
 - (void)updateAccessTokenWith:(NSString *)accessToken accessTokenKey:(NSString *)accessTokenKey;
 - (void)updateIPTokenWith:(NSString *)ipToken ipKey:(NSString *)ipKey;
@@ -23,6 +25,8 @@
 
 - (void)loadTokensFromCacheForIpKey:(NSString *)ipKey accessTokenKey:(NSString *)accessTokenKey;
 - (void)removeTokensFromCache;
+
+- (void)updateRefreshTokenWith:(NSString *)refreshToken;
 
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback;
 

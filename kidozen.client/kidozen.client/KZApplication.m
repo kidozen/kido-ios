@@ -183,7 +183,7 @@ NSString *const kAccessTokenKey = @"access_token";
         }
         
         self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.applicationConfig.url
-                                                              tokenController:self.tokenController];
+                                                        tokenController:self.tokenController];
     }
 }
 
@@ -406,7 +406,7 @@ NSString *const kAccessTokenKey = @"access_token";
     postContentDictionary[@"grant_type"] = @"refresh_token";
     postContentDictionary[@"client_id"] = self.applicationName;
     postContentDictionary[@"client_secret"] = self.applicationKey;
-    postContentDictionary[@"refresh_token"] = [self.tokenController.rawAccessToken base64EncodedString];
+    postContentDictionary[@"refresh_token"] = [self.tokenController.refreshToken base64EncodedString];
     
     return postContentDictionary;
 }
@@ -491,11 +491,11 @@ NSString *const kAccessTokenKey = @"access_token";
     
     self.authCompletionBlock = block;
 
-    passiveAuthVC.completion = ^(NSString *token, NSError *error) {
+    passiveAuthVC.completion = ^(NSString *token, NSString *refreshToken, NSError *error) {
         if (error != nil) {
             return [safeMe failAuthenticationWithError:error];
         } else {
-            [safeMe completePassiveAuthenticationWithToken:token];
+            [safeMe completePassiveAuthenticationWithToken:token refreshToken:refreshToken];
         }
     };
     
@@ -505,10 +505,12 @@ NSString *const kAccessTokenKey = @"access_token";
 }
 
 
-- (void)completePassiveAuthenticationWithToken:(NSString *)token
+- (void)completePassiveAuthenticationWithToken:(NSString *)token refreshToken:(NSString *)refreshToken
 {
     [self.tokenController updateAccessTokenWith:token
                                 accessTokenKey:[self getAccessTokenCacheKey]];
+    
+    [self.tokenController updateRefreshTokenWith:refreshToken];
 
 
     [self completeAuthenticationFlow];

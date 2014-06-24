@@ -14,6 +14,8 @@
 @property (nonatomic, copy, readwrite) NSString *rawAccessToken;
 @property (nonatomic, copy, readwrite) NSString *kzToken;
 @property (nonatomic, copy, readwrite) NSString *ipToken;
+@property (nonatomic, copy, readwrite) NSString *refreshToken;
+
 @property (nonatomic, strong) NSTimer *tokenTimer;
 
 @property (nonatomic, copy) void(^timerCallback)(void);
@@ -37,6 +39,11 @@
         self.ipToken = ipToken;
         self.tokenCache[ipKey] = ipToken;
     }
+}
+
+- (void)updateRefreshTokenWith:(NSString *)refreshToken
+{
+    self.refreshToken = refreshToken;
 }
 
 - (NSString *)kzTokenFromRawAccessToken
