@@ -11,7 +11,6 @@
 #import "KZApplication.h"
 
 static NSString *const kApplicationKey = @"GZJQetc+VH9JLWoHnLEwlk7tw+XPSniMUSuIzK9kDxE=";
-static NSString *const kLoggingLogEndPoint = @"https://tasks.tests.qa.kidozen.com/api/v3/logging/log";
 
 
 @interface loggingTests : XCTestCase
