@@ -1,5 +1,7 @@
 #import "KZUser.h"
 
+NSTimeInterval kTimeOffset = 300;
+
 @interface KZUser()
 
 @property (nonatomic, copy) NSString *kzToken;
@@ -47,7 +49,7 @@ NSString *const KEY_EXPIRES = @"ExpiresOn";
             NSDate *todaysDate = [NSDate date];
             NSTimeInterval lastDiff = [lastDate timeIntervalSinceNow];
             NSTimeInterval todaysDiff = [todaysDate timeIntervalSinceNow];
-            _expiresOn = round(lastDiff - todaysDiff);
+            _expiresOn = round(lastDiff - todaysDiff - kTimeOffset);
             
         }
     }
