@@ -78,6 +78,10 @@
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
 {
     if (timeout > 0) {
+        
+#ifdef CURRENTLY_TESTING
+        timeout = 60;
+#endif
         self.timerCallback = callback;
         if (self.tokenTimer != nil) {
             [self.tokenTimer invalidate];
