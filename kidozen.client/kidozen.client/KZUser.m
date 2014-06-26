@@ -1,6 +1,6 @@
 #import "KZUser.h"
 
-NSTimeInterval kTimeOffset = 300;
+NSTimeInterval kTimeOffset = 10;
 
 @interface KZUser()
 
@@ -11,12 +11,6 @@ NSTimeInterval kTimeOffset = 300;
 @implementation KZUser
 
 NSString *const KEY_EXPIRES = @"ExpiresOn";
-
-@synthesize claims = _claims;
-@synthesize roles = _roles;
-@synthesize expiresOn = _expiresOn;
-@synthesize user = _user;
-@synthesize pass = _pass;
 
 -(id) initWithToken:(NSString *) token
 {
@@ -45,12 +39,10 @@ NSString *const KEY_EXPIRES = @"ExpiresOn";
         }
         
         if ([_claims objectForKey:KEY_EXPIRES]) {
-            NSDate *lastDate = [[NSDate alloc] initWithTimeIntervalSince1970:[[_claims objectForKey:KEY_EXPIRES] intValue]];
-            NSDate *todaysDate = [NSDate date];
-            NSTimeInterval lastDiff = [lastDate timeIntervalSinceNow];
-            NSTimeInterval todaysDiff = [todaysDate timeIntervalSinceNow];
-            _expiresOn = round(lastDiff - todaysDiff - kTimeOffset);
+            NSTimeInterval futureTimestamp = [self.claims[KEY_EXPIRES] integerValue];
+            NSTimeInterval rightNowTimestamp = [[NSDate date] timeIntervalSince1970];
             
+            self.expiresOn = round(futureTimestamp - rightNowTimestamp - kTimeOffset);
         }
     }
 }
