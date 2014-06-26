@@ -428,8 +428,7 @@ NSString *const kAccessTokenKey = @"access_token";
     postContentDictionary[@"client_id"] = self.applicationConfig.domain;
     postContentDictionary[@"client_secret"] = self.applicationKey;
     postContentDictionary[@"scope"] = self.applicationConfig.authConfig.applicationScope;
-    
-    postContentDictionary[@"refresh_token"] = [self.tokenController.refreshToken base64EncodedString];
+    postContentDictionary[@"refresh_token"] = self.tokenController.refreshToken;
     
     return postContentDictionary;
 }
