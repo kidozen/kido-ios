@@ -425,8 +425,10 @@ NSString *const kAccessTokenKey = @"access_token";
     NSMutableDictionary *postContentDictionary = [NSMutableDictionary dictionary];
     
     postContentDictionary[@"grant_type"] = @"refresh_token";
-    postContentDictionary[@"client_id"] = self.applicationName;
+    postContentDictionary[@"client_id"] = self.applicationConfig.domain;
     postContentDictionary[@"client_secret"] = self.applicationKey;
+    postContentDictionary[@"scope"] = self.applicationConfig.authConfig.applicationScope;
+    
     postContentDictionary[@"refresh_token"] = [self.tokenController.refreshToken base64EncodedString];
     
     return postContentDictionary;
