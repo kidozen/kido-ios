@@ -57,6 +57,21 @@ static NSString *const kApplicationKey = @"GZJQetc+VH9JLWoHnLEwlk7tw+XPSniMUSuIz
     [super tearDown];
 }
 
+
+- (void)testQueryAllLog
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.application.log all:^(KZResponse *r) {
+        XCTAssertEqual(200,r.urlResponse.statusCode, @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
+        
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+}
+
+
+
 - (void)testShouldExecuteLog
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
