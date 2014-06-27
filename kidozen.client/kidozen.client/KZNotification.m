@@ -51,8 +51,8 @@
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@", self.name, channel];
     
     NSDictionary *body = @{@"platform": @"apns",
-                           @"subscriptionId", deviceToken,
-                           @"deviceId", deviceMacAddress};
+                           @"subscriptionId": deviceToken,
+                           @"deviceId" :deviceMacAddress};
     
     [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];

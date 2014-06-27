@@ -22,13 +22,21 @@ typedef enum  {
  * @param level The log level: Verbose, Information, Warning, Error, Critical
  * @param block The callback with the result of the service call
  */
+-(void) write:(id)object message:(NSString *)message withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block;
+
+/**
+ * Message param will be nil.
+ */
 -(void) write:(id)object withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block;
+
+
 /**
  * Retrieves all the Log entries
  *
  * @param block The callback with the result of the service call
  */
 -(void) all:(void (^)(KZResponse *))block;
+
 /**
  * Clears the log.
  * This method add a new entry to the Log with the information of the user that executes this action
@@ -36,12 +44,14 @@ typedef enum  {
  * @param block The callback with the result of the service call
  */
 -(void) clear:(void (^)(KZResponse *))block;
+
 /**
  * Executes a query against the Log
  *
- * @param query An string with the same syntax used for a MongoDb query
- * @param options An string with the same syntax used for a MongoDb query options
+ * @param query An string with the same syntax used for a Elastic Search query
+ * @param options An string with the same syntax used for an Elastic Search options
  * @param block The callback with the result of the service call
  */
 -(void) query:(NSString *)query withOptions:(NSString *)options andBlock:(void (^)(KZResponse *))block;
+
 @end

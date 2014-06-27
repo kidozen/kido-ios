@@ -643,13 +643,15 @@ NSString *const kAccessTokenKey = @"access_token";
 
 
 #pragma mark - Logging
--(void) writeLog:(id)message
+-(void) writeLog:(id)object
+         message:(NSString *)message
        withLevel:(LogLevel)level
       completion:(void (^)(KZResponse *))block
 {
-    return [self.appServices writeLog:message
-                            withLevel:level
-                           completion:block];
+    return [self.appServices write:object
+                           message:message
+                         withLevel:level
+                        completion:block];
 }
 
 -(void) clearLog:(void (^)(KZResponse *))block

@@ -74,7 +74,9 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [self.application writeLog:@2
-                     withLevel:LogLevelVerbose completion:^(KZResponse *r) {
+                       message:@"Title message - 2"
+                     withLevel:LogLevelVerbose
+                    completion:^(KZResponse *r) {
                          
                          XCTAssertNotNil(r,@"invalid response");
                          XCTAssertEqual(201, r.urlResponse.statusCode, @"Invalid status code");
@@ -91,6 +93,7 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [self.application writeLog:@2
+                       message:@"Title message"
                      withLevel:LogLevelVerbose completion:^(KZResponse *r) {
                          
                          XCTAssertNotNil(r,@"invalid response");
@@ -108,6 +111,7 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [self.application writeLog:@{@"key": @2, @"key2" : @"value"}
+                       message:@"Title message for dict."
                      withLevel:LogLevelVerbose completion:^(KZResponse *r) {
                          
                          XCTAssertNotNil(r,@"invalid response");
@@ -125,6 +129,7 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [self.application writeLog:@[@1,@2,@"value"]
+                       message:@"Title message for array"
                      withLevel:LogLevelVerbose completion:^(KZResponse *r) {
                          
                          XCTAssertNotNil(r,@"invalid response");
@@ -146,6 +151,7 @@
                                                };
     
     [self.application writeLog:dictionaryWithDotsAsKeys
+                       message:@"Title message for nestedDict."
                      withLevel:LogLevelVerbose
                     completion:^(KZResponse *r) {
                          

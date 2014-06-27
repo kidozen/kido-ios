@@ -177,16 +177,14 @@
     [self.log setBypassSSL:self.strictSSL];
 }
 
--(void) writeLog:(id)message
-       withLevel:(LogLevel)level
-      completion:(void (^)(KZResponse *))block
+-(void) write:(id)object message:(NSString *)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block
 {
-    if ( [(NSObject *)message isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *d = (NSDictionary *)message;
-        message = [d dictionaryWithoutDotsInKeys];
+    if ( [(NSObject *)object isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *d = (NSDictionary *)object;
+        object = [d dictionaryWithoutDotsInKeys];
     }
     
-    [self.log write:message withLevel:level completion:^(KZResponse * k) {
+    [self.log write:object message:message withLevel:level completion:^(KZResponse * k) {
         block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
     }];
 }

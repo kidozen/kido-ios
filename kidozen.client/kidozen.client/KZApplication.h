@@ -158,11 +158,15 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 /**
  * Creates a new entry in the KZApplication log
  *
- * @param message a NSDictionary object with the message to write
+ * @param object a NSDictionary object with the message to write
+ * @param message is the titleMessage that will appear in the market.
  * @param level The log level: Verbose, Information, Warning, Error, Critical
  * @throws Exception
  */
-- (void)writeLog:(id)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block;
+-(void) writeLog:(id)object
+         message:(NSString *)message
+       withLevel:(LogLevel)level
+      completion:(void (^)(KZResponse *))block;
 
 /**
  * Clears the KZApplication log

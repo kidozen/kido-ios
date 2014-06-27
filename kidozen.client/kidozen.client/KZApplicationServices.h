@@ -39,7 +39,7 @@
 
 #pragma mark - Logging
 
-- (void)writeLog:(id)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block;
+- (void)write:(id)object message:(NSString *)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block;
 - (void)clearLog:(void (^)(KZResponse *))block;
 - (void)allLogMessages:(void (^)(KZResponse *))block;
 - (KZLogging *)log;
