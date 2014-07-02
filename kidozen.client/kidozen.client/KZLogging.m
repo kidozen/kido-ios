@@ -58,12 +58,11 @@
     }];
 
 }
--(void) query:(NSString *)query withOptions:(NSString *)options andBlock:(void (^)(KZResponse *))block
+-(void) query:(NSString *)query andBlock:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
     
-    NSDictionary *parameters = @{@"query": query,
-                                 @"options": options};
+    NSDictionary *parameters = @{@"query": query};
     
     [_client GET:@"/" parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;

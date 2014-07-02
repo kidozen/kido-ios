@@ -15,10 +15,11 @@ typedef enum  {
  * @version 1.00, April 2013
  */
 @interface KZLogging : KZBaseService
+
 /**
  * Writes a new entry in the application Log
  *
- * @param message The message (NSDictionary) you want to save
+ * @param object The message (NSDictionary) you want to save
  * @param level The log level: Verbose, Information, Warning, Error, Critical
  * @param block The callback with the result of the service call
  */
@@ -49,9 +50,8 @@ typedef enum  {
  * Executes a query against the Log
  *
  * @param query An string with the same syntax used for a Elastic Search query
- * @param options An string with the same syntax used for an Elastic Search options
  * @param block The callback with the result of the service call
  */
--(void) query:(NSString *)query withOptions:(NSString *)options andBlock:(void (^)(KZResponse *))block;
+-(void) query:(NSString *)query andBlock:(void (^)(KZResponse *))block;
 
 @end
