@@ -31,14 +31,18 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
 }
 
 -(void) dequeue:(void (^)(KZResponse *))block
 {
     if (!self.name) {
-        block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        }
         return;
     }
     [self addAuthorizationHeader];
@@ -47,7 +51,9 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
     return;
 }

@@ -317,7 +317,10 @@ NSString *const kAccessTokenKey = @"access_token";
             if ([urlResponse statusCode]>300) {
                 NSMutableDictionary* details = [NSMutableDictionary dictionary];
                 [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
-              safeMe.authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
+                if (safeMe.authCompletionBlock) {
+                    safeMe.authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
+                }
+                
             }
             else {
                 safeMe.isAuthenticated = true;
@@ -341,11 +344,15 @@ NSString *const kAccessTokenKey = @"access_token";
                     if (![safeMe.KidoZenUser.claims objectForKey:@"system"] && ![safeMe.KidoZenUser.claims objectForKey:@"usersource"] )
                     {
                         NSError * err = [[NSError alloc] initWithDomain:@"Authentication" code:0 userInfo:[NSDictionary dictionaryWithObject:@"User is not authenticated" forKey:@"description"]];
-                        safeMe.authCompletionBlock(err);
+                        if (safeMe.authCompletionBlock) {
+                            safeMe.authCompletionBlock(err);
+                        }
                     }
                     else
                     {
-                        safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                        if (safeMe.authCompletionBlock) {
+                            safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                        }
                     }
                 }
             }
@@ -381,9 +388,13 @@ NSString *const kAccessTokenKey = @"access_token";
     [self refreshPassiveToken:^(NSError *error) {
         if (safeMe.authCompletionBlock != nil) {
             if (error != nil) {
-                safeMe.authCompletionBlock(error);
+                if (safeMe.authCompletionBlock) {
+                    safeMe.authCompletionBlock(error);
+                }
             } else {
-                safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                if (safeMe.authCompletionBlock) {
+                    safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                }
             }
         }
     }];
@@ -440,9 +451,13 @@ NSString *const kAccessTokenKey = @"access_token";
     [self handleAuthenticationViaApplicationKeyWithCallback:^(NSError *error) {
         if (safeMe.authCompletionBlock != nil) {
             if (error != nil) {
-                safeMe.authCompletionBlock(error);
+                if (safeMe.authCompletionBlock) {
+                    safeMe.authCompletionBlock(error);
+                }
             } else {
-                safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                if (safeMe.authCompletionBlock) {
+                    safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                }
             }
         }
     }];

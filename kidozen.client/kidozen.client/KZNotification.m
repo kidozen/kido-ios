@@ -44,7 +44,9 @@
         error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
     }
     if (error) {
-        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        if (block != nil) {
+            block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        }
         return;
     }
 
@@ -61,7 +63,9 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
     
 }
@@ -74,7 +78,9 @@
         error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
     }
     if (error) {
-        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        if (block != nil) {
+            block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        }
         return;
     }
     NSString * path= [NSString stringWithFormat:@"/push/%@/%@", self.name, channel];
@@ -85,7 +91,9 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError]);
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError]);
+        }
     }];
 }
 
@@ -98,7 +106,9 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
 }
 
@@ -111,7 +121,10 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
 }
 
@@ -127,7 +140,9 @@
         error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
     }
     if (error) {
-        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        if (block != nil) {
+            block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        }
         return;
     }
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@/%@", self.name, channel, deviceToken];
@@ -137,7 +152,9 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
 }
 

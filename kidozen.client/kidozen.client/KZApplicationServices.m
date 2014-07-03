@@ -185,21 +185,27 @@
     }
     
     [self.log write:object message:message withLevel:level completion:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        if (block) {
+            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        }
     }];
 }
 
 -(void) clearLog:(void (^)(KZResponse *))block
 {
     [self.log clear:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        if (block) {
+            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        }
     }];
 }
 
 -(void) allLogMessages:(void (^)(KZResponse *))block
 {
     [self.log all:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        if (block) {
+            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        }
     }];
 }
 
@@ -230,7 +236,9 @@
                                                                                 }];
     
     [self.mail send:mail attachments:attachments completion:^(KZResponse *k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        if (block) {
+            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+        }
     }];
     
 }

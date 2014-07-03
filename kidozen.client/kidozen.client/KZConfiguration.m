@@ -13,7 +13,10 @@
     [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        }
     }];
 }
 
@@ -21,7 +24,10 @@
 {
     [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        }
     }];
 }
 
@@ -35,7 +41,9 @@
 {
     [self addAuthorizationHeader];
     [_client DELETE:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        }
     }];
 }
 
@@ -43,7 +51,9 @@
 {
     [self addAuthorizationHeader];
     [_client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        }
     }];
 }
 

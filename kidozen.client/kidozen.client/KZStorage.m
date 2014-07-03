@@ -20,7 +20,9 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 - (void) create:(id)object completion:(void (^)(KZResponse *))block options:(NSDictionary *)options
 {
     if (!object || !self.name) {
-        block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        }
         return;
     }
     
@@ -34,9 +36,11 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
     [_client POST:urlString parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response
                                         urlResponse:urlResponse
                                            andError:error] );
+        }
     }];
 
     
@@ -75,7 +79,9 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 -(void) updateUsingId:(NSString *) objectId object:(id)object completion:(void (^)(KZResponse *))block
 {
     if (!object || !self.name) {
-        block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        }
         return;
     }
     NSDictionary * metadata= [object valueForKey:@"_metadata"];
@@ -85,7 +91,9 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
                                  forKey:NSLocalizedDescriptionKey];
 
         NSError * error = [NSError errorWithDomain:KZStorageErrorDomain code:ENULLMETADATA userInfo:details];
-        block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:error] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:error] );
+        }
         return;
     }
     [self addAuthorizationHeader];
@@ -97,14 +105,18 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
 }
 
 -(void) getUsingId:(NSString *) objectId withBlock:(void (^)(KZResponse *))block;
 {
     if (!objectId || !self.name) {
-        block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        }
         return;
     }
 
@@ -114,7 +126,9 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
         
     }];
 }
@@ -171,9 +185,11 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 {
     [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response
                                         urlResponse:urlResponse
                                            andError:error] );
+        }
     }];
 }
 
@@ -187,9 +203,12 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     [self addAuthorizationHeader];
     NSString * scapedUrl = [[NSString stringWithFormat:@"%@?query=%@",self.name, query] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     [_client GET:scapedUrl parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response
-                                        urlResponse:urlResponse
-                                           andError:error] );
+        if (block != nil) {
+
+            block( [[KZResponse alloc] initWithResponse:response
+                                            urlResponse:urlResponse
+                                               andError:error] );
+        }
     }];
 }
 
@@ -202,9 +221,12 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 
     [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@",self.name, query, options] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response
-                                        urlResponse:urlResponse
-                                           andError:error] );
+        
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response
+                                            urlResponse:urlResponse
+                                               andError:error] );
+        }
     }];
 }
 
@@ -217,9 +239,11 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     
     [self addAuthorizationHeader];
     [_client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@&fields=%@",self.name, query, options, fields] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response
-                                        urlResponse:urlResponse
-                                           andError:error] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response
+                                            urlResponse:urlResponse
+                                               andError:error] );
+        }
     }];
 }
 

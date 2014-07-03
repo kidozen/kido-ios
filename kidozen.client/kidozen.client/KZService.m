@@ -56,7 +56,10 @@
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+        }
     }];
 }
 

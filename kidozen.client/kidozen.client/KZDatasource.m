@@ -45,7 +45,9 @@
             [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDCALL userInfo:details];
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        }
     }];
     
 }
@@ -65,7 +67,10 @@
             [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDCALL userInfo:details];
         }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+        }
     }];
 
 }
@@ -111,9 +116,11 @@
         NSMutableDictionary* details = [NSMutableDictionary dictionary];
         [details setValue:@"Invalid parameter. Must be a serializable json or nsdictionary" forKey:NSLocalizedDescriptionKey];
         NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
-        block( [[KZResponse alloc] initWithResponse:Nil
-                                        urlResponse:nil
-                                           andError:error] );
+        if (block != nil) {
+            block( [[KZResponse alloc] initWithResponse:Nil
+                                            urlResponse:nil
+                                               andError:error] );
+        }
 
     }
     else
@@ -127,10 +134,12 @@
         NSMutableDictionary* details = [NSMutableDictionary dictionary];
         [details setValue:@"Invalid parameter. Must be a serializable json or nsdictionary" forKey:NSLocalizedDescriptionKey];
         NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
-        block( [[KZResponse alloc] initWithResponse:Nil
-                                        urlResponse:nil
-                                           andError:error] );
-        
+        if (block != nil) {            
+            block( [[KZResponse alloc] initWithResponse:Nil
+                                            urlResponse:nil
+                                               andError:error] );
+            
+        }
     }
     else
         [self queryWithData:d completion:block];
