@@ -35,7 +35,7 @@
              [[dictionary objectForKey:@"_metadata"] objectForKey:@"createdBy"], @"createdBy",
              _createdOnAsString, @"createdOn",
              [NSString stringWithFormat:@"%d",_isPrivate], @"isPrivate",
-             [NSString stringWithFormat:@"%d",_sync],@"sync",
+             [NSString stringWithFormat:@"%@",@(_sync)],@"sync",
              [[dictionary objectForKey:@"_metadata"] objectForKey:@"updatedBy"], @"updatedBy",
              _updatedOnAsString, @"updatedOn",nil],@"_metadata",
             nil];
