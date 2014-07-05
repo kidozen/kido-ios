@@ -42,6 +42,7 @@
 		6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
 		6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
+		6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D43DBDF1968BF2300D023CF /* kz.client.a */; };
 		6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */; };
 		6D4ACD491937CBA400958E65 /* KZObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD471937CBA400958E65 /* KZObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -122,7 +123,6 @@
 		AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33E1843BAEB00CBCFC2 /* Constants.h */; };
 		AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33F1843BAEB00CBCFC2 /* Constants.m */; };
 		AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88418C0E80B00FB046A /* datasourceTests.m */; };
-		AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB865271614D11800DD60E6 /* libkidozen.client.a */; };
 		AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */; };
 /* End PBXBuildFile section */
@@ -135,7 +135,7 @@
 			remoteGlobalIDString = F6B2082D1450F597009315AF;
 			remoteInfo = SocketRocket;
 		};
-		6D6C85EB18F2D13D002CA3A0 /* PBXContainerItemProxy */ = {
+		6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
 			proxyType = 1;
@@ -204,6 +204,7 @@
 		6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mongo.h"; sourceTree = "<group>"; };
 		6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Mongo.m"; sourceTree = "<group>"; };
 		6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../thirdParty/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
+		6D43DBDF1968BF2300D023CF /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../outputLibrary/kz.client.a; sourceTree = "<group>"; };
 		6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationConfiguration.h; sourceTree = "<group>"; };
 		6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationConfiguration.m; sourceTree = "<group>"; };
 		6D4ACD471937CBA400958E65 /* KZObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZObject.h; sourceTree = "<group>"; };
@@ -316,9 +317,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
-				AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */,
 				AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */,
 				AAE6E8DA18C10D8100FB046A /* UIKit.framework in Frameworks */,
 				AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */,
@@ -471,6 +472,7 @@
 		8EB865291614D11800DD60E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D43DBDF1968BF2300D023CF /* kz.client.a */,
 				6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */,
 				AA0F7EB01730515200C55706 /* UIKit.framework */,
 				AADA4208165D32BE00EB6443 /* CFNetwork.framework */,
@@ -629,7 +631,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6D6C85EC18F2D13D002CA3A0 /* PBXTargetDependency */,
+				6D43DBE21968BF2C00D023CF /* PBXTargetDependency */,
 			);
 			name = "Integration Tests";
 			productName = "Integration Tests";
@@ -808,10 +810,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6D6C85EC18F2D13D002CA3A0 /* PBXTargetDependency */ = {
+		6D43DBE21968BF2C00D023CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
-			targetProxy = 6D6C85EB18F2D13D002CA3A0 /* PBXContainerItemProxy */;
+			targetProxy = 6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */;
 		};
 		6D8018011968ACDE00E99FB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -937,14 +939,18 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"$SRCROOT/**",
-					"../SVHTTPRequest/**",
-					"../SocketRocket/**",
-					"../plcrashreporter-1.2-rc4/Source/**",
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -952,6 +958,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Testing;
@@ -1137,14 +1144,18 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"$SRCROOT/**",
-					"../SVHTTPRequest/**",
-					"../SocketRocket/**",
-					"../plcrashreporter-1.2-rc4/Source/**",
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -1152,6 +1163,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1181,14 +1193,18 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				HEADER_SEARCH_PATHS = (
-					"$SRCROOT/**",
-					"../SVHTTPRequest/**",
-					"../SocketRocket/**",
-					"../plcrashreporter-1.2-rc4/Source/**",
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -1196,6 +1212,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
