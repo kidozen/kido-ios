@@ -192,7 +192,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SVHTTPRequest ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target SVHTTPRequest  ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator -arch x86_64 -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/${PROJECT_NAME}/\" \"${OUTPUTFOLDER}/include\"\n#rm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n";
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SVHTTPRequest ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target SVHTTPRequest  ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator -arch x86_64 -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/${PROJECT_NAME}/\" \"${OUTPUTFOLDER}/include\"\n#rm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n";
 		};
 		6DFF94B418EE621B00EA324F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -205,7 +205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT_FOLDER=../outputLibrary\n\nxcodebuild -target SVHTTPRequest ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p \"${OUTPUT_FOLDER}/include\"\n\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUT_FOLDER\ncp $PROJECT_NAME/*.h $OUTPUT_FOLDER/include\n                 \necho \"Your binary is in $OUTPUT_FOLDER/lib$PROJECT_NAME.a\"\n";
+			shellScript = "OUTPUT_FOLDER=../../outputLibrary\n\nxcodebuild -target SVHTTPRequest ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p \"${OUTPUT_FOLDER}/include\"\n\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUT_FOLDER\ncp $PROJECT_NAME/*.h $OUTPUT_FOLDER/include\n                 \necho \"Your binary is in $OUTPUT_FOLDER/lib$PROJECT_NAME.a\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
