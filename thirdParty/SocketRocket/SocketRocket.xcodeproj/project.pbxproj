@@ -298,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 -arch x86_64 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp \"./${PROJECT_NAME}/SRWebSocket.h\" \"${OUTPUTFOLDER}/include/\"\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n";
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator -arch i386 -arch x86_64 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\ncp \"./${PROJECT_NAME}/SRWebSocket.h\" \"${OUTPUTFOLDER}/include/\"\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n";
 		};
 		6DFF94C118EE644200EA324F /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -311,7 +311,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p $OUTPUTFOLDER/include\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUTFOLDER\ncp \"./${PROJECT_NAME}/SRWebSocket.h\" \"${OUTPUTFOLDER}/include/\"\n\necho \"Your binary is in $OUTPUTFOLDER/lib$PROJECT_NAME.a\"\n";
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target SocketRocket ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p $OUTPUTFOLDER/include\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUTFOLDER\ncp \"./${PROJECT_NAME}/SRWebSocket.h\" \"${OUTPUTFOLDER}/include/\"\n\necho \"Your binary is in $OUTPUTFOLDER/lib$PROJECT_NAME.a\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -468,6 +468,7 @@
 				OTHER_LDFLAGS = "-Licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Debug;
 		};
@@ -486,6 +487,7 @@
 				OTHER_LDFLAGS = "-Licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 			};
 			name = Release;
 		};
