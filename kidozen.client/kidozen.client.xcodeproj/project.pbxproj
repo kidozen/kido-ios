@@ -16,7 +16,6 @@
 			dependencies = (
 				6D99201A18EF217A000A6C5D /* PBXTargetDependency */,
 				6D99201C18EF217A000A6C5D /* PBXTargetDependency */,
-				6D99201E18EF217A000A6C5D /* PBXTargetDependency */,
 			);
 			name = kidozen.client.device;
 			productName = kidozen.client.fat;
@@ -30,7 +29,6 @@
 			dependencies = (
 				6D99201418EF2121000A6C5D /* PBXTargetDependency */,
 				6D99201618EF2121000A6C5D /* PBXTargetDependency */,
-				6D99201818EF2121000A6C5D /* PBXTargetDependency */,
 			);
 			name = kidozen.client.fat;
 			productName = kidozen.client.fat;
@@ -51,7 +49,6 @@
 		6D4ACD631937CD1000958E65 /* KZSecurityConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD611937CD1000958E65 /* KZSecurityConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D4ACD641937CD1000958E65 /* KZSecurityConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */; };
 		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
-		6D6C85ED18F2D160002CA3A0 /* libCrashReporter-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FEB318E5CE4800DE42F7 /* libCrashReporter-iphonesimulator.a */; };
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
 		6D85979A192BDA4100237277 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D859798192BDA4100237277 /* Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D85979B192BDA4100237277 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D859799192BDA4100237277 /* Base64.m */; };
@@ -110,7 +107,6 @@
 		AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = AA211CDB1667B35600848407 /* KZStorageMetadata.m */; };
 		AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */; };
 		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA50FEC918E5D2F900DE42F7 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FE3F18E5C2DD00DE42F7 /* libSocketRocket.a */; };
 		AA50FECA18E5D30D00DE42F7 /* libSVHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FE9218E5C6E100DE42F7 /* libSVHTTPRequest.a */; };
 		AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
@@ -141,6 +137,13 @@
 			remoteGlobalIDString = 6DF1EBBA18EDF726000C3AA7;
 			remoteInfo = kidozen.client.fat;
 		};
+		6D80179619689E5600E99FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D80179019689E5600E99FB7 /* SocketRocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F6B2082D1450F597009315AF;
+			remoteInfo = SocketRocket;
+		};
 		6D99201318EF2121000A6C5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
@@ -154,13 +157,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6DE1A30318EDFFC400A8810E;
 			remoteInfo = libSVHTTPRequest.fat;
-		};
-		6D99201718EF2121000A6C5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94B818EE63E200EA324F;
-			remoteInfo = SocketRocket.fat;
 		};
 		6D99201918EF217A000A6C5D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -176,41 +172,6 @@
 			remoteGlobalIDString = 6DFF94B318EE621B00EA324F;
 			remoteInfo = libSVHTTPRequest.device;
 		};
-		6D99201D18EF217A000A6C5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94BC18EE63ED00EA324F;
-			remoteInfo = SocketRocket.device;
-		};
-		AA50FE3E18E5C2DD00DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6B2082D1450F597009315AF;
-			remoteInfo = SocketRocket;
-		};
-		AA50FE4018E5C2DD00DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F668C880153E91210044DBAC;
-			remoteInfo = SocketRocketOSX;
-		};
-		AA50FE4218E5C2DD00DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6BDA802145900D200FE3253;
-			remoteInfo = SRWebSocketTests;
-		};
-		AA50FE4418E5C2DD00DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F62417E314D52F3C003CE997;
-			remoteInfo = TestChat;
-		};
 		AA50FE9118E5C6E100DE42F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
@@ -218,96 +179,12 @@
 			remoteGlobalIDString = AA50FE4F18E5C39300DE42F7;
 			remoteInfo = SVHTTPRequest;
 		};
-		AA50FEAA18E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05E731F30EFA1AAB005EDFB7;
-			remoteInfo = "CrashReporter-MacOSX-Static";
-		};
-		AA50FEAC18E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = "CrashReporter-MacOSX";
-		};
-		AA50FEAE18E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 058812B91040582D009128FB;
-			remoteInfo = "CrashReporter-iOS";
-		};
 		AA50FEB018E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 05CD31520EE936A9000FDE88;
 			remoteInfo = "CrashReporter-iOS-Device";
-		};
-		AA50FEB218E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05CD31630EE93905000FDE88;
-			remoteInfo = "CrashReporter-iOS-Simulator";
-		};
-		AA50FEB418E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05E731E30EFA1A3E005EDFB7;
-			remoteInfo = plcrashutil;
-		};
-		AA50FEB618E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05CD32690EE93DC3000FDE88;
-			remoteInfo = "Tests-MacOSX";
-		};
-		AA50FEB818E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05CD32A90EE94062000FDE88;
-			remoteInfo = "Tests-iOS-Simulator";
-		};
-		AA50FEBA18E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05CD33240EE94439000FDE88;
-			remoteInfo = "Tests-iOS-Device";
-		};
-		AA50FEBC18E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05F40CE70EF7AB80008050CF;
-			remoteInfo = DemoCrash;
-		};
-		AA50FEBE18E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 052A45CF136353FB00987004;
-			remoteInfo = "DemoCrash-iOS-Device";
-		};
-		AA50FEC018E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 052A464F136355FD00987004;
-			remoteInfo = "DemoCrash-iOS-Simulator";
-		};
-		AA50FEC218E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 050DE24D0F61B80B00152ED3;
-			remoteInfo = "Fuzz Testing";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -336,6 +213,7 @@
 		6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZSecurityConfiguration.m; sourceTree = "<group>"; };
 		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		6D80179019689E5600E99FB7 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../thirdParty/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		6D859798192BDA4100237277 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../Base64/Base64.h; sourceTree = "<group>"; };
 		6D859799192BDA4100237277 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../Base64/Base64.m; sourceTree = "<group>"; };
 		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
@@ -398,7 +276,6 @@
 		AA1E4B88183127860059314D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AA211CDA1667B35600848407 /* KZStorageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZStorageMetadata.h; sourceTree = "<group>"; };
 		AA211CDB1667B35600848407 /* KZStorageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZStorageMetadata.m; sourceTree = "<group>"; };
-		AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
 		AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZCrashReporter.m; sourceTree = "<group>"; };
 		AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZCrashReporter.h; sourceTree = "<group>"; };
@@ -442,9 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
-				6D6C85ED18F2D160002CA3A0 /* libCrashReporter-iphonesimulator.a in Frameworks */,
 				AA50FECA18E5D30D00DE42F7 /* libSVHTTPRequest.a in Frameworks */,
-				AA50FEC918E5D2F900DE42F7 /* libSocketRocket.a in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
 				AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */,
 				AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */,
@@ -529,6 +404,14 @@
 			name = ConfigurationModel;
 			sourceTree = "<group>";
 		};
+		6D80179119689E5600E99FB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D80179719689E5600E99FB7 /* libSocketRocket.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6DCEDDCF19391D7F00A38C39 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,9 +436,9 @@
 		8EB8651C1614D11800DD60E6 = {
 			isa = PBXGroup;
 			children = (
+				6D80179019689E5600E99FB7 /* SocketRocket.xcodeproj */,
 				AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */,
 				AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */,
-				AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */,
 				8EB8652C1614D11800DD60E6 /* kidozen.client */,
 				AAE6E8DB18C10D8100FB046A /* Integration Tests */,
 				8EB865291614D11800DD60E6 /* Frameworks */,
@@ -630,17 +513,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AA50FE3818E5C2DD00DE42F7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA50FE3F18E5C2DD00DE42F7 /* libSocketRocket.a */,
-				AA50FE4118E5C2DD00DE42F7 /* SocketRocket.framework */,
-				AA50FE4318E5C2DD00DE42F7 /* SRWebSocketTests.octest */,
-				AA50FE4518E5C2DD00DE42F7 /* TestChat.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AA50FE8A18E5C6E100DE42F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -652,19 +524,7 @@
 		AA50FE9818E5CE4800DE42F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA50FEAB18E5CE4800DE42F7 /* libCrashReporter-MacOSX-Static.a */,
-				AA50FEAD18E5CE4800DE42F7 /* CrashReporter.framework */,
-				AA50FEAF18E5CE4800DE42F7 /* CrashReporter.framework */,
 				AA50FEB118E5CE4800DE42F7 /* libCrashReporter-iphoneos.a */,
-				AA50FEB318E5CE4800DE42F7 /* libCrashReporter-iphonesimulator.a */,
-				AA50FEB518E5CE4800DE42F7 /* plcrashutil */,
-				AA50FEB718E5CE4800DE42F7 /* Tests-MacOSX.octest */,
-				AA50FEB918E5CE4800DE42F7 /* Tests-iOS-Simulator.app */,
-				AA50FEBB18E5CE4800DE42F7 /* Tests-iOS-Device.app */,
-				AA50FEBD18E5CE4800DE42F7 /* DemoCrash.app */,
-				AA50FEBF18E5CE4800DE42F7 /* DemoCrash-iOS-Device.app */,
-				AA50FEC118E5CE4800DE42F7 /* DemoCrash-iOS-Simulator.app */,
-				AA50FEC318E5CE4800DE42F7 /* Fuzz Testing */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -809,8 +669,8 @@
 					ProjectRef = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
 				},
 				{
-					ProductGroup = AA50FE3818E5C2DD00DE42F7 /* Products */;
-					ProjectRef = AA50FE3718E5C2DD00DE42F7 /* SocketRocket.xcodeproj */;
+					ProductGroup = 6D80179119689E5600E99FB7 /* Products */;
+					ProjectRef = 6D80179019689E5600E99FB7 /* SocketRocket.xcodeproj */;
 				},
 				{
 					ProductGroup = AA50FE8A18E5C6E100DE42F7 /* Products */;
@@ -828,32 +688,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AA50FE3F18E5C2DD00DE42F7 /* libSocketRocket.a */ = {
+		6D80179719689E5600E99FB7 /* libSocketRocket.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSocketRocket.a;
-			remoteRef = AA50FE3E18E5C2DD00DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FE4118E5C2DD00DE42F7 /* SocketRocket.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SocketRocket.framework;
-			remoteRef = AA50FE4018E5C2DD00DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FE4318E5C2DD00DE42F7 /* SRWebSocketTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SRWebSocketTests.octest;
-			remoteRef = AA50FE4218E5C2DD00DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FE4518E5C2DD00DE42F7 /* TestChat.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = TestChat.app;
-			remoteRef = AA50FE4418E5C2DD00DE42F7 /* PBXContainerItemProxy */;
+			remoteRef = 6D80179619689E5600E99FB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		AA50FE9218E5C6E100DE42F7 /* libSVHTTPRequest.a */ = {
@@ -863,95 +702,11 @@
 			remoteRef = AA50FE9118E5C6E100DE42F7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AA50FEAB18E5CE4800DE42F7 /* libCrashReporter-MacOSX-Static.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libCrashReporter-MacOSX-Static.a";
-			remoteRef = AA50FEAA18E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEAD18E5CE4800DE42F7 /* CrashReporter.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CrashReporter.framework;
-			remoteRef = AA50FEAC18E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEAF18E5CE4800DE42F7 /* CrashReporter.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CrashReporter.framework;
-			remoteRef = AA50FEAE18E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		AA50FEB118E5CE4800DE42F7 /* libCrashReporter-iphoneos.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libCrashReporter-iphoneos.a";
 			remoteRef = AA50FEB018E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEB318E5CE4800DE42F7 /* libCrashReporter-iphonesimulator.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libCrashReporter-iphonesimulator.a";
-			remoteRef = AA50FEB218E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEB518E5CE4800DE42F7 /* plcrashutil */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = plcrashutil;
-			remoteRef = AA50FEB418E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEB718E5CE4800DE42F7 /* Tests-MacOSX.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Tests-MacOSX.octest";
-			remoteRef = AA50FEB618E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEB918E5CE4800DE42F7 /* Tests-iOS-Simulator.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Tests-iOS-Simulator.app";
-			remoteRef = AA50FEB818E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEBB18E5CE4800DE42F7 /* Tests-iOS-Device.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "Tests-iOS-Device.app";
-			remoteRef = AA50FEBA18E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEBD18E5CE4800DE42F7 /* DemoCrash.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = DemoCrash.app;
-			remoteRef = AA50FEBC18E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEBF18E5CE4800DE42F7 /* DemoCrash-iOS-Device.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "DemoCrash-iOS-Device.app";
-			remoteRef = AA50FEBE18E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEC118E5CE4800DE42F7 /* DemoCrash-iOS-Simulator.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "DemoCrash-iOS-Simulator.app";
-			remoteRef = AA50FEC018E5CE4800DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEC318E5CE4800DE42F7 /* Fuzz Testing */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = "Fuzz Testing";
-			remoteRef = AA50FEC218E5CE4800DE42F7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1072,11 +827,6 @@
 			name = libSVHTTPRequest.fat;
 			targetProxy = 6D99201518EF2121000A6C5D /* PBXContainerItemProxy */;
 		};
-		6D99201818EF2121000A6C5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SocketRocket.fat;
-			targetProxy = 6D99201718EF2121000A6C5D /* PBXContainerItemProxy */;
-		};
 		6D99201A18EF217A000A6C5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CrashReporter.device;
@@ -1086,11 +836,6 @@
 			isa = PBXTargetDependency;
 			name = libSVHTTPRequest.device;
 			targetProxy = 6D99201B18EF217A000A6C5D /* PBXContainerItemProxy */;
-		};
-		6D99201E18EF217A000A6C5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SocketRocket.device;
-			targetProxy = 6D99201D18EF217A000A6C5D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1154,10 +899,9 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
-					../SocketRocket/,
-					../SocketRocket/SocketRocket,
 					"../plcrashreporter-1.2-rc4/Source",
 					../SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1334,10 +1078,9 @@
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
-					../SocketRocket/,
-					../SocketRocket/SocketRocket,
 					"../plcrashreporter-1.2-rc4/Source",
 					../SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1357,10 +1100,9 @@
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
-					../SocketRocket/,
-					../SocketRocket/SocketRocket,
 					"../plcrashreporter-1.2-rc4/Source",
 					../SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
