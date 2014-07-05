@@ -1,0 +1,35 @@
+dependencies: \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashSignalHandler.mm \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashNamespace.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/CrashReporter.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReporter.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReporterConfig.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashFeatureConfig.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReport.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportApplicationInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportBinaryImageInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportProcessorInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportExceptionInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportThreadInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportStackFrameInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportSymbolInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportRegisterInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportMachineInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportMachExceptionInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportProcessInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportSignalInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportSystemInfo.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportTextFormatter.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReportFormatter.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsync.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashSignalHandler.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashMacros.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashFrameWalker.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsyncThread.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsyncThread_x86.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsyncThread_arm.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsyncImageList.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsyncMachOImage.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsyncMObject.h \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashAsyncLinkedList.hpp \
+  /Users/miya/src/kido-ios/plcrashreporter-1.2-rc4/Source/PLCrashReporterNSError.h

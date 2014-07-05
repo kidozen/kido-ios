@@ -14,8 +14,6 @@
 				6D428AB818EEE6F60002C36C /* ShellScript */,
 			);
 			dependencies = (
-				6D99201A18EF217A000A6C5D /* PBXTargetDependency */,
-				6D99201C18EF217A000A6C5D /* PBXTargetDependency */,
 			);
 			name = kidozen.client.device;
 			productName = kidozen.client.fat;
@@ -27,8 +25,6 @@
 				6DF1EBBE18EDF72F000C3AA7 /* ShellScript */,
 			);
 			dependencies = (
-				6D99201418EF2121000A6C5D /* PBXTargetDependency */,
-				6D99201618EF2121000A6C5D /* PBXTargetDependency */,
 			);
 			name = kidozen.client.fat;
 			productName = kidozen.client.fat;
@@ -50,9 +46,8 @@
 		6D4ACD641937CD1000958E65 /* KZSecurityConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */; };
 		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
-		6D85979A192BDA4100237277 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D859798192BDA4100237277 /* Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6D85979B192BDA4100237277 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D859799192BDA4100237277 /* Base64.m */; };
-		6D85979C192BDA4100237277 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D859799192BDA4100237277 /* Base64.m */; };
+		6D8017EE1968A74800E99FB7 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8017EC1968A74800E99FB7 /* Base64.h */; };
+		6D8017EF1968A74800E99FB7 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8017ED1968A74800E99FB7 /* Base64.m */; };
 		6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */; };
 		6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -107,7 +102,6 @@
 		AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = AA211CDB1667B35600848407 /* KZStorageMetadata.m */; };
 		AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */; };
 		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA50FECA18E5D30D00DE42F7 /* libSVHTTPRequest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA50FE9218E5C6E100DE42F7 /* libSVHTTPRequest.a */; };
 		AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -144,47 +138,19 @@
 			remoteGlobalIDString = F6B2082D1450F597009315AF;
 			remoteInfo = SocketRocket;
 		};
-		6D99201318EF2121000A6C5D /* PBXContainerItemProxy */ = {
+		6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94C918EE67BF00EA324F;
-			remoteInfo = CrashReporter.fat;
+			containerPortal = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05CD31520EE936A9000FDE88;
+			remoteInfo = CrashReporter;
 		};
-		6D99201518EF2121000A6C5D /* PBXContainerItemProxy */ = {
+		6D8017FE1968A75D00E99FB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DE1A30318EDFFC400A8810E;
-			remoteInfo = libSVHTTPRequest.fat;
-		};
-		6D99201918EF217A000A6C5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94CD18EE67CA00EA324F;
-			remoteInfo = CrashReporter.device;
-		};
-		6D99201B18EF217A000A6C5D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94B318EE621B00EA324F;
-			remoteInfo = libSVHTTPRequest.device;
-		};
-		AA50FE9118E5C6E100DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
+			containerPortal = 6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = AA50FE4F18E5C39300DE42F7;
 			remoteInfo = SVHTTPRequest;
-		};
-		AA50FEB018E5CE4800DE42F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05CD31520EE936A9000FDE88;
-			remoteInfo = "CrashReporter-iOS-Device";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -214,8 +180,10 @@
 		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D80179019689E5600E99FB7 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../thirdParty/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
-		6D859798192BDA4100237277 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../Base64/Base64.h; sourceTree = "<group>"; };
-		6D859799192BDA4100237277 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../Base64/Base64.m; sourceTree = "<group>"; };
+		6D8017EC1968A74800E99FB7 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../thirdParty/Base64/Base64.h; sourceTree = "<group>"; };
+		6D8017ED1968A74800E99FB7 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../thirdParty/Base64/Base64.m; sourceTree = "<group>"; };
+		6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CrashReporter.xcodeproj; path = "../thirdParty/plcrashreporter-1.2-rc4/CrashReporter.xcodeproj"; sourceTree = "<group>"; };
+		6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../thirdParty/SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
 		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
 		6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationServices.m; sourceTree = "<group>"; };
 		6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZPassiveAuthViewController.h; sourceTree = "<group>"; };
@@ -276,10 +244,8 @@
 		AA1E4B88183127860059314D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AA211CDA1667B35600848407 /* KZStorageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZStorageMetadata.h; sourceTree = "<group>"; };
 		AA211CDB1667B35600848407 /* KZStorageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZStorageMetadata.m; sourceTree = "<group>"; };
-		AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
 		AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZCrashReporter.m; sourceTree = "<group>"; };
 		AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZCrashReporter.h; sourceTree = "<group>"; };
-		AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CrashReporter.xcodeproj; path = "../plcrashreporter-1.2-rc4/CrashReporter.xcodeproj"; sourceTree = "<group>"; };
 		AA68A33E1843BAEB00CBCFC2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../sdk.integration.tests/Constants.h; sourceTree = "<group>"; };
 		AA68A33F1843BAEB00CBCFC2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ../sdk.integration.tests/Constants.m; sourceTree = "<group>"; };
 		AAC92C451725954200D1FF88 /* KZService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZService.h; sourceTree = "<group>"; };
@@ -319,7 +285,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
-				AA50FECA18E5D30D00DE42F7 /* libSVHTTPRequest.a in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
 				AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */,
 				AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */,
@@ -363,6 +328,8 @@
 		6D4ACD331937A3A900958E65 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				6D8017EC1968A74800E99FB7 /* Base64.h */,
+				6D8017ED1968A74800E99FB7 /* Base64.m */,
 				6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */,
 				6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */,
 				AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */,
@@ -371,8 +338,6 @@
 				8E07749E1619D9AF00FA21D9 /* NSDictionary+JSONCategories.m */,
 				8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */,
 				8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */,
-				6D859798192BDA4100237277 /* Base64.h */,
-				6D859799192BDA4100237277 /* Base64.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -412,6 +377,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6D8017F11968A75700E99FB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D8017F71968A75700E99FB7 /* libCrashReporter-iphoneos.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D8017F91968A75C00E99FB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D8017FF1968A75D00E99FB7 /* libSVHTTPRequest.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6DCEDDCF19391D7F00A38C39 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,9 +417,9 @@
 		8EB8651C1614D11800DD60E6 = {
 			isa = PBXGroup;
 			children = (
+				6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */,
+				6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */,
 				6D80179019689E5600E99FB7 /* SocketRocket.xcodeproj */,
-				AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */,
-				AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */,
 				8EB8652C1614D11800DD60E6 /* kidozen.client */,
 				AAE6E8DB18C10D8100FB046A /* Integration Tests */,
 				8EB865291614D11800DD60E6 /* Frameworks */,
@@ -513,22 +494,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AA50FE8A18E5C6E100DE42F7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA50FE9218E5C6E100DE42F7 /* libSVHTTPRequest.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		AA50FE9818E5CE4800DE42F7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA50FEB118E5CE4800DE42F7 /* libCrashReporter-iphoneos.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AAE6E8DB18C10D8100FB046A /* Integration Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,7 +528,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */,
-				6D85979A192BDA4100237277 /* Base64.h in Headers */,
 				8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */,
 				8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */,
 				8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */,
@@ -594,6 +558,7 @@
 				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
 				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
 				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
+				6D8017EE1968A74800E99FB7 /* Base64.h in Headers */,
 				6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */,
 				8E0774D81619F35500FA21D9 /* KZUser.h in Headers */,
 				6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */,
@@ -665,16 +630,16 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = AA50FE9818E5CE4800DE42F7 /* Products */;
-					ProjectRef = AA50FE9718E5CE4800DE42F7 /* CrashReporter.xcodeproj */;
+					ProductGroup = 6D8017F11968A75700E99FB7 /* Products */;
+					ProjectRef = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
 				},
 				{
 					ProductGroup = 6D80179119689E5600E99FB7 /* Products */;
 					ProjectRef = 6D80179019689E5600E99FB7 /* SocketRocket.xcodeproj */;
 				},
 				{
-					ProductGroup = AA50FE8A18E5C6E100DE42F7 /* Products */;
-					ProjectRef = AA50FE8918E5C6E100DE42F7 /* SVHTTPRequest.xcodeproj */;
+					ProductGroup = 6D8017F91968A75C00E99FB7 /* Products */;
+					ProjectRef = 6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -695,18 +660,18 @@
 			remoteRef = 6D80179619689E5600E99FB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AA50FE9218E5C6E100DE42F7 /* libSVHTTPRequest.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSVHTTPRequest.a;
-			remoteRef = AA50FE9118E5C6E100DE42F7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA50FEB118E5CE4800DE42F7 /* libCrashReporter-iphoneos.a */ = {
+		6D8017F71968A75700E99FB7 /* libCrashReporter-iphoneos.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libCrashReporter-iphoneos.a";
-			remoteRef = AA50FEB018E5CE4800DE42F7 /* PBXContainerItemProxy */;
+			remoteRef = 6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D8017FF1968A75D00E99FB7 /* libSVHTTPRequest.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSVHTTPRequest.a;
+			remoteRef = 6D8017FE1968A75D00E99FB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -757,7 +722,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D85979B192BDA4100237277 /* Base64.m in Sources */,
 				6D4ACD641937CD1000958E65 /* KZSecurityConfiguration.m in Sources */,
 				6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
 				8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */,
@@ -768,6 +732,7 @@
 				6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */,
 				8E0774A71619D9AF00FA21D9 /* KZMail.m in Sources */,
 				6DCB876819462C64005B75B9 /* KZPassiveAuthViewController.m in Sources */,
+				6D8017EF1968A74800E99FB7 /* Base64.m in Sources */,
 				8E0774A81619D9AF00FA21D9 /* KZNotification.m in Sources */,
 				AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */,
 				6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */,
@@ -804,7 +769,6 @@
 				6D677C401921073B000DF367 /* mailTests.m in Sources */,
 				6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */,
 				AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */,
-				6D85979C192BDA4100237277 /* Base64.m in Sources */,
 				6D291A88191BFE28003AEFAF /* storageTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -816,26 +780,6 @@
 			isa = PBXTargetDependency;
 			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
 			targetProxy = 6D6C85EB18F2D13D002CA3A0 /* PBXContainerItemProxy */;
-		};
-		6D99201418EF2121000A6C5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CrashReporter.fat;
-			targetProxy = 6D99201318EF2121000A6C5D /* PBXContainerItemProxy */;
-		};
-		6D99201618EF2121000A6C5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libSVHTTPRequest.fat;
-			targetProxy = 6D99201518EF2121000A6C5D /* PBXContainerItemProxy */;
-		};
-		6D99201A18EF217A000A6C5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CrashReporter.device;
-			targetProxy = 6D99201918EF217A000A6C5D /* PBXContainerItemProxy */;
-		};
-		6D99201C18EF217A000A6C5D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libSVHTTPRequest.device;
-			targetProxy = 6D99201B18EF217A000A6C5D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -899,8 +843,8 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
-					"../plcrashreporter-1.2-rc4/Source",
-					../SVHTTPRequest/SVHTTPRequest,
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
 					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				OTHER_LDFLAGS = (
@@ -1078,8 +1022,8 @@
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
-					"../plcrashreporter-1.2-rc4/Source",
-					../SVHTTPRequest/SVHTTPRequest,
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
 					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				OTHER_LDFLAGS = (
@@ -1100,8 +1044,8 @@
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)",
-					"../plcrashreporter-1.2-rc4/Source",
-					../SVHTTPRequest/SVHTTPRequest,
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
 					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
 				);
 				OTHER_LDFLAGS = (
