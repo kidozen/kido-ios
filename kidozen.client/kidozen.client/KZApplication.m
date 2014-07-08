@@ -44,14 +44,26 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @end
 
+
+@interface KZApplication(PrivateAuthentication)
+
+- (void)authenticateWithApplicationKey:(NSString *)applicationKey
+                 postContentDictionary:(NSDictionary *)postContentDictionary
+                              callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback;
+
+- (NSString *) getIpCacheKey;
+- (NSString *) getAccessTokenCacheKey;
+
+@end
+
 @implementation KZApplication
 
 
--(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
-                 applicationName:(NSString *)applicationName
-                  applicationKey:(NSString *)applicationKey
-                       strictSSL:(BOOL)strictSSL
-                     andCallback:(void (^)(KZResponse *))callback
+-(id) initWithTenantMarketPlace:(NSString *)tennantMarketPlace
+                applicationName:(NSString *)applicationName
+                 applicationKey:(NSString *)applicationKey
+                      strictSSL:(BOOL)strictSSL
+                    andCallback:(void (^)(KZResponse *))callback
 {
     self = [super init];
     
@@ -174,13 +186,6 @@ NSString *const kAccessTokenKey = @"access_token";
     
 }
 
-- (void) failAuthenticationWithError:(NSError *)error
-{
-    if (self.authCompletionBlock) {
-        self.authCompletionBlock(error);
-    }
-}
-
 - (void) failInitializationWithError:(NSError *)error
 {
     [self didFinishInitializationWithResponse:nil
@@ -262,19 +267,6 @@ NSString *const kAccessTokenKey = @"access_token";
         }
     }
 
-}
-
--(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey
-{
-    //1- add to array
-    //http://osmorphis.blogspot.com.ar/2009/05/reflection-in-objective-c.html
-    //BOOL conforms = [obj conformsToProtocol:@protocol(MyInterface)];
-}
--(void) registerProviderWithInstance:(id) instance andProviderKey:(NSString *) providerKey
-{
-    //1- add to array
-    //http://osmorphis.blogspot.com.ar/2009/05/reflection-in-objective-c.html
-    //BOOL conforms = [obj conformsToProtocol:@protocol(MyInterface)];
 }
 
 -(void) parseUserInfo:(NSString *) token
@@ -489,16 +481,48 @@ NSString *const kAccessTokenKey = @"access_token";
     return postContentDictionary;
 }
 
+
+@end
+
+@implementation KZApplication(Authentication)
+
+-(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
+{
+    self.authCompletionBlock = block;
+    self.lastUserName = user;
+    self.lastPassword = password;
+    self.lastProviderKey = provider;
+    
+    [self authenticateUser:user withProvider:provider andPassword:password];
+}
+
+-(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password
+{
+    self.lastUserName = user;
+    self.lastPassword = password;
+    self.lastProviderKey = provider;
+    
+    [self.tokenController loadTokensFromCacheForIpKey:[self getIpCacheKey]
+                                       accessTokenKey:[self getAccessTokenCacheKey]];
+    
+    if (self.tokenController.kzToken && self.tokenController.ipToken) {
+        [self completeAuthenticationFlow];
+    }
+    else {
+        [self invokeAuthServices:user withPassword:password andProvider:provider];
+    }
+}
+
 - (void)authenticateWithApplicationKey:(NSString *)applicationKey
                  postContentDictionary:(NSDictionary *)postContentDictionary
                               callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback
 {
     
     [self initializeHttpClient];
-
+    
     [self.defaultClient setSendParametersAsJSON:YES];
     [self.defaultClient setBasePath:@""];
-
+    
     [self.defaultClient POST:self.applicationConfig.authConfig.oauthTokenEndpoint
                   parameters:postContentDictionary
                   completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -527,7 +551,7 @@ NSString *const kAccessTokenKey = @"access_token";
     __weak KZApplication *safeMe = self;
     
     self.authCompletionBlock = block;
-
+    
     passiveAuthVC.completion = ^(NSString *token, NSString *refreshToken, NSError *error) {
         if (error != nil) {
             return [safeMe failAuthenticationWithError:error];
@@ -541,63 +565,56 @@ NSString *const kAccessTokenKey = @"access_token";
     [rootController presentModalViewController:webNavigation animated:YES];
 }
 
-
 - (void)completePassiveAuthenticationWithToken:(NSString *)token refreshToken:(NSString *)refreshToken
 {
     [self.tokenController updateAccessTokenWith:token
-                                accessTokenKey:[self getAccessTokenCacheKey]];
+                                 accessTokenKey:[self getAccessTokenCacheKey]];
     
     [self.tokenController updateRefreshTokenWith:refreshToken];
-
-
+    
+    
     [self completeAuthenticationFlow];
     
 }
 
--(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
-{
-    self.authCompletionBlock = block;
-    self.lastUserName = user;
-    self.lastPassword = password;
-    self.lastProviderKey = provider;
-    
-    [self authenticateUser:user withProvider:provider andPassword:password];
-}
 
 - (void) completeAuthenticationFlow
 {
     self.passiveAuthenticated = YES;
     
     [self parseUserInfo:self.tokenController.kzToken];
-
+    
     __weak KZApplication *safeMe = self;
     
     if (self.KidoZenUser.expiresOn > 0) {
         [self.tokenController startTokenExpirationTimer:self.KidoZenUser.expiresOn
-                                              callback:^{
-                                                  [safeMe tokenExpires];
-                                              }];
+                                               callback:^{
+                                                   [safeMe tokenExpires];
+                                               }];
     }
-
+    
     if (self.authCompletionBlock) {
         self.authCompletionBlock(self.tokenController.kzToken);
     }
 }
 
--(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password
+-(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey
 {
-    self.lastUserName = user;
-    self.lastPassword = password;
-    self.lastProviderKey = provider;
-    
-    [self.tokenController loadTokensFromCacheForIpKey:[self getIpCacheKey]
-                                      accessTokenKey:[self getAccessTokenCacheKey]];
-    
-    if (self.tokenController.kzToken && self.tokenController.ipToken) {
-        [self completeAuthenticationFlow];
-    }
-    else {
-        [self invokeAuthServices:user withPassword:password andProvider:provider];
+    //1- add to array
+    //http://osmorphis.blogspot.com.ar/2009/05/reflection-in-objective-c.html
+    //BOOL conforms = [obj conformsToProtocol:@protocol(MyInterface)];
+}
+-(void) registerProviderWithInstance:(id) instance andProviderKey:(NSString *) providerKey
+{
+    //1- add to array
+    //http://osmorphis.blogspot.com.ar/2009/05/reflection-in-objective-c.html
+    //BOOL conforms = [obj conformsToProtocol:@protocol(MyInterface)];
+}
+
+- (void) failAuthenticationWithError:(NSError *)error
+{
+    if (self.authCompletionBlock) {
+        self.authCompletionBlock(error);
     }
 }
 
@@ -611,6 +628,7 @@ NSString *const kAccessTokenKey = @"access_token";
     return [[NSString stringWithFormat:@"%@%@%@%@", self.tennantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword]
             createHash];
 }
+
 
 @end
 

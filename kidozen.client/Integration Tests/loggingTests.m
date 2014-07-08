@@ -25,7 +25,7 @@
     if (!self.application) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-        self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
+        self.application = [[KZApplication alloc] initWithTenantMarketPlace:kzAppCenterUrl
                                                              applicationName:kzAppName
                                                               applicationKey:kzApplicationKey
                                                                    strictSSL:NO
@@ -156,7 +156,7 @@
 {
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    self.application = [[KZApplication alloc] initWithTennantMarketPlace:kzAppCenterUrl
+    self.application = [[KZApplication alloc] initWithTenantMarketPlace:kzAppCenterUrl
                                                          applicationName:kzAppName
                                                           applicationKey:kzApplicationKey
                                                                strictSSL:NO

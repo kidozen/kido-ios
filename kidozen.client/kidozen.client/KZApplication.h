@@ -21,7 +21,7 @@
 #if TARGET_OS_IPHONE
 #import "KZPubSubChannel.h"
 #endif
-#import "KZAuthentication.h"
+
 #import "KZWRAPv09IdentityProvider.h"
 #import <SVHTTPRequest.h>
 
@@ -37,7 +37,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * Main KidoZen application object
  *
  */
-@interface KZApplication : KZBaseService<KZAuthentication>
+@interface KZApplication : KZBaseService
 
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
@@ -64,11 +64,11 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * @param strictSSL Whether we want SSL to be bypassed or not,  only use in development (Required)
  * @param callback The ServiceEventListener callback with the operation results (optional)
  */
--(id) initWithTennantMarketPlace:(NSString *)tennantMarketPlace
-                 applicationName:(NSString *)applicationName
-                  applicationKey:(NSString *)applicationKey
-                       strictSSL:(BOOL)strictSSL
-                     andCallback:(void (^)(KZResponse *))callback;
+-(id) initWithTenantMarketPlace:(NSString *)tennantMarketPlace
+                applicationName:(NSString *)applicationName
+                 applicationKey:(NSString *)applicationKey
+                      strictSSL:(BOOL)strictSSL
+                    andCallback:(void (^)(KZResponse *))callback;
 
 /**
  * Will create an instance of crash reporter.
@@ -84,6 +84,22 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 - (void)addBreadCrumb:(NSString *)breadCrumb;
 
+
+@end
+
+@interface KZApplication(Authentication)
+
+-(void) authenticateUser:(NSString *) user withProvider:(NSString *) provider andPassword:(NSString *) password;
+-(void) authenticateUser:(NSString *) user withProvider:(NSString *) provider andPassword:(NSString *) password completion:(void (^)(id))block;
+
+/**
+ * Starts a passive authentication flow.
+ */
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))block;
+
+//custom provider
+-(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey;
+-(void) registerProviderWithInstance:(id) instance andProviderKey:(NSString *) providerKey;
 
 @end
 

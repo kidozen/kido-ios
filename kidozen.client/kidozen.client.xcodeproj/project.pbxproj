@@ -80,7 +80,6 @@
 		8E0774B61619DC7E00FA21D9 /* KZApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774B51619DC7E00FA21D9 /* KZApplication.m */; };
 		8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774B41619DC7E00FA21D9 /* KZApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774811619D9AF00FA21D9 /* KZAuthentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774821619D9AF00FA21D9 /* KZConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -228,7 +227,6 @@
 		6DE2A0B01925502B0020C69A /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZADFSIdentityProvider.h; sourceTree = "<group>"; };
 		8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZADFSIdentityProvider.m; sourceTree = "<group>"; };
-		8E0774811619D9AF00FA21D9 /* KZAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAuthentication.h; sourceTree = "<group>"; };
 		8E0774821619D9AF00FA21D9 /* KZConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZConfiguration.h; sourceTree = "<group>"; };
 		8E0774831619D9AF00FA21D9 /* KZConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZConfiguration.m; sourceTree = "<group>"; };
 		8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZIdentityProvider.h; sourceTree = "<group>"; };
@@ -504,7 +502,6 @@
 				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
 				6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */,
 				6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */,
-				8E0774811619D9AF00FA21D9 /* KZAuthentication.h */,
 				8E0774911619D9AF00FA21D9 /* KZResponse.h */,
 				8E0774921619D9AF00FA21D9 /* KZResponse.m */,
 				8E0774991619D9AF00FA21D9 /* KZUser.h */,
@@ -563,7 +560,6 @@
 			files = (
 				6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */,
 				8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */,
-				8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */,
 				8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */,
 				8E0774CF1619F35500FA21D9 /* KZLogging.h in Headers */,
 				8E0774D01619F35500FA21D9 /* KZMail.h in Headers */,
