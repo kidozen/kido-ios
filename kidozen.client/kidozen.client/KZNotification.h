@@ -6,9 +6,7 @@
  * @version 1.00, April 2013
  */
 @interface KZNotification : KZBaseService
-{
-    NSString * deviceMacAddress;
-}
+
 /**
  * Subscribe the device to the channel
  *

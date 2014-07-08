@@ -105,8 +105,6 @@ NSString *const kAccessTokenKey = @"access_token";
 }
 
 
-#pragma mark private methods
-    
 -(NSString *)sanitizeTennantMarketPlace:(NSString *)tennant
 {
     NSMutableCharacterSet *characterSet = [NSMutableCharacterSet whitespaceCharacterSet];
