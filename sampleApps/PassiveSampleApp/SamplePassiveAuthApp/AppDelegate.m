@@ -11,9 +11,9 @@
 #import "InitialViewController.h"
 #import "MainPassiveAuthViewController.h"
 
-#define TENTANT @"https://uf.kidocloud.com"
-#define APPNAME @"timesheets"
-#define APPLICATION_KEY @"pCBp89v07I4tsVdmguN2uitmveds9HoTFpzjB60VEcI="
+#define TENTANT @""
+#define APPNAME @""
+#define APPLICATION_KEY @""
 
 @interface AppDelegate()
 
