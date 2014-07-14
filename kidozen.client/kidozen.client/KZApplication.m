@@ -134,8 +134,9 @@ NSString *const kAccessTokenKey = @"access_token";
     [self.defaultClient GET:appSettingsPath
                  parameters:@{kApplicationNameKey: self.applicationName}
                  completion:^(NSArray *configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
-                     if (configError != nil) {
-                         return [safeMe failInitializationWithError:configError];
+                     if (configError != nil || (configUrlResponse.statusCode != 200) ) {
+                         NSError *error = configError ? : [NSError errorWithDomain:@"" code:configUrlResponse.statusCode userInfo:nil];
+                         return [safeMe failInitializationWithError:error];
                      }
                      
                      if ([configResponse count] == 0) {
