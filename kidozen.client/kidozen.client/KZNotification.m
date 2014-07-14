@@ -169,8 +169,8 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
         [userDefaults setValue:uniqueID forKey:kUniqueIdentificationFilename];
         [userDefaults synchronize];
     }
-    return  uniqueID;
     
+    return  uniqueID;
 }
 
 @end

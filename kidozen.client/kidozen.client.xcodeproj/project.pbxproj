@@ -49,6 +49,8 @@
 		6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD481937CBA400958E65 /* KZObject.m */; };
 		6D4ACD631937CD1000958E65 /* KZSecurityConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD611937CD1000958E65 /* KZSecurityConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D4ACD641937CD1000958E65 /* KZSecurityConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */; };
+		6D5BBE1419741558008576D5 /* KZApplicationAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */; };
+		6D5BBE1519741558008576D5 /* KZApplicationAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */; };
 		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
 		6D8017EE1968A74800E99FB7 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8017EC1968A74800E99FB7 /* Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -210,6 +212,8 @@
 		6D4ACD481937CBA400958E65 /* KZObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZObject.m; sourceTree = "<group>"; };
 		6D4ACD611937CD1000958E65 /* KZSecurityConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZSecurityConfiguration.h; sourceTree = "<group>"; };
 		6D4ACD621937CD1000958E65 /* KZSecurityConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZSecurityConfiguration.m; sourceTree = "<group>"; };
+		6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationAuthentication.h; sourceTree = "<group>"; };
+		6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationAuthentication.m; sourceTree = "<group>"; };
 		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
 		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D8017EC1968A74800E99FB7 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../thirdParty/Base64/Base64.h; sourceTree = "<group>"; };
@@ -502,6 +506,8 @@
 				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
 				6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */,
 				6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */,
+				6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */,
+				6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */,
 				8E0774911619D9AF00FA21D9 /* KZResponse.h */,
 				8E0774921619D9AF00FA21D9 /* KZResponse.m */,
 				8E0774991619D9AF00FA21D9 /* KZUser.h */,
@@ -573,6 +579,7 @@
 				8E0774D61619F35500FA21D9 /* KZSMSSender.h in Headers */,
 				8E0774D71619F35500FA21D9 /* KZStorage.h in Headers */,
 				8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */,
+				6D5BBE1419741558008576D5 /* KZApplicationAuthentication.h in Headers */,
 				8E0774DC1619F35500FA21D9 /* Query.h in Headers */,
 				8E0774D91619F35500FA21D9 /* KZWRAPv09IdentityProvider.h in Headers */,
 				6D4ACD491937CBA400958E65 /* KZObject.h in Headers */,
@@ -763,6 +770,7 @@
 				8E0774A71619D9AF00FA21D9 /* KZMail.m in Sources */,
 				6DCB876819462C64005B75B9 /* KZPassiveAuthViewController.m in Sources */,
 				6D8017EF1968A74800E99FB7 /* Base64.m in Sources */,
+				6D5BBE1519741558008576D5 /* KZApplicationAuthentication.m in Sources */,
 				8E0774A81619D9AF00FA21D9 /* KZNotification.m in Sources */,
 				AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */,
 				6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */,

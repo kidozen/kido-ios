@@ -22,7 +22,7 @@ extern NSInteger const KZHttpErrorStatusCode;
 
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSURL * serviceUrl;
-@property (atomic) BOOL isAuthenticated;
+@property (atomic, assign) BOOL isAuthenticated;
 @property (atomic, strong) KZUser * KidoZenUser;
 
 
