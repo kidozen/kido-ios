@@ -38,6 +38,7 @@
     [self addHeadersWithTimeout:timeout];
     
     _client.sendParametersAsJSON = NO;
+    __weak KZDatasource *safeMe = self;
     
     [_client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
@@ -46,7 +47,7 @@
             error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDCALL userInfo:details];
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }
     }];
     
@@ -59,8 +60,9 @@
 -(void) InvokeWithData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
 {
     [self addHeadersWithTimeout:timeout];
-    
+
     [_client setSendParametersAsJSON:YES];
+    __weak KZDatasource *safeMe = self;
     [_client POST:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             NSMutableDictionary* details = [NSMutableDictionary dictionary];
@@ -69,7 +71,7 @@
         }
         
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }
     }];
 
@@ -144,5 +146,27 @@
     else
         [self queryWithData:d completion:block];
 }
+
+
+- (void) callCallback:(void (^)(KZResponse *))block
+             response:(id)response
+          urlResponse:(NSHTTPURLResponse *)urlResponse
+                error:(NSError *)error
+{
+    id typedResponse;
+    if ([response isKindOfClass:[NSData class]]) {
+        NSError *errorResponse;
+        typedResponse = [NSJSONSerialization JSONObjectWithData:response options:0 error:&errorResponse];
+        
+        if (typedResponse == nil) {
+            typedResponse = [NSString stringWithUTF8String:[response bytes]];
+        }
+        
+    } else {
+        typedResponse = response;
+    }
+    block( [[KZResponse alloc] initWithResponse:typedResponse urlResponse:urlResponse andError:error] );
+}
+
 
 @end
