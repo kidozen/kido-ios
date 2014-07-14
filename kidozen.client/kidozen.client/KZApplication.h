@@ -39,20 +39,14 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 @interface KZApplication : KZBaseService
 
-
-@property (nonatomic, readonly) KZCrashReporter *crashreporter;
-
 @property (atomic) BOOL strictSSL ;
-
-@property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
-@property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
-@property (copy, nonatomic) InitializationCompleteBlock onInitializationComplete;
-
-@property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
-
 @property (readonly, nonatomic) SVHTTPClient * defaultClient;
 
-@property (nonatomic, copy) NSString * lastProviderKey;
+@property (nonatomic, readonly) KZCrashReporter *crashreporter;
+@property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
+@property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
+@property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;
+@property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
 /**
  * Constructor
@@ -92,7 +86,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 -(void) authenticateUser:(NSString *)user
             withProvider:(NSString *)provider
              andPassword:(NSString *)password
-              completion:(void (^)(id))block;
+              completion:(void (^)(id))callback;
 
 -(void) authenticateUser:(NSString *)user
             withProvider:(NSString *)provider
@@ -104,7 +98,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 /**
  * Starts a passive authentication flow.
  */
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))block;
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback;
 
 @end
 

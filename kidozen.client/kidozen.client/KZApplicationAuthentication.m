@@ -24,7 +24,7 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @property (nonatomic, copy) NSString *applicationKey;
 
-@property (nonatomic, copy) NSString *tennantMarketPlace;
+@property (nonatomic, copy) NSString *tenantMarketPlace;
 
 @property (nonatomic, copy) NSString *lastUserName;
 @property (nonatomic, copy) NSString *lastPassword;
@@ -44,22 +44,33 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @property (nonatomic, assign) BOOL strictSSL;
 
+@property (nonatomic, copy) void (^tokenExpiresBlock)(id);
+
+
 @end
 
 @implementation KZApplicationAuthentication
 
 -(instancetype) initWithTokenController:(KZTokenController *)tokenController
                       applicationConfig:(KZApplicationConfiguration *)applicationConfig
+                      tenantMarketPlace:(NSString *)tenantMarketPlace
                               strictSSL:(BOOL)strictSSL
 {
     self = [super init];
     if (self) {
         self.passiveAuthenticated = NO;
+        self.strictSSL = strictSSL;
+        self.applicationConfig = applicationConfig;
+        self.tokenController = tokenController;
+        self.tenantMarketPlace = tenantMarketPlace;
     }
     return self;
 }
 
--(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
+-(void) authenticateUser:(NSString *)user
+            withProvider:(NSString *)provider
+             andPassword:(NSString *)password
+              completion:(void (^)(id))block
 {
     self.authCompletionBlock = block;
     self.lastUserName = user;
@@ -435,12 +446,12 @@ NSString *const kAccessTokenKey = @"access_token";
 
 - (NSString *) getIpCacheKey
 {
-    return [[NSString stringWithFormat:@"%@%@%@%@-ipToken", self.tennantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword] createHash];
+    return [[NSString stringWithFormat:@"%@%@%@%@-ipToken", self.tenantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword] createHash];
 }
 
 - (NSString *) getAccessTokenCacheKey
 {
-    return [[NSString stringWithFormat:@"%@%@%@%@", self.tennantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword]
+    return [[NSString stringWithFormat:@"%@%@%@%@", self.tenantMarketPlace, self.lastProviderKey, self.lastUserName, self.lastPassword]
             createHash];
 }
 

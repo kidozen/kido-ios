@@ -15,6 +15,7 @@
 
 -(id) initWithTokenController:(KZTokenController *)tokenController
             applicationConfig:(KZApplicationConfiguration *)applicationConfig
+            tenantMarketPlace:(NSString *)tenantMarketPlace
                     strictSSL:(BOOL)strictSSL;
 
 -(void) authenticateUser:(NSString *)user
@@ -38,7 +39,5 @@
 // Refreshes the current token, which can be the one obtained from authenticathing
 // via username/password, passive authentication or via application key.
 - (void)refreshCurrentToken;
-
-@property (nonatomic, copy) void (^tokenExpiresBlock)(id);
 
 @end

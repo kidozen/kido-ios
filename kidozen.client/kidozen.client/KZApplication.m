@@ -12,8 +12,7 @@
 
 #import <UIKit/UIKit.h>
 
-NSString *const KZ_APP_CONFIG_PATH = @"/publicapi/apps";
-NSString *const KZ_SEC_CONFIG_PATH = @"/publicapi/auth/config";
+NSString *const kAppConfigPath = @"/publicapi/apps";
 
 NSString *const kApplicationNameKey = @"name";
 
@@ -21,25 +20,13 @@ NSString *const kApplicationNameKey = @"name";
 
 @property (nonatomic, copy, readwrite) NSString *applicationKey;
 
-@property (nonatomic, copy) NSString *tennantMarketPlace;
+@property (nonatomic, copy) NSString *tenantMarketPlace;
 @property (nonatomic, copy) NSString *applicationName;
-@property (nonatomic, copy) NSString *notificationUrl;
-
-@property (nonatomic, assign) id<KZIdentityProvider> ip;
+@property (nonatomic, strong) SVHTTPClient * defaultClient;
 
 @property (nonatomic, strong) KZCrashReporter *crashreporter;
-
-@property (nonatomic, assign) BOOL passiveAuthenticated;
-
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
-
-@property (strong, nonatomic) SVHTTPClient * defaultClient;
-
-@property (strong, nonatomic) KZApplicationServices *appServices;
-
-@property (nonatomic, copy) NSString * lastUserName;
-@property (nonatomic, copy) NSString * lastPassword;
-
+@property (nonatomic, strong) KZApplicationServices *appServices;
 @property (nonatomic, strong) KZApplicationAuthentication *appAuthentication;
 
 @end
@@ -59,7 +46,7 @@ NSString *const kApplicationNameKey = @"name";
 @implementation KZApplication
 
 
--(id) initWithTenantMarketPlace:(NSString *)tennantMarketPlace
+-(id) initWithTenantMarketPlace:(NSString *)tenantMarketPlace
                 applicationName:(NSString *)applicationName
                  applicationKey:(NSString *)applicationKey
                       strictSSL:(BOOL)strictSSL
@@ -69,21 +56,19 @@ NSString *const kApplicationNameKey = @"name";
     
     if (self)
     {
-        [self validateMarketPlace:tennantMarketPlace
+        [self validateMarketPlace:tenantMarketPlace
                   applicationName:applicationName
                    applicationKey:applicationKey];
         
         self.applicationKey = applicationKey;
         
-        self.tennantMarketPlace = [self sanitizeTennantMarketPlace:tennantMarketPlace];
+        self.tenantMarketPlace = [self sanitizeTennantMarketPlace:tenantMarketPlace];
         self.applicationName = applicationName;
         self.onInitializationComplete = callback;
         self.strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
         
         [self initializeServices];
         self.tokenController = [[KZTokenController alloc] init];
-        
-        self.appAuthentication = [[KZApplicationAuthentication alloc] init];
 
     }
     return self;
@@ -127,10 +112,10 @@ NSString *const kApplicationNameKey = @"name";
 {
     __weak KZApplication *safeMe = self;
     
-    NSString * appSettingsPath = [NSString stringWithFormat:KZ_APP_CONFIG_PATH];
+    NSString * appSettingsPath = [NSString stringWithFormat:kAppConfigPath];
     [self initializeHttpClient];
     
-    [self.defaultClient setBasePath:self.tennantMarketPlace];
+    [self.defaultClient setBasePath:self.tenantMarketPlace];
     
     [self.defaultClient GET:appSettingsPath
                  parameters:@{kApplicationNameKey: self.applicationName}
@@ -158,6 +143,7 @@ NSString *const kApplicationNameKey = @"name";
                      }
                      
                      [safeMe configureApplicationServices];
+                     [safeMe configureAuthentication];
                      
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
                          
@@ -176,6 +162,14 @@ NSString *const kApplicationNameKey = @"name";
                                                                error:configError];
                      }
       }];
+}
+
+- (void) configureAuthentication
+{
+    self.appAuthentication = [[KZApplicationAuthentication alloc] initWithTokenController:self.tokenController
+                                                                        applicationConfig:self.applicationConfig
+                                                                        tenantMarketPlace:self.tenantMarketPlace
+                                                                                strictSSL:self.strictSSL];
 }
 
 - (void) configureApplicationServices
