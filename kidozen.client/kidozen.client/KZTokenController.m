@@ -78,6 +78,7 @@
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
 {
 #ifdef CURRENTLY_TESTING
+    NSLog(@"-- Currently testing, setting timeout to 30 sec.");
     timeout = 30;
 #endif
 
