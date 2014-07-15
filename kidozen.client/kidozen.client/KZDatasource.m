@@ -115,15 +115,7 @@
 {
     NSDictionary * d = [self dataAsDictionary:data];
     if (!d) {
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:@"Invalid parameter. Must be a serializable json or nsdictionary" forKey:NSLocalizedDescriptionKey];
-        NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
-        if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:Nil
-                                            urlResponse:nil
-                                               andError:error] );
-        }
-
+        [self handleDictionaryErrorWithCallback:block];
     }
     else
         [self invokeWithData:d completion:block];
@@ -133,20 +125,26 @@
 {
     NSDictionary * d = [self dataAsDictionary:data];
     if (!d) {
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:@"Invalid parameter. Must be a serializable json or nsdictionary" forKey:NSLocalizedDescriptionKey];
-        NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
-        if (block != nil) {            
-            block( [[KZResponse alloc] initWithResponse:Nil
-                                            urlResponse:nil
-                                               andError:error] );
-            
-        }
+        [self handleDictionaryErrorWithCallback:block];
     }
     else
         [self queryWithData:d completion:block];
 }
 
+- (void) handleDictionaryErrorWithCallback:(void(^)(KZResponse *))callback
+{
+    NSMutableDictionary* details = [NSMutableDictionary dictionary];
+    details[NSLocalizedDescriptionKey] = @"Invalid parameter. Must be a serializable json or nsdictionary";
+    
+    NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
+    if (callback != nil) {
+        callback( [[KZResponse alloc] initWithResponse:Nil
+                                        urlResponse:nil
+                                           andError:error] );
+        
+    }
+    
+}
 
 - (void) callCallback:(void (^)(KZResponse *))block
              response:(id)response
