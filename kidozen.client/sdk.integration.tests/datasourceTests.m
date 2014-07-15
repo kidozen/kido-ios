@@ -83,7 +83,7 @@
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     [ds QueryWithTimeout:1 callback:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
-        XCTAssertEqual(408,r.urlResponse.statusCode, @"Must be a timeout response");
+        XCTAssertEqualObjects([[r.response objectForKey:@"error"] objectForKey:@"code"], @"ETIMEDOUT", @"Must timeout"); ;
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
@@ -112,7 +112,7 @@
     
     [ds InvokeWithTimeout:1 callback:^(KZResponse *r) {
         XCTAssertNotNil(r,@"invalid response");
-        XCTAssertEqual(408,r.urlResponse.statusCode, @"Must be a timeout response");
+        XCTAssertEqualObjects([[r.response objectForKey:@"error"] objectForKey:@"code"], @"ETIMEDOUT", @"Must timeout"); ;
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
