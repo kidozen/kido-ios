@@ -66,9 +66,9 @@ NSString *const kApplicationNameKey = @"name";
         self.applicationName = applicationName;
         self.onInitializationComplete = callback;
         self.strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
+        self.tokenController = [[KZTokenController alloc] init];
         
         [self initializeServices];
-        self.tokenController = [[KZTokenController alloc] init];
 
     }
     return self;
@@ -147,7 +147,8 @@ NSString *const kApplicationNameKey = @"name";
                      
                      if ([safeMe shouldAskTokenWithForApplicationKey]) {
                          
-                         [safeMe.appAuthentication handleAuthenticationWithApplicationKey:self.applicationKey callback:^(NSError *error) {
+                         [safeMe.appAuthentication handleAuthenticationWithApplicationKey:self.applicationKey
+                                                                                 callback:^(NSError *error) {
                              
                              NSError *firstError = configError ?:error;
                              [safeMe didFinishInitializationWithResponse:configResponse
