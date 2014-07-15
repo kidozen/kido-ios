@@ -81,6 +81,9 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 @end
 
+
+#pragma mark - Authentication Related methods
+
 @interface KZApplication(Authentication)
 
 -(void) authenticateUser:(NSString *)user
