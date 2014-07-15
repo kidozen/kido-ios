@@ -20,8 +20,6 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @interface KZApplicationAuthentication()
 
-@property (nonatomic, copy) void (^authCompletionBlock)(id);
-
 @property (nonatomic, copy) NSString *applicationKey;
 
 @property (nonatomic, copy) NSString *tenantMarketPlace;
@@ -43,9 +41,6 @@ NSString *const kAccessTokenKey = @"access_token";
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
 
 @property (nonatomic, assign) BOOL strictSSL;
-
-@property (nonatomic, copy) void (^tokenExpiresBlock)(id);
-
 
 @end
 

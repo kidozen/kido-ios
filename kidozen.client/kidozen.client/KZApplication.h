@@ -43,8 +43,6 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 @property (readonly, nonatomic) SVHTTPClient * defaultClient;
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
-@property (nonatomic, copy) AuthCompletionBlock authCompletionBlock;
-@property (nonatomic, copy) TokenExpiresBlock tokenExpiresBlock;
 @property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
 
@@ -102,6 +100,17 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * Starts a passive authentication flow.
  */
 - (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback;
+
+/* If you want to change the authentication callback, you can do so by
+ * setting this property.
+ */
+- (void) setAuthCompletionBlock:(AuthCompletionBlock)authCompletionBlock;
+
+/*
+ * This is the callback that will get called when your token expires.
+ */
+- (void)setTokenExpiresBlock:(TokenExpiresBlock)tokenExpiresBlock;
+
 
 @end
 

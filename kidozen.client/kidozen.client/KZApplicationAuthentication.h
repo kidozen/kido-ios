@@ -40,4 +40,8 @@
 // via username/password, passive authentication or via application key.
 - (void)refreshCurrentToken;
 
+@property (nonatomic, copy) void (^tokenExpiresBlock)(id);
+
+@property (nonatomic, copy) void (^authCompletionBlock)(id);
+
 @end

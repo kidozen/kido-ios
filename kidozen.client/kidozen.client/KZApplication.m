@@ -281,6 +281,15 @@ NSString *const kApplicationNameKey = @"name";
     
 }
 
+- (void) setAuthCompletionBlock:(AuthCompletionBlock)authCompletionBlock
+{
+    [self.appAuthentication setAuthCompletionBlock:authCompletionBlock];
+}
+
+- (void)setTokenExpiresBlock:(TokenExpiresBlock)tokenExpiresBlock
+{
+    self.appAuthentication.tokenExpiresBlock = tokenExpiresBlock;
+}
 
 @end
 
