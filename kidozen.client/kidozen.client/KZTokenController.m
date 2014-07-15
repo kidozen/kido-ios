@@ -77,6 +77,10 @@
 
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
 {
+#ifdef CURRENTLY_TESTING
+    timeout = 30;
+#endif
+
     if (timeout > 0) {
         self.timerCallback = callback;
         if (self.tokenTimer != nil) {
@@ -96,6 +100,8 @@
             [[NSRunLoop currentRunLoop] addTimer:safeTokenTimer forMode:NSDefaultRunLoopMode];
             [[NSRunLoop currentRunLoop] run];
         });
+    } else {
+        NSLog(@"Warning, key expiration is zero");
     }
 }
 
