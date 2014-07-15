@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/*
+ * This ViewController contains a webview which displays all available 
+ * User Sources, such as Facebook, Twitter, FourSquare, etc...
+ */
 @interface KZPassiveAuthViewController : UIViewController
 
 - (id) initWithURLString:(NSString *)urlString;
