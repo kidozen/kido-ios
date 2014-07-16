@@ -15,6 +15,7 @@
 #import "SVHTTPClient.h"
 #import "KZUser.h"
 #import "KZPassiveAuthViewController.h"
+#import "NSData+Conversion.h"
 
 NSString *const kAccessTokenKey = @"access_token";
 
@@ -242,7 +243,14 @@ NSString *const kAccessTokenKey = @"access_token";
                    postContentDictionary:[self dictionaryForTokenUsingApplicationKey]
                                 callback:^(id responseForToken, NSError *error) {
                                     
-                                    if (error != nil) {
+                                    if (error != nil || [responseForToken isKindOfClass:[NSData class]]) {
+                                        if (error == nil) {
+                                            NSString *message = [responseForToken KZ_UTF8String] : ? @"Error while authenticating with applicationKey.";
+                                            error = [NSError errorWithDomain:@""
+                                                                        code:0
+                                                                    userInfo:@{@"message": message}];
+                                        }
+                                        
                                         callback(error);
                                         return;
                                     }

@@ -2,6 +2,7 @@
 #import "KZWRAPv09IdentityProvider.h"
 #import "KZTokenController.h"
 #import "KZBaseService+ProtectedMethods.h"
+#import "NSData+Conversion.h"
 
 #define ENULLPARAM       1
 
@@ -70,16 +71,7 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
 {
     id typedResponse;
     if ([response isKindOfClass:[NSData class]]) {
-        NSError *errorResponse;
-        typedResponse = [NSJSONSerialization JSONObjectWithData:response options:0 error:&errorResponse];
-        
-        if (typedResponse == nil) {
-            typedResponse = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-            if (typedResponse == nil) {
-                typedResponse = [NSString stringWithUTF8String:[response bytes]];
-            }
-        }
-        
+        typedResponse = [response KZ_UTF8String];
     } else {
         typedResponse = response;
     }

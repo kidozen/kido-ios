@@ -3,4 +3,7 @@
 @interface NSData (Conversion)
 #pragma mark - String Conversion
 - (NSString *)hexadecimalString;
+
+- (NSString *)KZ_UTF8String;
+
 @end
