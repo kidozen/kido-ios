@@ -40,7 +40,6 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 @interface KZApplication : KZBaseService
 
 @property (atomic) BOOL strictSSL ;
-@property (readonly, nonatomic) SVHTTPClient * defaultClient;
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 @property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;

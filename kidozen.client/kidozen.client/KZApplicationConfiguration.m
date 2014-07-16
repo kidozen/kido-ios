@@ -7,7 +7,13 @@
 //
 
 #import "KZApplicationConfiguration.h"
+#import "KZResponse.h"
+#import "SVHTTPClient.h"
+
 #import <objc/runtime.h>
+
+NSString *const kAppConfigPath = @"/publicapi/apps";
+NSString *const kApplicationNameKey = @"name";
 
 @interface KZObject()
 
@@ -51,13 +57,15 @@
 @property (nonatomic, copy, readwrite) NSString *html5Url;
 @property (nonatomic, strong) KZAuthenticationConfig *authConfig;
 
+@property (nonatomic, strong) SVHTTPClient * httpClient;
+@property (nonatomic, assign) BOOL strictSSL;
+
 @end
 
 
 @implementation KZApplicationConfiguration
 
-
-- (id)initWithDictionary:(NSDictionary *)configDictionary error:(NSError **)error
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -66,13 +74,66 @@
                                    @"description" : @"applicationDescription",
                                    @"logging-v3" : @"loggingV3"};
         
-        [self configureWithDictionary:configDictionary];
-        
-        *error = [self validateServices];
-        
     }
-    
     return self;
+}
+
+- (void)setupWithApplicationName:(NSString *)applicationName
+                         tennant:(NSString *)tenantMarketPlace
+                       strictSSL:(BOOL)strictSSL
+                      completion:(void(^)(id configResponse,
+                                          NSHTTPURLResponse *configUrlResponse,
+                                          NSError *error))cb
+{
+    
+    __weak KZApplicationConfiguration *safeMe = self;
+    
+    [self initializeHttpClientWithStrictSSL:strictSSL];
+    [self.httpClient setBasePath:tenantMarketPlace];
+
+    NSString * appSettingsPath = [NSString stringWithFormat:kAppConfigPath];
+    
+    [self.httpClient GET:appSettingsPath
+              parameters:@{kApplicationNameKey: applicationName}
+              completion:^(id configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
+                     
+                     // Handle configError
+                     if (configError != nil || (configUrlResponse.statusCode != 200) ) {
+                         
+                         NSError *localError = configError ? : [NSError errorWithDomain:@""
+                                                                                   code:configUrlResponse.statusCode
+                                                                               userInfo:nil];
+                         return cb(configResponse, configUrlResponse, localError);
+                         
+                     }
+                     
+                     // Handle case where there is no configuration.
+                     if ([configResponse count] == 0) {
+                         NSDictionary *userInfo = @{ @"error": @"configResponse dictionary is empty"};
+                         
+                         NSError *localError = [NSError errorWithDomain:@"KZApplicationError"
+                                                              code:0
+                                                          userInfo:userInfo];
+                         return cb(configResponse, configUrlResponse, localError);
+                     }
+                     
+                     
+                     [safeMe configureWithDictionary:[configResponse objectAtIndex:0]];
+                     
+                     NSError *servicesError = [self validateServices];
+
+                     return cb(configResponse, configUrlResponse, servicesError);
+                     
+                 }];
+    
+}
+
+-(void) initializeHttpClientWithStrictSSL:(BOOL)strictSSL
+{
+    if (!self.httpClient) {
+        self.httpClient = [[SVHTTPClient alloc] init];
+        [self.httpClient setDismissNSURLAuthenticationMethodServerTrust:strictSSL];
+    }
 }
 
 - (NSError *) validateServices

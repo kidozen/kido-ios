@@ -10,10 +10,17 @@
 #import "KZObject.h"
 
 @class KZAuthenticationConfig;
+@class KZResponse;
 
 @interface KZApplicationConfiguration : KZObject
 
-- (id)initWithDictionary:(NSDictionary *)configDictionary error:(NSError **)error;
+- (void)setupWithApplicationName:(NSString *)applicationName
+                         tennant:(NSString *)tenantMarketPlace
+                       strictSSL:(BOOL)strictSSL
+                      completion:(void(^)(id configResponse,
+                                          NSHTTPURLResponse *configUrlResponse,
+                                          NSError *error))cb;
+
 
 @property (nonatomic, copy, readonly) NSString *displayName;
 @property (nonatomic, copy, readonly) NSString *customUrl;

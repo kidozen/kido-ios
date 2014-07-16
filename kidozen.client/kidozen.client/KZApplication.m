@@ -12,34 +12,17 @@
 
 #import <UIKit/UIKit.h>
 
-NSString *const kAppConfigPath = @"/publicapi/apps";
-
-NSString *const kApplicationNameKey = @"name";
-
 @interface KZApplication ()
 
 @property (nonatomic, copy, readwrite) NSString *applicationKey;
 
 @property (nonatomic, copy) NSString *tenantMarketPlace;
 @property (nonatomic, copy) NSString *applicationName;
-@property (nonatomic, strong) SVHTTPClient * defaultClient;
 
 @property (nonatomic, strong) KZCrashReporter *crashreporter;
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
 @property (nonatomic, strong) KZApplicationServices *appServices;
 @property (nonatomic, strong) KZApplicationAuthentication *appAuthentication;
-
-@end
-
-
-@interface KZApplication(PrivateAuthentication)
-
-- (void)authenticateWithApplicationKey:(NSString *)applicationKey
-                 postContentDictionary:(NSDictionary *)postContentDictionary
-                              callback:(void(^)(NSString *tokenForProvidedApplicationKey, NSError *error))callback;
-
-- (NSString *) getIpCacheKey;
-- (NSString *) getAccessTokenCacheKey;
 
 @end
 
@@ -67,6 +50,7 @@ NSString *const kApplicationNameKey = @"name";
         self.onInitializationComplete = callback;
         self.strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
         self.tokenController = [[KZTokenController alloc] init];
+        self.applicationConfig = [[KZApplicationConfiguration alloc] init];
         
         [self initializeServices];
 
@@ -99,70 +83,39 @@ NSString *const kApplicationNameKey = @"name";
     return [tennant stringByTrimmingCharactersInSet:characterSet];
 }
 
-- (void) initialzeDefaultHttpClient
-{
-    if (!self.defaultClient) {
-        self.defaultClient = [[SVHTTPClient alloc] init];
-        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:self.strictSSL];
-    }
-
-}
-
 -(void) initializeServices
 {
     __weak KZApplication *safeMe = self;
     
-    NSString * appSettingsPath = [NSString stringWithFormat:kAppConfigPath];
-    [self initializeHttpClient];
-    
-    [self.defaultClient setBasePath:self.tenantMarketPlace];
-    
-    [self.defaultClient GET:appSettingsPath
-                 parameters:@{kApplicationNameKey: self.applicationName}
-                 completion:^(NSArray *configResponse, NSHTTPURLResponse *configUrlResponse, NSError *configError) {
-                     if (configError != nil || (configUrlResponse.statusCode != 200) ) {
-                         NSError *error = configError ? : [NSError errorWithDomain:@"" code:configUrlResponse.statusCode userInfo:nil];
-                         return [safeMe failInitializationWithError:error];
-                     }
-                     
-                     if ([configResponse count] == 0) {
-                         NSDictionary *userInfo = @{ @"error": @"configResponse dictionary is empty"};
-                         
-                         NSError *error = [NSError errorWithDomain:@"KZApplicationError"
-                                                              code:0
-                                                          userInfo:userInfo];
-                         return [safeMe failInitializationWithError:error];
-                     }
-                     
-                     NSError *error;
-                     safeMe.applicationConfig = [[KZApplicationConfiguration alloc] initWithDictionary:[configResponse objectAtIndex:0]
-                                                                                                 error:&error];
-                     
-                     if (error != nil) {
-                         return [safeMe failInitializationWithError:error];
-                     }
-                     
-                     [safeMe configureApplicationServices];
-                     [safeMe configureAuthentication];
-                     
-                     if ([safeMe shouldAskTokenWithForApplicationKey]) {
-                         
-                         [safeMe.appAuthentication handleAuthenticationWithApplicationKey:self.applicationKey
-                                                                                 callback:^(NSError *error) {
-                             
-                             NSError *firstError = configError ?:error;
-                             [safeMe didFinishInitializationWithResponse:configResponse
-                                                             urlResponse:configUrlResponse
-                                                                   error:firstError];
-                         }];
-                         
-
-                     } else {
-                         [safeMe didFinishInitializationWithResponse:configResponse
-                                                         urlResponse:configUrlResponse
-                                                               error:configError];
-                     }
-      }];
+    [self.applicationConfig setupWithApplicationName:self.applicationName
+                                             tennant:self.tenantMarketPlace
+                                           strictSSL:self.strictSSL
+                                          completion:^(id configResponse,
+                                                       NSHTTPURLResponse *configUrlResponse,
+                                                       NSError *configError)
+     {
+         if (configError != nil) {
+             return [safeMe failInitializationWithError:configError];
+         }
+         
+         [safeMe configureApplicationServices];
+         [safeMe configureAuthentication];
+         
+         if ([safeMe shouldAskTokenWithForApplicationKey]) {
+             
+             [safeMe.appAuthentication handleAuthenticationWithApplicationKey:self.applicationKey
+                                                                     callback:^(NSError *authError)
+              {
+                  [safeMe didFinishInitializationWithResponse:configResponse
+                                                  urlResponse:configUrlResponse
+                                                        error:authError];
+              }];
+         } else {
+             [safeMe didFinishInitializationWithResponse:configResponse
+                                             urlResponse:configUrlResponse
+                                                   error:configError];
+         }
+     }];
 }
 
 - (void) configureAuthentication
@@ -228,14 +181,6 @@ NSString *const kApplicationNameKey = @"name";
         }
     }
 
-}
-
--(void) initializeHttpClient
-{
-    if (!self.defaultClient) {
-        self.defaultClient = [[SVHTTPClient alloc] init];
-        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:self.strictSSL];
-    }
 }
 
 @end
