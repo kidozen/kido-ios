@@ -25,7 +25,7 @@
  */
 @property (nonatomic, strong) NSArray * roles;
 /**
- * The expiration in miliseconds
+ * The expiration in seconds
  */
 @property (nonatomic) int expiresOn;
 /**

@@ -3,7 +3,7 @@
 #define ISO_TIMEZONE_UTC_FORMAT @"Z"
 #define ISO_TIMEZONE_OFFSET_FORMAT @"%+02d%02d"
 
-@interface KZStorageMetadata (private)
+@interface KZStorageMetadata ()
 - (NSString *) getStringFromDate:(NSDate *) date;
 - (NSDate *) getDateFromString:(NSString *) dateAsString;
 @end

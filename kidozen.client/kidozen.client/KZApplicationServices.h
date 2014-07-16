@@ -22,6 +22,10 @@
 @class KZMail;
 @class KZNotification;
 
+/*
+ * The main idea of this class is to handle everything related to Logging,
+ * Email, notifications, SMS, etc...
+ */
 @interface KZApplicationServices : NSObject
 
 - (instancetype)initWithApplicationConfig:(KZApplicationConfiguration *)applicationConfig
@@ -34,8 +38,10 @@
 - (KZConfiguration *)ConfigurationWithName:(NSString *)name;
 - (KZSMSSender *)SMSSenderWithNumber:(NSString *)number;
 - (KZDatasource *)DataSourceWithName:(NSString *)name;
-- (KZPubSubChannel *)PubSubChannelWithName:(NSString *) name;
 
+#if TARGET_OS_IPHONE
+- (KZPubSubChannel *)PubSubChannelWithName:(NSString *) name;
+#endif
 
 #pragma mark - Logging
 

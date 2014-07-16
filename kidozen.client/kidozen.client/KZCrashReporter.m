@@ -19,8 +19,6 @@
 
 @implementation KZCrashReporter
 
-@synthesize reporterServiceUrl = _reporterServiceUrl;
-
 NSMutableDictionary * internalCrashReporterInfo;
 
 static int breadCrumbsFd;
@@ -54,11 +52,6 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     }
     [url appendString: @"api/v3/logging/crash/ios/dump"];
     _reporterServiceUrl = url;
-}
-
--(NSString *) reporterServiceUrl
-{
-    return _reporterServiceUrl;
 }
 
 -(void) enableCrashReporter {

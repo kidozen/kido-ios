@@ -11,6 +11,9 @@
 @class KZTokenController;
 @class KZApplicationConfiguration;
 
+/* 
+ * This class concentrates all authentication methods.
+ */
 @interface KZApplicationAuthentication : NSObject
 
 -(id) initWithTokenController:(KZTokenController *)tokenController

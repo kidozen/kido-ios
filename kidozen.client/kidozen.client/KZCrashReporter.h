@@ -10,6 +10,9 @@
 #import <CrashReporter.h>
 #import "KZBaseService.h"
 
+/* 
+ * This class will handle the crash reporting feature in the SDK.
+ */
 @interface KZCrashReporter : KZBaseService
 
 - (id) initWithURLString:(NSString *)url tokenController:(KZTokenController *)tokenController;
@@ -19,11 +22,11 @@
 @property (nonatomic, copy, readonly) NSString *version;
 @property (nonatomic, copy, readonly) NSString *build;
 
-@property (atomic) BOOL isInitialized ;
-@property (atomic, weak) PLCrashReporter * baseReporter;
-@property (atomic, strong) NSString * reporterServiceUrl;
-@property (atomic, strong) NSString * crashReportContentAsString;
-@property (atomic, strong) NSError * crashReporterError;
-@property (atomic, strong) NSDictionary * crashReporterInfo;
+@property (nonatomic, assign) BOOL isInitialized ;
+@property (nonatomic, weak) PLCrashReporter * baseReporter;
+@property (nonatomic, copy) NSString * reporterServiceUrl;
+@property (nonatomic, copy) NSString * crashReportContentAsString;
+@property (nonatomic, strong) NSError * crashReporterError;
+@property (nonatomic, strong) NSDictionary * crashReporterInfo;
 
 @end

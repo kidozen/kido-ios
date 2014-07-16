@@ -111,8 +111,6 @@
 		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
 		AACBD73B18CA579400518D14 /* applicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationTests.m */; };
-		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6B2A6166915AF00AED1AF /* KZConstants.m */; };
 		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */; };
 		AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1E4B88183127860059314D /* XCTest.framework */; };
@@ -285,8 +283,6 @@
 		AADA4204165D327400EB6443 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		AADA4206165D32B900EB6443 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AADA4208165D32BE00EB6443 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		AAE6B2A5166915AF00AED1AF /* KZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZConstants.h; sourceTree = "<group>"; };
-		AAE6B2A6166915AF00AED1AF /* KZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZConstants.m; sourceTree = "<group>"; };
 		AAE6E88418C0E80B00FB046A /* datasourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = datasourceTests.m; path = ../sdk.integration.tests/datasourceTests.m; sourceTree = "<group>"; };
 		AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDatasource.h; sourceTree = "<group>"; };
 		AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDatasource.m; sourceTree = "<group>"; };
@@ -510,8 +506,6 @@
 				8E0774A21619D9AF00FA21D9 /* Query.m */,
 				AA211CDA1667B35600848407 /* KZStorageMetadata.h */,
 				AA211CDB1667B35600848407 /* KZStorageMetadata.m */,
-				AAE6B2A5166915AF00AED1AF /* KZConstants.h */,
-				AAE6B2A6166915AF00AED1AF /* KZConstants.m */,
 				8EB8652D1614D11800DD60E6 /* Supporting Files */,
 			);
 			path = kidozen.client;
@@ -578,7 +572,6 @@
 				8E0774D91619F35500FA21D9 /* KZWRAPv09IdentityProvider.h in Headers */,
 				6D4ACD491937CBA400958E65 /* KZObject.h in Headers */,
 				AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */,
-				AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */,
 				6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */,
 				AAC92C471725954200D1FF88 /* KZService.h in Headers */,
 				AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */,
@@ -781,7 +774,6 @@
 				8E0774B61619DC7E00FA21D9 /* KZApplication.m in Sources */,
 				AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */,
 				AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */,
-				AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */,
 				AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */,
 				6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */,
 				AAC92C481725954200D1FF88 /* KZService.m in Sources */,
