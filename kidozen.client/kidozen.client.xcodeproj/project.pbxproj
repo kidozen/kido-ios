@@ -43,6 +43,7 @@
 		6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
 		6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
 		6D4001481976C42B00D5F511 /* serviceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4001471976C42B00D5F511 /* serviceTests.m */; };
+		6D40014F1976CE9E00D5F511 /* smsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D40014E1976CE9E00D5F511 /* smsTests.m */; };
 		6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D43DBDF1968BF2300D023CF /* kz.client.a */; };
 		6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */; };
@@ -202,6 +203,7 @@
 		6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mongo.h"; sourceTree = "<group>"; };
 		6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Mongo.m"; sourceTree = "<group>"; };
 		6D4001471976C42B00D5F511 /* serviceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = serviceTests.m; sourceTree = "<group>"; };
+		6D40014E1976CE9E00D5F511 /* smsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = smsTests.m; sourceTree = "<group>"; };
 		6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../thirdParty/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		6D43DBDF1968BF2300D023CF /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../outputLibrary/kz.client.a; sourceTree = "<group>"; };
 		6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationConfiguration.h; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				6D1C85AE1917B71A00E59BD8 /* loggingTests.m */,
 				6D291A87191BFE28003AEFAF /* storageTests.m */,
 				6D677C3F1921073B000DF367 /* mailTests.m */,
+				6D40014E1976CE9E00D5F511 /* smsTests.m */,
 				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
 			);
 			path = "Integration Tests";
@@ -790,6 +793,7 @@
 				6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
 				AACBD73B18CA579400518D14 /* applicationTests.m in Sources */,
 				AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */,
+				6D40014F1976CE9E00D5F511 /* smsTests.m in Sources */,
 				AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */,
 				6D677C401921073B000DF367 /* mailTests.m in Sources */,
 				6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */,

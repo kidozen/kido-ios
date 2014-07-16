@@ -202,6 +202,7 @@
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __weak loggingTests *safeMe = self;
+    
     safeMe.application.authCompletionBlock = ^(KZUser *response) {
         XCTAssert([response isKindOfClass:[KZUser class]], @"Must be an instance of KZUser");
         dispatch_semaphore_signal(semaphore);
