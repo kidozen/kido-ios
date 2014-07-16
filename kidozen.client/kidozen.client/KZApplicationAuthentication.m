@@ -245,7 +245,7 @@ NSString *const kAccessTokenKey = @"access_token";
                                     
                                     if (error != nil || [responseForToken isKindOfClass:[NSData class]]) {
                                         if (error == nil) {
-                                            NSString *message = [responseForToken KZ_UTF8String] : ? @"Error while authenticating with applicationKey.";
+                                            NSString *message = [responseForToken KZ_UTF8String] ?: @"Error while authenticating with applicationKey.";
                                             error = [NSError errorWithDomain:@""
                                                                         code:0
                                                                     userInfo:@{@"message": message}];
