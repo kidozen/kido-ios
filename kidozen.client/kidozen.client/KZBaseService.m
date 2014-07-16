@@ -1,6 +1,7 @@
 #import "KZBaseService.h"
 #import "KZWRAPv09IdentityProvider.h"
 #import "KZTokenController.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 #define ENULLPARAM       1
 
@@ -61,5 +62,29 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
         NSLog(@"WARNING - NO AUTH HEADER");
     }
 }
+
+- (void) callCallback:(void (^)(KZResponse *))block
+             response:(id)response
+          urlResponse:(NSHTTPURLResponse *)urlResponse
+                error:(NSError *)error
+{
+    id typedResponse;
+    if ([response isKindOfClass:[NSData class]]) {
+        NSError *errorResponse;
+        typedResponse = [NSJSONSerialization JSONObjectWithData:response options:0 error:&errorResponse];
+        
+        if (typedResponse == nil) {
+            typedResponse = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            if (typedResponse == nil) {
+                typedResponse = [NSString stringWithUTF8String:[response bytes]];
+            }
+        }
+        
+    } else {
+        typedResponse = response;
+    }
+    block( [[KZResponse alloc] initWithResponse:typedResponse urlResponse:urlResponse andError:error] );
+}
+
 
 @end

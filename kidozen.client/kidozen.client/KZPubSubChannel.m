@@ -1,4 +1,5 @@
 #import "KZPubSubChannel.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZPubSubChannel
 @synthesize wsEndpoint = _wsEndpoint;
@@ -23,13 +24,15 @@
         [_client setSendParametersAsJSON:YES];
     }
     [_client setSendParametersAsJSON:YES];
+    __weak KZPubSubChannel *safeMe = self;
+    
     [_client POST:[NSString stringWithFormat:@"/%@", self.channelName]  parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }

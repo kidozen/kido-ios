@@ -1,5 +1,6 @@
 #import "KZSMSSender.h"
 #import "NSString+Utilities.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZSMSSender
 
@@ -15,13 +16,15 @@
     NSString * url = [NSString stringWithFormat:@"?to=%@&message=%@", nr, [message encodeUsingEncoding:NSUTF8StringEncoding] ];
 
 
+    __weak KZSMSSender *safeMe = self;
+    
     [_client POST:url parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 
@@ -29,13 +32,15 @@
 -(void) getStatus:(NSString *)messageId completion:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
+    __weak KZSMSSender *safeMe = self;
+
     [_client GET:[NSString stringWithFormat:@"/%@",messageId] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }

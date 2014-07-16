@@ -1,4 +1,5 @@
 #import "KZMail.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZMail
 
@@ -51,6 +52,7 @@
               completion:(void (^)(KZResponse *r))block
 {
     [self addAuthorizationHeader];
+    __weak KZMail *safeMe = self;
     
     [_client POST:path parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -58,7 +60,7 @@
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }

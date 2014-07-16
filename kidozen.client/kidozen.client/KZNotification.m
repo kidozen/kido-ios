@@ -1,8 +1,5 @@
-#include <sys/socket.h>
-#include <sys/sysctl.h>
-#include <net/if.h>
-#include <net/if_dl.h>
 #import "KZNotification.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename";
 
@@ -56,6 +53,8 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
                            @"deviceId" :self.uniqueIdentifier};
     
     [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+    
     [_client setSendParametersAsJSON:YES];
     [_client POST:path parameters:body completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -63,7 +62,7 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
     
@@ -85,13 +84,15 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     NSString * path= [NSString stringWithFormat:@"/push/%@/%@", self.name, channel];
     [self addAuthorizationHeader];
     [_client setSendParametersAsJSON:YES];
+
+    __weak KZNotification *safeMe = self;
     [_client POST:path parameters:notification completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError]);
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }
@@ -100,13 +101,15 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
 {
     NSString * path= [NSString stringWithFormat:@"/devices/%@/%@", self.uniqueIdentifier, self.name];
     [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+    
     [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }
@@ -115,6 +118,8 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
 {
     NSString * path= [NSString stringWithFormat:@"/channels/%@", self.name];
     [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+
     [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -122,7 +127,7 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
         }
         
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }
@@ -146,13 +151,15 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     }
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@/%@", self.name, channel, deviceToken];
     [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+
     [_client DELETE:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }

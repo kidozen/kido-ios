@@ -2,6 +2,7 @@
 #import "NSData+SRB64Additions.h"
 #import "KZTokenController.h"
 #import "NSData+Conversion.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZService
 
@@ -52,6 +53,8 @@
     [_client setHeaders:headersToUse];
     [_client setSendParametersAsJSON:YES];
     
+    __weak KZService *safeMe = self;
+    
     [_client POST:[NSString stringWithFormat:@"invoke/%@",method] parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
@@ -59,24 +62,7 @@
         }
         
         if (block != nil) {
-            id typedResponse;
-            if ([response isKindOfClass:[NSData class]]) {
-                NSError *errorResponse;
-                typedResponse = [NSJSONSerialization JSONObjectWithData:response options:0 error:&errorResponse];
-                
-                if (typedResponse == nil) {
-                    typedResponse = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
-                    
-                    if (typedResponse == nil) {
-                        typedResponse = [NSString stringWithUTF8String:[response bytes]];
-                    }
-                }
-                
-            } else {
-                typedResponse = response;
-            }
-            
-            block( [[KZResponse alloc] initWithResponse:typedResponse urlResponse:urlResponse andError:error] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }
     }];
 }

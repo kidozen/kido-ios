@@ -1,4 +1,5 @@
 #import "KZLogging.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZLogging
 
@@ -18,6 +19,8 @@
     [_client setSendParametersAsJSON:YES];
     NSString *path = [self pathForLevel:level message:message];
     
+    __weak KZLogging *safeMe = self;
+    
     [_client POST:path
        parameters:object
        completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
@@ -26,7 +29,7 @@
                restError = error;
            }
            if (block != nil) {
-               block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+               [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
            }
     }];
 }
@@ -39,13 +42,15 @@
 -(void) all:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
+    __weak KZLogging *safeMe = self;
+    
     [_client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
     
@@ -53,13 +58,15 @@
 -(void) clear:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
+    __weak KZLogging *safeMe = self;
+    
     [_client DELETE:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 
@@ -69,6 +76,7 @@
     [self addAuthorizationHeader];
     
     NSDictionary *parameters = @{@"query": query};
+    __weak KZLogging *safeMe = self;
     
     [_client GET:@"/" parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -76,7 +84,7 @@
             restError = error;
         }
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
         }
     }];
 }
