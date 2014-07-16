@@ -157,7 +157,10 @@
         typedResponse = [NSJSONSerialization JSONObjectWithData:response options:0 error:&errorResponse];
         
         if (typedResponse == nil) {
-            typedResponse = [NSString stringWithUTF8String:[response bytes]];
+            typedResponse = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+            if (typedResponse == nil) {
+                typedResponse = [NSString stringWithUTF8String:[response bytes]];
+            }
         }
         
     } else {

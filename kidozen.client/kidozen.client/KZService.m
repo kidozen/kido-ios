@@ -1,6 +1,7 @@
 #import "KZService.h"
 #import "NSData+SRB64Additions.h"
 #import "KZTokenController.h"
+#import "NSData+Conversion.h"
 
 @implementation KZService
 
@@ -58,7 +59,24 @@
         }
         
         if (block != nil) {
-            block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
+            id typedResponse;
+            if ([response isKindOfClass:[NSData class]]) {
+                NSError *errorResponse;
+                typedResponse = [NSJSONSerialization JSONObjectWithData:response options:0 error:&errorResponse];
+                
+                if (typedResponse == nil) {
+                    typedResponse = [[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding];
+                    
+                    if (typedResponse == nil) {
+                        typedResponse = [NSString stringWithUTF8String:[response bytes]];
+                    }
+                }
+                
+            } else {
+                typedResponse = response;
+            }
+            
+            block( [[KZResponse alloc] initWithResponse:typedResponse urlResponse:urlResponse andError:error] );
         }
     }];
 }
