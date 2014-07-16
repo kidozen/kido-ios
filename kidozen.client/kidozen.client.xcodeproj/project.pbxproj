@@ -323,6 +323,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D40013A1976B8F600D5F511 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8E0774B41619DC7E00FA21D9 /* KZApplication.h */,
+				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
+				6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */,
+				6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */,
+				6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */,
+				6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */,
+				6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */,
+				6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
 		6D43DBD51968B26300D023CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,17 +406,6 @@
 			name = IdentityProviders;
 			sourceTree = "<group>";
 		};
-		6D4ACD601937CCC300958E65 /* ConfigurationModel */ = {
-			isa = PBXGroup;
-			children = (
-				6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */,
-				6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */,
-				6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */,
-				6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */,
-			);
-			name = ConfigurationModel;
-			sourceTree = "<group>";
-		};
 		6D8017F11968A75700E99FB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +429,8 @@
 				6DCEDDD519391E9F00A38C39 /* KZTokenController.m */,
 				6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */,
 				6DCB876619462C64005B75B9 /* KZPassiveAuthViewController.m */,
+				6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */,
+				6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -485,19 +491,13 @@
 			children = (
 				6D4ACD471937CBA400958E65 /* KZObject.h */,
 				6D4ACD481937CBA400958E65 /* KZObject.m */,
+				6D40013A1976B8F600D5F511 /* Application */,
 				6DCEDDCF19391D7F00A38C39 /* Auth */,
-				6D4ACD601937CCC300958E65 /* ConfigurationModel */,
 				6D4ACD341937A48000958E65 /* IdentityProviders */,
 				6D4ACD331937A3A900958E65 /* Categories */,
 				6D4ACD1D1937A39800958E65 /* Services */,
 				AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */,
 				AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */,
-				8E0774B41619DC7E00FA21D9 /* KZApplication.h */,
-				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
-				6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */,
-				6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */,
-				6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */,
-				6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */,
 				8E0774911619D9AF00FA21D9 /* KZResponse.h */,
 				8E0774921619D9AF00FA21D9 /* KZResponse.m */,
 				8E0774991619D9AF00FA21D9 /* KZUser.h */,
