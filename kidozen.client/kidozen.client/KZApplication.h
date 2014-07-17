@@ -39,8 +39,6 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 @interface KZApplication : KZBaseService
 
-@property (atomic) BOOL strictSSL ;
-
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 @property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
@@ -133,7 +131,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 - (KZStorage *)StorageWithName:(NSString *)name;
 
 /**
- * Creates a new LOBService object
+ * Creates a new LOBService (LineOfBusiness Service) object
  *
  * @param name the service name.
  * @return a new LOBService object

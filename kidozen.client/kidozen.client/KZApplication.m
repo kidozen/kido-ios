@@ -23,6 +23,7 @@
 @property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
 @property (nonatomic, strong) KZApplicationServices *appServices;
 @property (nonatomic, strong) KZApplicationAuthentication *appAuthentication;
+@property (nonatomic, assign) BOOL strictSSL;
 
 @end
 
