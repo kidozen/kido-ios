@@ -8,8 +8,7 @@
  *
  */
 @interface KZResponse : NSObject
-{
-};
+
 -(id) initWithResponse:(id) response urlResponse:(NSHTTPURLResponse *) urlresponse andError:(NSError *) error;
 /**
  * The service response. It could be a NSDictionary, an NSString or any other object

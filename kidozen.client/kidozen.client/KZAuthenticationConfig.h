@@ -8,6 +8,9 @@
 
 #import "KZObject.h"
 
+/* 
+ * This class is just a model for the authentication config response.
+ */
 @interface KZAuthenticationConfig : KZObject
 
 @property (nonatomic, copy, readonly) NSString *applicationScope;

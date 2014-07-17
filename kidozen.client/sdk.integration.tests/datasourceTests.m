@@ -64,7 +64,6 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
-
 - (void)testShouldExecuteGet
 {
     KZDatasource *ds = [self.application DataSourceWithName:@"test-query"];

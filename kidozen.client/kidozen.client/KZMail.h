@@ -7,6 +7,10 @@
 
 #import "KZBaseService.h"
 
+
+/* 
+ * Interface to the Kidozen's mail service.
+ */
 @interface KZMail : KZBaseService
 
 /**

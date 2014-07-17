@@ -8,6 +8,11 @@ extern NSInteger const KZHttpErrorStatusCode;
 
 @class KZTokenController;
 
+/* 
+ * 
+ * All services inherit from this class.
+ *
+ */
 @interface KZBaseService : NSObject
 
 
