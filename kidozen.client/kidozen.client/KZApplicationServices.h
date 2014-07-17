@@ -70,7 +70,4 @@
 
 - (KZNotification *)pushNotifications;
 
-
-
-
 @end
