@@ -9,6 +9,8 @@
 #import <XCTest/XCTest.h>
 #import "KZApplication.h"
 #import "Constants.h"
+#import "KZDatasource.h"
+
 
 @interface datasourceTests : XCTestCase
 @property (nonatomic, strong) KZApplication * application;
