@@ -7,6 +7,9 @@
  */
 #import "KZBaseService.h"
 
+/*
+ * This class is the interface to the config service.
+ */
 @interface KZConfiguration : KZBaseService
 
 /**
