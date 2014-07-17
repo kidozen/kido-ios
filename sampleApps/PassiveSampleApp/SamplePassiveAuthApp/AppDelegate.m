@@ -11,9 +11,9 @@
 #import "InitialViewController.h"
 #import "MainPassiveAuthViewController.h"
 
-#define TENTANT @""
-#define APPNAME @""
-#define APPLICATION_KEY @""
+NSString * const kzAppCenterUrl = @"YOUR_APP_CENTER_URL";
+NSString * const kzAppName = @"YOUR_APP";
+NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
 
 @interface AppDelegate()
 
@@ -57,9 +57,9 @@
     
     [self.window setRootViewController:navController];
 
-    self.kzApplication = [[KZApplication alloc] initWithTenantMarketPlace:TENTANT
-                                                           applicationName:APPNAME
-                                                            applicationKey:APPLICATION_KEY
+    self.kzApplication = [[KZApplication alloc] initWithTenantMarketPlace:kzAppCenterUrl
+                                                           applicationName:kzAppName
+                                                            applicationKey:kzApplicationKey
                                                                  strictSSL:NO
                                                                andCallback:^(KZResponse *r) {
                                                                    if (r.error) {
