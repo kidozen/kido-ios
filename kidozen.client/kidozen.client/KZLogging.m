@@ -16,12 +16,12 @@
 -(void) write:(id)object message:(NSString *)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
-    [_client setSendParametersAsJSON:YES];
+    [self.client setSendParametersAsJSON:YES];
     NSString *path = [self pathForLevel:level message:message];
     
     __weak KZLogging *safeMe = self;
     
-    [_client POST:path
+    [self.client POST:path
        parameters:object
        completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
            NSError * restError = nil;
@@ -44,7 +44,7 @@
     [self addAuthorizationHeader];
     __weak KZLogging *safeMe = self;
     
-    [_client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -60,7 +60,7 @@
     [self addAuthorizationHeader];
     __weak KZLogging *safeMe = self;
     
-    [_client DELETE:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client DELETE:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -78,7 +78,7 @@
     NSDictionary *parameters = @{@"query": query};
     __weak KZLogging *safeMe = self;
     
-    [_client GET:@"/" parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:@"/" parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;

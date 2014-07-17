@@ -10,8 +10,8 @@
         [NSException exceptionWithName:@"KZException" reason:@"The parameter is null" userInfo:nil];
     }
     [self addAuthorizationHeader];
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client setSendParametersAsJSON:YES];
+    [self.client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -29,7 +29,7 @@
     [self addAuthorizationHeader];
     __weak KZQueue *safeMe = self;
     
-    [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -51,7 +51,7 @@
     [self addAuthorizationHeader];
     __weak KZQueue *safeMe = self;
     
-    [_client DELETE:[NSString stringWithFormat:@"/%@/next",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client DELETE:[NSString stringWithFormat:@"/%@/next",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;

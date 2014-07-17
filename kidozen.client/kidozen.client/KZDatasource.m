@@ -22,7 +22,7 @@
         headers[@"timeout"] = [NSString stringWithFormat:@"%d", timeout];
     }
     
-    [_client setHeaders:headers];
+    [self.client setHeaders:headers];
 
     [self addAuthorizationHeader];
 
@@ -37,10 +37,10 @@
 {
     [self addHeadersWithTimeout:timeout];
     
-    _client.sendParametersAsJSON = NO;
+    self.client.sendParametersAsJSON = NO;
     __weak KZDatasource *safeMe = self;
     
-    [_client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             NSMutableDictionary* details = [NSMutableDictionary dictionary];
             [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];
@@ -61,9 +61,9 @@
 {
     [self addHeadersWithTimeout:timeout];
 
-    [_client setSendParametersAsJSON:YES];
+    [self.client setSendParametersAsJSON:YES];
     __weak KZDatasource *safeMe = self;
-    [_client POST:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error) {
             NSMutableDictionary* details = [NSMutableDictionary dictionary];
             [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];

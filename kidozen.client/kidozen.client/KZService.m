@@ -50,12 +50,12 @@
         [headersToUse addEntriesFromDictionary:headers];
     }
     
-    [_client setHeaders:headersToUse];
-    [_client setSendParametersAsJSON:YES];
+    [self.client setHeaders:headersToUse];
+    [self.client setSendParametersAsJSON:YES];
     
     __weak KZService *safeMe = self;
     
-    [_client POST:[NSString stringWithFormat:@"invoke/%@",method] parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:[NSString stringWithFormat:@"invoke/%@",method] parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;

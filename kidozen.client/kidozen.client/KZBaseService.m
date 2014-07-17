@@ -10,7 +10,14 @@ NSInteger const KZHttpErrorStatusCode = 300;
 NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
 
 
-@interface KZBaseService (private)
+@interface KZBaseService ()
+
+@property (nonatomic, copy, readwrite) NSString *endpoint;
+@property (nonatomic, copy, readwrite) NSString * name;
+
+@property (nonatomic, strong) SVHTTPClient *client;
+@property (nonatomic, strong) NSURL *baseUrl;
+@property (nonatomic, strong) NSURL * serviceUrl;
 
 -(NSError *) createNilReferenceError;
 
@@ -23,26 +30,21 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
     self = [super init];
     if (self)
     {
-        _name = name;
-        _endpoint = endpoint;
+        self.name = name;
+        self.endpoint = endpoint;
+        self.serviceUrl = [NSURL URLWithString:self.endpoint] ;
         
-        _serviceUrl = [NSURL URLWithString:_endpoint] ;
-        _client = [[SVHTTPClient alloc] init];
-        [_client setBasePath:_serviceUrl.absoluteString];
-        _client.sendParametersAsJSON = YES;   
+        self.client = [[SVHTTPClient alloc] init];
+        [self.client setBasePath:_serviceUrl.absoluteString];
+        self.client.sendParametersAsJSON = YES;
     }
     return self;
 }
 
--(void) setBypassSSL:(BOOL)bypass
+-(void) setStrictSSL:(BOOL)strictSSL
 {
-    _bypassSSL = bypass;
-    [_client setDismissNSURLAuthenticationMethodServerTrust:bypass];
-}
-
--(BOOL) bypassSSL
-{
-    return _bypassSSL;
+    _strictSSL= strictSSL;
+    [self.client setDismissNSURLAuthenticationMethodServerTrust:!strictSSL];
 }
 
 -(NSError *) createNilReferenceError
@@ -56,9 +58,9 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
 - (void)addAuthorizationHeader
 {
     if (self.tokenController != nil && self.tokenController.kzToken != nil && self.tokenController.kzToken.length > 0) {
-        NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:_client.headers];
+        NSMutableDictionary *headers = [NSMutableDictionary dictionaryWithDictionary:self.client.headers];
         headers[@"Authorization"] = self.tokenController.kzToken;
-        [_client setHeaders:headers];
+        [self.client setHeaders:headers];
     } else {
         NSLog(@"WARNING - NO AUTH HEADER");
     }

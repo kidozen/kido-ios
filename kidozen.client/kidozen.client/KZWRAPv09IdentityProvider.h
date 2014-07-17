@@ -10,6 +10,7 @@
 {
     NSString * _wrapName, *_wrapPassword, *_wrapScope;
 }
-@property (atomic) BOOL bypassSSLValidation ;
+@property (nonatomic, assign) BOOL strictSSL ;
 @property (nonatomic, strong) NSString * token;
+
 @end

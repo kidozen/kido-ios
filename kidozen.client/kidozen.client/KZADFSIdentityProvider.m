@@ -7,7 +7,6 @@
 
 @implementation KZADFSIdentityProvider
 @synthesize requestCompletion = _requestCompletion;
-@synthesize bypassSSLValidation = _bypassSSLValidation;
 
 -(void) configure:(id) configuration
 {

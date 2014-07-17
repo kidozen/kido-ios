@@ -21,12 +21,12 @@
 {
     [self addAuthorizationHeader];
     if ([object isKindOfClass:[NSString class]]) {
-        [_client setSendParametersAsJSON:YES];
+        [self.client setSendParametersAsJSON:YES];
     }
-    [_client setSendParametersAsJSON:YES];
+    [self.client setSendParametersAsJSON:YES];
     __weak KZPubSubChannel *safeMe = self;
     
-    [_client POST:[NSString stringWithFormat:@"/%@", self.channelName]  parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:[NSString stringWithFormat:@"/%@", self.channelName]  parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;

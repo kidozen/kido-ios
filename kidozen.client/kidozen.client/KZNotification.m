@@ -13,16 +13,10 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
 
 -(id) initWithEndpoint:(NSString *)endpoint andName:(NSString *)name
 {
-    self = [super init];
+    self = [super initWithEndpoint:endpoint andName:name];
     if (self)
     {
-        self.name = name;
-        _endpoint = endpoint;
-        self.serviceUrl = [NSURL URLWithString:_endpoint] ;
         self.uniqueIdentifier = [self getUniqueIdentification];
-        
-        _client = [[SVHTTPClient alloc] init];
-        [_client setBasePath:endpoint];
     }
     return self;
 }
@@ -55,8 +49,8 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     [self addAuthorizationHeader];
     __weak KZNotification *safeMe = self;
     
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:path parameters:body completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client setSendParametersAsJSON:YES];
+    [self.client POST:path parameters:body completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -83,10 +77,10 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     }
     NSString * path= [NSString stringWithFormat:@"/push/%@/%@", self.name, channel];
     [self addAuthorizationHeader];
-    [_client setSendParametersAsJSON:YES];
+    [self.client setSendParametersAsJSON:YES];
 
     __weak KZNotification *safeMe = self;
-    [_client POST:path parameters:notification completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:path parameters:notification completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -103,7 +97,7 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     [self addAuthorizationHeader];
     __weak KZNotification *safeMe = self;
     
-    [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -120,7 +114,7 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     [self addAuthorizationHeader];
     __weak KZNotification *safeMe = self;
 
-    [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -153,7 +147,7 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     [self addAuthorizationHeader];
     __weak KZNotification *safeMe = self;
 
-    [_client DELETE:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client DELETE:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;

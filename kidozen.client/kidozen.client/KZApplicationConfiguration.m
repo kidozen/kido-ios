@@ -132,7 +132,7 @@ NSString *const kApplicationNameKey = @"name";
 {
     if (!self.httpClient) {
         self.httpClient = [[SVHTTPClient alloc] init];
-        [self.httpClient setDismissNSURLAuthenticationMethodServerTrust:strictSSL];
+        [self.httpClient setDismissNSURLAuthenticationMethodServerTrust:!strictSSL];
     }
 }
 

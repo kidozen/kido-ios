@@ -8,6 +8,11 @@
 
 #import "KZCrashReporter.h"
 
+// Importing/Redeclaring methods.
+@interface KZBaseService ()
+@property (nonatomic, strong) SVHTTPClient *client;
+@end
+
 
 
 @interface KZCrashReporter()
@@ -38,7 +43,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
         self.tokenController = tokenController;
         
         internalCrashReporterInfo = [[NSMutableDictionary alloc] init];
-        _client = [[SVHTTPClient alloc] init];
+        self.client = [[SVHTTPClient alloc] init];
         [self enableCrashReporterWithUrl:url];
     }
     return self;
@@ -51,7 +56,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
         [url appendString:@"/"];
     }
     [url appendString: @"api/v3/logging/crash/ios/dump"];
-    _reporterServiceUrl = url;
+    self.reporterServiceUrl = url;
 }
 
 -(void) enableCrashReporter {
@@ -141,14 +146,14 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
                                      @"BUILD" : self.build,
                                      @"BREADCRUMBS" : breadcrumbsArray};
     
-    [_client setBasePath:_reporterServiceUrl];
-    [_client setSendParametersAsJSON:YES];
-    [_client setDismissNSURLAuthenticationMethodServerTrust:YES];
+    [self.client setBasePath:self.reporterServiceUrl];
+    [self.client setSendParametersAsJSON:YES];
+    [self.client setDismissNSURLAuthenticationMethodServerTrust:YES];
     [self addAuthorizationHeader];
     
     __weak KZCrashReporter *safeMe = self;
     
-    [_client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 
         if (!error) {
             NSError *purgeError;

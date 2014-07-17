@@ -14,4 +14,6 @@
           urlResponse:(NSHTTPURLResponse *)urlResponse
                 error:(NSError *)error;
 
+-(NSError *) createNilReferenceError;
+
 @end

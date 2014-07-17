@@ -18,7 +18,7 @@
 
     __weak KZSMSSender *safeMe = self;
     
-    [_client POST:url parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:url parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -34,7 +34,7 @@
     [self addAuthorizationHeader];
     __weak KZSMSSender *safeMe = self;
 
-    [_client GET:[NSString stringWithFormat:@"/%@",messageId] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:[NSString stringWithFormat:@"/%@",messageId] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;

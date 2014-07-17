@@ -9,28 +9,24 @@ extern NSInteger const KZHttpErrorStatusCode;
 @class KZTokenController;
 
 @interface KZBaseService : NSObject
-{
-    NSString * _endpoint;
-    SVHTTPClient * _client;
-    NSURL * baseUrl;
-    BOOL _bypassSSL;
 
-}
+
+- (id)initWithEndpoint:(NSString *)endpoint andName:(NSString *)name;
+- (void)addAuthorizationHeader;
 
 // This property will be in charge of managing all token related things.
 @property (nonatomic, strong) KZTokenController *tokenController;
 
-@property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSURL * serviceUrl;
+// In case you need the http client that the service uses to create the requests
+@property (nonatomic, readonly) SVHTTPClient *client;
+
+@property (nonatomic, copy, readonly) NSString *endpoint;
+@property (nonatomic, copy, readonly) NSString * name;
+
+@property (nonatomic, readonly) NSURL * serviceUrl;
 @property (atomic, assign) BOOL isAuthenticated;
 @property (atomic, strong) KZUser * KidoZenUser;
 
-
--(id) initWithEndpoint:(NSString *) endpoint andName:(NSString *) name;
--(NSError *) createNilReferenceError;
--(void) setBypassSSL:(BOOL)bypass;
--(BOOL) bypassSSL;
-
-- (void)addAuthorizationHeader;
+@property (nonatomic, assign) BOOL strictSSL;
 
 @end

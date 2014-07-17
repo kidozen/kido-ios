@@ -49,7 +49,7 @@
         self.tenantMarketPlace = [self sanitizeTennantMarketPlace:tenantMarketPlace];
         self.applicationName = applicationName;
         self.onInitializationComplete = callback;
-        self.strictSSL = !strictSSL; // negate it to avoid changes in SVHTTPRequest
+        self.strictSSL = strictSSL;
         self.tokenController = [[KZTokenController alloc] init];
         self.applicationConfig = [[KZApplicationConfiguration alloc] init];
         

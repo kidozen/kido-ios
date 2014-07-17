@@ -35,10 +35,10 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     NSString *urlString = [self urlStringWithOptions:options];
     
     [self addAuthorizationHeader];
-    [_client setSendParametersAsJSON:YES];
+    [self.client setSendParametersAsJSON:YES];
     __weak KZStorage *safeMe = self;
     
-    [_client POST:urlString parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:urlString parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }
@@ -98,10 +98,10 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         return;
     }
     [self addAuthorizationHeader];
-    [_client setSendParametersAsJSON:YES];
+    [self.client setSendParametersAsJSON:YES];
     __weak KZStorage *safeMe = self;
     
-    [_client PUT:[NSString stringWithFormat:@"%@/%@",self.name, objectId]
+    [self.client PUT:[NSString stringWithFormat:@"%@/%@",self.name, objectId]
       parameters:[self updateMetadataDates:object]
       completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
@@ -127,7 +127,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     
     __weak KZStorage *safeMe = self;
     
-    [_client GET:[NSString stringWithFormat:@"%@/%@",self.name, objectId] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:[NSString stringWithFormat:@"%@/%@",self.name, objectId] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -159,7 +159,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     [self addAuthorizationHeader];
     __weak KZStorage *safeMe = self;
     
-    [_client DELETE:[NSString stringWithFormat:@"%@/%@",self.name, objectId]  parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client DELETE:[NSString stringWithFormat:@"%@/%@",self.name, objectId]  parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -180,7 +180,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     [self addAuthorizationHeader];
     __weak KZStorage *safeMe = self;
     
-    [_client DELETE:[NSString stringWithFormat:@"%@",self.name]  parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client DELETE:[NSString stringWithFormat:@"%@",self.name]  parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;
         if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
             restError = error;
@@ -196,7 +196,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     [self addAuthorizationHeader];
     __weak KZStorage *safeMe = self;
     
-    [_client GET:[NSString stringWithFormat:@"%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:[NSString stringWithFormat:@"%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }
@@ -214,7 +214,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     NSString * scapedUrl = [[NSString stringWithFormat:@"%@?query=%@",self.name, query] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     __weak KZStorage *safeMe = self;
     
-    [_client GET:scapedUrl parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:scapedUrl parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }
@@ -231,7 +231,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     [self addAuthorizationHeader];
     __weak KZStorage *safeMe = self;
 
-    [_client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@",self.name, query, options] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@",self.name, query, options] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
@@ -249,7 +249,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     [self addAuthorizationHeader];
     __weak KZStorage *safeMe = self;
 
-    [_client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@&fields=%@",self.name, query, options, fields] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@&fields=%@",self.name, query, options, fields] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }

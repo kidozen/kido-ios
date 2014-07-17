@@ -13,10 +13,10 @@
     }
 
     [self addAuthorizationHeader];
-    [_client setSendParametersAsJSON:YES];
+    [self.client setSendParametersAsJSON:YES];
     
     __weak KZConfiguration *safeMe = self;
-    [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
@@ -29,7 +29,7 @@
     [self addAuthorizationHeader];
     __weak KZConfiguration *safeMe = self;
     
-    [_client GET:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
@@ -40,7 +40,7 @@
 -(void) remove
 {
     [self addAuthorizationHeader];
-    [_client DELETE:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client DELETE:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
     }];
 }
 -(void) remove:(void (^)(KZResponse *))block
@@ -48,7 +48,7 @@
     [self addAuthorizationHeader];
     __weak KZConfiguration *safeMe = self;
     
-    [_client DELETE:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client DELETE:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }
@@ -60,7 +60,7 @@
     [self addAuthorizationHeader];
     __weak KZConfiguration *safeMe = self;
     
-    [_client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [self.client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (block != nil) {
             [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
         }

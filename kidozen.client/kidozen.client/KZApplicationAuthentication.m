@@ -105,7 +105,7 @@ NSString *const kAccessTokenKey = @"access_token";
     __weak KZApplicationAuthentication *safeMe = self;
     
     if (!self.ip)
-        self.ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:self.strictSSL ];
+        self.ip = [KZIdentityProviderFactory createProvider:providerProtocol strictSSL:self.strictSSL ];
     
     [self.ip initializeWithUserName:user password:password andScope:authServiceScope];
     [self.ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
@@ -442,7 +442,7 @@ NSString *const kAccessTokenKey = @"access_token";
 {
     if (!self.defaultClient) {
         self.defaultClient = [[SVHTTPClient alloc] init];
-        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:self.strictSSL];
+        [self.defaultClient setDismissNSURLAuthenticationMethodServerTrust:!self.strictSSL];
     }
 }
 

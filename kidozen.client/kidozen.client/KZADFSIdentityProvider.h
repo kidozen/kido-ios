@@ -19,5 +19,5 @@
 }
 @property (nonatomic, strong) NSString * token;
 @property (nonatomic, strong) RequestTokenCompletionBlock requestCompletion;
-@property (atomic) BOOL bypassSSLValidation;
+@property (nonatomic, assign) BOOL strictSSL;
 @end

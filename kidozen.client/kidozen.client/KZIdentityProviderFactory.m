@@ -4,16 +4,16 @@
 
 @implementation KZIdentityProviderFactory
 
-+(id<KZIdentityProvider>) createProvider:(NSString *) type bypassSSL:(BOOL) bypassSSL
++(id<KZIdentityProvider>) createProvider:(NSString *) type strictSSL:(BOOL)strictSSL
 {
     if ([[type lowercaseString]  isEqualToString:@"wrapv0.9"] ) {
         KZWRAPv09IdentityProvider * kip = [[KZWRAPv09IdentityProvider alloc] init];
-        [kip setBypassSSLValidation:bypassSSL];
+        kip.strictSSL = strictSSL;
         return kip;
     }
     else {
         KZADFSIdentityProvider * aip = [[KZADFSIdentityProvider alloc] init];
-        [aip setBypassSSLValidation:bypassSSL];
+        aip.strictSSL = strictSSL;
         return aip;
     }
 }

@@ -59,7 +59,7 @@
     KZQueue * q = [[KZQueue alloc] initWithEndpoint:self.applicationConfig.queue
                                             andName:name];
     q.tokenController = self.tokenController;
-    [q setBypassSSL:self.strictSSL];
+    [q setStrictSSL:self.strictSSL];
     return q;
 }
 
@@ -68,7 +68,7 @@
     NSString * ep = [self.applicationConfig.storage stringByAppendingString:@"/"];
     KZStorage * s= [[KZStorage alloc] initWithEndpoint:ep andName:name];
     s.tokenController = self.tokenController;
-    [s setBypassSSL:self.strictSSL];
+    [s setStrictSSL:self.strictSSL];
     return s;
 }
 
@@ -80,7 +80,7 @@
     
     KZService * s= [[KZService alloc] initWithEndpoint:ep andName:name];
     s.tokenController = self.tokenController;
-    [s setBypassSSL:self.strictSSL];
+    [s setStrictSSL:self.strictSSL];
     
     return s;
 }
@@ -90,7 +90,7 @@
     KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:self.applicationConfig.config
                                                             andName:name];
     c.tokenController = self.tokenController;
-    [c setBypassSSL:self.strictSSL];
+    [c setStrictSSL:self.strictSSL];
     return c;
 }
 
@@ -99,7 +99,7 @@
     KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:self.applicationConfig.sms
                                                 andName:number];
     s.tokenController = self.tokenController;
-    [s setBypassSSL:self.strictSSL];
+    [s setStrictSSL:self.strictSSL];
     return s;
 }
 
@@ -109,7 +109,7 @@
     
     KZDatasource * s= [[KZDatasource alloc] initWithEndpoint:ep andName:name];
     s.tokenController = self.tokenController;
-    [s setBypassSSL:self.strictSSL];
+    [s setStrictSSL:self.strictSSL];
     return s;
 }
 
@@ -119,7 +119,7 @@
                                                          wsEndpoint:self.applicationConfig.ws
                                                             andName:name];
     ch.tokenController = self.tokenController;
-    [ch setBypassSSL:self.strictSSL];
+    [ch setStrictSSL:self.strictSSL];
     return ch;
 }
 
@@ -130,7 +130,7 @@
     self.log = [[KZLogging alloc] initWithEndpoint:self.applicationConfig.loggingV3
                                            andName:nil];
     self.log.tokenController = self.tokenController;
-    [self.log setBypassSSL:self.strictSSL];
+    [self.log setStrictSSL:self.strictSSL];
 }
 
 -(void) write:(id)object message:(NSString *)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block
@@ -142,7 +142,7 @@
     
     [self.log write:object message:message withLevel:level completion:^(KZResponse * k) {
         if (block) {
-            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+            block(k);
         }
     }];
 }
@@ -151,7 +151,7 @@
 {
     [self.log clear:^(KZResponse * k) {
         if (block) {
-            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+            block(k);
         }
     }];
 }
@@ -160,7 +160,7 @@
 {
     [self.log all:^(KZResponse * k) {
         if (block) {
-            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+            block(k);
         }
     }];
 }
@@ -173,7 +173,7 @@
     self.mail = [[KZMail alloc] initWithEndpoint:self.applicationConfig.email
                                          andName:nil];
     self.mail.tokenController = self.tokenController;
-    [self.mail setBypassSSL:self.strictSSL];
+    [self.mail setStrictSSL:self.strictSSL];
 }
 
 -(void) sendMailTo:(NSString *)to
@@ -193,7 +193,7 @@
     
     [self.mail send:mail attachments:attachments completion:^(KZResponse *k) {
         if (block) {
-            block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
+            block(k);
         }
     }];
     
@@ -206,7 +206,7 @@
     self.pushNotifications = [[KZNotification alloc] initWithEndpoint:self.applicationConfig.notification
                                                               andName:self.applicationConfig.name];
     self.pushNotifications.tokenController = self.tokenController;
-    [self.pushNotifications setBypassSSL:self.strictSSL];
+    [self.pushNotifications setStrictSSL:self.strictSSL];
     
 }
 
