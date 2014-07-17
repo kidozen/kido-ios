@@ -15,7 +15,6 @@
 @interface smsTests : XCTestCase
 
 @property (nonatomic, strong) KZApplication * application;
-@property (nonatomic, strong) KZMail *mailService;
 
 @end
 
@@ -49,10 +48,19 @@
 
 - (void) testSendSMS
 {
-    KZSMSSender *smsSender = [self.application SMSSenderWithNumber:@"1569691823"];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+
+    KZSMSSender *smsSender = [self.application SMSSenderWithNumber:@"+541169691823"];
     [smsSender send:@"Hola test" completion:^(KZResponse *r) {
-        NSLog(@"Response is %@", r.response);
+//        XCTAssert(r.urlResponse.statusCode != 400, @"");
+        NSLog(@"--- Response is %@", r.response);
+        dispatch_semaphore_signal(semaphore);
+        
     }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+
 }
 
 @end
