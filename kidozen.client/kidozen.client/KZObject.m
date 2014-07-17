@@ -18,15 +18,6 @@
 
 @implementation KZObject
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-
 - (void) configureWithDictionary:(NSDictionary *)dictionary
 {
     NSDictionary *propertyToClassDictionary = [self propertiesWithClassesDictionary];

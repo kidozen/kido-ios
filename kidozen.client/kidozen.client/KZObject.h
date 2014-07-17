@@ -10,8 +10,6 @@
 
 @interface KZObject : NSObject
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
-
 - (void)configureWithDictionary:(NSDictionary *)dictionary;
 
 // This dictionary should be used in case of the json coming from the server
