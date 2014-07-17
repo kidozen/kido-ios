@@ -53,9 +53,9 @@
     }
 }
 
-- (void) testServiceWithNoData
+- (void) testWeatherService
 {
-    NSString *jsonString = @"{}";
+    NSString *jsonString = @"{\"city\":\"miami\"}";
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     NSDictionary *myDictionary = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -63,8 +63,11 @@
                                                                    error:&error];
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-    id myService = [self.application LOBServiceWithName:@"Google"];
-    [myService invokeMethod:@"" withData:myDictionary completion:^(KZResponse * k) {
+    id myService = [self.application LOBServiceWithName:@"weatherService"];
+    [myService invokeMethod:@"get" withData:myDictionary completion:^(KZResponse * r) {
+        NSNumber* status =  [[r.response objectForKey:@"data"] objectForKey:@"status"] ;
+        XCTAssertEqual(200,[status intValue], @"Invalid status code");
+
         dispatch_semaphore_signal(semaphore);
     }];
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
