@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "KZApplication.h"
+#import "KZNotification.h"
 
 @interface MainViewController ()
 
