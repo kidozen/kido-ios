@@ -9,6 +9,7 @@
 #import "KZAuthenticationConfig.h"
 
 NSString *const kEndPointKey = @"endpoint";
+NSString *const kProtocolKey = @"protocol";
 
 @interface KZAuthenticationConfig()
 
@@ -34,8 +35,6 @@ NSString *const kEndPointKey = @"endpoint";
 }
 
 - (NSString *)protocolForProvider:(NSString *)provider {
-    NSString *const kProtocolKey = @"protocol";
-
     NSDictionary *providerInfo = [self.identityProviders objectForKey:provider];
     return providerInfo[kProtocolKey];
 }

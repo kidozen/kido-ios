@@ -12,6 +12,10 @@
 @class KZAuthenticationConfig;
 @class KZResponse;
 
+/*
+ * This class holds all information related to the application config.
+ * The initial GET request will fill an instance of this class.
+ */
 @interface KZApplicationConfiguration : KZObject
 
 - (void)setupWithApplicationName:(NSString *)applicationName
