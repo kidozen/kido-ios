@@ -174,13 +174,11 @@
                                        error:(NSError *)error
 {
     if (self.onInitializationComplete) {
-        if (self.onInitializationComplete) {
-            KZResponse *kzresponse = [[KZResponse alloc] initWithResponse:configResponse
-                                                              urlResponse:configUrlResponse
-                                                                 andError:error];
-            [kzresponse setApplication:self];
-            self.onInitializationComplete(kzresponse);
-        }
+        KZResponse *kzresponse = [[KZResponse alloc] initWithResponse:configResponse
+                                                          urlResponse:configUrlResponse
+                                                             andError:error];
+        [kzresponse setApplication:self];
+        self.onInitializationComplete(kzresponse);
     }
 
 }
