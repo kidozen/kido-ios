@@ -40,16 +40,16 @@
     self.client.sendParametersAsJSON = NO;
     __weak KZDatasource *safeMe = self;
     
-    [self.client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            NSMutableDictionary* details = [NSMutableDictionary dictionary];
-            [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDCALL userInfo:details];
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-        }
-    }];
+    [self.client GET:self.name
+          parameters:data
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+              
+          }];
     
 }
 
@@ -63,16 +63,15 @@
 
     [self.client setSendParametersAsJSON:YES];
     __weak KZDatasource *safeMe = self;
-    [self.client POST:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            NSMutableDictionary* details = [NSMutableDictionary dictionary];
-            [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDCALL userInfo:details];
-        }
-        
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-        }
+    [self.client POST:self.name
+           parameters:data
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+            [safeMe callCallback:block
+                        response:response
+                     urlResponse:urlResponse
+                           error:error];
+               
     }];
 
 }
@@ -81,7 +80,7 @@
     [self InvokeWithData:@{} timeout:timeout completion:block];
 }
 
--(NSDictionary *) dataAsDictionary : (id)data
+- (NSDictionary *) dataAsDictionary:(id)data
 {
     NSError* error;
     NSDictionary* json = Nil;

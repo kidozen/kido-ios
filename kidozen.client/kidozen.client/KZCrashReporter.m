@@ -7,6 +7,7 @@
 //
 
 #import "KZCrashReporter.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 // Importing/Redeclaring methods.
 @interface KZBaseService ()

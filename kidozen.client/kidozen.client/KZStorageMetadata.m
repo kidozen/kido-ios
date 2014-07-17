@@ -16,8 +16,8 @@
     if (self) {
         _metadata = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"", @"createdBy",
                      [NSDate date],@"createdOn",
-                     true, @"isPrivate",
-                     0, @"sync",
+                     @1, @"isPrivate",
+                     @0, @"sync",
                      @"", @"updatedBy",
                      [NSDate date], @"updatedOn",
                      nil];

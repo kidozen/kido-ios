@@ -6,38 +6,31 @@
 
 -(void) enqueue:(id)object
 {
-    if (!object || !self.name) {
-        [NSException exceptionWithName:@"KZException" reason:@"The parameter is null" userInfo:nil];
-    }
-    [self addAuthorizationHeader];
-    [self.client setSendParametersAsJSON:YES];
-    [self.client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-    }];
+    [self enqueue:object completion:nil];
 }
 
 
 -(void) enqueue:(id)object completion:(void (^)(KZResponse *))block
 {
     if (!object || !self.name) {
-        block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
+        if (block)
+            block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
         return;
     }
+    
     [self addAuthorizationHeader];
     __weak KZQueue *safeMe = self;
     
-    [self.client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    [self.client POST:[NSString stringWithFormat:@"/%@",self.name]
+           parameters:object
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
 }
 
 -(void) dequeue:(void (^)(KZResponse *))block
@@ -48,18 +41,21 @@
         }
         return;
     }
+    
     [self addAuthorizationHeader];
     __weak KZQueue *safeMe = self;
     
-    [self.client DELETE:[NSString stringWithFormat:@"/%@/next",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    [self.client DELETE:[NSString stringWithFormat:@"/%@/next",self.name]
+             parameters:nil
+             completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                 
+                 [safeMe callCallback:block
+                             response:response
+                          urlResponse:urlResponse
+                                error:error];
+                 
+             }];
     return;
 }
+
 @end

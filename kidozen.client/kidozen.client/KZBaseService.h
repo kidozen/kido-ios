@@ -12,7 +12,6 @@ extern NSInteger const KZHttpErrorStatusCode;
 
 
 - (id)initWithEndpoint:(NSString *)endpoint andName:(NSString *)name;
-- (void)addAuthorizationHeader;
 
 // This property will be in charge of managing all token related things.
 @property (nonatomic, strong) KZTokenController *tokenController;

@@ -54,15 +54,16 @@
     [self addAuthorizationHeader];
     __weak KZMail *safeMe = self;
     
-    [self.client POST:path parameters:parameters completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    [self.client POST:path
+           parameters:parameters
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
 }
 
 

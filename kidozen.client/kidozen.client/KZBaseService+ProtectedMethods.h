@@ -9,11 +9,12 @@
 
 @interface KZBaseService (ProtectedMethods)
 
-- (void) callCallback:(void (^)(KZResponse *))block
-             response:(id)response
-          urlResponse:(NSHTTPURLResponse *)urlResponse
-                error:(NSError *)error;
+- (void)callCallback:(void (^)(KZResponse *))block
+            response:(id)response
+         urlResponse:(NSHTTPURLResponse *)urlResponse
+               error:(NSError *)error;
 
--(NSError *) createNilReferenceError;
+- (NSError *)createNilReferenceError;
+- (void)addAuthorizationHeader;
 
 @end

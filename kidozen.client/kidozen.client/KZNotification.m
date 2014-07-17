@@ -39,7 +39,7 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
         }
         return;
     }
-
+    
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@", self.name, channel];
     
     NSDictionary *body = @{@"platform": @"apns",
@@ -50,15 +50,16 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     __weak KZNotification *safeMe = self;
     
     [self.client setSendParametersAsJSON:YES];
-    [self.client POST:path parameters:body completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    [self.client POST:path
+           parameters:body
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
     
 }
 
@@ -78,17 +79,18 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     NSString * path= [NSString stringWithFormat:@"/push/%@/%@", self.name, channel];
     [self addAuthorizationHeader];
     [self.client setSendParametersAsJSON:YES];
-
+    
     __weak KZNotification *safeMe = self;
-    [self.client POST:path parameters:notification completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    [self.client POST:path
+           parameters:notification
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
 }
 
 -(void) getSubscriptions:(void (^)(KZResponse *))block
@@ -97,15 +99,16 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     [self addAuthorizationHeader];
     __weak KZNotification *safeMe = self;
     
-    [self.client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    [self.client GET:path
+          parameters:nil
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+              
+          }];
 }
 
 -(void) getApplicationChannels:(void (^)(KZResponse *))block
@@ -113,17 +116,17 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     NSString * path= [NSString stringWithFormat:@"/channels/%@", self.name];
     [self addAuthorizationHeader];
     __weak KZNotification *safeMe = self;
-
-    [self.client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    
+    [self.client GET:path
+          parameters:nil
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+              
+          }];
 }
 
 -(void) unSubscribeDeviceUsingToken:(NSString *)deviceToken fromChannel:(NSString *) channel completion:(void (^)(KZResponse *))block
@@ -146,16 +149,17 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@/%@", self.name, channel, deviceToken];
     [self addAuthorizationHeader];
     __weak KZNotification *safeMe = self;
-
-    [self.client DELETE:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    
+    [self.client DELETE:path
+             parameters:nil
+             completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                 
+                 [safeMe callCallback:block
+                             response:response
+                          urlResponse:urlResponse
+                                error:error];
+                 
+             }];
 }
 
 

@@ -71,13 +71,23 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
           urlResponse:(NSHTTPURLResponse *)urlResponse
                 error:(NSError *)error
 {
-    id typedResponse;
-    if ([response isKindOfClass:[NSData class]]) {
-        typedResponse = [response KZ_UTF8String];
-    } else {
-        typedResponse = response;
+    if (block)
+    {
+        NSError * restError = error;
+        if ([urlResponse statusCode]>KZHttpErrorStatusCode && restError == nil) {
+            NSString *msg = [response isKindOfClass:[NSData class]] ? [response KZ_UTF8String] : response;
+            restError = [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{@"Message": msg}];
+        }
+        
+        id typedResponse;
+        if ([response isKindOfClass:[NSData class]]) {
+            typedResponse = [response KZ_UTF8String];
+        } else {
+            typedResponse = response;
+        }
+        
+        block( [[KZResponse alloc] initWithResponse:typedResponse urlResponse:urlResponse andError:restError] );
     }
-    block( [[KZResponse alloc] initWithResponse:typedResponse urlResponse:urlResponse andError:error] );
 }
 
 

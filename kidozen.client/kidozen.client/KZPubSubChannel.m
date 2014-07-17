@@ -6,7 +6,7 @@
 @synthesize channelName = _channelName;
 @synthesize webSocketCompletionEventBlock = _webSocketCompletionEventBlock;
 
--(id)initWithEndpoint:(NSString *)endpoint wsEndpoint:(NSString *) wsEndpoint andName:(NSString *)name 
+-(id)initWithEndpoint:(NSString *)endpoint wsEndpoint:(NSString *) wsEndpoint andName:(NSString *)name
 {
     self = [super initWithEndpoint:endpoint andName:nil];
     if (self) {
@@ -26,15 +26,16 @@
     [self.client setSendParametersAsJSON:YES];
     __weak KZPubSubChannel *safeMe = self;
     
-    [self.client POST:[NSString stringWithFormat:@"/%@", self.channelName]  parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:restError];
-        }
-    }];
+    [self.client POST:[NSString stringWithFormat:@"/%@", self.channelName]
+           parameters:object
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
 }
 
 -(void) subscribe:(WebSocketEventBlock) completionEventBlock
@@ -43,7 +44,7 @@
     NSMutableURLRequest * nsurl = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:_wsEndpoint]];
     _webSocket = [[SRWebSocket alloc] initWithURLRequest:nsurl];
     [_webSocket setDelegate:self];
-    [_webSocket open];    
+    [_webSocket open];
     return;
 }
 
