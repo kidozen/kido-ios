@@ -9,6 +9,7 @@
 #import "KZPassiveAuthViewController.h"
 #import "KZApplicationAuthentication.h"
 #import "KZApplicationServices.h"
+#import "KZCrashReporter.h"
 
 #import <UIKit/UIKit.h>
 

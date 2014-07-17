@@ -5,28 +5,24 @@
 //  Created on April 2013
 //  Copyright 2013 KidoZen All rights reserved.
 //
-
 #import "KZBaseService.h"
-#import "KZNotification.h"
-#import "KZQueue.h"
-#import "KZStorage.h"
-#import "KZConfiguration.h"
-#import "KZMail.h"
-#import "KZSMSSender.h"
 #import "KZLogging.h"
-#import "KZService.h"
-#import "KZDatasource.h"
-#import "KZCrashReporter.h"
-
-#if TARGET_OS_IPHONE
-#import "KZPubSubChannel.h"
-#endif
-
-#import "KZWRAPv09IdentityProvider.h"
-#import <SVHTTPRequest.h>
 
 @class KZApplicationConfiguration;
+@class KZCrashReporter;
+@class KZResponse;
+@class KZQueue;
+@class KZStorage;
+@class KZService;
+@class KZConfiguration;
+@class KZSMSSender;
+@class KZNotification;
+@class KZMail;
+@class KZDatasource;
 
+#if TARGET_OS_IPHONE
+@class KZPubSubChannel;
+#endif
 
 typedef void (^AuthCompletionBlock)(id);
 typedef void (^TokenExpiresBlock)(id);
