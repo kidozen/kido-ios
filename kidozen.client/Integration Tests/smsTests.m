@@ -8,8 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "KZApplication.h"
-#import "KZMail.h"
-
+#import "KZSMSSender.h"
 #import "Constants.h"
 
 @interface smsTests : XCTestCase

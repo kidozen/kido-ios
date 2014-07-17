@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "KZApplication.h"
 #import "Constants.h"
+#import "KZService.h"
 
 @interface serviceTests : XCTestCase
 

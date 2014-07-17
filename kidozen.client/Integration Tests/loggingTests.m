@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "Constants.h"
 #import "KZApplication.h"
+#import "KZDatasource.h"
 
 @interface loggingTests : XCTestCase
 
