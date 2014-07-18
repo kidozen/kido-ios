@@ -187,6 +187,20 @@
 
 @implementation KZApplication(Authentication)
 
+- (KZUser *)kzUser
+{
+    return self.appAuthentication.kzUser;
+}
+
+- (BOOL)isAuthenticated
+{
+    return self.appAuthentication.isAuthenticated;
+}
+
+- (BOOL)passiveAuthenticated
+{
+    return self.appAuthentication.passiveAuthenticated;
+}
 
 -(void) authenticateUser:(NSString *)user
             withProvider:(NSString *)provider

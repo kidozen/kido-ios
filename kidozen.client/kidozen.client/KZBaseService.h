@@ -25,12 +25,9 @@ extern NSInteger const KZHttpErrorStatusCode;
 @property (nonatomic, readonly) SVHTTPClient *client;
 
 @property (nonatomic, copy, readonly) NSString *endpoint;
-@property (nonatomic, copy, readonly) NSString * name;
-
+@property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, readonly) NSURL * serviceUrl;
-@property (atomic, assign) BOOL isAuthenticated;
-@property (atomic, strong) KZUser * KidoZenUser;
-
 @property (nonatomic, assign) BOOL strictSSL;
+
 
 @end

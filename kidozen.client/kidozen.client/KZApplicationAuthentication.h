@@ -10,11 +10,20 @@
 
 @class KZTokenController;
 @class KZApplicationConfiguration;
+@class KZUser;
 
 /* 
  * This class concentrates all authentication methods.
  */
 @interface KZApplicationAuthentication : NSObject
+
+
+@property (nonatomic, copy) void (^tokenExpiresBlock)(id);
+@property (nonatomic, copy) void (^authCompletionBlock)(id);
+@property (nonatomic, readonly) KZUser *kzUser;
+@property (nonatomic, readonly) BOOL isAuthenticated;
+@property (nonatomic, readonly) BOOL passiveAuthenticated;
+
 
 -(id) initWithTokenController:(KZTokenController *)tokenController
             applicationConfig:(KZApplicationConfiguration *)applicationConfig
@@ -42,9 +51,5 @@
 // Refreshes the current token, which can be the one obtained from authenticathing
 // via username/password, passive authentication or via application key.
 - (void)refreshCurrentToken;
-
-@property (nonatomic, copy) void (^tokenExpiresBlock)(id);
-
-@property (nonatomic, copy) void (^authCompletionBlock)(id);
 
 @end

@@ -33,8 +33,8 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @property (nonatomic, strong) NSObject<KZIdentityProvider> *ip;
 
-@property (atomic, assign) BOOL isAuthenticated;
-@property (atomic, strong) KZUser * KidoZenUser;
+@property (nonatomic, assign) BOOL isAuthenticated;
+@property (nonatomic, strong) KZUser * kzUser;
 
 @property (nonatomic, assign) BOOL passiveAuthenticated;
 
@@ -143,8 +143,8 @@ NSString *const kAccessTokenKey = @"access_token";
             }
             else {
                 safeMe.isAuthenticated = true;
-                safeMe.KidoZenUser.user = user;
-                safeMe.KidoZenUser.pass = password;
+                safeMe.kzUser.user = user;
+                safeMe.kzUser.pass = password;
                 
                 [safeMe.tokenController updateAccessTokenWith:[response objectForKey:@"rawToken"]
                                                accessTokenKey:[safeMe getAccessTokenCacheKey]];
@@ -154,13 +154,13 @@ NSString *const kAccessTokenKey = @"access_token";
                 
                 [safeMe parseUserInfo:safeMe.tokenController.kzToken];
                 
-                [safeMe.tokenController startTokenExpirationTimer:safeMe.KidoZenUser.expiresOn
+                [safeMe.tokenController startTokenExpirationTimer:safeMe.kzUser.expiresOn
                                                          callback:^{
                                                              [safeMe tokenExpires];
                                                          }];
                 
                 if (safeMe.authCompletionBlock) {
-                    if (![safeMe.KidoZenUser.claims objectForKey:@"system"] && ![safeMe.KidoZenUser.claims objectForKey:@"usersource"] )
+                    if (![safeMe.kzUser.claims objectForKey:@"system"] && ![safeMe.kzUser.claims objectForKey:@"usersource"] )
                     {
                         NSError * err = [[NSError alloc] initWithDomain:@"Authentication" code:0 userInfo:[NSDictionary dictionaryWithObject:@"User is not authenticated" forKey:@"description"]];
                         if (safeMe.authCompletionBlock) {
@@ -170,7 +170,7 @@ NSString *const kAccessTokenKey = @"access_token";
                     else
                     {
                         if (safeMe.authCompletionBlock) {
-                            safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                            safeMe.authCompletionBlock(safeMe.kzUser);
                         }
                     }
                 }
@@ -278,7 +278,7 @@ NSString *const kAccessTokenKey = @"access_token";
                                     
                                     [safeMe parseUserInfo:safeMe.tokenController.kzToken];
                                     
-                                    [safeMe.tokenController startTokenExpirationTimer:safeMe.KidoZenUser.expiresOn
+                                    [safeMe.tokenController startTokenExpirationTimer:safeMe.kzUser.expiresOn
                                                                              callback:^{
                                                                                  [safeMe tokenExpires];
                                                                              }];
@@ -315,7 +315,7 @@ NSString *const kAccessTokenKey = @"access_token";
                 }
             } else {
                 if (safeMe.authCompletionBlock) {
-                    safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                    safeMe.authCompletionBlock(safeMe.kzUser);
                 }
             }
         }
@@ -341,7 +341,7 @@ NSString *const kAccessTokenKey = @"access_token";
                                     
                                     [safeMe parseUserInfo:safeMe.tokenController.kzToken];
                                     
-                                    [safeMe.tokenController startTokenExpirationTimer:safeMe.KidoZenUser.expiresOn
+                                    [safeMe.tokenController startTokenExpirationTimer:safeMe.kzUser.expiresOn
                                                                              callback:^{
                                                                                  [safeMe tokenExpires];
                                                                              }];
@@ -369,7 +369,7 @@ NSString *const kAccessTokenKey = @"access_token";
 -(void) tokenExpires
 {
     if (self.tokenExpiresBlock) {
-        self.tokenExpiresBlock(self.KidoZenUser);
+        self.tokenExpiresBlock(self.kzUser);
     } else {
         [self refreshCurrentToken];
     }
@@ -404,7 +404,7 @@ NSString *const kAccessTokenKey = @"access_token";
                 }
             } else {
                 if (safeMe.authCompletionBlock) {
-                    safeMe.authCompletionBlock(safeMe.KidoZenUser);
+                    safeMe.authCompletionBlock(safeMe.kzUser);
                 }
             }
         }
@@ -419,7 +419,7 @@ NSString *const kAccessTokenKey = @"access_token";
 
 -(void) parseUserInfo:(NSString *) token
 {
-    self.KidoZenUser = [[KZUser alloc] initWithToken:token];
+    self.kzUser = [[KZUser alloc] initWithToken:token];
 }
 
 
@@ -431,8 +431,8 @@ NSString *const kAccessTokenKey = @"access_token";
     
     __weak KZApplicationAuthentication *safeMe = self;
     
-    if (self.KidoZenUser.expiresOn > 0) {
-        [self.tokenController startTokenExpirationTimer:self.KidoZenUser.expiresOn
+    if (self.kzUser.expiresOn > 0) {
+        [self.tokenController startTokenExpirationTimer:self.kzUser.expiresOn
                                                callback:^{
                                                    [safeMe tokenExpires];
                                                }];

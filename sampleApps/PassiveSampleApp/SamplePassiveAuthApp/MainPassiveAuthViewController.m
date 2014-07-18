@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    NSDictionary *claims = [[[AppDelegate sharedDelegate].kzApplication KidoZenUser] claims];
+    NSDictionary *claims = [[AppDelegate sharedDelegate].kzApplication.kzUser claims];
     self.labelClaimName.text= [NSString stringWithFormat:@"Hello: %@",  [claims objectForKey:claimName] ];
 }
 

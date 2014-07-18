@@ -77,6 +77,10 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 @interface KZApplication(Authentication)
 
+@property (nonatomic, readonly) KZUser *kzUser;
+@property (nonatomic, readonly) BOOL isAuthenticated;
+@property (nonatomic, readonly) BOOL passiveAuthenticated;
+
 /*
  * This method will authenticate you to Kidozen. 
  * To check whether the authentication was successful or not, you should check 

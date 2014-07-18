@@ -35,7 +35,7 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
         self.serviceUrl = [NSURL URLWithString:self.endpoint] ;
         
         self.client = [[SVHTTPClient alloc] init];
-        [self.client setBasePath:_serviceUrl.absoluteString];
+        [self.client setBasePath:self.serviceUrl.absoluteString];
         self.client.sendParametersAsJSON = YES;
     }
     return self;
