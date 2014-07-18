@@ -77,6 +77,15 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 @interface KZApplication(Authentication)
 
+/*
+ * This method will authenticate you to Kidozen. 
+ * To check whether the authentication was successful or not, you should check 
+ * on the callback type, if it's an NSError, the authentication was not OK.
+ * 
+ * @param callback can be a KZResponse or an  NSError, whether the authentication
+ * was successful or not.
+ * 
+ */
 -(void) authenticateUser:(NSString *)user
             withProvider:(NSString *)provider
              andPassword:(NSString *)password
@@ -91,6 +100,8 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 /**
  * Starts a passive authentication flow.
+ * @param callback can be a KZResponse or an  NSError, whether the authentication
+ * was successful or not.
  */
 - (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback;
 
