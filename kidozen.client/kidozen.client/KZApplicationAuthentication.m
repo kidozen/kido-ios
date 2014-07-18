@@ -102,6 +102,13 @@ NSString *const kAccessTokenKey = @"access_token";
     NSString * providerProtocol = [self.applicationConfig.authConfig protocolForProvider:providerKey];
     NSString * providerIPEndpoint = [self.applicationConfig.authConfig endPointForProvider:providerKey];
     
+    
+    NSError *authConfigError;
+    if (![self.applicationConfig validConfigForProvider:providerKey error:&authConfigError]) {
+        self.authCompletionBlock(authConfigError);
+        return;
+    }
+    
     __weak KZApplicationAuthentication *safeMe = self;
     
     if (!self.ip)

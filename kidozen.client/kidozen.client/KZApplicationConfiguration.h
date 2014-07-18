@@ -25,6 +25,7 @@
                                           NSHTTPURLResponse *configUrlResponse,
                                           NSError *error))cb;
 
+- (BOOL)validConfigForProvider:(NSString *)provider error:(NSError **)error;
 
 @property (nonatomic, copy, readonly) NSString *displayName;
 @property (nonatomic, copy, readonly) NSString *customUrl;

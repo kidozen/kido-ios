@@ -9,6 +9,7 @@
 #import "KZApplicationConfiguration.h"
 #import "KZResponse.h"
 #import "SVHTTPClient.h"
+#import "KZAuthenticationConfig.h"
 
 #import <objc/runtime.h>
 
@@ -126,6 +127,50 @@ NSString *const kApplicationNameKey = @"name";
                      
                  }];
     
+}
+
+
+- (BOOL)validConfigForProvider:(NSString *)provider error:(NSError **)error
+{
+    NSString * authServiceScope = self.authConfig.authServiceScope;
+    NSString * authServiceEndpoint = self.authConfig.authServiceEndpoint;
+    NSString * applicationScope = self.authConfig.applicationScope;
+    
+    NSString * providerProtocol = [self.authConfig protocolForProvider:provider];
+    NSString * providerIPEndpoint = [self.authConfig endPointForProvider:provider];
+
+    BOOL isValid =  authServiceScope && authServiceEndpoint &&
+                    applicationScope && providerProtocol &&
+                    providerIPEndpoint && provider;
+    
+    if (!isValid) {
+        *error = [self applicationConfigErrorForProvider:provider];
+    }
+    
+    return isValid;
+}
+
+- (NSError *)applicationConfigErrorForProvider:(NSString *)provider
+{
+    NSString * authServiceScope = self.authConfig.authServiceScope;
+    NSString * authServiceEndpoint = self.authConfig.authServiceEndpoint;
+    NSString * applicationScope = self.authConfig.applicationScope;
+    
+    NSString * providerProtocol = [self.authConfig protocolForProvider:provider];
+    NSString * providerIPEndpoint = [self.authConfig endPointForProvider:provider];
+
+    NSDictionary *data = @{@"authServiceScope": [NSString stringWithFormat:@"%@", authServiceScope],
+                           @"authServiceEndpoint": [NSString stringWithFormat:@"%@", authServiceEndpoint],
+                           @"applicationScope": [NSString stringWithFormat:@"%@", applicationScope],
+                           @"providerProtocol": [NSString stringWithFormat:@"%@", providerProtocol],
+                           @"providerIPEndpoint": [NSString stringWithFormat:@"%@", providerIPEndpoint]};
+    
+    NSError *error = [[NSError alloc] initWithDomain:@"Application Configuration. Wrong values obtained"
+                                                code:1
+                                            userInfo:data];
+    
+    
+    return error;
 }
 
 -(void) initializeHttpClientWithStrictSSL:(BOOL)strictSSL
