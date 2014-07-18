@@ -57,7 +57,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
         [url appendString:@"/"];
     }
     [url appendString: @"api/v3/logging/crash/ios/dump"];
-    self.reporterServiceUrl = url;
+    _reporterServiceUrl = url;
 }
 
 -(void) enableCrashReporter {
