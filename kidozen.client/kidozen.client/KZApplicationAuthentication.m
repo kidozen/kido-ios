@@ -133,7 +133,9 @@ NSString *const kAccessTokenKey = @"access_token";
         [safeMe.defaultClient POST:@"" parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
             if ([urlResponse statusCode]>300) {
                 NSMutableDictionary* details = [NSMutableDictionary dictionary];
-                [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
+                details[NSLocalizedDescriptionKey] = @"KidoZen service returns an invalid response";
+                details[@"Error message"] = [error localizedDescription] ? : @"Could not authenticate";
+                
                 if (safeMe.authCompletionBlock) {
                     safeMe.authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
                 }
@@ -193,6 +195,9 @@ NSString *const kAccessTokenKey = @"access_token";
                       // Handle error.
                       if ([urlResponse statusCode] > 300) {
                           NSMutableDictionary* details = [NSMutableDictionary dictionary];
+                          details[NSLocalizedDescriptionKey] = @"KidoZen service returns an invalid response";
+                          details[@"Error message"] = [error localizedDescription] ? : @"Could not authenticate with application key";
+
                           [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
                           callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
                       }
