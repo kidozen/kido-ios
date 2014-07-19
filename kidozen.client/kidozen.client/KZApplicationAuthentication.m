@@ -47,8 +47,7 @@ NSString *const kAccessTokenKey = @"access_token";
 
 @implementation KZApplicationAuthentication
 
--(instancetype) initWithTokenController:(KZTokenController *)tokenController
-                      applicationConfig:(KZApplicationConfiguration *)applicationConfig
+-(instancetype) initWithApplicationConfig:(KZApplicationConfiguration *)applicationConfig
                       tenantMarketPlace:(NSString *)tenantMarketPlace
                               strictSSL:(BOOL)strictSSL
 {
@@ -57,7 +56,7 @@ NSString *const kAccessTokenKey = @"access_token";
         self.passiveAuthenticated = NO;
         self.strictSSL = strictSSL;
         self.applicationConfig = applicationConfig;
-        self.tokenController = tokenController;
+        self.tokenController = [[KZTokenController alloc] init];
         self.tenantMarketPlace = tenantMarketPlace;
     }
     return self;

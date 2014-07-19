@@ -5,8 +5,9 @@
 //  Created on April 2013
 //  Copyright 2013 KidoZen All rights reserved.
 //
-#import "KZBaseService.h"
+
 #import "KZLogging.h"
+#import "KZObject.h"
 
 @class KZApplicationConfiguration;
 @class KZCrashReporter;
@@ -33,7 +34,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * Main KidoZen application object
  *
  */
-@interface KZApplication : KZBaseService
+@interface KZApplication : KZObject
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 @property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;

@@ -11,8 +11,9 @@
 @class KZTokenController;
 @class KZApplicationConfiguration;
 @class KZUser;
+@class KZTokenController;
 
-/* 
+/*
  * This class concentrates all authentication methods.
  */
 @interface KZApplicationAuthentication : NSObject
@@ -24,9 +25,10 @@
 @property (nonatomic, readonly) BOOL isAuthenticated;
 @property (nonatomic, readonly) BOOL passiveAuthenticated;
 
+@property (nonatomic, readonly) KZTokenController *tokenController;
 
--(id) initWithTokenController:(KZTokenController *)tokenController
-            applicationConfig:(KZApplicationConfiguration *)applicationConfig
+
+-(id) initWithApplicationConfig:(KZApplicationConfiguration *)applicationConfig
             tenantMarketPlace:(NSString *)tenantMarketPlace
                     strictSSL:(BOOL)strictSSL;
 

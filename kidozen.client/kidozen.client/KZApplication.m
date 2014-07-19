@@ -51,7 +51,6 @@
         self.applicationName = applicationName;
         self.onInitializationComplete = callback;
         self.strictSSL = strictSSL;
-        self.tokenController = [[KZTokenController alloc] init];
         self.applicationConfig = [[KZApplicationConfiguration alloc] init];
         
         [self initializeServices];
@@ -100,8 +99,9 @@
              return [safeMe failInitializationWithError:configError];
          }
          
-         [safeMe configureApplicationServices];
          [safeMe configureAuthentication];
+
+         [safeMe configureApplicationServices];
          
          if ([safeMe shouldAskTokenWithForApplicationKey]) {
              
@@ -122,8 +122,7 @@
 
 - (void) configureAuthentication
 {
-    self.appAuthentication = [[KZApplicationAuthentication alloc] initWithTokenController:self.tokenController
-                                                                        applicationConfig:self.applicationConfig
+    self.appAuthentication = [[KZApplicationAuthentication alloc] initWithApplicationConfig:self.applicationConfig
                                                                         tenantMarketPlace:self.tenantMarketPlace
                                                                                 strictSSL:self.strictSSL];
 }
@@ -131,7 +130,7 @@
 - (void) configureApplicationServices
 {
     self.appServices = [[KZApplicationServices alloc] initWithApplicationConfig:self.applicationConfig
-                                                                tokenController:self.tokenController
+                                                                tokenController:self.appAuthentication.tokenController
                                                                       strictSSL:self.strictSSL];
     
 }
@@ -159,7 +158,7 @@
         }
         
         self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.applicationConfig.url
-                                                        tokenController:self.tokenController];
+                                                        tokenController:self.appAuthentication.tokenController];
     }
 }
 
