@@ -35,7 +35,8 @@
                                                                  andCallback:^(KZResponse * r) {
                                                                      XCTAssertNotNil(r.response,@"Invalid response");
                                                                      [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
-                                                                         XCTAssertNotNil(c,@"User not authenticated");
+                                                                         NSAssert(![c  isKindOfClass:[NSError class]], @"error must be null");
+
                                                                          dispatch_semaphore_signal(semaphore);
                                                                      }];
                                                                  }];
@@ -50,8 +51,8 @@
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-    [self.application sendMailTo:@"nicolas.miyasato@kidozen.com"
-                            from:@"nicolas.miyasato@kidozen.com"
+    [self.application sendMailTo:@"yourMail@kidozen.com"
+                            from:@"yourMail@kidozen.com"
                      withSubject:@"Subject - Test email"
                      andHtmlBody:@"<i>Test HTML body</i>"
                      andTextBody:@"Text body"

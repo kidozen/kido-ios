@@ -46,7 +46,8 @@
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     [self.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
-        XCTAssertNotNil(c,@"User not authenticated");
+        NSAssert(![c  isKindOfClass:[NSError class]], @"error must be null");
+
         dispatch_semaphore_signal(semaphore);
     }];
     assert(self.application);
@@ -58,7 +59,7 @@
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     [self.application authenticateUser:@"none@kido.com" withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
-        XCTAssertNotNil(c,@"User not authenticated");
+        NSAssert([c  isKindOfClass:[NSError class]], @"should be error");
         dispatch_semaphore_signal(semaphore);
     }];
     assert(self.application);

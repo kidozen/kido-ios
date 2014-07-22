@@ -159,7 +159,7 @@ NSString *const kAccessTokenKey = @"access_token";
                                                          }];
                 
                 if (safeMe.authCompletionBlock) {
-                    if (![safeMe.kzUser.claims objectForKey:@"system"] && ![safeMe.kzUser.claims objectForKey:@"usersource"] )
+                    if (![safeMe.kzUser.claims objectForKey:@"WRAP access_token"] && ![safeMe.kzUser.claims objectForKey:@"ExpiresOn"] )
                     {
                         NSError * err = [[NSError alloc] initWithDomain:@"Authentication" code:0 userInfo:[NSDictionary dictionaryWithObject:@"User is not authenticated" forKey:@"description"]];
                         if (safeMe.authCompletionBlock) {

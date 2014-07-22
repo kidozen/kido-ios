@@ -33,7 +33,8 @@
                                                                 andCallback:^(KZResponse * r) {
                                                                     XCTAssertNotNil(r.response,@"Invalid response");
                                                                     [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
-                                                                        XCTAssertNotNil(c,@"User not authenticated");
+                                                                        NSAssert(![c  isKindOfClass:[NSError class]], @"error must be null");
+
                                                                         dispatch_semaphore_signal(semaphore);
                                                                     }];
                                                                 }];
@@ -49,10 +50,9 @@
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
-    KZSMSSender *smsSender = [self.application SMSSenderWithNumber:@"+541169691823"];
+    KZSMSSender *smsSender = [self.application SMSSenderWithNumber:@"+yourPhoneNumber"];
     [smsSender send:@"Hola test" completion:^(KZResponse *r) {
-//        XCTAssert(r.urlResponse.statusCode != 400, @"");
-        NSLog(@"--- Response is %@", r.response);
+        XCTAssert(r.urlResponse.statusCode != 400, @"");
         dispatch_semaphore_signal(semaphore);
         
     }];

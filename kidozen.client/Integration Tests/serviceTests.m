@@ -42,7 +42,8 @@
                                                                     XCTAssertNil(r.error, @"Should not have an error");
                                                                     
                                                                     [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
-                                                                        XCTAssertNotNil(c,@"User not authenticated");
+                                                                        NSAssert(![c  isKindOfClass:[NSError class]], @"error must be null");
+
                                                                         dispatch_semaphore_signal(semaphore);
                                                                     }];
                                                                 }];
