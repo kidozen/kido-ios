@@ -206,10 +206,9 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     }
 
     [self addAuthorizationHeader];
-    NSString * scapedUrl = [[NSString stringWithFormat:@"%@?query=%@",self.name, query] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     __weak KZStorage *safeMe = self;
     
-    [self.client GET:scapedUrl
+    [self.client GET:[NSString stringWithFormat:@"%@?query=%@",self.name, query]
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 
