@@ -47,17 +47,16 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
                            @"deviceId" :self.uniqueIdentifier};
     
     [self addAuthorizationHeader];
-    __weak KZNotification *safeMe = self;
     
     [self.client setSendParametersAsJSON:YES];
     [self.client POST:path
            parameters:body
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-               [safeMe callCallback:block
-                           response:response
-                        urlResponse:urlResponse
-                              error:error];
+               [self callCallback:block
+                         response:response
+                      urlResponse:urlResponse
+                            error:error];
                
            }];
     
@@ -80,15 +79,14 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     [self addAuthorizationHeader];
     [self.client setSendParametersAsJSON:YES];
     
-    __weak KZNotification *safeMe = self;
     [self.client POST:path
            parameters:notification
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-               [safeMe callCallback:block
-                           response:response
-                        urlResponse:urlResponse
-                              error:error];
+               [self callCallback:block
+                         response:response
+                      urlResponse:urlResponse
+                            error:error];
                
            }];
 }
@@ -97,16 +95,15 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
 {
     NSString * path= [NSString stringWithFormat:@"/devices/%@/%@", self.uniqueIdentifier, self.name];
     [self addAuthorizationHeader];
-    __weak KZNotification *safeMe = self;
     
     [self.client GET:path
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
               
-              [safeMe callCallback:block
-                          response:response
-                       urlResponse:urlResponse
-                             error:error];
+              [self callCallback:block
+                        response:response
+                     urlResponse:urlResponse
+                           error:error];
               
           }];
 }
@@ -115,16 +112,15 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
 {
     NSString * path= [NSString stringWithFormat:@"/channels/%@", self.name];
     [self addAuthorizationHeader];
-    __weak KZNotification *safeMe = self;
     
     [self.client GET:path
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
               
-              [safeMe callCallback:block
-                          response:response
-                       urlResponse:urlResponse
-                             error:error];
+              [self callCallback:block
+                        response:response
+                     urlResponse:urlResponse
+                           error:error];
               
           }];
 }
@@ -148,16 +144,15 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     }
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@/%@", self.name, channel, deviceToken];
     [self addAuthorizationHeader];
-    __weak KZNotification *safeMe = self;
     
     [self.client DELETE:path
              parameters:nil
              completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                  
-                 [safeMe callCallback:block
-                             response:response
-                          urlResponse:urlResponse
-                                error:error];
+                 [self callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
                  
              }];
 }

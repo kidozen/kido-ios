@@ -24,16 +24,15 @@
         [self.client setSendParametersAsJSON:YES];
     }
     [self.client setSendParametersAsJSON:YES];
-    __weak KZPubSubChannel *safeMe = self;
     
     [self.client POST:[NSString stringWithFormat:@"/%@", self.channelName]
            parameters:object
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-               [safeMe callCallback:block
-                           response:response
-                        urlResponse:urlResponse
-                              error:error];
+               [self callCallback:block
+                         response:response
+                      urlResponse:urlResponse
+                            error:error];
                
            }];
 }

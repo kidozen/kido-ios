@@ -52,13 +52,12 @@
               completion:(void (^)(KZResponse *r))block
 {
     [self addAuthorizationHeader];
-    __weak KZMail *safeMe = self;
     
     [self.client POST:path
            parameters:parameters
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-               [safeMe callCallback:block
+               [self callCallback:block
                            response:response
                         urlResponse:urlResponse
                               error:error];

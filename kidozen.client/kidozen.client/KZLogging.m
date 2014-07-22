@@ -19,13 +19,11 @@
     [self.client setSendParametersAsJSON:YES];
     NSString *path = [self pathForLevel:level message:message];
     
-    __weak KZLogging *safeMe = self;
-    
     [self.client POST:path
        parameters:object
        completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
            
-               [safeMe callCallback:block
+               [self callCallback:block
                            response:response
                         urlResponse:urlResponse
                               error:error];
@@ -41,13 +39,12 @@
 -(void) all:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
-    __weak KZLogging *safeMe = self;
     
     [self.client GET:@"/"
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
               
-              [safeMe callCallback:block
+              [self callCallback:block
                           response:response
                        urlResponse:urlResponse
                              error:error];
@@ -58,13 +55,12 @@
 -(void) clear:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
-    __weak KZLogging *safeMe = self;
     
     [self.client DELETE:@"/"
              parameters:nil
              completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 
-                 [safeMe callCallback:block
+                 [self callCallback:block
                              response:response
                           urlResponse:urlResponse
                                 error:error];
@@ -77,13 +73,12 @@
     [self addAuthorizationHeader];
     
     NSDictionary *parameters = @{@"query": query};
-    __weak KZLogging *safeMe = self;
     
     [self.client GET:@"/"
           parameters:parameters
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
               
-              [safeMe callCallback:block
+              [self callCallback:block
                           response:response
                        urlResponse:urlResponse
                              error:error];

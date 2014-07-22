@@ -38,13 +38,12 @@
     [self addHeadersWithTimeout:timeout];
     
     self.client.sendParametersAsJSON = NO;
-    __weak KZDatasource *safeMe = self;
     
     [self.client GET:self.name
           parameters:data
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
               
-              [safeMe callCallback:block
+              [self callCallback:block
                           response:response
                        urlResponse:urlResponse
                              error:error];
@@ -62,12 +61,12 @@
     [self addHeadersWithTimeout:timeout];
 
     [self.client setSendParametersAsJSON:YES];
-    __weak KZDatasource *safeMe = self;
+    
     [self.client POST:self.name
            parameters:data
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-            [safeMe callCallback:block
+            [self callCallback:block
                         response:response
                      urlResponse:urlResponse
                            error:error];

@@ -19,16 +19,15 @@
     }
     
     [self addAuthorizationHeader];
-    __weak KZQueue *safeMe = self;
     
     [self.client POST:[NSString stringWithFormat:@"/%@",self.name]
            parameters:object
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-               [safeMe callCallback:block
-                           response:response
-                        urlResponse:urlResponse
-                              error:error];
+               [self callCallback:block
+                         response:response
+                      urlResponse:urlResponse
+                            error:error];
                
            }];
 }
@@ -43,16 +42,15 @@
     }
     
     [self addAuthorizationHeader];
-    __weak KZQueue *safeMe = self;
     
     [self.client DELETE:[NSString stringWithFormat:@"/%@/next",self.name]
              parameters:nil
              completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                  
-                 [safeMe callCallback:block
-                             response:response
-                          urlResponse:urlResponse
-                                error:error];
+                 [self callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
                  
              }];
     return;

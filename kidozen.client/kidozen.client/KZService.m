@@ -55,16 +55,14 @@
     [self.client setHeaders:headersToUse];
     [self.client setSendParametersAsJSON:YES];
     
-    __weak KZService *safeMe = self;
-    
     [self.client POST:[NSString stringWithFormat:@"invoke/%@",method]
            parameters:data
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-               [safeMe callCallback:block
-                           response:response
-                        urlResponse:urlResponse
-                              error:error];
+               [self callCallback:block
+                         response:response
+                      urlResponse:urlResponse
+                            error:error];
                
            }];
 }

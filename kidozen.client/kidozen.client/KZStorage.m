@@ -36,16 +36,15 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     
     [self addAuthorizationHeader];
     [self.client setSendParametersAsJSON:YES];
-    __weak KZStorage *safeMe = self;
     
     [self.client POST:urlString
            parameters:object
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
+               [self callCallback:block response:response urlResponse:urlResponse error:error];
                
-    }];
-
+           }];
+    
     
 }
 
@@ -75,7 +74,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         [NSException exceptionWithName:@"KZException" reason:@"You must include the \"_metadata\" information" userInfo:nil];
         return;
     }
-
+    
     [self updateUsingId:objectId object:object completion:NULL];
 }
 
@@ -92,7 +91,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         NSDictionary *details = [NSDictionary
                                  dictionaryWithObject:@"You must include the \"_metadata\" information"
                                  forKey:NSLocalizedDescriptionKey];
-
+        
         NSError * error = [NSError errorWithDomain:KZStorageErrorDomain code:ENULLMETADATA userInfo:details];
         if (block != nil) {
             block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:error] );
@@ -101,14 +100,13 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     }
     [self addAuthorizationHeader];
     [self.client setSendParametersAsJSON:YES];
-    __weak KZStorage *safeMe = self;
     
     [self.client PUT:[NSString stringWithFormat:@"%@/%@",self.name, objectId]
           parameters:[self updateMetadataDates:object]
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-    }];
+              
+              [self callCallback:block response:response urlResponse:urlResponse error:error];
+          }];
 }
 
 -(void) getUsingId:(NSString *) objectId withBlock:(void (^)(KZResponse *))block;
@@ -119,20 +117,16 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         }
         return;
     }
-
-    [self addAuthorizationHeader];
     
-    __weak KZStorage *safeMe = self;
+    [self addAuthorizationHeader];
     
     [self.client GET:[NSString stringWithFormat:@"%@/%@",self.name, objectId]
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-
-        
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-        
-        
-    }];
+              
+              [self callCallback:block response:response urlResponse:urlResponse error:error];
+              
+          }];
 }
 
 -(void) deleteUsingId:(NSString *) objectId
@@ -141,7 +135,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         [NSException exceptionWithName:@"KZException" reason:@"Parameter is null" userInfo:nil];
         return;
     }
-
+    
     [self deleteUsingId:[NSString stringWithFormat:@"%@/%@",self.name, objectId] withBlock:nil];
 }
 
@@ -153,16 +147,15 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         }
         return;
     }
-
+    
     [self addAuthorizationHeader];
-    __weak KZStorage *safeMe = self;
     
     [self.client DELETE:[NSString stringWithFormat:@"%@/%@",self.name, objectId]
              parameters:nil
              completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-    }];
+                 
+                 [self callCallback:block response:response urlResponse:urlResponse error:error];
+             }];
 }
 
 -(void) drop
@@ -173,29 +166,27 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
 {
     
     [self addAuthorizationHeader];
-    __weak KZStorage *safeMe = self;
     
     [self.client DELETE:[NSString stringWithFormat:@"%@",self.name]
              parameters:nil
              completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
                  
-    }];
+                 [self callCallback:block response:response urlResponse:urlResponse error:error];
+                 
+             }];
 }
 
 -(void) all:(void (^)(KZResponse *))block
 {
     [self addAuthorizationHeader];
-    __weak KZStorage *safeMe = self;
     
     [self.client GET:[NSString stringWithFormat:@"%@",self.name]
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-
-    }];
+              
+              [self callCallback:block response:response urlResponse:urlResponse error:error];
+              
+          }];
 }
 
 -(void) query:(NSString *) query withBlock:(void (^)(KZResponse *))block
@@ -204,17 +195,16 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
         return;
     }
-
+    
     [self addAuthorizationHeader];
-    __weak KZStorage *safeMe = self;
     
     [self.client GET:[NSString stringWithFormat:@"%@?query=%@",self.name, query]
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-
-    }];
+              
+              [self callCallback:block response:response urlResponse:urlResponse error:error];
+              
+          }];
 }
 
 -(void) query:(NSString *) query withOptions:(NSString *) options withBlock:(void (^)(KZResponse *))block
@@ -223,18 +213,15 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         block( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError] );
         return;
     }
-
+    
     [self addAuthorizationHeader];
-    __weak KZStorage *safeMe = self;
-
+    
     [self.client GET:[NSString stringWithFormat:@"/%@?query=%@&options=%@",self.name, query, options]
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        
-        if (block != nil) {
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
-        }
-    }];
+              
+              [self callCallback:block response:response urlResponse:urlResponse error:error];
+          }];
 }
 
 -(void) query:(NSString *) query withOptions:(NSString *) options withFields:(NSString *) fields andBlock:(void (^)(KZResponse *))block
@@ -245,16 +232,15 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
     }
     
     [self addAuthorizationHeader];
-    __weak KZStorage *safeMe = self;
-
+    
     NSString* urlPath = [NSString stringWithFormat:@"/%@?query=%@&options=%@&fields=%@",self.name, query, options, fields] ;
     [self.client GET:urlPath
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
               
-            [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
+              [self callCallback:block response:response urlResponse:urlResponse error:error];
               
-    }];
+          }];
 }
 
 - (NSArray *) serializeArray:(NSArray *) array
@@ -287,7 +273,7 @@ NSString * const KZStorageErrorDomain = @"KZStorageErrorDomain";
         [updatedMetadata removeObjectForKey:@"updatedOn"];
         [updatedMetadata setObject:date forKey:@"updatedOn"];
     }
-
+    
     NSMutableDictionary * updatedObject=[NSMutableDictionary dictionaryWithDictionary:object];
     [updatedObject removeObjectForKey:@"_metadata"];
     [updatedObject setObject:updatedMetadata forKey:@"_metadata"];
