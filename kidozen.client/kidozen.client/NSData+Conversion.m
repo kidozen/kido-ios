@@ -18,4 +18,21 @@
     
     return [NSString stringWithString:hexString];
 }
+
+- (NSString *)KZ_UTF8String
+{
+    NSError *errorResponse;
+    NSString *typedResponse = [NSJSONSerialization JSONObjectWithData:self options:0 error:&errorResponse];
+    
+    if (typedResponse == nil) {
+        typedResponse = [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
+        if (typedResponse == nil) {
+            typedResponse = [NSString stringWithUTF8String:[self bytes]];
+        }
+    }
+    
+    return typedResponse;
+
+}
+
 @end

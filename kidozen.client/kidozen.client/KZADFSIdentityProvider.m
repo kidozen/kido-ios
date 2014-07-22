@@ -7,7 +7,6 @@
 
 @implementation KZADFSIdentityProvider
 @synthesize requestCompletion = _requestCompletion;
-@synthesize bypassSSLValidation = _bypassSSLValidation;
 
 -(void) configure:(id) configuration
 {
@@ -29,7 +28,7 @@
     _endpoint = identityProviderUrl;
     _requestCompletion = block;
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:identityProviderUrl] ];
-    NSString *msgLength = [NSString stringWithFormat:@"%d", [[self requestMessage] length]];
+    NSString *msgLength = [NSString stringWithFormat:@"%u", (unsigned int)[[self requestMessage] length]];
     [req addValue:@"application/soap+xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [req addValue:msgLength forHTTPHeaderField:@"Content-Length"];
     [req setHTTPMethod:@"POST"];

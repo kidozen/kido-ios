@@ -1,5 +1,8 @@
 #import "KZService.h"
 #import "NSData+SRB64Additions.h"
+#import "KZTokenController.h"
+#import "NSData+Conversion.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZService
 
@@ -19,7 +22,7 @@
 -(void) invokeMethodWithAuth:(NSString *) method withData:(id)data completion:(void (^)(KZResponse *))block
 {
     NSString *authHeader = [self authHeaderString];
-
+    
     NSDictionary *headers = @{@"x-kidozen-actas": authHeader};
     
     [self invokeMethodCore:method withData:data andHeaders:headers completion:block];
@@ -37,30 +40,38 @@
 -(void) invokeMethodCore:(NSString *) method withData:(id) data andHeaders:(NSDictionary *) headers completion:(void (^)(KZResponse *)) block
 {
     if (!method || !self.name) {
-        [NSException exceptionWithName:@"KZException" reason:@"The parameter is null" userInfo:nil];
+        block ( [[KZResponse alloc] initWithResponse:nil urlResponse:nil andError:self.createNilReferenceError]);
+        return;
     }
     
-    NSMutableDictionary *headersToUse = [NSMutableDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"];
+    NSMutableDictionary *headersToUse = [NSMutableDictionary dictionaryWithObject:self.tokenController.kzToken
+                                                                           forKey:@"Authorization"];
+    
     
     if  (headers) {
         [headersToUse addEntriesFromDictionary:headers];
     }
     
-    [_client setHeaders:headersToUse];
-    [_client setSendParametersAsJSON:YES];
+    [self.client setHeaders:headersToUse];
+    [self.client setSendParametersAsJSON:YES];
     
-    [_client POST:[NSString stringWithFormat:@"invoke/%@",method] parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
-    }];
+    __weak KZService *safeMe = self;
+    
+    [self.client POST:[NSString stringWithFormat:@"invoke/%@",method]
+           parameters:data
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
 }
 
 - (NSString *)authHeaderString
 {
-    NSData *plainData = [self.ipToken dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *plainData = [self.tokenController.ipToken dataUsingEncoding:NSUTF8StringEncoding];
     NSString *encodedToken = [plainData SR_stringByBase64Encoding];
     
     return [NSString stringWithFormat:@"Bearer %@", encodedToken];

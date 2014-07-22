@@ -13,3 +13,4 @@ NSString * const kzAppName = @""; // app name
 NSString * const kzUser = @""; //kidozen user
 NSString * const kzPassword = @""; //kidozen password
 NSString * const kzProvider = @"";
+NSString * const kzApplicationKey = @"";

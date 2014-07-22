@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B213D196EEDFA00088F5C /* kz.client.a */; };
+		6D435C3A196326EB00A710EF /* MainPassiveAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */; };
+		6D435C3B196326EB00A710EF /* MainPassiveAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D435C39196326EB00A710EF /* MainPassiveAuthViewController.xib */; };
+		6D46EEEE194B777A00EC629F /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46EEEC194B777A00EC629F /* InitialViewController.m */; };
+		6D46EEEF194B777A00EC629F /* InitialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D46EEED194B777A00EC629F /* InitialViewController.xib */; };
+		6D6CBF9F19362CFD00135CFA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6CBF9E19362CFD00135CFA /* Social.framework */; };
+		6D6CBFA419362D0B00135CFA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6CBFA319362D0B00135CFA /* Accounts.framework */; };
+		6D76F5121923E3DA000A361F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F5111923E3DA000A361F /* Foundation.framework */; };
+		6D76F5141923E3DA000A361F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F5131923E3DA000A361F /* CoreGraphics.framework */; };
+		6D76F5161923E3DA000A361F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F5151923E3DA000A361F /* UIKit.framework */; };
+		6D76F51C1923E3DA000A361F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D76F51A1923E3DA000A361F /* InfoPlist.strings */; };
+		6D76F51E1923E3DA000A361F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D76F51D1923E3DA000A361F /* main.m */; };
+		6D76F5221923E3DA000A361F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D76F5211923E3DA000A361F /* AppDelegate.m */; };
+		6D76F5241923E3DA000A361F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D76F5231923E3DA000A361F /* Images.xcassets */; };
+		6D76F52B1923E3DA000A361F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F52A1923E3DA000A361F /* XCTest.framework */; };
+		6D76F52C1923E3DA000A361F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F5111923E3DA000A361F /* Foundation.framework */; };
+		6D76F52D1923E3DB000A361F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F5151923E3DA000A361F /* UIKit.framework */; };
+		6D76F5351923E3DB000A361F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D76F5331923E3DB000A361F /* InfoPlist.strings */; };
+		6D76F5371923E3DB000A361F /* SamplePassiveAuthAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D76F5361923E3DB000A361F /* SamplePassiveAuthAppTests.m */; };
+		6DE2A04D19241B230020C69A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE2A04C19241B230020C69A /* libicucore.dylib */; };
+		6DE2A05219241B2F0020C69A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCB83A91924198300D14C02 /* libc++.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6D76F52E1923E3DB000A361F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D76F5061923E3DA000A361F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6D76F50D1923E3DA000A361F;
+			remoteInfo = SamplePassiveAuthApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6D1B213D196EEDFA00088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
+		6D435C37196326EB00A710EF /* MainPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPassiveAuthViewController.h; sourceTree = "<group>"; };
+		6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPassiveAuthViewController.m; sourceTree = "<group>"; };
+		6D435C39196326EB00A710EF /* MainPassiveAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainPassiveAuthViewController.xib; sourceTree = "<group>"; };
+		6D46EEEB194B777A00EC629F /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
+		6D46EEEC194B777A00EC629F /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
+		6D46EEED194B777A00EC629F /* InitialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitialViewController.xib; sourceTree = "<group>"; };
+		6D6CBF9E19362CFD00135CFA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		6D6CBFA319362D0B00135CFA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		6D76F50E1923E3DA000A361F /* SamplePassiveAuthApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SamplePassiveAuthApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D76F5111923E3DA000A361F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6D76F5131923E3DA000A361F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6D76F5151923E3DA000A361F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6D76F5191923E3DA000A361F /* SamplePassiveAuthApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SamplePassiveAuthApp-Info.plist"; sourceTree = "<group>"; };
+		6D76F51B1923E3DA000A361F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D76F51D1923E3DA000A361F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D76F51F1923E3DA000A361F /* SamplePassiveAuthApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SamplePassiveAuthApp-Prefix.pch"; sourceTree = "<group>"; };
+		6D76F5201923E3DA000A361F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6D76F5211923E3DA000A361F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6D76F5231923E3DA000A361F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6D76F5291923E3DA000A361F /* SamplePassiveAuthAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SamplePassiveAuthAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D76F52A1923E3DA000A361F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6D76F5321923E3DB000A361F /* SamplePassiveAuthAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SamplePassiveAuthAppTests-Info.plist"; sourceTree = "<group>"; };
+		6D76F5341923E3DB000A361F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D76F5361923E3DB000A361F /* SamplePassiveAuthAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SamplePassiveAuthAppTests.m; sourceTree = "<group>"; };
+		6DCB83A91924198300D14C02 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		6DCB877E19463ECC005B75B9 /* next.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = next.html; sourceTree = "<group>"; };
+		6DCB877F19463ECC005B75B9 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		6DE2A04C19241B230020C69A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		6DE2A0871963525E002556B0 /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = "SamplePassiveAuthApp/kido-lib/kz.client.a"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D76F50B1923E3DA000A361F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */,
+				6D6CBFA419362D0B00135CFA /* Accounts.framework in Frameworks */,
+				6D6CBF9F19362CFD00135CFA /* Social.framework in Frameworks */,
+				6DE2A05219241B2F0020C69A /* libc++.dylib in Frameworks */,
+				6DE2A04D19241B230020C69A /* libicucore.dylib in Frameworks */,
+				6D76F5141923E3DA000A361F /* CoreGraphics.framework in Frameworks */,
+				6D76F5161923E3DA000A361F /* UIKit.framework in Frameworks */,
+				6D76F5121923E3DA000A361F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D76F5261923E3DA000A361F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D76F52B1923E3DA000A361F /* XCTest.framework in Frameworks */,
+				6D76F52D1923E3DB000A361F /* UIKit.framework in Frameworks */,
+				6D76F52C1923E3DA000A361F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6D76F5051923E3DA000A361F = {
+			isa = PBXGroup;
+			children = (
+				6D76F5171923E3DA000A361F /* SamplePassiveAuthApp */,
+				6D76F5301923E3DB000A361F /* SamplePassiveAuthAppTests */,
+				6D76F5101923E3DA000A361F /* Frameworks */,
+				6D76F50F1923E3DA000A361F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D76F50F1923E3DA000A361F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D76F50E1923E3DA000A361F /* SamplePassiveAuthApp.app */,
+				6D76F5291923E3DA000A361F /* SamplePassiveAuthAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D76F5101923E3DA000A361F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D1B213D196EEDFA00088F5C /* kz.client.a */,
+				6DE2A0871963525E002556B0 /* kz.client.a */,
+				6D6CBFA319362D0B00135CFA /* Accounts.framework */,
+				6D6CBF9E19362CFD00135CFA /* Social.framework */,
+				6DE2A04C19241B230020C69A /* libicucore.dylib */,
+				6DCB83A91924198300D14C02 /* libc++.dylib */,
+				6D76F5111923E3DA000A361F /* Foundation.framework */,
+				6D76F5131923E3DA000A361F /* CoreGraphics.framework */,
+				6D76F5151923E3DA000A361F /* UIKit.framework */,
+				6D76F52A1923E3DA000A361F /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D76F5171923E3DA000A361F /* SamplePassiveAuthApp */ = {
+			isa = PBXGroup;
+			children = (
+				6D435C37196326EB00A710EF /* MainPassiveAuthViewController.h */,
+				6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */,
+				6D435C39196326EB00A710EF /* MainPassiveAuthViewController.xib */,
+				6D76F5201923E3DA000A361F /* AppDelegate.h */,
+				6D76F5211923E3DA000A361F /* AppDelegate.m */,
+				6D46EEEB194B777A00EC629F /* InitialViewController.h */,
+				6D46EEEC194B777A00EC629F /* InitialViewController.m */,
+				6D46EEED194B777A00EC629F /* InitialViewController.xib */,
+				6D76F5231923E3DA000A361F /* Images.xcassets */,
+				6D76F5181923E3DA000A361F /* Supporting Files */,
+			);
+			path = SamplePassiveAuthApp;
+			sourceTree = "<group>";
+		};
+		6D76F5181923E3DA000A361F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6DCB877E19463ECC005B75B9 /* next.html */,
+				6DCB877F19463ECC005B75B9 /* index.html */,
+				6D76F5191923E3DA000A361F /* SamplePassiveAuthApp-Info.plist */,
+				6D76F51A1923E3DA000A361F /* InfoPlist.strings */,
+				6D76F51D1923E3DA000A361F /* main.m */,
+				6D76F51F1923E3DA000A361F /* SamplePassiveAuthApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D76F5301923E3DB000A361F /* SamplePassiveAuthAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D76F5361923E3DB000A361F /* SamplePassiveAuthAppTests.m */,
+				6D76F5311923E3DB000A361F /* Supporting Files */,
+			);
+			path = SamplePassiveAuthAppTests;
+			sourceTree = "<group>";
+		};
+		6D76F5311923E3DB000A361F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D76F5321923E3DB000A361F /* SamplePassiveAuthAppTests-Info.plist */,
+				6D76F5331923E3DB000A361F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D76F50D1923E3DA000A361F /* SamplePassiveAuthApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D76F53A1923E3DB000A361F /* Build configuration list for PBXNativeTarget "SamplePassiveAuthApp" */;
+			buildPhases = (
+				6D76F50A1923E3DA000A361F /* Sources */,
+				6D76F50B1923E3DA000A361F /* Frameworks */,
+				6D76F50C1923E3DA000A361F /* Resources */,
+				6D5D8AEB1964490500C7611E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SamplePassiveAuthApp;
+			productName = SamplePassiveAuthApp;
+			productReference = 6D76F50E1923E3DA000A361F /* SamplePassiveAuthApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6D76F5281923E3DA000A361F /* SamplePassiveAuthAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D76F53D1923E3DB000A361F /* Build configuration list for PBXNativeTarget "SamplePassiveAuthAppTests" */;
+			buildPhases = (
+				6D76F5251923E3DA000A361F /* Sources */,
+				6D76F5261923E3DA000A361F /* Frameworks */,
+				6D76F5271923E3DA000A361F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D76F52F1923E3DB000A361F /* PBXTargetDependency */,
+			);
+			name = SamplePassiveAuthAppTests;
+			productName = SamplePassiveAuthAppTests;
+			productReference = 6D76F5291923E3DA000A361F /* SamplePassiveAuthAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D76F5061923E3DA000A361F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Kidozen;
+				TargetAttributes = {
+					6D76F5281923E3DA000A361F = {
+						TestTargetID = 6D76F50D1923E3DA000A361F;
+					};
+				};
+			};
+			buildConfigurationList = 6D76F5091923E3DA000A361F /* Build configuration list for PBXProject "SamplePassiveAuthApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6D76F5051923E3DA000A361F;
+			productRefGroup = 6D76F50F1923E3DA000A361F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D76F50D1923E3DA000A361F /* SamplePassiveAuthApp */,
+				6D76F5281923E3DA000A361F /* SamplePassiveAuthAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D76F50C1923E3DA000A361F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D76F51C1923E3DA000A361F /* InfoPlist.strings in Resources */,
+				6D46EEEF194B777A00EC629F /* InitialViewController.xib in Resources */,
+				6D435C3B196326EB00A710EF /* MainPassiveAuthViewController.xib in Resources */,
+				6D76F5241923E3DA000A361F /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D76F5271923E3DA000A361F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D76F5351923E3DB000A361F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D5D8AEB1964490500C7611E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "DSYM_FILE_PATH=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\n\necho \"DSYM FILE IS IN\"\necho \"$DSYM_FILE_PATH\"\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D76F50A1923E3DA000A361F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D435C3A196326EB00A710EF /* MainPassiveAuthViewController.m in Sources */,
+				6D46EEEE194B777A00EC629F /* InitialViewController.m in Sources */,
+				6D76F5221923E3DA000A361F /* AppDelegate.m in Sources */,
+				6D76F51E1923E3DA000A361F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D76F5251923E3DA000A361F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D76F5371923E3DB000A361F /* SamplePassiveAuthAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6D76F52F1923E3DB000A361F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6D76F50D1923E3DA000A361F /* SamplePassiveAuthApp */;
+			targetProxy = 6D76F52E1923E3DB000A361F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6D76F51A1923E3DA000A361F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D76F51B1923E3DA000A361F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6D76F5331923E3DB000A361F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D76F5341923E3DB000A361F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6D76F5381923E3DB000A361F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					$SRCROOT/../../outputLibrary/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6D76F5391923E3DB000A361F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					$SRCROOT/../../outputLibrary/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_CFLAGS = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D76F53B1923E3DB000A361F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SamplePassiveAuthApp/SamplePassiveAuthApp-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					$SRCROOT/../../outputLibrary/include,
+				);
+				INFOPLIST_FILE = "SamplePassiveAuthApp/SamplePassiveAuthApp-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SamplePassiveAuthApp-cuzsgaukvfsgtideojfdmbqvyutp/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/SamplePassiveAuthApp",
+					"$(PROJECT_DIR)/SamplePassiveAuthApp/kido-lib",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6D76F53C1923E3DB000A361F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SamplePassiveAuthApp/SamplePassiveAuthApp-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					$SRCROOT/../../outputLibrary/include,
+				);
+				INFOPLIST_FILE = "SamplePassiveAuthApp/SamplePassiveAuthApp-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SamplePassiveAuthApp-cuzsgaukvfsgtideojfdmbqvyutp/Build/Products/Debug-iphoneos",
+					"$(PROJECT_DIR)/SamplePassiveAuthApp",
+					"$(PROJECT_DIR)/SamplePassiveAuthApp/kido-lib",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6D76F53E1923E3DB000A361F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SamplePassiveAuthApp.app/SamplePassiveAuthApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SamplePassiveAuthApp/SamplePassiveAuthApp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SamplePassiveAuthAppTests/SamplePassiveAuthAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6D76F53F1923E3DB000A361F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SamplePassiveAuthApp.app/SamplePassiveAuthApp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SamplePassiveAuthApp/SamplePassiveAuthApp-Prefix.pch";
+				INFOPLIST_FILE = "SamplePassiveAuthAppTests/SamplePassiveAuthAppTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D76F5091923E3DA000A361F /* Build configuration list for PBXProject "SamplePassiveAuthApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D76F5381923E3DB000A361F /* Debug */,
+				6D76F5391923E3DB000A361F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D76F53A1923E3DB000A361F /* Build configuration list for PBXNativeTarget "SamplePassiveAuthApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D76F53B1923E3DB000A361F /* Debug */,
+				6D76F53C1923E3DB000A361F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D76F53D1923E3DB000A361F /* Build configuration list for PBXNativeTarget "SamplePassiveAuthAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D76F53E1923E3DB000A361F /* Debug */,
+				6D76F53F1923E3DB000A361F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D76F5061923E3DA000A361F /* Project object */;
+}

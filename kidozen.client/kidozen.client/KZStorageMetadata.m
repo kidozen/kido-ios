@@ -3,7 +3,7 @@
 #define ISO_TIMEZONE_UTC_FORMAT @"Z"
 #define ISO_TIMEZONE_OFFSET_FORMAT @"%+02d%02d"
 
-@interface KZStorageMetadata (private)
+@interface KZStorageMetadata ()
 - (NSString *) getStringFromDate:(NSDate *) date;
 - (NSDate *) getDateFromString:(NSString *) dateAsString;
 @end
@@ -16,8 +16,8 @@
     if (self) {
         _metadata = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"", @"createdBy",
                      [NSDate date],@"createdOn",
-                     true, @"isPrivate",
-                     0, @"sync",
+                     @1, @"isPrivate",
+                     @0, @"sync",
                      @"", @"updatedBy",
                      [NSDate date], @"updatedOn",
                      nil];
@@ -35,7 +35,7 @@
              [[dictionary objectForKey:@"_metadata"] objectForKey:@"createdBy"], @"createdBy",
              _createdOnAsString, @"createdOn",
              [NSString stringWithFormat:@"%d",_isPrivate], @"isPrivate",
-             [NSString stringWithFormat:@"%d",_sync],@"sync",
+             [NSString stringWithFormat:@"%@",@(_sync)],@"sync",
              [[dictionary objectForKey:@"_metadata"] objectForKey:@"updatedBy"], @"updatedBy",
              _updatedOnAsString, @"updatedOn",nil],@"_metadata",
             nil];

@@ -6,7 +6,65 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		6D428AB118EEE6F60002C36C /* kidozen.client.device */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6D428AB918EEE6F60002C36C /* Build configuration list for PBXAggregateTarget "kidozen.client.device" */;
+			buildPhases = (
+				6D428AB818EEE6F60002C36C /* ShellScript */,
+			);
+			dependencies = (
+				6D8018071968ACE700E99FB7 /* PBXTargetDependency */,
+				6D8018091968ACE700E99FB7 /* PBXTargetDependency */,
+			);
+			name = kidozen.client.device;
+			productName = kidozen.client.fat;
+		};
+		6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6DF1EBBB18EDF726000C3AA7 /* Build configuration list for PBXAggregateTarget "kidozen.client.fat" */;
+			buildPhases = (
+				6DF1EBBE18EDF72F000C3AA7 /* ShellScript */,
+			);
+			dependencies = (
+				6D8018011968ACDE00E99FB7 /* PBXTargetDependency */,
+				6D8018031968ACDE00E99FB7 /* PBXTargetDependency */,
+			);
+			name = kidozen.client.fat;
+			productName = kidozen.client.fat;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
+		6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C85AE1917B71A00E59BD8 /* loggingTests.m */; };
+		6D291A88191BFE28003AEFAF /* storageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A87191BFE28003AEFAF /* storageTests.m */; };
+		6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
+		6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */; };
+		6D4001481976C42B00D5F511 /* serviceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4001471976C42B00D5F511 /* serviceTests.m */; };
+		6D40014F1976CE9E00D5F511 /* smsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D40014E1976CE9E00D5F511 /* smsTests.m */; };
+		6D4001521976D1B000D5F511 /* KZBaseService+ProtectedMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4001501976D1B000D5F511 /* KZBaseService+ProtectedMethods.h */; };
+		6D40016B1978687600D5F511 /* configurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D40016A1978687600D5F511 /* configurationTests.m */; };
+		6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D43DBDF1968BF2300D023CF /* kz.client.a */; };
+		6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */; };
+		6D4ACD491937CBA400958E65 /* KZObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD471937CBA400958E65 /* KZObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD481937CBA400958E65 /* KZObject.m */; };
+		6D5BBE1419741558008576D5 /* KZApplicationAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */; };
+		6D5BBE1519741558008576D5 /* KZApplicationAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */; };
+		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
+		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
+		6D8017EE1968A74800E99FB7 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8017EC1968A74800E99FB7 /* Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D8017EF1968A74800E99FB7 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8017ED1968A74800E99FB7 /* Base64.m */; };
+		6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */; };
+		6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DCB876819462C64005B75B9 /* KZPassiveAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCB876619462C64005B75B9 /* KZPassiveAuthViewController.m */; };
+		6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */; };
+		6DCEDDD619391E9F00A38C39 /* KZTokenController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDDD419391E9F00A38C39 /* KZTokenController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DCEDDD719391E9F00A38C39 /* KZTokenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEDDD519391E9F00A38C39 /* KZTokenController.m */; };
+		6DE2A0B11925502B0020C69A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DE2A0B01925502B0020C69A /* Media.xcassets */; };
 		8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */; };
 		8E0774A41619D9AF00FA21D9 /* KZConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774831619D9AF00FA21D9 /* KZConfiguration.m */; };
 		8E0774A51619D9AF00FA21D9 /* KZIdentityProviderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774861619D9AF00FA21D9 /* KZIdentityProviderFactory.m */; };
@@ -26,7 +84,6 @@
 		8E0774B61619DC7E00FA21D9 /* KZApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774B51619DC7E00FA21D9 /* KZApplication.m */; };
 		8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774B41619DC7E00FA21D9 /* KZApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774811619D9AF00FA21D9 /* KZAuthentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774821619D9AF00FA21D9 /* KZConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,14 +101,6 @@
 		8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749D1619D9AF00FA21D9 /* NSDictionary+JSONCategories.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8E0774DC1619F35500FA21D9 /* Query.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E0774A11619D9AF00FA21D9 /* Query.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E1C9AA7161CD549001C43B1 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E1C9AA2161CD549001C43B1 /* base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E1C9AA8161CD549001C43B1 /* SocketRocket-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 8E1C9AA3161CD549001C43B1 /* SocketRocket-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E1C9AA9161CD549001C43B1 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E1C9AA4161CD549001C43B1 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E1C9AAF161CD562001C43B1 /* KZHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E1C9AAB161CD562001C43B1 /* KZHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E1C9AB0161CD562001C43B1 /* KZHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C9AAC161CD562001C43B1 /* KZHTTPClient.m */; };
-		8E1C9AB1161CD562001C43B1 /* KZHTTPRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E1C9AAD161CD562001C43B1 /* KZHTTPRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8E1C9AB2161CD562001C43B1 /* KZHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E1C9AAE161CD562001C43B1 /* KZHTTPRequest.m */; };
-		8E69448D16261DA90089959F /* NSData+SRB64Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E69448B16261DA90089959F /* NSData+SRB64Additions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EB8652B1614D11800DD60E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
 		8EE16FAD161B52B6006BAA59 /* NSString+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */; };
 		AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4208165D32BE00EB6443 /* CFNetwork.framework */; };
@@ -59,14 +108,13 @@
 		AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0F7EB01730515200C55706 /* UIKit.framework */; };
 		AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = AA211CDA1667B35600848407 /* KZStorageMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = AA211CDB1667B35600848407 /* KZStorageMetadata.m */; };
+		AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */; };
+		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
-		AAAAB31618C1144C00262636 /* libSocketRocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA86D4C317BAD7CF00B5F15E /* libSocketRocket.a */; };
 		AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
-		AACBD73B18CA579400518D14 /* applicationtests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationtests.m */; };
-		AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6B2A5166915AF00AED1AF /* KZConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6B2A6166915AF00AED1AF /* KZConstants.m */; };
+		AACBD73B18CA579400518D14 /* applicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationTests.m */; };
 		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */; };
 		AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1E4B88183127860059314D /* XCTest.framework */; };
@@ -75,47 +123,67 @@
 		AAE6E8E018C10D8100FB046A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAE6E8DE18C10D8100FB046A /* InfoPlist.strings */; };
 		AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33E1843BAEB00CBCFC2 /* Constants.h */; };
 		AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33F1843BAEB00CBCFC2 /* Constants.m */; };
-		AAE6E8EB18C10DBF00FB046A /* datasourcetests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88418C0E80B00FB046A /* datasourcetests.m */; };
-		AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB865271614D11800DD60E6 /* libkidozen.client.a */; };
+		AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88418C0E80B00FB046A /* datasourceTests.m */; };
 		AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AA86D4C217BAD7CF00B5F15E /* PBXContainerItemProxy */ = {
+		6D43DBDA1968B26300D023CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */;
+			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F6B2082D1450F597009315AF;
 			remoteInfo = SocketRocket;
 		};
-		AA86D4C417BAD7CF00B5F15E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F668C880153E91210044DBAC;
-			remoteInfo = SocketRocketOSX;
-		};
-		AA86D4C617BAD7CF00B5F15E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F6BDA802145900D200FE3253;
-			remoteInfo = SRWebSocketTests;
-		};
-		AA86D4C817BAD7CF00B5F15E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F62417E314D52F3C003CE997;
-			remoteInfo = TestChat;
-		};
-		AAE6E8F318C1135100FB046A /* PBXContainerItemProxy */ = {
+		6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8EB865261614D11800DD60E6;
-			remoteInfo = kidozen.client;
+			remoteGlobalIDString = 6DF1EBBA18EDF726000C3AA7;
+			remoteInfo = kidozen.client.fat;
+		};
+		6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05CD31520EE936A9000FDE88;
+			remoteInfo = CrashReporter;
+		};
+		6D8017FE1968A75D00E99FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AA50FE4F18E5C39300DE42F7;
+			remoteInfo = SVHTTPRequest;
+		};
+		6D8018001968ACDE00E99FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DE1A30318EDFFC400A8810E;
+			remoteInfo = libSVHTTPRequest.fat;
+		};
+		6D8018021968ACDE00E99FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94C918EE67BF00EA324F;
+			remoteInfo = CrashReporter.fat;
+		};
+		6D8018061968ACE700E99FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94B318EE621B00EA324F;
+			remoteInfo = libSVHTTPRequest.device;
+		};
+		6D8018081968ACE700E99FB7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94CD18EE67CA00EA324F;
+			remoteInfo = CrashReporter.device;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -132,9 +200,39 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D1C85AE1917B71A00E59BD8 /* loggingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loggingTests.m; sourceTree = "<group>"; };
+		6D291A87191BFE28003AEFAF /* storageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = storageTests.m; sourceTree = "<group>"; };
+		6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mongo.h"; sourceTree = "<group>"; };
+		6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Mongo.m"; sourceTree = "<group>"; };
+		6D4001471976C42B00D5F511 /* serviceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = serviceTests.m; sourceTree = "<group>"; };
+		6D40014E1976CE9E00D5F511 /* smsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = smsTests.m; sourceTree = "<group>"; };
+		6D4001501976D1B000D5F511 /* KZBaseService+ProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KZBaseService+ProtectedMethods.h"; sourceTree = "<group>"; };
+		6D40016A1978687600D5F511 /* configurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = configurationTests.m; sourceTree = "<group>"; };
+		6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../thirdParty/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
+		6D43DBDF1968BF2300D023CF /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../outputLibrary/kz.client.a; sourceTree = "<group>"; };
+		6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationConfiguration.h; sourceTree = "<group>"; };
+		6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationConfiguration.m; sourceTree = "<group>"; };
+		6D4ACD471937CBA400958E65 /* KZObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZObject.h; sourceTree = "<group>"; };
+		6D4ACD481937CBA400958E65 /* KZObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZObject.m; sourceTree = "<group>"; };
+		6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationAuthentication.h; sourceTree = "<group>"; };
+		6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationAuthentication.m; sourceTree = "<group>"; };
+		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
+		6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		6D8017EC1968A74800E99FB7 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../../thirdParty/Base64/Base64.h; sourceTree = "<group>"; };
+		6D8017ED1968A74800E99FB7 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../thirdParty/Base64/Base64.m; sourceTree = "<group>"; };
+		6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CrashReporter.xcodeproj; path = "../thirdParty/plcrashreporter-1.2-rc4/CrashReporter.xcodeproj"; sourceTree = "<group>"; };
+		6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../thirdParty/SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
+		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
+		6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationServices.m; sourceTree = "<group>"; };
+		6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZPassiveAuthViewController.h; sourceTree = "<group>"; };
+		6DCB876619462C64005B75B9 /* KZPassiveAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZPassiveAuthViewController.m; sourceTree = "<group>"; };
+		6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAuthenticationConfig.h; sourceTree = "<group>"; };
+		6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAuthenticationConfig.m; sourceTree = "<group>"; };
+		6DCEDDD419391E9F00A38C39 /* KZTokenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZTokenController.h; sourceTree = "<group>"; };
+		6DCEDDD519391E9F00A38C39 /* KZTokenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZTokenController.m; sourceTree = "<group>"; };
+		6DE2A0B01925502B0020C69A /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZADFSIdentityProvider.h; sourceTree = "<group>"; };
 		8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZADFSIdentityProvider.m; sourceTree = "<group>"; };
-		8E0774811619D9AF00FA21D9 /* KZAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAuthentication.h; sourceTree = "<group>"; };
 		8E0774821619D9AF00FA21D9 /* KZConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZConfiguration.h; sourceTree = "<group>"; };
 		8E0774831619D9AF00FA21D9 /* KZConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZConfiguration.m; sourceTree = "<group>"; };
 		8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZIdentityProvider.h; sourceTree = "<group>"; };
@@ -170,21 +268,10 @@
 		8E0774A21619D9AF00FA21D9 /* Query.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Query.m; sourceTree = "<group>"; };
 		8E0774B41619DC7E00FA21D9 /* KZApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplication.h; sourceTree = "<group>"; };
 		8E0774B51619DC7E00FA21D9 /* KZApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplication.m; sourceTree = "<group>"; };
-		8E1C9AA1161CD549001C43B1 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = kidozen.client/base64.c; sourceTree = SOURCE_ROOT; };
-		8E1C9AA2161CD549001C43B1 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = kidozen.client/base64.h; sourceTree = SOURCE_ROOT; };
-		8E1C9AA3161CD549001C43B1 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SocketRocket-Prefix.pch"; path = "kidozen.client/SocketRocket-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		8E1C9AA4161CD549001C43B1 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = kidozen.client/SRWebSocket.h; sourceTree = SOURCE_ROOT; };
-		8E1C9AA5161CD549001C43B1 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = kidozen.client/SRWebSocket.m; sourceTree = SOURCE_ROOT; };
-		8E1C9AAB161CD562001C43B1 /* KZHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KZHTTPClient.h; path = kidozen.client/KZHTTPClient.h; sourceTree = SOURCE_ROOT; };
-		8E1C9AAC161CD562001C43B1 /* KZHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KZHTTPClient.m; path = kidozen.client/KZHTTPClient.m; sourceTree = SOURCE_ROOT; };
-		8E1C9AAD161CD562001C43B1 /* KZHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KZHTTPRequest.h; path = kidozen.client/KZHTTPRequest.h; sourceTree = SOURCE_ROOT; };
-		8E1C9AAE161CD562001C43B1 /* KZHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KZHTTPRequest.m; path = kidozen.client/KZHTTPRequest.m; sourceTree = SOURCE_ROOT; };
 		8E5A61A71641872800038364 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		8E5A61AA1641872800038364 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8E5A61AB1641872800038364 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8E5A61AC1641872800038364 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		8E69448B16261DA90089959F /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+SRB64Additions.h"; path = "kidozen.client/NSData+SRB64Additions.h"; sourceTree = SOURCE_ROOT; };
-		8E69448C16261DA90089959F /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+SRB64Additions.m"; path = "kidozen.client/NSData+SRB64Additions.m"; sourceTree = SOURCE_ROOT; };
 		8E746EE0162312B0001D39C7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		8EB865271614D11800DD60E6 /* libkidozen.client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libkidozen.client.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB8652A1614D11800DD60E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -194,24 +281,22 @@
 		AA1E4B88183127860059314D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AA211CDA1667B35600848407 /* KZStorageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZStorageMetadata.h; sourceTree = "<group>"; };
 		AA211CDB1667B35600848407 /* KZStorageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZStorageMetadata.m; sourceTree = "<group>"; };
+		AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZCrashReporter.m; sourceTree = "<group>"; };
+		AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZCrashReporter.h; sourceTree = "<group>"; };
 		AA68A33E1843BAEB00CBCFC2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../sdk.integration.tests/Constants.h; sourceTree = "<group>"; };
 		AA68A33F1843BAEB00CBCFC2 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Constants.m; path = ../sdk.integration.tests/Constants.m; sourceTree = "<group>"; };
-		AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../../SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		AAC92C451725954200D1FF88 /* KZService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZService.h; sourceTree = "<group>"; };
 		AAC92C461725954200D1FF88 /* KZService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZService.m; sourceTree = "<group>"; };
-		AACBD73A18CA579400518D14 /* applicationtests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = applicationtests.m; sourceTree = "<group>"; };
+		AACBD73A18CA579400518D14 /* applicationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = applicationTests.m; sourceTree = "<group>"; };
 		AADA4204165D327400EB6443 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		AADA4206165D32B900EB6443 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AADA4208165D32BE00EB6443 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		AAE6B2A5166915AF00AED1AF /* KZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZConstants.h; sourceTree = "<group>"; };
-		AAE6B2A6166915AF00AED1AF /* KZConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZConstants.m; sourceTree = "<group>"; };
-		AAE6E88418C0E80B00FB046A /* datasourcetests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = datasourcetests.m; path = ../sdk.integration.tests/datasourcetests.m; sourceTree = "<group>"; };
+		AAE6E88418C0E80B00FB046A /* datasourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = datasourceTests.m; path = ../sdk.integration.tests/datasourceTests.m; sourceTree = "<group>"; };
 		AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDatasource.h; sourceTree = "<group>"; };
 		AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDatasource.m; sourceTree = "<group>"; };
 		AAE6E8D718C10D8100FB046A /* Integration Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Integration Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE6E8DD18C10D8100FB046A /* Integration Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Integration Tests-Info.plist"; sourceTree = "<group>"; };
 		AAE6E8DF18C10D8100FB046A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AAE6E8E118C10D8100FB046A /* Integration_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Integration_Tests.m; sourceTree = "<group>"; };
 		AAE6E8E318C10D8100FB046A /* Integration Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Integration Tests-Prefix.pch"; sourceTree = "<group>"; };
 		AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Conversion.h"; sourceTree = "<group>"; };
 		AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Conversion.m"; sourceTree = "<group>"; };
@@ -234,9 +319,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
+				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
-				AAAAB31618C1144C00262636 /* libSocketRocket.a in Frameworks */,
-				AAE6E8EC18C10E3E00FB046A /* libkidozen.client.a in Frameworks */,
 				AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */,
 				AAE6E8DA18C10D8100FB046A /* UIKit.framework in Frameworks */,
 				AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */,
@@ -246,30 +331,117 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E07746D1619D98400FA21D9 /* SocketRocket */ = {
+		6D40013A1976B8F600D5F511 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				8E69448B16261DA90089959F /* NSData+SRB64Additions.h */,
-				8E69448C16261DA90089959F /* NSData+SRB64Additions.m */,
-				8E1C9AA1161CD549001C43B1 /* base64.c */,
-				8E1C9AA2161CD549001C43B1 /* base64.h */,
-				8E1C9AA3161CD549001C43B1 /* SocketRocket-Prefix.pch */,
-				8E1C9AA4161CD549001C43B1 /* SRWebSocket.h */,
-				8E1C9AA5161CD549001C43B1 /* SRWebSocket.m */,
+				8E0774B41619DC7E00FA21D9 /* KZApplication.h */,
+				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
+				6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */,
+				6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */,
+				6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */,
+				6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */,
+				6D4ACD351937A84900958E65 /* KZApplicationConfiguration.h */,
+				6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */,
 			);
-			path = SocketRocket;
+			name = Application;
 			sourceTree = "<group>";
 		};
-		8E0774751619D98400FA21D9 /* HTTPClient */ = {
+		6D43DBD51968B26300D023CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8E1C9AAB161CD562001C43B1 /* KZHTTPClient.h */,
-				8E1C9AAC161CD562001C43B1 /* KZHTTPClient.m */,
-				8E1C9AAD161CD562001C43B1 /* KZHTTPRequest.h */,
-				8E1C9AAE161CD562001C43B1 /* KZHTTPRequest.m */,
+				6D43DBDB1968B26300D023CF /* libSocketRocket.a */,
 			);
-			name = HTTPClient;
-			path = SVHTTPRequest;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D4ACD1D1937A39800958E65 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8E0774931619D9AF00FA21D9 /* KZBaseService.h */,
+				8E0774941619D9AF00FA21D9 /* KZBaseService.m */,
+				AAC92C451725954200D1FF88 /* KZService.h */,
+				AAC92C461725954200D1FF88 /* KZService.m */,
+				8E0774821619D9AF00FA21D9 /* KZConfiguration.h */,
+				8E0774831619D9AF00FA21D9 /* KZConfiguration.m */,
+				8E07748F1619D9AF00FA21D9 /* KZQueue.h */,
+				8E0774901619D9AF00FA21D9 /* KZQueue.m */,
+				8E07748D1619D9AF00FA21D9 /* KZPubSubChannel.h */,
+				8E07748E1619D9AF00FA21D9 /* KZPubSubChannel.m */,
+				8E0774871619D9AF00FA21D9 /* KZLogging.h */,
+				8E0774881619D9AF00FA21D9 /* KZLogging.m */,
+				8E0774891619D9AF00FA21D9 /* KZMail.h */,
+				8E07748A1619D9AF00FA21D9 /* KZMail.m */,
+				8E0774971619D9AF00FA21D9 /* KZStorage.h */,
+				8E0774981619D9AF00FA21D9 /* KZStorage.m */,
+				8E0774951619D9AF00FA21D9 /* KZSMSSender.h */,
+				8E0774961619D9AF00FA21D9 /* KZSMSSender.m */,
+				AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */,
+				AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */,
+				8E07748B1619D9AF00FA21D9 /* KZNotification.h */,
+				8E07748C1619D9AF00FA21D9 /* KZNotification.m */,
+				6D4001501976D1B000D5F511 /* KZBaseService+ProtectedMethods.h */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		6D4ACD331937A3A900958E65 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6D8017EC1968A74800E99FB7 /* Base64.h */,
+				6D8017ED1968A74800E99FB7 /* Base64.m */,
+				6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */,
+				6D291A9F191BFEE8003AEFAF /* NSDictionary+Mongo.m */,
+				AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */,
+				AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */,
+				8E07749D1619D9AF00FA21D9 /* NSDictionary+JSONCategories.h */,
+				8E07749E1619D9AF00FA21D9 /* NSDictionary+JSONCategories.m */,
+				8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */,
+				8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		6D4ACD341937A48000958E65 /* IdentityProviders */ = {
+			isa = PBXGroup;
+			children = (
+				8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */,
+				8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */,
+				8E0774861619D9AF00FA21D9 /* KZIdentityProviderFactory.m */,
+				8E07749B1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.h */,
+				8E07749C1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m */,
+				8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */,
+				8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */,
+			);
+			name = IdentityProviders;
+			sourceTree = "<group>";
+		};
+		6D8017F11968A75700E99FB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D8017F71968A75700E99FB7 /* libCrashReporter-iphoneos.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D8017F91968A75C00E99FB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D8017FF1968A75D00E99FB7 /* libSVHTTPRequest.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6DCEDDCF19391D7F00A38C39 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				6DCEDDD419391E9F00A38C39 /* KZTokenController.h */,
+				6DCEDDD519391E9F00A38C39 /* KZTokenController.m */,
+				6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */,
+				6DCB876619462C64005B75B9 /* KZPassiveAuthViewController.m */,
+				6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */,
+				6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */,
+			);
+			name = Auth;
 			sourceTree = "<group>";
 		};
 		8E5A61A91641872800038364 /* Other Frameworks */ = {
@@ -285,7 +457,9 @@
 		8EB8651C1614D11800DD60E6 = {
 			isa = PBXGroup;
 			children = (
-				AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */,
+				6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */,
+				6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */,
+				6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */,
 				8EB8652C1614D11800DD60E6 /* kidozen.client */,
 				AAE6E8DB18C10D8100FB046A /* Integration Tests */,
 				8EB865291614D11800DD60E6 /* Frameworks */,
@@ -305,6 +479,8 @@
 		8EB865291614D11800DD60E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D43DBDF1968BF2300D023CF /* kz.client.a */,
+				6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */,
 				AA0F7EB01730515200C55706 /* UIKit.framework */,
 				AADA4208165D32BE00EB6443 /* CFNetwork.framework */,
 				AADA4206165D32B900EB6443 /* Security.framework */,
@@ -322,57 +498,24 @@
 		8EB8652C1614D11800DD60E6 /* kidozen.client */ = {
 			isa = PBXGroup;
 			children = (
-				8E0774B41619DC7E00FA21D9 /* KZApplication.h */,
-				8E0774B51619DC7E00FA21D9 /* KZApplication.m */,
-				8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */,
-				8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */,
-				8E0774811619D9AF00FA21D9 /* KZAuthentication.h */,
-				8E0774821619D9AF00FA21D9 /* KZConfiguration.h */,
-				8E0774831619D9AF00FA21D9 /* KZConfiguration.m */,
-				8E0774841619D9AF00FA21D9 /* KZIdentityProvider.h */,
-				8E0774851619D9AF00FA21D9 /* KZIdentityProviderFactory.h */,
-				8E0774861619D9AF00FA21D9 /* KZIdentityProviderFactory.m */,
-				8E0774871619D9AF00FA21D9 /* KZLogging.h */,
-				8E0774881619D9AF00FA21D9 /* KZLogging.m */,
-				8E0774891619D9AF00FA21D9 /* KZMail.h */,
-				8E07748A1619D9AF00FA21D9 /* KZMail.m */,
-				8E07748B1619D9AF00FA21D9 /* KZNotification.h */,
-				8E07748C1619D9AF00FA21D9 /* KZNotification.m */,
-				8E07748D1619D9AF00FA21D9 /* KZPubSubChannel.h */,
-				8E07748E1619D9AF00FA21D9 /* KZPubSubChannel.m */,
-				8E07748F1619D9AF00FA21D9 /* KZQueue.h */,
-				8E0774901619D9AF00FA21D9 /* KZQueue.m */,
+				6D4ACD471937CBA400958E65 /* KZObject.h */,
+				6D4ACD481937CBA400958E65 /* KZObject.m */,
+				6D40013A1976B8F600D5F511 /* Application */,
+				6DCEDDCF19391D7F00A38C39 /* Auth */,
+				6D4ACD341937A48000958E65 /* IdentityProviders */,
+				6D4ACD331937A3A900958E65 /* Categories */,
+				6D4ACD1D1937A39800958E65 /* Services */,
+				AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */,
+				AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */,
 				8E0774911619D9AF00FA21D9 /* KZResponse.h */,
 				8E0774921619D9AF00FA21D9 /* KZResponse.m */,
-				8E0774931619D9AF00FA21D9 /* KZBaseService.h */,
-				8E0774941619D9AF00FA21D9 /* KZBaseService.m */,
-				8E0774951619D9AF00FA21D9 /* KZSMSSender.h */,
-				8E0774961619D9AF00FA21D9 /* KZSMSSender.m */,
-				8E0774971619D9AF00FA21D9 /* KZStorage.h */,
-				8E0774981619D9AF00FA21D9 /* KZStorage.m */,
 				8E0774991619D9AF00FA21D9 /* KZUser.h */,
 				8E07749A1619D9AF00FA21D9 /* KZUser.m */,
-				8E07749B1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.h */,
-				8E07749C1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m */,
-				8E07749D1619D9AF00FA21D9 /* NSDictionary+JSONCategories.h */,
-				8E07749E1619D9AF00FA21D9 /* NSDictionary+JSONCategories.m */,
-				8E07749F1619D9AF00FA21D9 /* NSString+Utilities.h */,
-				8E0774A01619D9AF00FA21D9 /* NSString+Utilities.m */,
 				8E0774A11619D9AF00FA21D9 /* Query.h */,
 				8E0774A21619D9AF00FA21D9 /* Query.m */,
-				8E07746D1619D98400FA21D9 /* SocketRocket */,
-				8E0774751619D98400FA21D9 /* HTTPClient */,
-				8EB8652D1614D11800DD60E6 /* Supporting Files */,
 				AA211CDA1667B35600848407 /* KZStorageMetadata.h */,
 				AA211CDB1667B35600848407 /* KZStorageMetadata.m */,
-				AAE6B2A5166915AF00AED1AF /* KZConstants.h */,
-				AAE6B2A6166915AF00AED1AF /* KZConstants.m */,
-				AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */,
-				AAEF1B8816A755B900A33C76 /* NSData+Conversion.m */,
-				AAC92C451725954200D1FF88 /* KZService.h */,
-				AAC92C461725954200D1FF88 /* KZService.m */,
-				AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */,
-				AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */,
+				8EB8652D1614D11800DD60E6 /* Supporting Files */,
 			);
 			path = kidozen.client;
 			sourceTree = "<group>";
@@ -385,26 +528,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AA86D4BC17BAD7CF00B5F15E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA86D4C317BAD7CF00B5F15E /* libSocketRocket.a */,
-				AA86D4C517BAD7CF00B5F15E /* SocketRocket.framework */,
-				AA86D4C717BAD7CF00B5F15E /* SRWebSocketTests.octest */,
-				AA86D4C917BAD7CF00B5F15E /* TestChat.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AAE6E8DB18C10D8100FB046A /* Integration Tests */ = {
 			isa = PBXGroup;
 			children = (
 				AA68A33E1843BAEB00CBCFC2 /* Constants.h */,
 				AA68A33F1843BAEB00CBCFC2 /* Constants.m */,
-				AAE6E88418C0E80B00FB046A /* datasourcetests.m */,
-				AAE6E8E118C10D8100FB046A /* Integration_Tests.m */,
+				AAE6E88418C0E80B00FB046A /* datasourceTests.m */,
+				6D4001471976C42B00D5F511 /* serviceTests.m */,
+				AACBD73A18CA579400518D14 /* applicationTests.m */,
+				6D1C85AE1917B71A00E59BD8 /* loggingTests.m */,
+				6D291A87191BFE28003AEFAF /* storageTests.m */,
+				6D677C3F1921073B000DF367 /* mailTests.m */,
+				6D40014E1976CE9E00D5F511 /* smsTests.m */,
+				6D40016A1978687600D5F511 /* configurationTests.m */,
 				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
-				AACBD73A18CA579400518D14 /* applicationtests.m */,
 			);
 			path = "Integration Tests";
 			sourceTree = "<group>";
@@ -415,6 +552,7 @@
 				AAE6E8DD18C10D8100FB046A /* Integration Tests-Info.plist */,
 				AAE6E8DE18C10D8100FB046A /* InfoPlist.strings */,
 				AAE6E8E318C10D8100FB046A /* Integration Tests-Prefix.pch */,
+				6DE2A0B01925502B0020C69A /* Media.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -426,37 +564,40 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */,
-				AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */,
-				AAE6B2A7166915AF00AED1AF /* KZConstants.h in Headers */,
-				8E1C9AA7161CD549001C43B1 /* base64.h in Headers */,
-				8E1C9AA8161CD549001C43B1 /* SocketRocket-Prefix.pch in Headers */,
-				8E1C9AA9161CD549001C43B1 /* SRWebSocket.h in Headers */,
-				8E1C9AAF161CD562001C43B1 /* KZHTTPClient.h in Headers */,
-				8E1C9AB1161CD562001C43B1 /* KZHTTPRequest.h in Headers */,
-				8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */,
-				8E0774CB1619F35500FA21D9 /* KZAuthentication.h in Headers */,
+				6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */,
 				8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */,
-				8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */,
 				8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */,
 				8E0774CF1619F35500FA21D9 /* KZLogging.h in Headers */,
 				8E0774D01619F35500FA21D9 /* KZMail.h in Headers */,
-				AAC92C471725954200D1FF88 /* KZService.h in Headers */,
 				8E0774D11619F35500FA21D9 /* KZNotification.h in Headers */,
 				8E0774D21619F35500FA21D9 /* KZPubSubChannel.h in Headers */,
+				8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */,
+				8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */,
 				8E0774D31619F35500FA21D9 /* KZQueue.h in Headers */,
 				8E0774D41619F35500FA21D9 /* KZResponse.h in Headers */,
 				8E0774D51619F35500FA21D9 /* KZBaseService.h in Headers */,
 				8E0774D61619F35500FA21D9 /* KZSMSSender.h in Headers */,
 				8E0774D71619F35500FA21D9 /* KZStorage.h in Headers */,
-				8E0774D81619F35500FA21D9 /* KZUser.h in Headers */,
-				8E0774D91619F35500FA21D9 /* KZWRAPv09IdentityProvider.h in Headers */,
-				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
-				8E69448D16261DA90089959F /* NSData+SRB64Additions.h in Headers */,
-				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
-				AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */,
+				8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */,
+				6D5BBE1419741558008576D5 /* KZApplicationAuthentication.h in Headers */,
 				8E0774DC1619F35500FA21D9 /* Query.h in Headers */,
+				8E0774D91619F35500FA21D9 /* KZWRAPv09IdentityProvider.h in Headers */,
+				6D4ACD491937CBA400958E65 /* KZObject.h in Headers */,
+				AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */,
+				6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */,
+				AAC92C471725954200D1FF88 /* KZService.h in Headers */,
+				AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */,
+				AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */,
+				6DCEDDD619391E9F00A38C39 /* KZTokenController.h in Headers */,
 				AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */,
+				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
+				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
+				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
+				6D8017EE1968A74800E99FB7 /* Base64.h in Headers */,
+				6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */,
+				8E0774D81619F35500FA21D9 /* KZUser.h in Headers */,
+				6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */,
+				6D4001521976D1B000D5F511 /* KZBaseService+ProtectedMethods.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,7 +611,6 @@
 				8EB865231614D11800DD60E6 /* Sources */,
 				8EB865241614D11800DD60E6 /* Frameworks */,
 				8EB865251614D11800DD60E6 /* CopyFiles */,
-				8E0774BA1619E55400FA21D9 /* ShellScript */,
 				8E0774C71619F32C00FA21D9 /* Headers */,
 			);
 			buildRules = (
@@ -493,7 +633,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				AAE6E8F418C1135100FB046A /* PBXTargetDependency */,
+				6D43DBE21968BF2C00D023CF /* PBXTargetDependency */,
 			);
 			name = "Integration Tests";
 			productName = "Integration Tests";
@@ -526,45 +666,48 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = AA86D4BC17BAD7CF00B5F15E /* Products */;
-					ProjectRef = AA86D4BB17BAD7CF00B5F15E /* SocketRocket.xcodeproj */;
+					ProductGroup = 6D8017F11968A75700E99FB7 /* Products */;
+					ProjectRef = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
+				},
+				{
+					ProductGroup = 6D43DBD51968B26300D023CF /* Products */;
+					ProjectRef = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
+				},
+				{
+					ProductGroup = 6D8017F91968A75C00E99FB7 /* Products */;
+					ProjectRef = 6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				8EB865261614D11800DD60E6 /* kidozen.client */,
 				AAE6E8D618C10D8100FB046A /* Integration Tests */,
+				6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */,
+				6D428AB118EEE6F60002C36C /* kidozen.client.device */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		AA86D4C317BAD7CF00B5F15E /* libSocketRocket.a */ = {
+		6D43DBDB1968B26300D023CF /* libSocketRocket.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSocketRocket.a;
-			remoteRef = AA86D4C217BAD7CF00B5F15E /* PBXContainerItemProxy */;
+			remoteRef = 6D43DBDA1968B26300D023CF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AA86D4C517BAD7CF00B5F15E /* SocketRocket.framework */ = {
+		6D8017F71968A75700E99FB7 /* libCrashReporter-iphoneos.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SocketRocket.framework;
-			remoteRef = AA86D4C417BAD7CF00B5F15E /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = "libCrashReporter-iphoneos.a";
+			remoteRef = 6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AA86D4C717BAD7CF00B5F15E /* SRWebSocketTests.octest */ = {
+		6D8017FF1968A75D00E99FB7 /* libSVHTTPRequest.a */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SRWebSocketTests.octest;
-			remoteRef = AA86D4C617BAD7CF00B5F15E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA86D4C917BAD7CF00B5F15E /* TestChat.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = TestChat.app;
-			remoteRef = AA86D4C817BAD7CF00B5F15E /* PBXContainerItemProxy */;
+			fileType = archive.ar;
+			path = libSVHTTPRequest.a;
+			remoteRef = 6D8017FE1968A75D00E99FB7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -574,6 +717,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DE2A0B11925502B0020C69A /* Media.xcassets in Resources */,
 				AAE6E8E018C10D8100FB046A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,7 +725,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8E0774BA1619E55400FA21D9 /* ShellScript */ = {
+		6D428AB818EEE6F60002C36C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -592,8 +736,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#\n# c.f. StackOverflow question/answer here: http://stackoverflow.com/questions/3520977/build-fat-static-library-device-simulator-using-xcode-and-sdk-4\n#\n# Version 2.5\n#\n# Latest Change:\n# - The \"copy headers\" section now respects the build setting for the location of the public headers\n#\n# Purpose:\n#   Create a static library for iPhone from within XCode\n#   Because Apple staff DELIBERATELY broke Xcode to make this impossible from the GUI (Xcode 3.2.3 specifically states this in the Release notes!)\n#   ...no, I don't understand why they did this!\n#\n# Author: Adam Martin - http://twitter.com/redglassesapps\n# Based on: original script from Eonil (main changes: Eonil's script WILL NOT WORK in Xcode GUI - it WILL CRASH YOUR COMPUTER)\n#\n\nset -e\nset -o pipefail\n\n#################[ Tests: helps workaround any future bugs in Xcode ]########\n#\nDEBUG_THIS_SCRIPT=\"false\"\n\nif [ $DEBUG_THIS_SCRIPT = \"true\" ]\nthen\necho \"########### TESTS #############\"\necho \"Use the following variables when debugging this script; note that they may change on recursions\"\necho \"BUILD_DIR = $BUILD_DIR\"\necho \"BUILD_ROOT = $BUILD_ROOT\"\necho \"CONFIGURATION_BUILD_DIR = $CONFIGURATION_BUILD_DIR\"\necho \"BUILT_PRODUCTS_DIR = $BUILT_PRODUCTS_DIR\"\necho \"CONFIGURATION_TEMP_DIR = $CONFIGURATION_TEMP_DIR\"\necho \"TARGET_BUILD_DIR = $TARGET_BUILD_DIR\"\nfi\n\n#####################[ part 1 ]##################\n# First, work out the BASESDK version number (NB: Apple ought to report this, but they hide it)\n#    (incidental: searching for substrings in sh is a nightmare! Sob)\n\nSDK_VERSION=$(echo ${SDK_NAME} | grep -o '.\\{3\\}$')\n\n# Next, work out if we're in SIM or DEVICE\n\nif [ ${PLATFORM_NAME} = \"iphonesimulator\" ]\nthen\nOTHER_SDK_TO_BUILD=iphoneos${SDK_VERSION}\nelse\nOTHER_SDK_TO_BUILD=iphonesimulator${SDK_VERSION}\nfi\n\necho \"XCode has selected SDK: ${PLATFORM_NAME} with version: ${SDK_VERSION} (although back-targetting: ${IPHONEOS_DEPLOYMENT_TARGET})\"\necho \"...therefore, OTHER_SDK_TO_BUILD = ${OTHER_SDK_TO_BUILD}\"\n#\n#####################[ end of part 1 ]##################\n\n#####################[ part 2 ]##################\n#\n# IF this is the original invocation, invoke WHATEVER other builds are required\n#\n# Xcode is already building ONE target...\n#\n# ...but this is a LIBRARY, so Apple is wrong to set it to build just one.\n# ...we need to build ALL targets\n# ...we MUST NOT re-build the target that is ALREADY being built: Xcode WILL CRASH YOUR COMPUTER if you try this (infinite recursion!)\n#\n#\n# So: build ONLY the missing platforms/configurations.\n\nif [ \"true\" == ${ALREADYINVOKED:-false} ]\nthen\necho \"RECURSION: I am NOT the root invocation, so I'm NOT going to recurse\"\nelse\n# CRITICAL:\n# Prevent infinite recursion (Xcode sucks)\nexport ALREADYINVOKED=\"true\"\n\necho \"RECURSION: I am the root ... recursing all missing build targets NOW...\"\necho \"RECURSION: ...about to invoke: xcodebuild -configuration \\\"${CONFIGURATION}\\\" -project \\\"${PROJECT_NAME}.xcodeproj\\\" -target \\\"${TARGET_NAME}\\\" -sdk \\\"${OTHER_SDK_TO_BUILD}\\\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO\" BUILD_DIR=\\\"${BUILD_DIR}\\\" BUILD_ROOT=\\\"${BUILD_ROOT}\\\" SYMROOT=\\\"${SYMROOT}\\\"\n\nxcodebuild -configuration \"${CONFIGURATION}\" -project \"${PROJECT_NAME}.xcodeproj\" -target \"${TARGET_NAME}\" -sdk \"${OTHER_SDK_TO_BUILD}\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO BUILD_DIR=\"${BUILD_DIR}\" ONLY_ACTIVE_ARCH=NO BUILD_ROOT=\"${BUILD_ROOT}\" SYMROOT=\"${SYMROOT}\"\n\nACTION=\"build\"\n\n#Merge all platform binaries as a fat binary for each configurations.\n\n# Calculate where the (multiple) built files are coming from:\nCURRENTCONFIG_DEVICE_DIR=${SYMROOT}/${CONFIGURATION}-iphoneos\nCURRENTCONFIG_SIMULATOR_DIR=${SYMROOT}/${CONFIGURATION}-iphonesimulator\n\necho \"Taking device build from: ${CURRENTCONFIG_DEVICE_DIR}\"\necho \"Taking simulator build from: ${CURRENTCONFIG_SIMULATOR_DIR}\"\n\nCREATING_UNIVERSAL_DIR=${SYMROOT}/${CONFIGURATION}-universal\necho \"...I will output a universal build to: ${CREATING_UNIVERSAL_DIR}\"\n\n# ... remove the products of previous runs of this script\n#      NB: this directory is ONLY created by this script - it should be safe to delete!\n\nrm -rf \"${CREATING_UNIVERSAL_DIR}\"\nmkdir \"${CREATING_UNIVERSAL_DIR}\"\n\n#\necho \"lipo: for current configuration (${CONFIGURATION}) creating output file: ${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\"\nlipo -create -output \"${CREATING_UNIVERSAL_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_DEVICE_DIR}/${EXECUTABLE_NAME}\" \"${CURRENTCONFIG_SIMULATOR_DIR}/${EXECUTABLE_NAME}\"\n\n#########\n#\n# Added: StackOverflow suggestion to also copy \"include\" files\n#    (untested, but should work OK)\n#\necho \"Fetching headers from ${PUBLIC_HEADERS_FOLDER_PATH}\"\nif [ -d \"${CURRENTCONFIG_DEVICE_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\" ]\nthen\nmkdir -p \"${CREATING_UNIVERSAL_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"\n# * needs to be outside the double quotes?\ncp -r \"${CURRENTCONFIG_DEVICE_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"* \"${CREATING_UNIVERSAL_DIR}${PUBLIC_HEADERS_FOLDER_PATH}\"\nfi\nfi";
-			showEnvVarsInLog = 0;
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\nrm -rf ./build\n\nmkdir -p $OUTPUTFOLDER\ncp $BUILD_DIR/$CONFIGURATION-iphoneos/lib$PROJECT_NAME.a $OUTPUTFOLDER/\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${OUTPUTFOLDER}/\"\n\necho \"Your binary is in $OUTPUTFOLDER/lib$PROJECT_NAME.a\"\n\ncd $OUTPUTFOLDER\nlibtool -static -o kz.client.a libkidozen.client.a libSVHTTPRequest.a libSocketRocket.a libCrashReporter.a\n";
+		};
+		6DF1EBBE18EDF72F000C3AA7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target kidozen.client ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator -arch x86_64 -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\necho \"COPYING HEADER FILES TO $OUTPUTFOLDER\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/usr/local/include\" \"${OUTPUTFOLDER}/\"\nrm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n\ncd $OUTPUTFOLDER\nlibtool -static -o kz.client.a libkidozen.client.a libSVHTTPRequest.a libSocketRocket.a libCrashReporter.a\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -602,12 +758,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D291AA1191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
 				8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */,
 				8E0774A41619D9AF00FA21D9 /* KZConfiguration.m in Sources */,
 				8E0774A51619D9AF00FA21D9 /* KZIdentityProviderFactory.m in Sources */,
 				8E0774A61619D9AF00FA21D9 /* KZLogging.m in Sources */,
+				6DCEDDD719391E9F00A38C39 /* KZTokenController.m in Sources */,
+				6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */,
 				8E0774A71619D9AF00FA21D9 /* KZMail.m in Sources */,
+				6DCB876819462C64005B75B9 /* KZPassiveAuthViewController.m in Sources */,
+				6D8017EF1968A74800E99FB7 /* Base64.m in Sources */,
+				6D5BBE1519741558008576D5 /* KZApplicationAuthentication.m in Sources */,
 				8E0774A81619D9AF00FA21D9 /* KZNotification.m in Sources */,
+				AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */,
+				6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */,
 				8E0774A91619D9AF00FA21D9 /* KZPubSubChannel.m in Sources */,
 				8E0774AA1619D9AF00FA21D9 /* KZQueue.m in Sources */,
 				8E0774AB1619D9AF00FA21D9 /* KZResponse.m in Sources */,
@@ -616,16 +780,15 @@
 				8E0774AE1619D9AF00FA21D9 /* KZStorage.m in Sources */,
 				8EE16FAD161B52B6006BAA59 /* NSString+Utilities.m in Sources */,
 				8E0774AF1619D9AF00FA21D9 /* KZUser.m in Sources */,
+				6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */,
 				8E0774B01619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m in Sources */,
 				8E0774B11619D9AF00FA21D9 /* NSDictionary+JSONCategories.m in Sources */,
 				8E0774B31619D9AF00FA21D9 /* Query.m in Sources */,
 				8E0774B61619DC7E00FA21D9 /* KZApplication.m in Sources */,
-				8E1C9AB0161CD562001C43B1 /* KZHTTPClient.m in Sources */,
-				8E1C9AB2161CD562001C43B1 /* KZHTTPRequest.m in Sources */,
 				AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */,
 				AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */,
-				AAE6B2A8166915AF00AED1AF /* KZConstants.m in Sources */,
 				AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */,
+				6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */,
 				AAC92C481725954200D1FF88 /* KZService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -634,20 +797,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACBD73B18CA579400518D14 /* applicationtests.m in Sources */,
+				6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
+				AACBD73B18CA579400518D14 /* applicationTests.m in Sources */,
 				AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */,
+				6D40014F1976CE9E00D5F511 /* smsTests.m in Sources */,
 				AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */,
-				AAE6E8EB18C10DBF00FB046A /* datasourcetests.m in Sources */,
+				6D677C401921073B000DF367 /* mailTests.m in Sources */,
+				6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */,
+				AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */,
+				6D291A88191BFE28003AEFAF /* storageTests.m in Sources */,
+				6D4001481976C42B00D5F511 /* serviceTests.m in Sources */,
+				6D40016B1978687600D5F511 /* configurationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AAE6E8F418C1135100FB046A /* PBXTargetDependency */ = {
+		6D43DBE21968BF2C00D023CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8EB865261614D11800DD60E6 /* kidozen.client */;
-			targetProxy = AAE6E8F318C1135100FB046A /* PBXContainerItemProxy */;
+			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
+			targetProxy = 6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */;
+		};
+		6D8018011968ACDE00E99FB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libSVHTTPRequest.fat;
+			targetProxy = 6D8018001968ACDE00E99FB7 /* PBXContainerItemProxy */;
+		};
+		6D8018031968ACDE00E99FB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CrashReporter.fat;
+			targetProxy = 6D8018021968ACDE00E99FB7 /* PBXContainerItemProxy */;
+		};
+		6D8018071968ACE700E99FB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libSVHTTPRequest.device;
+			targetProxy = 6D8018061968ACE700E99FB7 /* PBXContainerItemProxy */;
+		};
+		6D8018091968ACE700E99FB7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CrashReporter.device;
+			targetProxy = 6D8018081968ACE700E99FB7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -663,15 +853,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8EB865331614D11800DD60E6 /* Debug */ = {
+		6D1C85C5191819FA00E59BD8 /* Testing */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-					x86_84,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -691,15 +876,176 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$SRCROOT/DerivedData\"";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				ONLY_ACTIVE_ARCH = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-allLoad",
 				);
 				SDKROOT = iphoneos;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
+				SKIP_INSTALL = YES;
+			};
+			name = Testing;
+		};
+		6D1C85C6191819FA00E59BD8 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/kidozen_client.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"CURRENTLY_TESTING=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Testing;
+		};
+		6D1C85C7191819FA00E59BD8 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Integration Tests/Integration Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"CURRENTLY_TESTING=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+				);
+				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Testing;
+		};
+		6D1C85C8191819FA00E59BD8 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"CURRENTLY_TESTING=1",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Testing;
+		};
+		6D1C85C9191819FA00E59BD8 /* Testing */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = kidozen.client.device;
+			};
+			name = Testing;
+		};
+		6D428ABA18EEE6F60002C36C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = kidozen.client.device;
+			};
+			name = Debug;
+		};
+		6D428ABB18EEE6F60002C36C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = kidozen.client.device;
+			};
+			name = Release;
+		};
+		6DF1EBBC18EDF726000C3AA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6DF1EBBD18EDF726000C3AA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8EB865331614D11800DD60E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.1.0;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$SRCROOT/DerivedData\"";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-allLoad",
+				);
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -707,11 +1053,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					i386,
-					x86_84,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -724,33 +1065,30 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "\"$SRCROOT/DerivedData\"";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				ONLY_ACTIVE_ARCH = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CODE_SIGN_FLAGS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-allLoad",
 				);
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Release;
 		};
 		8EB865361614D11800DD60E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					x86_64,
-					i386,
-				);
 				DSTROOT = /tmp/kidozen_client.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${SYMROOT}/${CONFIGURATION}-universal/usr/local/include/include/";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -758,24 +1096,21 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Debug;
 		};
 		8EB865371614D11800DD60E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					x86_64,
-					i386,
-				);
 				DSTROOT = /tmp/kidozen_client.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kidozen.client/kidozen.client-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${SYMROOT}/${CONFIGURATION}-universal/usr/local/include/include/";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				ONLY_ACTIVE_ARCH = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -783,7 +1118,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s i386 x86_64";
 			};
 			name = Release;
 		};
@@ -797,6 +1131,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -812,16 +1147,27 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+				);
 				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				VALID_ARCHS = "x86_64 i386";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -836,6 +1182,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -844,20 +1191,32 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Integration Tests/Integration Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
+					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
+					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+				);
 				INFOPLIST_FILE = "Integration Tests/Integration Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				VALID_ARCHS = "x86_64 i386";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -865,10 +1224,31 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6D428AB918EEE6F60002C36C /* Build configuration list for PBXAggregateTarget "kidozen.client.device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D428ABA18EEE6F60002C36C /* Debug */,
+				6D1C85C9191819FA00E59BD8 /* Testing */,
+				6D428ABB18EEE6F60002C36C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6DF1EBBB18EDF726000C3AA7 /* Build configuration list for PBXAggregateTarget "kidozen.client.fat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DF1EBBC18EDF726000C3AA7 /* Debug */,
+				6D1C85C8191819FA00E59BD8 /* Testing */,
+				6DF1EBBD18EDF726000C3AA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8EB865211614D11800DD60E6 /* Build configuration list for PBXProject "kidozen.client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8EB865331614D11800DD60E6 /* Debug */,
+				6D1C85C5191819FA00E59BD8 /* Testing */,
 				8EB865341614D11800DD60E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -878,6 +1258,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8EB865361614D11800DD60E6 /* Debug */,
+				6D1C85C6191819FA00E59BD8 /* Testing */,
 				8EB865371614D11800DD60E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -887,6 +1268,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAE6E8E718C10D8100FB046A /* Debug */,
+				6D1C85C7191819FA00E59BD8 /* Testing */,
 				AAE6E8E818C10D8100FB046A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

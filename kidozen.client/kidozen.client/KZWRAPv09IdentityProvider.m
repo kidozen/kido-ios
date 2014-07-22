@@ -5,9 +5,7 @@
 - (NSString *) getAssert:(NSString *) text;
 @end
 
-@implementation KZWRAPv09IdentityProvider 
-
-@synthesize bypassSSLValidation = _bypassSSLValidation;
+@implementation KZWRAPv09IdentityProvider
 
 -(void) configure:(id) configuration
 {
@@ -26,8 +24,8 @@
 -(void) requestToken:(NSString *) identityProviderUrl completion:(RequestTokenCompletionBlock)block
 {
     NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:_wrapName ,@"wrap_name", _wrapPassword,@"wrap_password", _wrapScope,@"wrap_scope", nil];
-    KZHTTPClient * client = [[KZHTTPClient alloc] init];
-    [client setBypassSSLValidation:_bypassSSLValidation];
+    SVHTTPClient * client = [[SVHTTPClient alloc] init];
+    [client setDismissNSURLAuthenticationMethodServerTrust:!self.strictSSL];
     [client setBasePath:identityProviderUrl];
     [client POST:@"" parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSError * restError = nil;

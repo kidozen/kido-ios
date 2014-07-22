@@ -1,44 +1,85 @@
 #import "KZConfiguration.h"
+#import "NSDictionary+Mongo.h"
+#import "KZBaseService+ProtectedMethods.h"
+
 
 @implementation KZConfiguration
 
 -(void) save:(id)object completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:[NSString stringWithFormat:@"/%@",self.name] parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
-    }];
+    if ( [object isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *d = (NSDictionary *)object;
+        object = [d dictionaryWithoutDotsInKeys];
+    }
+    
+    [self addAuthorizationHeader];
+    [self.client setSendParametersAsJSON:YES];
+    
+    __weak KZConfiguration *safeMe = self;
+    [self.client POST:[NSString stringWithFormat:@"/%@",self.name]
+           parameters:object
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+           }];
 }
 
 -(void) get:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client GET:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
-    }];
+    [self addAuthorizationHeader];
+    __weak KZConfiguration *safeMe = self;
+    
+    [self.client GET:[NSString stringWithFormat:@"/%@",self.name]
+          parameters:nil
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+          }];
 }
 
 -(void) remove
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client DELETE:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-    }];
+    [self addAuthorizationHeader];
+    [self.client DELETE:[NSString stringWithFormat:@"/%@",self.name]
+             parameters:nil
+             completion:nil];
 }
 -(void) remove:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client DELETE:[NSString stringWithFormat:@"/%@",self.name] parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
-    }];
+    [self addAuthorizationHeader];
+    __weak KZConfiguration *safeMe = self;
+    
+    [self.client DELETE:[NSString stringWithFormat:@"/%@",self.name]
+             parameters:nil
+             completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                 
+                 [safeMe callCallback:block
+                             response:response
+                          urlResponse:urlResponse
+                                error:error];
+                 
+             }];
 }
 
 -(void) all:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client GET:@"/" parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
-    }];
+    [self addAuthorizationHeader];
+    __weak KZConfiguration *safeMe = self;
+    
+    [self.client GET:@"/"
+          parameters:nil
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+              
+          }];
 }
 
 @end

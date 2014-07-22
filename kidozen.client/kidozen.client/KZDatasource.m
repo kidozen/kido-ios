@@ -7,42 +7,49 @@
 //
 
 #import "KZDatasource.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 #define EINVALIDCALL 1
 #define EINVALIDPARAM 2
 #define DATASOURCE_ERROR_DOMAIN @"DataSource"
 
-
 @implementation KZDatasource
 
--(NSDictionary *)headersWithTimeout:(int)timeout
+-(void)addHeadersWithTimeout:(int)timeout
 {
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     if (timeout > 0) {
         headers[@"timeout"] = [NSString stringWithFormat:@"%d", timeout];
     }
-    [headers setObject:self.kzToken forKey:@"Authorization"];
+    
+    [self.client setHeaders:headers];
 
-    return headers;
+    [self addAuthorizationHeader];
+
 }
 
 -(void) queryWithData: (id) data completion:(void (^)(KZResponse *))block
 {
     [self QueryWithData:data timeout:0 completion:block];
 }
+
 -(void) QueryWithData:(NSDictionary *)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
 {
-    NSDictionary *headers = [self headersWithTimeout:timeout];
-    [_client setHeaders:headers];
+    [self addHeadersWithTimeout:timeout];
     
-    [_client GET:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            NSMutableDictionary* details = [NSMutableDictionary dictionary];
-            [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDCALL userInfo:details];
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
-    }];
+    self.client.sendParametersAsJSON = NO;
+    __weak KZDatasource *safeMe = self;
+    
+    [self.client GET:self.name
+          parameters:data
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+              
+          }];
     
 }
 
@@ -52,17 +59,19 @@
 }
 -(void) InvokeWithData:(id)data timeout:(int)timeout completion:(void (^)(KZResponse *))block
 {
-    NSDictionary *headers = [self headersWithTimeout:timeout];
-    [_client setHeaders:headers];
-    
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:self.name parameters:data completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error) {
-            NSMutableDictionary* details = [NSMutableDictionary dictionary];
-            [details setValue:[[NSString alloc] initWithData:response encoding:NSASCIIStringEncoding] forKey:NSLocalizedDescriptionKey];
-            error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDCALL userInfo:details];
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] );
+    [self addHeadersWithTimeout:timeout];
+
+    [self.client setSendParametersAsJSON:YES];
+    __weak KZDatasource *safeMe = self;
+    [self.client POST:self.name
+           parameters:data
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+            [safeMe callCallback:block
+                        response:response
+                     urlResponse:urlResponse
+                           error:error];
+               
     }];
 
 }
@@ -71,7 +80,7 @@
     [self InvokeWithData:@{} timeout:timeout completion:block];
 }
 
--(NSDictionary *) dataAsDictionary : (id)data
+- (NSDictionary *) dataAsDictionary:(id)data
 {
     NSError* error;
     NSDictionary* json = Nil;
@@ -105,13 +114,7 @@
 {
     NSDictionary * d = [self dataAsDictionary:data];
     if (!d) {
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:@"Invalid parameter. Must be a serializable json or nsdictionary" forKey:NSLocalizedDescriptionKey];
-        NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
-        block( [[KZResponse alloc] initWithResponse:Nil
-                                        urlResponse:nil
-                                           andError:error] );
-
+        [self handleDictionaryErrorWithCallback:block];
     }
     else
         [self invokeWithData:d completion:block];
@@ -121,16 +124,25 @@
 {
     NSDictionary * d = [self dataAsDictionary:data];
     if (!d) {
-        NSMutableDictionary* details = [NSMutableDictionary dictionary];
-        [details setValue:@"Invalid parameter. Must be a serializable json or nsdictionary" forKey:NSLocalizedDescriptionKey];
-        NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
-        block( [[KZResponse alloc] initWithResponse:Nil
+        [self handleDictionaryErrorWithCallback:block];
+    }
+    else
+        [self queryWithData:d completion:block];
+}
+
+- (void) handleDictionaryErrorWithCallback:(void(^)(KZResponse *))callback
+{
+    NSMutableDictionary* details = [NSMutableDictionary dictionary];
+    details[NSLocalizedDescriptionKey] = @"Invalid parameter. Must be a serializable json or nsdictionary";
+    
+    NSError * error = [NSError errorWithDomain:DATASOURCE_ERROR_DOMAIN code:EINVALIDPARAM userInfo:details];
+    if (callback != nil) {
+        callback( [[KZResponse alloc] initWithResponse:Nil
                                         urlResponse:nil
                                            andError:error] );
         
     }
-    else
-        [self queryWithData:d completion:block];
+    
 }
 
 @end

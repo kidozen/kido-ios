@@ -1,12 +1,11 @@
-#include <sys/socket.h>
-#include <sys/sysctl.h>
-#include <net/if.h>
-#include <net/if_dl.h>
 #import "KZNotification.h"
+#import "KZBaseService+ProtectedMethods.h"
 
-@interface KZNotification (private)
+NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename";
 
-- (NSString *)getMacAddress;
+@interface KZNotification ()
+
+@property (nonatomic, copy) NSString * uniqueIdentifier;
 
 @end
 
@@ -14,19 +13,10 @@
 
 -(id) initWithEndpoint:(NSString *)endpoint andName:(NSString *)name
 {
-    self = [super init];
+    self = [super initWithEndpoint:endpoint andName:name];
     if (self)
     {
-        self.name = name;
-        _endpoint = endpoint;
-        self.serviceUrl = [NSURL URLWithString:_endpoint] ;
-        
-        if (!deviceMacAddress) {
-            deviceMacAddress = [self getMacAddress];
-        }
-        
-        _client = [[KZHTTPClient alloc] init];
-        [_client setBasePath:endpoint];
+        self.uniqueIdentifier = [self getUniqueIdentification];
     }
     return self;
 }
@@ -44,21 +34,32 @@
         error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
     }
     if (error) {
-        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        if (block != nil) {
+            block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        }
         return;
     }
-
+    
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@", self.name, channel];
-    NSDictionary * body = [NSDictionary dictionaryWithObjectsAndKeys:@"apns",@"platform", deviceToken, @"subscriptionId", deviceMacAddress, @"deviceId", nil];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:path parameters:body completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
-    }];
+    
+    NSDictionary *body = @{@"platform": @"apns",
+                           @"subscriptionId": deviceToken,
+                           @"deviceId" :self.uniqueIdentifier};
+    
+    [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+    
+    [self.client setSendParametersAsJSON:YES];
+    [self.client POST:path
+           parameters:body
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
     
 }
 
@@ -70,45 +71,62 @@
         error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
     }
     if (error) {
-        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        if (block != nil) {
+            block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        }
         return;
     }
     NSString * path= [NSString stringWithFormat:@"/push/%@/%@", self.name, channel];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:path parameters:notification completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError]);
-    }];
+    [self addAuthorizationHeader];
+    [self.client setSendParametersAsJSON:YES];
+    
+    __weak KZNotification *safeMe = self;
+    [self.client POST:path
+           parameters:notification
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
 }
 
 -(void) getSubscriptions:(void (^)(KZResponse *))block
 {
-    NSString * path= [NSString stringWithFormat:@"/devices/%@/%@", deviceMacAddress, self.name];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
-    }];
+    NSString * path= [NSString stringWithFormat:@"/devices/%@/%@", self.uniqueIdentifier, self.name];
+    [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+    
+    [self.client GET:path
+          parameters:nil
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+              
+          }];
 }
 
 -(void) getApplicationChannels:(void (^)(KZResponse *))block
 {
     NSString * path= [NSString stringWithFormat:@"/channels/%@", self.name];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client GET:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
-    }];
+    [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+    
+    [self.client GET:path
+          parameters:nil
+          completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+              
+              [safeMe callCallback:block
+                          response:response
+                       urlResponse:urlResponse
+                             error:error];
+              
+          }];
 }
 
 -(void) unSubscribeDeviceUsingToken:(NSString *)deviceToken fromChannel:(NSString *) channel completion:(void (^)(KZResponse *))block
@@ -123,86 +141,41 @@
         error = [NSError errorWithDomain:@"com.kidozen.sdk.ios" code:42 userInfo:[NSDictionary dictionaryWithObject:@"Invalid parameter value for 'channel'" forKey:@"Description"]];
     }
     if (error) {
-        block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        if (block != nil) {
+            block([[KZResponse alloc] initWithResponse:Nil urlResponse:nil andError:error]);
+        }
         return;
     }
     NSString * path= [NSString stringWithFormat:@"/subscriptions/%@/%@/%@", self.name, channel, deviceToken];
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
-    [_client DELETE:path parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
-    }];
+    [self addAuthorizationHeader];
+    __weak KZNotification *safeMe = self;
+    
+    [self.client DELETE:path
+             parameters:nil
+             completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+                 
+                 [safeMe callCallback:block
+                             response:response
+                          urlResponse:urlResponse
+                                error:error];
+                 
+             }];
 }
 
 
-- (NSString *)getMacAddress
+- (NSString *)getUniqueIdentification
 {
-    int                 mgmtInfoBase[6];
-    char                *msgBuffer = NULL;
-    size_t              length;
-    unsigned char       macAddress[6];
-    struct if_msghdr    *interfaceMsgStruct;
-    struct sockaddr_dl  *socketStruct;
-    NSString            *errorFlag = NULL;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    // Setup the management Information Base (mib)
-    mgmtInfoBase[0] = CTL_NET;        // Request network subsystem
-    mgmtInfoBase[1] = AF_ROUTE;       // Routing table info
-    mgmtInfoBase[2] = 0;
-    mgmtInfoBase[3] = AF_LINK;        // Request link layer information
-    mgmtInfoBase[4] = NET_RT_IFLIST;  // Request all configured interfaces
+    NSString *uniqueID = (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kUniqueIdentificationFilename];
     
-    // With all configured interfaces requested, get handle index
-    if ((mgmtInfoBase[5] = if_nametoindex("en0")) == 0)
-        errorFlag = @"if_nametoindex failure";
-    else
-    {
-        // Get the size of the data available (store in len)
-        if (sysctl(mgmtInfoBase, 6, NULL, &length, NULL, 0) < 0)
-            errorFlag = @"sysctl mgmtInfoBase failure";
-        else
-        {
-            // Alloc memory based on above call
-            if ((msgBuffer = malloc(length)) == NULL)
-                errorFlag = @"buffer allocation failure";
-            else
-            {
-                // Get system information, store in buffer
-                if (sysctl(mgmtInfoBase, 6, msgBuffer, &length, NULL, 0) < 0)
-                    errorFlag = @"sysctl msgBuffer failure";
-            }
-        }
+    if (uniqueID == nil) {
+        uniqueID = [[NSUUID UUID] UUIDString];
+        [userDefaults setValue:uniqueID forKey:kUniqueIdentificationFilename];
+        [userDefaults synchronize];
     }
     
-    // Befor going any further...
-    if (errorFlag != NULL)
-    {
-        //DLog(@"Error: %@", errorFlag);
-        return errorFlag;
-    }
-    
-    // Map msgbuffer to interface message structure
-    interfaceMsgStruct = (struct if_msghdr *) msgBuffer;
-    
-    // Map to link-level socket structure
-    socketStruct = (struct sockaddr_dl *) (interfaceMsgStruct + 1);
-    
-    // Copy link layer address data in socket structure to an array
-    memcpy(&macAddress, socketStruct->sdl_data + socketStruct->sdl_nlen, 6);
-    
-    // Read from char array into a string object, into traditional Mac address format
-    NSString *macAddressString = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X",
-                                  macAddress[0], macAddress[1], macAddress[2],
-                                  macAddress[3], macAddress[4], macAddress[5]];
-    //DLog(@"Mac Address: %@", macAddressString);
-    
-    // Release the buffer memory
-    free(msgBuffer);
-    
-    return macAddressString;
+    return  uniqueID;
 }
 
 @end

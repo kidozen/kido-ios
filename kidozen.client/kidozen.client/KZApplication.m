@@ -1,444 +1,372 @@
 #import "KZApplication.h"
 #import "NSString+Utilities.h"
 #import "KZIdentityProviderFactory.h"
+#import "NSDictionary+Mongo.h"
+#import "Base64.h"
+#import "KZApplicationConfiguration.h"
+#import "KZAuthenticationConfig.h"
+#import "KZTokenController.h"
+#import "KZPassiveAuthViewController.h"
+#import "KZApplicationAuthentication.h"
+#import "KZApplicationServices.h"
+#import "KZCrashReporter.h"
 
-NSString *const KVO_KEY_VALUE = @"kzToken";
-NSString *const KVO_NEW_VALUE = @"new";
-NSString *const KZ_APP_CONFIG_PATH = @"/publicapi/apps";
-NSString *const KZ_SEC_CONFIG_PATH = @"/publicapi/auth/config";
-
-NSString *const IP_KEY_ENDPOINT = @"ipEndpoint";
-NSString *const AUTH_SVC_KEY_ENDPOINT = @"authServiceEndpoint";
-NSString *const AUTH_SVC_KEY_SCOPE = @"authServiceScope";
-
+#import <UIKit/UIKit.h>
 
 @interface KZApplication ()
--(void) initializeServices;
--(void) invokeAuthServices:(NSString *) user withPassword:(NSString *) password andProvider:(NSString *) provider;
--(void) tokenExpires:(NSTimer*)theTimer;
--(void) parseUserInfo:(NSString *) token;
+
+@property (nonatomic, copy, readwrite) NSString *applicationKey;
+
+@property (nonatomic, copy) NSString *tenantMarketPlace;
+@property (nonatomic, copy) NSString *applicationName;
+
+@property (nonatomic, strong) KZCrashReporter *crashreporter;
+@property (nonatomic, strong) KZApplicationConfiguration *applicationConfig;
+@property (nonatomic, strong) KZApplicationServices *appServices;
+@property (nonatomic, strong) KZApplicationAuthentication *appAuthentication;
+@property (nonatomic, assign) BOOL strictSSL;
+
 @end
 
 @implementation KZApplication
 
-static NSMutableDictionary * tokenCache;
 
-@synthesize pushNotifications = _pushNotifications;
-@synthesize onInitializationComplete = _onInitializationComplete;
-@synthesize mail = _mail;
-@synthesize log = _log;
-@synthesize lastProviderKey = _lastProviderKey;
-@synthesize lastPassword = _lastPassword;
-@synthesize lastUserName = _lastUserName;
-@synthesize identityProviders = _identityProviders;
-@synthesize bypassSSLValidation = _bypassSSLValidation;
-
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName andCallback:(void (^)(KZResponse *))callback
-{
-   return [self initWithTennantMarketPlace:tennantMarketPlace applicationName:applicationName bypassSSLValidation:NO andCallback:callback];
-}
-
--(id) initWithTennantMarketPlace:(NSString *) tennantMarketPlace applicationName:(NSString *) applicationName bypassSSLValidation:(BOOL) bypassSSL andCallback:(void (^)(KZResponse *))callback
+-(id) initWithTenantMarketPlace:(NSString *)tenantMarketPlace
+                applicationName:(NSString *)applicationName
+                 applicationKey:(NSString *)applicationKey
+                      strictSSL:(BOOL)strictSSL
+                    andCallback:(void (^)(KZResponse *))callback
 {
     self = [super init];
+    
     if (self)
     {
-        if (!tokenCache) {
-            tokenCache = [[NSMutableDictionary alloc] init];
-        }
-        _bypassSSLValidation = NO;
-        _tennantMarketPlace = tennantMarketPlace;
-        _applicationName = applicationName;
-        _onInitializationComplete = callback;
-        _bypassSSLValidation = bypassSSL;
+        [self validateMarketPlace:tenantMarketPlace
+                  applicationName:applicationName
+                   applicationKey:applicationKey];
+        
+        self.applicationKey = applicationKey;
+        
+        self.tenantMarketPlace = [self sanitizeTennantMarketPlace:tenantMarketPlace];
+        self.applicationName = applicationName;
+        self.onInitializationComplete = callback;
+        self.strictSSL = strictSSL;
+        self.applicationConfig = [[KZApplicationConfiguration alloc] init];
+        
         [self initializeServices];
-        [self addObserver:self forKeyPath:KVO_KEY_VALUE options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
 
     }
     return self;
+    
 }
 
-#pragma mark private methods
+
+- (void)validateMarketPlace:(NSString *)marketPlaceString applicationName:(NSString *)applicationName applicationKey:(NSString *)appKey
+{
+    if (marketPlaceString == nil || [marketPlaceString length] == 0 ||
+        applicationName == nil || [applicationName length] == 0 ||
+        appKey == nil || [appKey length] == 0) {
+        
+        NSString *message = [NSString stringWithFormat:@"marketPlace is %@, applicationName is %@, appKey is %@", marketPlaceString, applicationName, appKey];
+        @throw [NSException exceptionWithName:@"Fail to initialize KZApplication"
+                                       reason:@"marketPlace, applicationName and applicationKey are required."
+                                     userInfo:@{@"message" : message}];
+    }
+    
+}
+
+
+-(NSString *)sanitizeTennantMarketPlace:(NSString *)tennant
+{
+    NSMutableCharacterSet *characterSet = [NSMutableCharacterSet whitespaceCharacterSet];
+    [characterSet addCharactersInString:@"/"];
+    
+    return [tennant stringByTrimmingCharactersInSet:characterSet];
+}
 
 -(void) initializeServices
 {
-    NSString * appSettingsPath = [NSString stringWithFormat:KZ_APP_CONFIG_PATH];
-    if (!_defaultClient) {
-        _defaultClient = [[KZHTTPClient alloc] init];
-        [_defaultClient setBypassSSLValidation:_bypassSSLValidation];
+    __weak KZApplication *safeMe = self;
+    
+    [self.applicationConfig setupWithApplicationName:self.applicationName
+                                             tennant:self.tenantMarketPlace
+                                           strictSSL:self.strictSSL
+                                          completion:^(id configResponse,
+                                                       NSHTTPURLResponse *configUrlResponse,
+                                                       NSError *configError)
+     {
+         if (configError != nil) {
+             return [safeMe failInitializationWithError:configError];
+         }
+         
+         [safeMe configureAuthentication];
+
+         [safeMe configureApplicationServices];
+         
+         if ([safeMe shouldAskTokenWithForApplicationKey]) {
+             
+             [safeMe.appAuthentication handleAuthenticationWithApplicationKey:self.applicationKey
+                                                                     callback:^(NSError *authError)
+              {
+                  [safeMe didFinishInitializationWithResponse:configResponse
+                                                  urlResponse:configUrlResponse
+                                                        error:authError];
+              }];
+         } else {
+             [safeMe didFinishInitializationWithResponse:configResponse
+                                             urlResponse:configUrlResponse
+                                                   error:configError];
+         }
+     }];
+}
+
+- (void) configureAuthentication
+{
+    self.appAuthentication = [[KZApplicationAuthentication alloc] initWithApplicationConfig:self.applicationConfig
+                                                                        tenantMarketPlace:self.tenantMarketPlace
+                                                                                strictSSL:self.strictSSL];
+}
+
+- (void) configureApplicationServices
+{
+    self.appServices = [[KZApplicationServices alloc] initWithApplicationConfig:self.applicationConfig
+                                                                tokenController:self.appAuthentication.tokenController
+                                                                      strictSSL:self.strictSSL];
+    
+}
+
+- (void) failInitializationWithError:(NSError *)error
+{
+    [self didFinishInitializationWithResponse:nil
+                                  urlResponse:nil
+                                        error:error];
+}
+
+- (void)addBreadCrumb:(NSString *)breadCrumb
+{
+    if (self.crashreporter != nil) {
+        [self.crashreporter addBreadCrumb:[breadCrumb stringByAppendingString:@"\n"]];
     }
-
-    [_defaultClient setBasePath:_tennantMarketPlace];
-    [_defaultClient GET:appSettingsPath parameters:[NSDictionary dictionaryWithObjectsAndKeys:_applicationName,@"name", nil]
-      completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-          _configuration = [NSDictionary dictionaryWithDictionary:[response objectAtIndex:0]];
-          _securityConfiguration = [NSDictionary dictionaryWithDictionary:[_configuration objectForKey:@"authConfig"]];
-          _identityProviders = [[NSMutableDictionary alloc] init];
-          for(NSString *key in [_securityConfiguration objectForKey:@"identityProviders" ]) {
-              NSString * obj = [[[_securityConfiguration objectForKey:@"identityProviders" ] valueForKey:key] valueForKey:@"protocol"] ;
-              [_identityProviders setValue:obj forKey:key];
-          }
-          _pushNotifications = [[KZNotification alloc] initWithEndpoint:[_configuration valueForKey:@"notification"] andName:_applicationName];
-          [_pushNotifications setBypassSSL:_bypassSSLValidation];
-          _log = [[KZLogging alloc] initWithEndpoint:[_configuration valueForKey:@"logging"] andName:nil];
-          [_log setBypassSSL:_bypassSSLValidation];
-          _log.kzToken = self.kzToken;
-          _mail = [[KZMail alloc] initWithEndpoint:[_configuration valueForKey:@"email"] andName:nil];
-          [_mail setBypassSSL:_bypassSSLValidation];
-          _mail.kzToken = self.kzToken;
-          if (_onInitializationComplete) {
-              if (_onInitializationComplete) {
-                  KZResponse * kzresponse = [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:error] ;
-                  [kzresponse setApplication:self];
-                  _onInitializationComplete (kzresponse);
-              }
-          }
-
-      }];
-}
--(void) registerProviderWithClassName:(NSString *) className andProviderKey:(NSString *) providerKey
-{
-    //1- add to array
-    //http://osmorphis.blogspot.com.ar/2009/05/reflection-in-objective-c.html
-    //BOOL conforms = [obj conformsToProtocol:@protocol(MyInterface)];
-}
--(void) registerProviderWithInstance:(id) instance andProviderKey:(NSString *) providerKey
-{
-    //1- add to array
-    //http://osmorphis.blogspot.com.ar/2009/05/reflection-in-objective-c.html
-    //BOOL conforms = [obj conformsToProtocol:@protocol(MyInterface)];
 }
 
--(void) parseUserInfo:(NSString *) token
+-(void)enableCrashReporter
 {
-    self.KidoZenUser = [[KZUser alloc] initWithToken:token];
-}
-
-
--(void) invokeAuthServices:(NSString *) user withPassword:(NSString *) password andProvider:(NSString *) providerKey
-{
-    NSString * authServiceScope = [_securityConfiguration objectForKey:AUTH_SVC_KEY_SCOPE];
-    NSString * authServiceEndpoint = [_securityConfiguration objectForKey:AUTH_SVC_KEY_ENDPOINT];
-    NSString * applicationScope = [_securityConfiguration objectForKey:@"applicationScope"];
-
-    NSDictionary *provider = [[_securityConfiguration objectForKey:@"identityProviders"] objectForKey:providerKey];
-    NSString * providerProtocol = [provider objectForKey:@"protocol"];
-    NSString * providerIPEndpoint = [provider objectForKey:@"endpoint"];
-    
-    if (!ip)
-        ip = [KZIdentityProviderFactory createProvider:providerProtocol bypassSSL:_bypassSSLValidation ];
-    
-    [ip initializeWithUserName:user password:password andScope:authServiceScope];
-    [ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
-        if (error) {
-            if (_authCompletionBlock) {
-                _authCompletionBlock(error);
-                return ;         
-            }
-        }
-        NSDictionary * params = [NSDictionary dictionaryWithObjectsAndKeys:applicationScope ,@"wrap_scope", @"SAML",@"wrap_assertion_format", ipToken,@"wrap_assertion", nil];
+    if (![self.crashreporter isInitialized]) {
         
-        if (!_defaultClient) {
-            _defaultClient = [[KZHTTPClient alloc] init];
-            [_defaultClient setBypassSSLValidation:_bypassSSLValidation];
+        if (NSGetUncaughtExceptionHandler() != nil) {
+            NSLog(@"Warning -- NSSetUncaughtExceptionHandler is not nil. Overriding will occur");
         }
         
-        [_defaultClient setBasePath:authServiceEndpoint];
-        [_defaultClient POST:@"" parameters:params completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-            if ([urlResponse statusCode]>300) {
-                NSMutableDictionary* details = [NSMutableDictionary dictionary];
-                [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
-              _authCompletionBlock([NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
-            }
-            else {
-                self.isAuthenticated = true;
-                self.KidoZenUser.user = user;
-                self.KidoZenUser.pass = password;
-                
-                NSString * kzToken = [NSString stringWithFormat:@"WRAP access_token=\"%@\"", [response objectForKey:@"rawToken"]];
-                
-                [self willChangeValueForKey:KVO_KEY_VALUE];
-                
-                self.kzToken = kzToken;
-                self.ipToken = ipToken;
-                
-                [self setCacheWithIPToken:ipToken andKzToken:kzToken];
-                
-                [self parseUserInfo:kzToken];
-                
-                if (self.KidoZenUser.expiresOn > 0) {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        tokenExpirationTimer = [NSTimer scheduledTimerWithTimeInterval:self.KidoZenUser.expiresOn
-                                                                                target:self
-                                                                              selector:@selector(tokenExpires:)
-                                                                              userInfo:nil
-                                                                               repeats:NO];
-                        [[NSRunLoop currentRunLoop] addTimer:tokenExpirationTimer forMode:NSDefaultRunLoopMode];
-                        [[NSRunLoop currentRunLoop] run];
-                    });
-                }
-                else {
-                    NSLog(@"There is a mismatch between your device date and the kidozen authentication service. The expiration time from the service is lower than the device date. The OnSessionExpirationRun method will be ignored");
-                }
-                if (_authCompletionBlock) {
-                    if (![self.KidoZenUser.claims objectForKey:@"system"] && ![self.KidoZenUser.claims objectForKey:@"usersource"] )
-                    {
-                        NSError * err = [[NSError alloc] initWithDomain:@"Authentication" code:0 userInfo:[NSDictionary dictionaryWithObject:@"User is not authenticated" forKey:@"description"]];
-                        _authCompletionBlock(err);
-                    }
-                    else
-                    {
-                        _authCompletionBlock(self.KidoZenUser);
-                    }
-                }
-            }
-        }];
-    }];
-}
-
--(void) tokenExpires:(NSTimer*)theTimer
-{
-    if (_tokenExpiresBlock) {
-        _tokenExpiresBlock(self.KidoZenUser);
-    }
-    else
-    {
-        [self removeTokensFromCache];
-        [self  authenticateUser:_lastUserName withProvider:_lastProviderKey andPassword:_lastPassword];
+        self.crashreporter = [[KZCrashReporter alloc] initWithURLString:self.applicationConfig.url
+                                                        tokenController:self.appAuthentication.tokenController];
     }
 }
 
--(void) sendMailTo:(NSString *)to from:(NSString *) from withSubject:(NSString *) subject andHtmlBody:(NSString *) htmlBody andTextBody:(NSString *)textBody  completion:(void (^)(KZResponse *))block
+- (BOOL)shouldAskTokenWithForApplicationKey
 {
-    NSDictionary * mail = [[NSDictionary alloc] initWithObjectsAndKeys:to,@"to", from, @"from", subject, @"subject", htmlBody, @"bodyHtml", textBody, @"bodyText", nil];
-    [_mail send:mail completion:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
-}
-
--(void) writeLog:(id) message withLevel:(LogLevel) level completion:(void (^)(KZResponse *))block
-{
-    [_log write:message withLevel:level completion:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
-}
-
--(void) clearLog:(void (^)(KZResponse *))block
-{
-    [_log clear:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
-}
-
--(void) allLogMessages:(void (^)(KZResponse *))block
-{
-    [_log all:^(KZResponse * k) {
-        block( [[KZResponse alloc] initWithResponse:k.response urlResponse:k.urlResponse andError:k.error] );
-    }];
+    return self.applicationKey != nil && [self.applicationKey length] > 0;
 }
 
 
--(KZConfiguration *) ConfigurationWithName:(NSString *) name
+- (void) didFinishInitializationWithResponse:(id)configResponse
+                                 urlResponse:(NSHTTPURLResponse *)configUrlResponse
+                                       error:(NSError *)error
 {
-    if (!_configurations) {
-        _configurations = [[NSMutableDictionary alloc] init];
+    if (self.onInitializationComplete) {
+        KZResponse *kzresponse = [[KZResponse alloc] initWithResponse:configResponse
+                                                          urlResponse:configUrlResponse
+                                                             andError:error];
+        [kzresponse setApplication:self];
+        self.onInitializationComplete(kzresponse);
     }
-    NSString * ep = [_configuration valueForKey:@"config"] ;
-    KZConfiguration * c = [[KZConfiguration alloc] initWithEndpoint:ep andName:name];
-    [c setBypassSSL:_bypassSSLValidation];
-    c.kzToken = self.kzToken;
-    [_configurations setObject:c forKey:name];
-    return c;
+
 }
 
--(KZSMSSender *) SMSSenderWithNumber:(NSString *) number
+@end
+
+@implementation KZApplication(Authentication)
+
+- (KZUser *)kzUser
 {
-    if (!_smssenders) {
-        _smssenders = [[NSMutableDictionary alloc] init];
-    }
-    NSString * ep = [_configuration valueForKey:@"sms"] ;
-    KZSMSSender *s = [[KZSMSSender alloc] initWithEndpoint:ep andName:number];
-    [s setBypassSSL:_bypassSSLValidation];
-    s.kzToken = self.kzToken;
-    [_smssenders setObject:s forKey:number];
-    return s;
+    return self.appAuthentication.kzUser;
 }
 
+- (BOOL)isAuthenticated
+{
+    return self.appAuthentication.isAuthenticated;
+}
+
+- (BOOL)passiveAuthenticated
+{
+    return self.appAuthentication.passiveAuthenticated;
+}
+
+-(void) authenticateUser:(NSString *)user
+            withProvider:(NSString *)provider
+             andPassword:(NSString *)password
+              completion:(void (^)(id))callback
+{
+    [self.appAuthentication authenticateUser:user
+                                withProvider:provider
+                                 andPassword:password
+                                  completion:callback];
+    
+}
+
+-(void) authenticateUser:(NSString *)user
+            withProvider:(NSString *)provider
+             andPassword:(NSString *)password
+{
+    [self.appAuthentication authenticateUser:user
+                                withProvider:provider
+                                 andPassword:password];
+    
+}
+
+- (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *))callback
+{
+    [self.appAuthentication handleAuthenticationWithApplicationKey:self.applicationKey
+                                                          callback:callback];
+    
+}
+
+/**
+ * Starts a passive authentication flow.
+ */
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback
+{
+    [self.appAuthentication doPassiveAuthenticationWithCompletion:callback];
+    
+}
+
+- (void) setAuthCompletionBlock:(AuthCompletionBlock)authCompletionBlock
+{
+    [self.appAuthentication setAuthCompletionBlock:authCompletionBlock];
+}
+
+- (void)setTokenExpiresBlock:(TokenExpiresBlock)tokenExpiresBlock
+{
+    self.appAuthentication.tokenExpiresBlock = tokenExpiresBlock;
+}
+
+@end
+
+
+@implementation KZApplication(Services)
 
 -(KZQueue *) QueueWithName:(NSString *) name
 {
-    if (!_queues) {
-        _queues = [[NSMutableDictionary alloc] init];
-    }
-    
-    NSString * ep = [_configuration valueForKey:@"queue"] ;
-    KZQueue * q = [[KZQueue alloc] initWithEndpoint:ep andName:name];
-    [q setBypassSSL:_bypassSSLValidation];
-    q.kzToken = self.kzToken;
-    [_queues setObject:q forKey:name];
-    return q;
+    return [self.appServices QueueWithName:name];
 }
+
 -(KZStorage *) StorageWithName:(NSString *) name
 {
-    if (!_storages) {
-        _storages = [[NSMutableDictionary alloc] init];
-    }
-    NSString * ep = [[_configuration valueForKey:@"storage"] stringByAppendingString:@"/"];
-    KZStorage * s= [[KZStorage alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_bypassSSLValidation];
-    s.kzToken = self.kzToken;
-    [_storages setObject:s forKey:name];
-    return s;
-}
-#if TARGET_OS_IPHONE
-
--(KZPubSubChannel *) PubSubChannelWithName:(NSString *) name
-{
-    if (!_channels) {
-        _channels = [[NSMutableDictionary alloc] init];
-    }
-    
-    NSString * ep = [_configuration valueForKey:@"pubsub"];
-    NSString * wsep = [_configuration valueForKey:@"ws"];
-    KZPubSubChannel * ch =[[KZPubSubChannel alloc] initWithEndpoint:ep wsEndpoint:wsep andName:name];
-    [ch setBypassSSL:_bypassSSLValidation];
-    ch.kzToken = self.kzToken;
-    [_channels setObject:ch forKey:name];
-    return ch;
-}
-
-#endif
-
--(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password completion:(void (^)(id))block
-{
-    _authCompletionBlock = block;
-    _lastUserName = user;
-    _lastPassword = password;
-    _lastProviderKey = provider;
-    
-    [self authenticateUser:user withProvider:provider andPassword:password];
-}
-
--(void) authenticateUser:(NSString *) user withProvider:(NSString *)provider andPassword:(NSString *) password
-{
-    _lastUserName = user;
-    _lastPassword = password;
-    _lastProviderKey = provider;
-
-    [self loadTokensFromCache];
-    
-    if (self.kzToken && self.ipToken) {
-        [self parseUserInfo:self.kzToken];
-        
-        if (_authCompletionBlock) {
-            _authCompletionBlock(self.kzToken);
-        }
-    }
-    else {
-        [self invokeAuthServices:user withPassword:password andProvider:provider];
-    }
-}
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    [_queues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_queues objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [_storages enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_storages objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [_configurations enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_configurations objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [_smssenders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_smssenders objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [_channels enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        [[_channels objectForKey:key] setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    }];
-    [_pushNotifications setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    [_mail setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-    [_log setKzToken:[change objectForKey:KVO_NEW_VALUE]];
-}
-
--(KZDatasource *) DataSourceWithName:(NSString *)name
-{
-    if (!_datasources) {
-        _datasources = [[NSMutableDictionary alloc] init];
-    }
-    NSString * ep =[[_configuration valueForKey:@"datasource"] stringByAppendingString:@"/"];
-    
-    KZDatasource * s= [[KZDatasource alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_bypassSSLValidation];
-    
-    s.kzToken = self.kzToken;
-    s.ipToken = self.ipToken;
-    
-    [_datasources setObject:s forKey:name];
-    
-    return s;
+    return [self.appServices StorageWithName:name];
 }
 
 -(KZService *) LOBServiceWithName:(NSString *) name
 {
-    if (!_services) {
-        _services = [[NSMutableDictionary alloc] init];
-    }
-    //url: "/api/services/" + name + "/invoke/" + method,
-    NSString * ep = [[_configuration valueForKey:@"url"] stringByAppendingString:
-                     [NSString stringWithFormat:@"api/services/%@/",name]];
-    
-    KZService * s= [[KZService alloc] initWithEndpoint:ep andName:name];
-    [s setBypassSSL:_bypassSSLValidation];
-    
-    s.kzToken = self.kzToken;
-    s.ipToken = self.ipToken;
-    
-    [_services setObject:s forKey:name];
-    
-    return s;
+    return [self.appServices LOBServiceWithName:name];
 }
 
--(void) setCacheWithIPToken:(NSString *) ipToken andKzToken:(NSString *) kzToken
+-(KZConfiguration *) ConfigurationWithName:(NSString *) name
 {
-    NSString * kzKey = [self getKzCacheKey];
-    NSString * ipKey = [self getIpCacheKey];
-    
-    [tokenCache setValue:kzToken forKey:kzKey];
-    [tokenCache setValue:ipToken forKey:ipKey];
-    
-    [self didChangeValueForKey:KVO_KEY_VALUE];
+    return [self.appServices ConfigurationWithName:name];
 }
 
--(void) loadTokensFromCache
+-(KZSMSSender *) SMSSenderWithNumber:(NSString *) number
 {
-    NSString * kzKey = [self getKzCacheKey];
-    NSString * ipKey = [self getIpCacheKey];
-     
-    self.kzToken = [tokenCache objectForKey:kzKey];
-    self.ipToken = [tokenCache objectForKey:ipKey];
-
-    [self willChangeValueForKey:KVO_KEY_VALUE];
-    [self didChangeValueForKey:KVO_KEY_VALUE];
+    return [self.appServices SMSSenderWithNumber:number];
 }
 
--(void) removeTokensFromCache
+-(KZDatasource *) DataSourceWithName:(NSString *)name
 {
-    NSString * kzKey = [self getKzCacheKey];
-    NSString * ipKey = [self getIpCacheKey];
-    
-    [tokenCache removeObjectForKey:kzKey];
-    [tokenCache removeObjectForKey:ipKey];
+    return [self.appServices DataSourceWithName:name];
 }
 
-- (NSString *) getIpCacheKey
+#if TARGET_OS_IPHONE
+
+-(KZPubSubChannel *) PubSubChannelWithName:(NSString *) name
 {
-    return [[NSString stringWithFormat:@"%@%@%@%@-ipToken", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword] createHash];
+    return [self.appServices PubSubChannelWithName:name];
 }
 
-- (NSString *) getKzCacheKey
+#endif
+
+
+#pragma mark - Logging
+-(void) writeLog:(id)object
+         message:(NSString *)message
+       withLevel:(LogLevel)level
+      completion:(void (^)(KZResponse *))block
 {
-    return [[NSString stringWithFormat:@"%@%@%@%@", _tennantMarketPlace, _lastProviderKey, _lastUserName, _lastPassword]
-            createHash];
+    return [self.appServices write:object
+                           message:message
+                         withLevel:level
+                        completion:block];
 }
+
+-(void) clearLog:(void (^)(KZResponse *))block
+{
+    [self.appServices clearLog:block];
+}
+
+-(void) allLogMessages:(void (^)(KZResponse *))block
+{
+    [self.appServices allLogMessages:block];
+}
+
+- (KZLogging *)log
+{
+    return self.appServices.log;
+}
+
+#pragma mark - Email
+
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+        completion:(void (^)(KZResponse *))block
+{
+    [self.appServices sendMailTo:to
+                from:from
+         withSubject:subject
+         andHtmlBody:htmlBody
+         andTextBody:textBody
+         attachments:nil
+          completion:block];
+}
+
+
+-(void) sendMailTo:(NSString *)to
+              from:(NSString *)from
+       withSubject:(NSString *)subject
+       andHtmlBody:(NSString *)htmlBody
+       andTextBody:(NSString *)textBody
+       attachments:(NSDictionary *)attachments
+        completion:(void (^)(KZResponse *))block
+{
+    [self.appServices sendMailTo:to
+                            from:from
+                     withSubject:subject
+                     andHtmlBody:htmlBody
+                     andTextBody:textBody
+                     attachments:attachments
+                      completion:block];
+}
+
+- (KZMail *)mail
+{
+    return self.appServices.mail;
+}
+
+#pragma mark - PushNotifications
+
+- (KZNotification *)pushNotifications
+{
+    return self.appServices.pushNotifications;
+}
+
 @end

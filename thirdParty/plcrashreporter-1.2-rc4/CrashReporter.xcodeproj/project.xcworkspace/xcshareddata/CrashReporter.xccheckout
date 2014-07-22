@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3F6919E8-3734-4EED-9B83-20D865F273A1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CrashReporter</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>264E6A75-AC08-49CD-A4A2-A722FD970855</key>
+		<string>https://github.com/kidozen/kido-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>plcrashreporter-1.2-rc4/CrashReporter.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>264E6A75-AC08-49CD-A4A2-A722FD970855</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/kidozen/kido-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>264E6A75-AC08-49CD-A4A2-A722FD970855</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>264E6A75-AC08-49CD-A4A2-A722FD970855</string>
+			<key>IDESourceControlWCCName</key>
+			<string>kido-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

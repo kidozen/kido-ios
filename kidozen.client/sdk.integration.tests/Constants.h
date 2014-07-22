@@ -13,3 +13,4 @@ FOUNDATION_EXPORT NSString *const kzAppName;
 FOUNDATION_EXPORT NSString *const kzUser;
 FOUNDATION_EXPORT NSString *const kzPassword;
 FOUNDATION_EXPORT NSString *const kzProvider;
+FOUNDATION_EXPORT NSString *const kzApplicationKey;

@@ -1,11 +1,12 @@
 #import "KZPubSubChannel.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZPubSubChannel
 @synthesize wsEndpoint = _wsEndpoint;
 @synthesize channelName = _channelName;
 @synthesize webSocketCompletionEventBlock = _webSocketCompletionEventBlock;
 
--(id)initWithEndpoint:(NSString *)endpoint wsEndpoint:(NSString *) wsEndpoint andName:(NSString *)name 
+-(id)initWithEndpoint:(NSString *)endpoint wsEndpoint:(NSString *) wsEndpoint andName:(NSString *)name
 {
     self = [super initWithEndpoint:endpoint andName:nil];
     if (self) {
@@ -18,18 +19,23 @@
 
 -(void) publish:(id)object completion:(void (^)(KZResponse *))block
 {
-    [_client setHeaders:[NSDictionary dictionaryWithObject:self.kzToken forKey:@"Authorization"]];
+    [self addAuthorizationHeader];
     if ([object isKindOfClass:[NSString class]]) {
-        [_client setSendParametersAsJSON:YES];
+        [self.client setSendParametersAsJSON:YES];
     }
-    [_client setSendParametersAsJSON:YES];
-    [_client POST:[NSString stringWithFormat:@"/%@", self.channelName]  parameters:object completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        NSError * restError = nil;
-        if ([urlResponse statusCode]>KZHttpErrorStatusCode) {
-            restError = error;
-        }
-        block( [[KZResponse alloc] initWithResponse:response urlResponse:urlResponse andError:restError] );
-    }];
+    [self.client setSendParametersAsJSON:YES];
+    __weak KZPubSubChannel *safeMe = self;
+    
+    [self.client POST:[NSString stringWithFormat:@"/%@", self.channelName]
+           parameters:object
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+               [safeMe callCallback:block
+                           response:response
+                        urlResponse:urlResponse
+                              error:error];
+               
+           }];
 }
 
 -(void) subscribe:(WebSocketEventBlock) completionEventBlock
@@ -38,7 +44,7 @@
     NSMutableURLRequest * nsurl = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:_wsEndpoint]];
     _webSocket = [[SRWebSocket alloc] initWithURLRequest:nsurl];
     [_webSocket setDelegate:self];
-    [_webSocket open];    
+    [_webSocket open];
     return;
 }
 
