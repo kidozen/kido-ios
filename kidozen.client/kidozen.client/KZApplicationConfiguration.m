@@ -10,6 +10,7 @@
 #import "KZResponse.h"
 #import "SVHTTPClient.h"
 #import "KZAuthenticationConfig.h"
+#import "NSData+Conversion.h"
 
 #import <objc/runtime.h>
 
@@ -101,6 +102,10 @@ NSString *const kApplicationNameKey = @"name";
                      // Handle configError
                      if (configError != nil || (configUrlResponse.statusCode != 200) ) {
                          
+                         if ([configResponse isKindOfClass:[NSData class]]) {
+                             configResponse = [configResponse KZ_UTF8String];
+                         }
+
                          NSError *localError = configError ? : [NSError errorWithDomain:@""
                                                                                    code:configUrlResponse.statusCode
                                                                                userInfo:nil];

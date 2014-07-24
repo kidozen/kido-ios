@@ -96,7 +96,10 @@
                                                        NSError *configError)
      {
          if (configError != nil) {
-             return [safeMe failInitializationWithError:configError];
+             // We failed... pass the error.
+             return [safeMe didFinishInitializationWithResponse:configResponse
+                                                    urlResponse:configUrlResponse
+                                                          error:configError];
          }
          
          [safeMe configureAuthentication];
@@ -133,13 +136,6 @@
                                                                 tokenController:self.appAuthentication.tokenController
                                                                       strictSSL:self.strictSSL];
     
-}
-
-- (void) failInitializationWithError:(NSError *)error
-{
-    [self didFinishInitializationWithResponse:nil
-                                  urlResponse:nil
-                                        error:error];
 }
 
 - (void)addBreadCrumb:(NSString *)breadCrumb
