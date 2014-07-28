@@ -14,6 +14,7 @@
 				6D428AB818EEE6F60002C36C /* ShellScript */,
 			);
 			dependencies = (
+				6DF37E9F19868E6900F18F37 /* PBXTargetDependency */,
 				6D8018071968ACE700E99FB7 /* PBXTargetDependency */,
 				6D8018091968ACE700E99FB7 /* PBXTargetDependency */,
 			);
@@ -27,6 +28,7 @@
 				6DF1EBBE18EDF72F000C3AA7 /* ShellScript */,
 			);
 			dependencies = (
+				6DF37EA619868E7200F18F37 /* PBXTargetDependency */,
 				6D8018011968ACDE00E99FB7 /* PBXTargetDependency */,
 				6D8018031968ACDE00E99FB7 /* PBXTargetDependency */,
 			);
@@ -184,6 +186,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6DFF94CD18EE67CA00EA324F;
 			remoteInfo = CrashReporter.device;
+		};
+		6DF37E9E19868E6900F18F37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94BC18EE63ED00EA324F;
+			remoteInfo = SocketRocket.device;
+		};
+		6DF37EA519868E7200F18F37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94B818EE63E200EA324F;
+			remoteInfo = SocketRocket.fat;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -838,6 +854,16 @@
 			isa = PBXTargetDependency;
 			name = CrashReporter.device;
 			targetProxy = 6D8018081968ACE700E99FB7 /* PBXContainerItemProxy */;
+		};
+		6DF37E9F19868E6900F18F37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket.device;
+			targetProxy = 6DF37E9E19868E6900F18F37 /* PBXContainerItemProxy */;
+		};
+		6DF37EA619868E7200F18F37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket.fat;
+			targetProxy = 6DF37EA519868E7200F18F37 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
