@@ -10,12 +10,14 @@
 #import "KZApplication.h"
 #import "Constants.h"
 #import "KZDatasource.h"
-
+#import "KZPubSubChannel.h"
 
 @interface datasourceTests : XCTestCase
 @property (nonatomic, strong) KZApplication * application;
 @property (nonatomic, strong) NSDictionary * nestedDataDict;
 @property (nonatomic, strong) NSDictionary * dataDict;
+
+@property (nonatomic, strong) KZPubSubChannel *subscribeChannel;
 @end
 
 @implementation datasourceTests
@@ -23,6 +25,8 @@
 - (void)setUp
 {
     [super setUp];
+    
+    
     self.nestedDataDict = @{@"path": @"/",
                             @"qa" : @{@"k": @"kidozen"}
                             };
@@ -177,4 +181,30 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
+
+- (void) testPubSub
+{
+    self.subscribeChannel = [self.application PubSubChannelWithName:@"MyChannel"];
+
+    [self.subscribeChannel subscribe:^(id message) {
+        NSLog(@"message is %@", message);
+    }];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        KZPubSubChannel *publishChannel = [self.application PubSubChannelWithName:@"MyChannel"];
+        id message = @{@"message": @"channel"};
+        
+        [publishChannel publish:message completion:^(KZResponse * k) {
+            NSLog(@"Response publish %@", k.response);
+        }];
+        
+        
+    });
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+    
+
+}
 @end
