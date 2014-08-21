@@ -240,6 +240,7 @@ NSString *const kAccessTokenKey = @"access_token";
     
     [self.tokenController updateRefreshTokenWith:refreshToken];
     
+    self.passiveAuthenticated = YES;
     
     [self completeAuthenticationFlow];
     
@@ -424,8 +425,6 @@ NSString *const kAccessTokenKey = @"access_token";
 
 - (void) completeAuthenticationFlow
 {
-    self.passiveAuthenticated = YES;
-    
     [self parseUserInfo:self.tokenController.kzToken];
     
     __weak KZApplicationAuthentication *safeMe = self;
