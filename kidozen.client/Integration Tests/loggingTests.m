@@ -213,4 +213,10 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
+- (void) testShouldTagEvent
+{
+    [self.application tagEvent:@"Event" attributes:@{@"Type": @"Event"}];
+
+}
+
 @end
