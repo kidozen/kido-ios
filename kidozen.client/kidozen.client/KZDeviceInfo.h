@@ -10,6 +10,12 @@
 
 @interface KZDeviceInfo : KZObject
 
+@property (nonatomic, copy, readonly) NSString *appVersion;
+@property (nonatomic, copy, readonly) NSString *deviceModel;
+@property (nonatomic, copy, readonly) NSString *systemVersion;
+
 - (NSString *)carrierName;
+
+- (NSDictionary *)properties;
 
 @end

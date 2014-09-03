@@ -14,9 +14,9 @@
 @interface KZDeviceInfo()
 
 @property (nonatomic, strong) CTCarrier *carrier;
-@property (nonatomic, copy) NSString *appVersion;
-@property (nonatomic, copy) NSString *deviceModel;
-@property (nonatomic, copy) NSString *systemVersion;
+@property (nonatomic, copy, readwrite) NSString *appVersion;
+@property (nonatomic, copy, readwrite) NSString *deviceModel;
+@property (nonatomic, copy, readwrite) NSString *systemVersion;
 
 @end
 
@@ -29,6 +29,7 @@
         self.carrier = [self configureCarrier];
         self.appVersion = [self configureAppVersion];
         [self configureDeviceInfo];
+        
     }
     return self;
 }
@@ -71,6 +72,16 @@
         version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
     return version;
+}
+
+- (NSDictionary *)properties
+{
+    return @{@"carrierName": self.carrierName,
+             @"mobileCountryCode" : self.mobileCountryCode,
+             @"isoCountryCode" : self.isoCountryCode,
+             @"deviceModel" : self.deviceModel,
+             @"systemVersion" : self.systemVersion
+             };
 }
 
 @end

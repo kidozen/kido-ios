@@ -19,6 +19,7 @@
     self = [super init];
     if (self) {
         self.logging = logging;
+        self.deviceInfo = [[KZDeviceInfo alloc] init];
     }
     return self;
 }
@@ -36,8 +37,7 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:attributes];
     [params addEntriesFromDictionary:@{@"Type": @"Event"}];
-    
-    // We should add all kind of information related to the device.
+    [params addEntriesFromDictionary:self.deviceInfo.properties];
     
     [self.logging write:params
                 message:event
