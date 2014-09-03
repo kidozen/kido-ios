@@ -66,8 +66,10 @@
 		6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */; };
 		6DCEDDD619391E9F00A38C39 /* KZTokenController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDDD419391E9F00A38C39 /* KZTokenController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DCEDDD719391E9F00A38C39 /* KZTokenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEDDD519391E9F00A38C39 /* KZTokenController.m */; };
-		6DDCFD1619B79C150091926E /* KZDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DDCFD1419B79C150091926E /* KZDeviceInfo.h */; };
+		6DDCFD1619B79C150091926E /* KZDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DDCFD1419B79C150091926E /* KZDeviceInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DDCFD1719B79C150091926E /* KZDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDCFD1519B79C150091926E /* KZDeviceInfo.m */; };
+		6DDCFD1A19B7B1D60091926E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DDCFD1919B7B1D60091926E /* CoreTelephony.framework */; };
+		6DDCFD1B19B7B2290091926E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DDCFD1919B7B1D60091926E /* CoreTelephony.framework */; };
 		6DE2A0B11925502B0020C69A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DE2A0B01925502B0020C69A /* Media.xcassets */; };
 		6DE7505519B78FB7001FD3BB /* KZAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DE7505319B78FB7001FD3BB /* KZAnalytics.h */; };
 		6DE7505619B78FB7001FD3BB /* KZAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE7505419B78FB7001FD3BB /* KZAnalytics.m */; };
@@ -252,6 +254,7 @@
 		6DCEDDD519391E9F00A38C39 /* KZTokenController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZTokenController.m; sourceTree = "<group>"; };
 		6DDCFD1419B79C150091926E /* KZDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDeviceInfo.h; sourceTree = "<group>"; };
 		6DDCFD1519B79C150091926E /* KZDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDeviceInfo.m; sourceTree = "<group>"; };
+		6DDCFD1919B7B1D60091926E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6DE2A0B01925502B0020C69A /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		6DE7505319B78FB7001FD3BB /* KZAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAnalytics.h; sourceTree = "<group>"; };
 		6DE7505419B78FB7001FD3BB /* KZAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAnalytics.m; sourceTree = "<group>"; };
@@ -331,6 +334,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DDCFD1A19B7B1D60091926E /* CoreTelephony.framework in Frameworks */,
 				AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */,
 				AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */,
 				AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */,
@@ -345,6 +349,7 @@
 			files = (
 				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
+				6DDCFD1B19B7B2290091926E /* CoreTelephony.framework in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
 				AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */,
 				AAE6E8DA18C10D8100FB046A /* UIKit.framework in Frameworks */,
@@ -505,6 +510,7 @@
 		8EB865291614D11800DD60E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DDCFD1919B7B1D60091926E /* CoreTelephony.framework */,
 				6D43DBDF1968BF2300D023CF /* kz.client.a */,
 				6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */,
 				AA0F7EB01730515200C55706 /* UIKit.framework */,
@@ -622,11 +628,11 @@
 				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
 				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
 				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
-				6DE7505519B78FB7001FD3BB /* KZAnalytics.h in Headers */,
 				6D8017EE1968A74800E99FB7 /* Base64.h in Headers */,
 				6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */,
 				8E0774D81619F35500FA21D9 /* KZUser.h in Headers */,
 				6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */,
+				6DE7505519B78FB7001FD3BB /* KZAnalytics.h in Headers */,
 				6D4001521976D1B000D5F511 /* KZBaseService+ProtectedMethods.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,7 +683,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Tellago Studios";
+				ORGANIZATIONNAME = Kidozen;
 				TargetAttributes = {
 					AAE6E8D618C10D8100FB046A = {
 						TestTargetID = 8EB865261614D11800DD60E6;

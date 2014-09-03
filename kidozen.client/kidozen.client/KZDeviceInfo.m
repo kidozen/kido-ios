@@ -76,12 +76,28 @@
 
 - (NSDictionary *)properties
 {
-    return @{@"carrierName": self.carrierName,
-             @"mobileCountryCode" : self.mobileCountryCode,
-             @"isoCountryCode" : self.isoCountryCode,
-             @"deviceModel" : self.deviceModel,
-             @"systemVersion" : self.systemVersion
+    return @{@"carrierName": self.carrierName ? : @"Undefined",
+             @"mobileCountryCode" : self.mobileCountryCode ? : @"Undefined",
+             @"isoCountryCode" : self.isoCountryCode ? : @"Undefined",
+             @"deviceModel" : self.deviceModel ? : @"Undefined",
+             @"systemVersion" : self.systemVersion ? : @"Undefined",
+             @"uniqueId" : self.getUniqueIdentification ? : @"Undefined"
              };
+}
+
+- (NSString *)getUniqueIdentification
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString *uniqueID = (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"kUniqueIdentificationFilename"];
+    
+    if (uniqueID == nil) {
+        uniqueID = [[NSUUID UUID] UUIDString];
+        [userDefaults setValue:uniqueID forKey:@"kUniqueIdentificationFilename"];
+        [userDefaults synchronize];
+    }
+    
+    return  uniqueID;
 }
 
 @end

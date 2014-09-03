@@ -17,5 +17,6 @@
 - (NSString *)carrierName;
 
 - (NSDictionary *)properties;
+- (NSString *) getUniqueIdentification;
 
 @end
