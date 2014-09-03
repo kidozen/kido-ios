@@ -271,5 +271,11 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 @property (readonly, nonatomic) KZNotification * pushNotifications;
 
+
+#pragma mark - Analytics
+
+- (void)tagEvent:(NSString *)event
+      attributes:(NSDictionary *)attributes;
+
 @end
 

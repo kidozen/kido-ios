@@ -51,6 +51,10 @@
 - (KZLogging *)log;
 
 
+#pragma mark - Analytics
+
+- (void)tagEvent:(NSString *)event
+      attributes:(NSDictionary *)attributes;
 
 #pragma mark - Email
 

@@ -22,6 +22,7 @@
 #import "KZLogging.h"
 #import "KZMail.h"
 #import "KZNotification.h"
+#import "KZAnalytics.h"
 
 @interface KZApplicationServices()
 
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) KZLogging *log;
 @property (strong, nonatomic) KZMail *mail;
 @property (strong, nonatomic) KZNotification *pushNotifications;
+@property (nonatomic, strong) KZAnalytics *analytics;
 
 @end
 
@@ -49,6 +51,7 @@
         [self initializeLogging];
         [self initializeMail];
         [self initializePushNotifications];
+        [self initializeAnalytics];
         
     }
     return self;
@@ -163,6 +166,20 @@
             block(k);
         }
     }];
+}
+
+#pragma mark - Analytics
+
+- (void) initializeAnalytics
+{
+    NSAssert(self.log != nil, @"Log service should not be nil");
+    self.analytics = [[KZAnalytics alloc] initWithLoggingService:self.log];
+}
+
+- (void)tagEvent:(NSString *)event
+      attributes:(NSDictionary *)attributes
+{
+    [self.analytics tagEvent:event attributes:attributes];
 }
 
 #pragma mark - Email

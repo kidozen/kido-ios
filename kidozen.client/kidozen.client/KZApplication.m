@@ -365,4 +365,12 @@
     return self.appServices.pushNotifications;
 }
 
+#pragma mark - Analytics
+
+- (void)tagEvent:(NSString *)event
+      attributes:(NSDictionary *)attributes
+{
+    [self.appServices tagEvent:event attributes:attributes];
+}
+
 @end
