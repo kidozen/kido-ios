@@ -56,6 +56,8 @@
 - (void)tagEvent:(NSString *)event
       attributes:(NSDictionary *)attributes;
 
+- (void)tagScreen:(NSString *)screen;
+
 #pragma mark - Email
 
 -(void) sendMailTo:(NSString *)to

@@ -373,4 +373,9 @@
     [self.appServices tagEvent:event attributes:attributes];
 }
 
+- (void)tagScreen:(NSString *)screen
+{
+    [self.appServices tagScreen:screen];
+}
+
 @end

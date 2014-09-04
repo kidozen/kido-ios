@@ -33,19 +33,31 @@
 - (void)tagEvent:(NSString *)event
       attributes:(NSDictionary *)attributes
 {
+    [self tag:event type:@"Event" attributes:nil];
+}
+
+- (void)tagScreen:(NSString *)screen
+{
+    [self tag:screen type:@"Screen" attributes:nil];
+}
+
+- (void) tag:(NSString *)tag type:(NSString *)tagType attributes:(NSDictionary *)attributes
+{
     attributes = attributes != nil ? attributes : @{};
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:attributes];
-    [params addEntriesFromDictionary:@{@"Type": @"Event"}];
+    
+    [params addEntriesFromDictionary:@{@"Type": tagType}];
     [params addEntriesFromDictionary:self.deviceInfo.properties];
     
     [self.logging write:params
-                message:event
+                message:tag
               withLevel:LogLevelInfo
              completion:^(KZResponse *response)
-    {
-        NSLog(@"Logged is %@", response.response);
-    }];
+     {
+         NSLog(@"Logged is %@", response.response);
+     }];
+
 }
 
 @end

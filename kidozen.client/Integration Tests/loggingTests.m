@@ -216,7 +216,7 @@
 - (void) testShouldTagEvent
 {
     [self.application tagEvent:@"Event2" attributes:@{@"Type": @"Event"}];
-    [NSThread sleepForTimeInterval:1000];
+    [NSThread sleepForTimeInterval:10];
     
 }
 

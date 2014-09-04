@@ -182,6 +182,11 @@
     [self.analytics tagEvent:event attributes:attributes];
 }
 
+- (void)tagScreen:(NSString *)screen
+{
+    [self.analytics tagScreen:screen];
+}
+
 #pragma mark - Email
 
 
