@@ -277,5 +277,6 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 - (void)tagEvent:(NSString *)event
       attributes:(NSDictionary *)attributes;
 
-@end
+- (void)tagScreen:(NSString *)screen;
 
+@end
