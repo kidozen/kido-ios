@@ -274,6 +274,8 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 #pragma mark - Analytics
 
+- (void)tagEvent:(NSString *)event;
+
 - (void)tagEvent:(NSString *)event
       attributes:(NSDictionary *)attributes;
 

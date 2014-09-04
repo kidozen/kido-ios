@@ -368,6 +368,11 @@
 #pragma mark - Analytics
 
 - (void)tagEvent:(NSString *)event
+{
+    [self.appServices tagEvent:event attributes:nil];
+}
+
+- (void)tagEvent:(NSString *)event
       attributes:(NSDictionary *)attributes
 {
     [self.appServices tagEvent:event attributes:attributes];
