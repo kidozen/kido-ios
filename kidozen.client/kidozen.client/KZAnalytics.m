@@ -47,15 +47,17 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:attributes];
     
-    [params addEntriesFromDictionary:@{@"Type": tagType}];
+//    [params addEntriesFromDictionary:@{@"Type": tagType}];
     [params addEntriesFromDictionary:self.deviceInfo.properties];
     
+    tag = [NSString stringWithFormat:@"%@.%@", tagType, tag];
     [self.logging write:params
                 message:tag
               withLevel:LogLevelInfo
              completion:^(KZResponse *response)
      {
-         NSLog(@"Logged is %@", response.response);
+         // TODO: Handle response.
+         // Enqueue in case there was a failure.
      }];
 
 }
