@@ -108,7 +108,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * @param callback can be a KZResponse or an  NSError, whether the authentication
  * was successful or not.
  */
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback;
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))callback;
 
 /* If you want to change the authentication callback, you can do so by
  * setting this property.

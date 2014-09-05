@@ -229,7 +229,7 @@
 /**
  * Starts a passive authentication flow.
  */
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))callback
 {
     [self.appAuthentication doPassiveAuthenticationWithCompletion:callback];
     
