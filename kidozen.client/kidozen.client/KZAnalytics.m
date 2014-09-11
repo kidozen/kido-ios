@@ -24,42 +24,55 @@
     return self;
 }
 
-
-- (void)tagEvent:(NSString *)event
+- (void)tagClick:(NSString *)buttonName
 {
-    [self tagEvent:event attributes:nil];
+    [self tagEvent:@"Clicked" value:buttonName];
 }
 
-- (void)tagEvent:(NSString *)event
-      attributes:(NSDictionary *)attributes
+- (void)tagView:(NSString *)viewName
 {
-    [self tag:event type:@"Event" attributes:nil];
+    [self tagEvent:@"Views" value:viewName];
 }
 
-- (void)tagScreen:(NSString *)screen
+- (void)tagSession
 {
-    [self tag:screen type:@"Screen" attributes:nil];
+    [self tagEvent:@"user-session" attributes:self.deviceInfo.properties];
 }
 
-- (void) tag:(NSString *)tag type:(NSString *)tagType attributes:(NSDictionary *)attributes
+- (void) tagEvent:(NSString *)customEventName attributes:(NSDictionary *)attributes
 {
-    attributes = attributes != nil ? attributes : @{};
+    NSDictionary *params;
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    if (attributes != nil) {
+        params = @{@"eventName" : customEventName,
+                   @"eventAttr" : attributes};
+    } else {
+        params = @{@"eventName" : customEventName};
+    }
     
-//    [params addEntriesFromDictionary:@{@"Type": tagType}];
-    [params addEntriesFromDictionary:self.deviceInfo.properties];
+    [self logWithParameters:params];
     
-    tag = [NSString stringWithFormat:@"%@.%@", tagType, tag];
+}
+
+- (void) tagEvent:(NSString*)eventName value:(NSString *)eventValue
+{
+    NSDictionary *params = @{@"eventName" : eventName,
+                             @"eventValue" : eventValue};
+ 
+    [self logWithParameters:params];
+}
+
+
+- (void) logWithParameters:(NSDictionary *)params
+{
     [self.logging write:params
-                message:tag
+                message:@""
               withLevel:LogLevelInfo
              completion:^(KZResponse *response)
      {
          // TODO: Handle response.
          // Enqueue in case there was a failure.
      }];
-
 }
 
 @end

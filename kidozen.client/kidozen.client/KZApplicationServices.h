@@ -53,10 +53,14 @@
 
 #pragma mark - Analytics
 
-- (void)tagEvent:(NSString *)event
-      attributes:(NSDictionary *)attributes;
+- (void)tagSession;
 
-- (void)tagScreen:(NSString *)screen;
+- (void)tagClick:(NSString *)buttonName;
+
+- (void)tagView:(NSString *)viewName;
+
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes;
 
 #pragma mark - Email
 

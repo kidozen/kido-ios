@@ -367,20 +367,27 @@
 
 #pragma mark - Analytics
 
-- (void)tagEvent:(NSString *)event
+
+- (void)tagSession
 {
-    [self.appServices tagEvent:event attributes:nil];
+    [self.appServices tagSession];
 }
 
-- (void)tagEvent:(NSString *)event
-      attributes:(NSDictionary *)attributes
+- (void)tagClick:(NSString *)buttonName
 {
-    [self.appServices tagEvent:event attributes:attributes];
+    [self.appServices tagClick:buttonName];
 }
 
-- (void)tagScreen:(NSString *)screen
+- (void)tagView:(NSString *)viewName
 {
-    [self.appServices tagScreen:screen];
+    [self.appServices tagView:viewName];
+}
+
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes
+{
+    [self.appServices tagEvent:customEventName
+                    attributes:attributes];
 }
 
 @end

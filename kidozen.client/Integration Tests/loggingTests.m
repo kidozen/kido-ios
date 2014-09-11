@@ -179,7 +179,8 @@
     // If user authenticated with username and password, one way to test whether it successfully
     // overrode the applicationKey token, is to try to call a datasource which only has permissions
     // to run using username and password.
-    [self executeDataSource];
+//    [self executeDataSource];
+    [self clearLog];
     
 }
 
@@ -213,11 +214,22 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
 }
 
-- (void) testShouldTagEvent
+
+- (void) clearLog
 {
-    [self.application tagEvent:@"Event2" attributes:@{@"Type": @"Event"}];
-    [NSThread sleepForTimeInterval:10];
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
+    [self.application clearLog:^(KZResponse *r) {
+        XCTAssertNotNil(r,@"invalid response");
+        XCTAssertEqual(204, r.urlResponse.statusCode, @"Invalid status code");
+        dispatch_semaphore_signal(semaphore);
+        
+        
+    }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+
 }
 
 @end

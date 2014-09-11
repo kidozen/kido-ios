@@ -176,16 +176,29 @@
     self.analytics = [[KZAnalytics alloc] initWithLoggingService:self.log];
 }
 
-- (void)tagEvent:(NSString *)event
-      attributes:(NSDictionary *)attributes
+- (void)tagSession
 {
-    [self.analytics tagEvent:event attributes:attributes];
+    [self.analytics tagSession];
 }
 
-- (void)tagScreen:(NSString *)screen
+- (void)tagClick:(NSString *)buttonName
 {
-    [self.analytics tagScreen:screen];
+    [self.analytics tagClick:buttonName];
 }
+
+- (void)tagView:(NSString *)viewName
+{
+    [self.analytics tagView:viewName];
+}
+
+
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes
+{
+    [self.analytics tagEvent:customEventName
+                  attributes:attributes];
+}
+
 
 #pragma mark - Email
 
