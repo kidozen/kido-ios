@@ -16,7 +16,7 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 @property (nonatomic, weak) KZLogging *logging;
 @property (nonatomic, strong) KZDeviceInfo *deviceInfo;
 
-@property (nonatomic, assign) NSString *currentSessionUUID;
+@property (nonatomic, copy) NSString *currentSessionUUID;
 @property (nonatomic, strong) NSDate *startDate;
 
 @end
