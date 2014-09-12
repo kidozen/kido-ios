@@ -386,6 +386,7 @@
 		6D4ACD1D1937A39800958E65 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6D52BB5B19C3383A00D57BC2 /* Analytics */,
 				8E0774931619D9AF00FA21D9 /* KZBaseService.h */,
 				8E0774941619D9AF00FA21D9 /* KZBaseService.m */,
 				AAC92C451725954200D1FF88 /* KZService.h */,
@@ -409,8 +410,6 @@
 				8E07748B1619D9AF00FA21D9 /* KZNotification.h */,
 				8E07748C1619D9AF00FA21D9 /* KZNotification.m */,
 				6D4001501976D1B000D5F511 /* KZBaseService+ProtectedMethods.h */,
-				6DE7505319B78FB7001FD3BB /* KZAnalytics.h */,
-				6DE7505419B78FB7001FD3BB /* KZAnalytics.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -444,6 +443,15 @@
 				8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */,
 			);
 			name = IdentityProviders;
+			sourceTree = "<group>";
+		};
+		6D52BB5B19C3383A00D57BC2 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				6DE7505319B78FB7001FD3BB /* KZAnalytics.h */,
+				6DE7505419B78FB7001FD3BB /* KZAnalytics.m */,
+			);
+			name = Analytics;
 			sourceTree = "<group>";
 		};
 		6D8017F11968A75700E99FB7 /* Products */ = {

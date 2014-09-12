@@ -367,12 +367,6 @@
 
 #pragma mark - Analytics
 
-
-- (void)tagSession
-{
-    [self.appServices tagSession];
-}
-
 - (void)tagClick:(NSString *)buttonName
 {
     [self.appServices tagClick:buttonName];

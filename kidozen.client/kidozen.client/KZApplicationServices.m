@@ -176,11 +176,6 @@
     self.analytics = [[KZAnalytics alloc] initWithLoggingService:self.log];
 }
 
-- (void)tagSession
-{
-    [self.analytics tagSession];
-}
-
 - (void)tagClick:(NSString *)buttonName
 {
     [self.analytics tagClick:buttonName];

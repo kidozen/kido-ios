@@ -275,8 +275,6 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 #pragma mark - Analytics
 
 
-- (void)tagSession;
-
 - (void)tagClick:(NSString *)buttonName;
 
 - (void)tagView:(NSString *)viewName;

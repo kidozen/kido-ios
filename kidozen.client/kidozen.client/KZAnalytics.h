@@ -10,10 +10,8 @@
 
 - (instancetype)initWithLoggingService:(KZLogging *)loggingService;
 
-- (void)tagSession;
 - (void)tagClick:(NSString *)buttonName;
 - (void)tagView:(NSString *)viewName;
-
 
 - (void) tagEvent:(NSString *)customEventName
        attributes:(NSDictionary *)attributes;
