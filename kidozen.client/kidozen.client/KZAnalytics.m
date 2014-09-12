@@ -62,7 +62,8 @@ static NSString *const kBackgroundDate = @"backgroundDate";
         params = @{@"eventName" : customEventName,
                    @"eventAttr" : attributes};
     } else {
-        params = @{@"eventName" : customEventName};
+        params = @{@"eventName" : customEventName,
+                   @"sessionUUID" : self.currentSessionUUID };
     }
     
     [self logWithParameters:params];
@@ -72,7 +73,8 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 - (void) tagEvent:(NSString*)eventName value:(NSString *)eventValue
 {
     NSDictionary *params = @{@"eventName" : eventName,
-                             @"eventValue" : eventValue};
+                             @"eventValue" : eventValue,
+                             @"sessionUUID" : self.currentSessionUUID};
  
     [self logWithParameters:params];
 }
@@ -122,7 +124,7 @@ static NSString *const kBackgroundDate = @"backgroundDate";
         NSTimeInterval length = [backgroundDate timeIntervalSinceDate:self.startDate];
         NSAssert(length > 0, @"Session should be greater than zero");
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:self.deviceInfo.properties];
-        params[@"length"] = @(length);
+        params[@"sessionLength"] = @(length);
         params[@"sessionUUID"] = self.currentSessionUUID;
         
         [self tagEvent:@"user-session" attributes:params];
