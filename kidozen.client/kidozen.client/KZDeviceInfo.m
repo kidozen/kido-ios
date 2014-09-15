@@ -10,6 +10,8 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
+
 
 @interface KZDeviceInfo()
 
@@ -17,6 +19,8 @@
 @property (nonatomic, copy, readwrite) NSString *appVersion;
 @property (nonatomic, copy, readwrite) NSString *deviceModel;
 @property (nonatomic, copy, readwrite) NSString *systemVersion;
+@property (nonatomic, strong) CTTelephonyNetworkInfo *networkInfo;
+@property (nonatomic, strong) Reachability *reachability;
 
 @end
 
@@ -26,8 +30,11 @@
 {
     self = [super init];
     if (self) {
+        self.networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+        self.reachability = [Reachability reachabilityForInternetConnection];
         self.carrier = [self configureCarrier];
         self.appVersion = [self configureAppVersion];
+        
         [self configureDeviceInfo];
         
     }
@@ -44,24 +51,30 @@
 }
 - (CTCarrier *)configureCarrier
 {
-    CTTelephonyNetworkInfo *myNetworkInfo = [[CTTelephonyNetworkInfo alloc] init];
-    return [myNetworkInfo subscriberCellularProvider];
+    return self.networkInfo.subscriberCellularProvider;
 }
 
+- (NSString *)currentRadioAccessTechnology {
+    if (self.reachability.isReachableViaWiFi == YES) {
+        return @"WiFi";
+    } else {
+        return self.networkInfo.currentRadioAccessTechnology ?: @"Simulated access";
+    }
+}
 
 - (NSString *)carrierName
 {
-    return self.carrier.carrierName;
+    return self.carrier.carrierName ?: @"Simulated Carrier";
 }
 
 - (NSString *)mobileCountryCode
 {
-    return self.carrier.mobileCountryCode;
+    return self.carrier.mobileCountryCode ? : @"Simulated Country Code";
 }
 
 - (NSString *)isoCountryCode
 {
-    return self.carrier.isoCountryCode;
+    return self.carrier.isoCountryCode ?: @"Simulated Country Code";
 }
 
 - (NSString *)configureAppVersion
@@ -76,12 +89,13 @@
 
 - (NSDictionary *)properties
 {
-    return @{@"carrierName": self.carrierName ? : @"Undefined",
-             @"mobileCountryCode" : self.mobileCountryCode ? : @"Undefined",
-             @"isoCountryCode" : self.isoCountryCode ? : @"Undefined",
-             @"deviceModel" : self.deviceModel ? : @"Undefined",
-             @"systemVersion" : self.systemVersion ? : @"Undefined",
-             @"uniqueId" : self.getUniqueIdentification ? : @"Undefined"
+    return @{@"carrierName": self.carrierName,
+             @"networkAccess": self.currentRadioAccessTechnology,
+             @"mobileCountryCode" : self.mobileCountryCode,
+             @"isoCountryCode" : self.isoCountryCode,
+             @"deviceModel" : self.deviceModel ? : @"Simulator",
+             @"systemVersion" : self.systemVersion,
+             @"uniqueId" : self.getUniqueIdentification
              };
 }
 

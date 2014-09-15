@@ -59,8 +59,11 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     NSDictionary *params;
     
     if (attributes != nil) {
+        NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+        mutableAttributes[@"sessionUUID"] = self.currentSessionUUID;
+        
         params = @{@"eventName" : customEventName,
-                   @"eventAttr" : attributes};
+                   @"eventAttr" : mutableAttributes};
     } else {
         params = @{@"eventName" : customEventName,
                    @"sessionUUID" : self.currentSessionUUID };
