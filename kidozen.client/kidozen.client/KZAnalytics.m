@@ -55,23 +55,28 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     [self logEvent:viewEvent];
 }
 
-- (void)tagSession
+- (void)tagSessionWithLength:(NSNumber *)length
 {
-    KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:self.deviceInfo.properties
+    NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary:self.deviceInfo.properties];
+    attributes[@"sessionLength"] = length;
+    
+    KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:attributes
                                                                   sessionUUID:self.currentSessionUUID];
     [self logEvent:sessionEvent];
 }
 
 - (void) logEvent:(KZEvent *)event
 {
-    [self.logging write:[event serializedEvent]
-                message:@""
-              withLevel:LogLevelInfo
-             completion:^(KZResponse *response)
-     {
-         // TODO: Handle response.
-         // Enqueue in case there was a failure.
-     }];
+    NSLog(@"Event is %@", [event serializedEvent]);
+    
+//    [self.logging write:[event serializedEvent]
+//                message:@""
+//              withLevel:LogLevelInfo
+//             completion:^(KZResponse *response)
+//     {
+//         // TODO: Handle response.
+//         // Enqueue in case there was a failure.
+//     }];
 }
 
 
@@ -99,15 +104,14 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     NSDate *backgroundDate = (NSDate *)[[NSUserDefaults standardUserDefaults] valueForKey:kBackgroundDate];
 
     if (self.startDate != nil && backgroundDate != nil && [[NSDate date] timeIntervalSinceDate:backgroundDate] > 15) {
-        // get the persisted events.
         
         NSTimeInterval length = [backgroundDate timeIntervalSinceDate:self.startDate];
         NSAssert(length > 0, @"Session should be greater than zero");
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:self.deviceInfo.properties];
-        params[@"sessionLength"] = @(length);
-        params[@"sessionUUID"] = self.currentSessionUUID;
         
-        [self tagEvent:@"user-session" attributes:params];
+        [self tagSessionWithLength:@(length)];
+        
+        // TODO
+        // load from disk send everything
         
         // restart.
         [self reset];
@@ -119,8 +123,6 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 }
 
 - (void) didEnterBackground {
-    NSLog(@"didEnterBackground");
-
     [self saveAnalyticsSessionState];
 }
 
@@ -136,7 +138,7 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 }
 
 - (void) reset {
-    // resume... do nothing.
+    // remove local file.
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults removeObjectForKey:kStartDate];
     [userDefaults removeObjectForKey:kSessionUUID];
