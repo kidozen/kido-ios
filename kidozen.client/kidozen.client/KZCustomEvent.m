@@ -26,6 +26,7 @@
     if (self) {
         self.attributes = attributes;
     }
+    return self;
 }
 
 - (NSDictionary *)serializedEvent
@@ -33,7 +34,7 @@
     NSDictionary *params;
     
     if (self.attributes != nil) {
-        NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+        NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:self.attributes];
         mutableAttributes[@"sessionUUID"] = self.sessionUUID;
         
         params = @{@"eventName" : self.eventName,

@@ -10,4 +10,10 @@
 
 @implementation KZSessionEvent
 
+-(instancetype) initWithAttributes:(NSDictionary *)attributes
+                       sessionUUID:(NSString *)sessionUUID
+{
+    return [super initWithEventName:@"user-session" attributes:attributes sessionUUID:sessionUUID];
+}
+
 @end

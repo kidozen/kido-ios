@@ -5,7 +5,11 @@
 #import "KZApplication.h"
 #import "KZDeviceInfo.h"
 #import <UIKit/UIKit.h>
-
+#import "KZEvent.h"
+#import "KZClickEvent.h"
+#import "KZViewEvent.h"
+#import "KZCustomEvent.h"
+#import "KZSessionEvent.h"
 
 static NSString *const kStartDate = @"startDate";
 static NSString *const kSessionUUID = @"sessionUUID";
@@ -41,51 +45,26 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 
 - (void)tagClick:(NSString *)buttonName
 {
-    [self tagEvent:@"Clicked" value:buttonName];
+    KZClickEvent *clickEvent = [[KZClickEvent alloc] initWithEventValue:buttonName sessionUUID:self.currentSessionUUID];
+    [self logEvent:clickEvent];
 }
 
 - (void)tagView:(NSString *)viewName
 {
-    [self tagEvent:@"Views" value:viewName];
+    KZViewEvent *viewEvent = [[KZViewEvent alloc] initWithEventValue:viewName sessionUUID:self.currentSessionUUID];
+    [self logEvent:viewEvent];
 }
 
 - (void)tagSession
 {
-    [self tagEvent:@"user-session" attributes:self.deviceInfo.properties];
+    KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:self.deviceInfo.properties
+                                                                  sessionUUID:self.currentSessionUUID];
+    [self logEvent:sessionEvent];
 }
 
-- (void) tagEvent:(NSString *)customEventName attributes:(NSDictionary *)attributes
+- (void) logEvent:(KZEvent *)event
 {
-    NSDictionary *params;
-    
-    if (attributes != nil) {
-        NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
-        mutableAttributes[@"sessionUUID"] = self.currentSessionUUID;
-        
-        params = @{@"eventName" : customEventName,
-                   @"eventAttr" : mutableAttributes};
-    } else {
-        params = @{@"eventName" : customEventName,
-                   @"sessionUUID" : self.currentSessionUUID };
-    }
-    
-    [self logWithParameters:params];
-    
-}
-
-- (void) tagEvent:(NSString*)eventName value:(NSString *)eventValue
-{
-    NSDictionary *params = @{@"eventName" : eventName,
-                             @"eventValue" : eventValue,
-                             @"sessionUUID" : self.currentSessionUUID};
- 
-    [self logWithParameters:params];
-}
-
-
-- (void) logWithParameters:(NSDictionary *)params
-{
-    [self.logging write:params
+    [self.logging write:[event serializedEvent]
                 message:@""
               withLevel:LogLevelInfo
              completion:^(KZResponse *response)
@@ -94,7 +73,6 @@ static NSString *const kBackgroundDate = @"backgroundDate";
          // Enqueue in case there was a failure.
      }];
 }
-
 
 
 - (void) start {
