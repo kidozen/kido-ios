@@ -15,4 +15,5 @@
     return [super initWithEventName:@"Click" value:eventValue sessionUUID:sessionUUID];
 }
 
+
 @end

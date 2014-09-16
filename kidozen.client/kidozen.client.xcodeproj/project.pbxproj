@@ -74,6 +74,8 @@
 		6DCD626B19C879BA00700BA4 /* KZViewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD626919C879BA00700BA4 /* KZViewEvent.m */; };
 		6DCD626E19C8812500700BA4 /* KZPredefinedEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCD626C19C8812500700BA4 /* KZPredefinedEvent.h */; };
 		6DCD626F19C8812500700BA4 /* KZPredefinedEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD626D19C8812500700BA4 /* KZPredefinedEvent.m */; };
+		6DCD627219C8956E00700BA4 /* KZCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCD627019C8956E00700BA4 /* KZCustomEvent.h */; };
+		6DCD627319C8956E00700BA4 /* KZCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD627119C8956E00700BA4 /* KZCustomEvent.m */; };
 		6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */; };
 		6DCEDDD619391E9F00A38C39 /* KZTokenController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDDD419391E9F00A38C39 /* KZTokenController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DCEDDD719391E9F00A38C39 /* KZTokenController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCEDDD519391E9F00A38C39 /* KZTokenController.m */; };
@@ -270,6 +272,8 @@
 		6DCD626919C879BA00700BA4 /* KZViewEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZViewEvent.m; sourceTree = "<group>"; };
 		6DCD626C19C8812500700BA4 /* KZPredefinedEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZPredefinedEvent.h; sourceTree = "<group>"; };
 		6DCD626D19C8812500700BA4 /* KZPredefinedEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZPredefinedEvent.m; sourceTree = "<group>"; };
+		6DCD627019C8956E00700BA4 /* KZCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZCustomEvent.h; sourceTree = "<group>"; };
+		6DCD627119C8956E00700BA4 /* KZCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZCustomEvent.m; sourceTree = "<group>"; };
 		6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAuthenticationConfig.h; sourceTree = "<group>"; };
 		6DCEDD9E1938D26600A38C39 /* KZAuthenticationConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAuthenticationConfig.m; sourceTree = "<group>"; };
 		6DCEDDD419391E9F00A38C39 /* KZTokenController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZTokenController.h; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 				6DCD626919C879BA00700BA4 /* KZViewEvent.m */,
 				6DCD626C19C8812500700BA4 /* KZPredefinedEvent.h */,
 				6DCD626D19C8812500700BA4 /* KZPredefinedEvent.m */,
+				6DCD627019C8956E00700BA4 /* KZCustomEvent.h */,
+				6DCD627119C8956E00700BA4 /* KZCustomEvent.m */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -653,6 +659,7 @@
 				8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */,
 				8E0774CF1619F35500FA21D9 /* KZLogging.h in Headers */,
 				8E0774D01619F35500FA21D9 /* KZMail.h in Headers */,
+				6DCD627219C8956E00700BA4 /* KZCustomEvent.h in Headers */,
 				6DCD626A19C879BA00700BA4 /* KZViewEvent.h in Headers */,
 				8E0774D11619F35500FA21D9 /* KZNotification.h in Headers */,
 				6DCD626619C8770B00700BA4 /* KZClickEvent.h in Headers */,
@@ -877,6 +884,7 @@
 				8E0774AF1619D9AF00FA21D9 /* KZUser.m in Sources */,
 				6DCD625519C768E500700BA4 /* Reachability.m in Sources */,
 				6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */,
+				6DCD627319C8956E00700BA4 /* KZCustomEvent.m in Sources */,
 				6DDCFD1719B79C150091926E /* KZDeviceInfo.m in Sources */,
 				6DCD626B19C879BA00700BA4 /* KZViewEvent.m in Sources */,
 				8E0774B01619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m in Sources */,

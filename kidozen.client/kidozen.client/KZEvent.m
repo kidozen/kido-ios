@@ -31,6 +31,7 @@
 - (NSDictionary *)serializedEvent
 {
     NSAssert(NO, @"Subclasses must override this method");
+    return nil;
 }
 
 @end

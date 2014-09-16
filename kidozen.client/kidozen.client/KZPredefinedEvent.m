@@ -11,14 +11,14 @@
 // we import private/protected properties.
 @interface KZEvent()
 
-@property (nonatomic, copy) NSString *eventName;
-@property (nonatomic, copy) NSString *sessionUUID;
+@property (nonatomic, readwrite, copy) NSString *eventName;
+@property (nonatomic, readwrite, copy) NSString *sessionUUID;
 
 @end
 
 @interface KZPredefinedEvent()
 
-@property (nonatomic, copy) NSString *eventValue;
+@property (nonatomic, readwrite, copy) NSString *eventValue;
 
 @end
 
@@ -32,6 +32,13 @@
     }
     return self;
 
+}
+
+- (NSDictionary *)serializedEvent {
+    
+    return  @{@"eventName" : self.eventName,
+              @"eventValue" : self.eventValue,
+              @"sessionUUID" : self.sessionUUID};
 }
 
 @end

@@ -10,6 +10,8 @@
 
 @interface KZPredefinedEvent : KZEvent
 
+@property (nonatomic, readonly, copy) NSString *eventValue;
+
 - (instancetype)initWithEventName:(NSString *)eventName value:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID;
 
 @end
