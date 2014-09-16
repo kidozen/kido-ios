@@ -116,14 +116,13 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 }
 
 - (void) willEnterForegroundNotification {
-    NSLog(@"UIApplicationWillEnterForegroundNotification");
     self.startDate = (NSDate *)[[NSUserDefaults standardUserDefaults] valueForKey:kStartDate];
     self.currentSessionUUID = (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kSessionUUID];
     NSDate *backgroundDate = (NSDate *)[[NSUserDefaults standardUserDefaults] valueForKey:kBackgroundDate];
 
     if (self.startDate != nil && backgroundDate != nil && [[NSDate date] timeIntervalSinceDate:backgroundDate] > 15) {
-        // send data.
-        NSLog(@"Sending data");
+        // get the persisted events.
+        
         NSTimeInterval length = [backgroundDate timeIntervalSinceDate:self.startDate];
         NSAssert(length > 0, @"Session should be greater than zero");
         NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:self.deviceInfo.properties];
