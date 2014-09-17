@@ -16,6 +16,7 @@
 
 @property (nonatomic, readonly) NSMutableArray *events;
 
+- (void)removeSavedEvents;
 - (void)addEvent:(KZEvent *)event;
 - (void)save;
 

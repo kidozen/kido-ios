@@ -9,6 +9,7 @@
 #import "KZEvents.h"
 #import "NSString+Path.h"
 #import "AutoCoding.h"
+#import "KZEvent.h"
 
 static NSString *const kEventsFilename = @"kEventsFilename";
 
@@ -20,22 +21,28 @@ static NSString *const kEventsFilename = @"kEventsFilename";
 
 @implementation KZEvents
 
-+(instancetype)eventsFromDisk {
-    
++(instancetype)eventsFromDisk
+{
     NSMutableArray *events = [NSMutableArray objectWithContentsOfFile:[kEventsFilename documentsPath]];
-    
     KZEvents *allEvents = [[KZEvents alloc] initWithEvents:events];
     return allEvents;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.events = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (instancetype) initWithEvents:(NSMutableArray *)events {
     
-    self = [super init];
+    self = [self init];
     if (self) {
         if (events) {
             self.events = events;
-        } else {
-            self.events = [[NSMutableArray alloc] init];
         }
     }
     return self;
@@ -43,13 +50,25 @@ static NSString *const kEventsFilename = @"kEventsFilename";
 
 - (void)save {
     NSString *eventsPathFilename = [kEventsFilename documentsPath];
-    [self.events writeToFile:eventsPathFilename atomically:YES];
+    
+    if (![self.events writeToFile:eventsPathFilename atomically:YES]) {
+        NSLog(@"An error occured while saving the events. Could not write to %@", eventsPathFilename);
+    }
 }
 
 - (void)addEvent:(KZEvent *)event {
     if (event) {
-        [self.events addObject:event];
+        [self.events addObject:[event serializedEvent]];
     }
 }
 
+- (void)removeSavedEvents {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSString *eventsPath = [kEventsFilename documentsPath];
+    
+    if ([fm fileExistsAtPath:eventsPath]) {
+        [fm removeItemAtPath:eventsPath error:nil];
+    }
+    
+}
 @end

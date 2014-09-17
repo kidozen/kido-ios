@@ -10,6 +10,7 @@
 #import "KZViewEvent.h"
 #import "KZCustomEvent.h"
 #import "KZSessionEvent.h"
+#import "KZEvents.h"
 
 static NSString *const kStartDate = @"startDate";
 static NSString *const kSessionUUID = @"sessionUUID";
@@ -22,6 +23,9 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 
 @property (nonatomic, copy) NSString *currentSessionUUID;
 @property (nonatomic, strong) NSDate *startDate;
+
+@property (nonatomic, strong) KZEvents *allEvents;
+@property (nonatomic, assign) BOOL uploading;
 
 @end
 
@@ -37,6 +41,7 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     self = [super init];
     if (self) {
         self.logging = logging;
+        self.uploading = NO;
         self.deviceInfo = [[KZDeviceInfo alloc] init];
         [self start];
     }
@@ -65,22 +70,45 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     [self logEvent:sessionEvent];
 }
 
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes
+{
+    KZCustomEvent *customEvent = [[KZCustomEvent alloc] initWithEventName:customEventName attributes:attributes sessionUUID:self.currentSessionUUID];
+    [self logEvent:customEvent];
+}
+
 - (void) logEvent:(KZEvent *)event
 {
-    NSLog(@"Event is %@", [event serializedEvent]);
+    [self.allEvents addEvent:event];
+}
+
+- (void)sendEvents
+{
+    // TODO: Uncomment when we've got the service ready.
     
-//    [self.logging write:[event serializedEvent]
+    self.uploading = YES;
+//    [self.logging write:self.allEvents.events
 //                message:@""
 //              withLevel:LogLevelInfo
 //             completion:^(KZResponse *response)
 //     {
-//         // TODO: Handle response.
-//         // Enqueue in case there was a failure.
+         self.uploading = NO;
+//         if (response.error == nil && response.urlResponse.statusCode < 300)
+//         {
+             [self reset];
+             [self start];
+//         } else {
+                // we just continue with the current saved events.
+    
+//          }
 //     }];
+    
 }
 
 
 - (void) start {
+    self.allEvents = [[KZEvents alloc] init];
+    
     self.currentSessionUUID = [[NSUUID UUID] UUIDString];
     self.startDate = [NSDate date];
     
@@ -99,37 +127,39 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 }
 
 - (void) willEnterForegroundNotification {
-    self.startDate = (NSDate *)[[NSUserDefaults standardUserDefaults] valueForKey:kStartDate];
-    self.currentSessionUUID = (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kSessionUUID];
-    NSDate *backgroundDate = (NSDate *)[[NSUserDefaults standardUserDefaults] valueForKey:kBackgroundDate];
-
-    if (self.startDate != nil && backgroundDate != nil && [[NSDate date] timeIntervalSinceDate:backgroundDate] > 15) {
+    if (self.uploading == NO) {
+        self.startDate = (NSDate *)[[NSUserDefaults standardUserDefaults] valueForKey:kStartDate];
+        self.currentSessionUUID = (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kSessionUUID];
+        NSDate *backgroundDate = (NSDate *)[[NSUserDefaults standardUserDefaults] valueForKey:kBackgroundDate];
         
-        NSTimeInterval length = [backgroundDate timeIntervalSinceDate:self.startDate];
-        NSAssert(length > 0, @"Session should be greater than zero");
-        
-        [self tagSessionWithLength:@(length)];
-        
-        // TODO
-        // load from disk send everything
-        
-        // restart.
-        [self reset];
-        [self start];
-        
-    } else {
-        [self reset];
+        // We need to know if we were in the background state more than N seconds.
+        if (self.startDate != nil && backgroundDate != nil && [[NSDate date] timeIntervalSinceDate:backgroundDate] > 15) {
+            
+            NSTimeInterval length = [backgroundDate timeIntervalSinceDate:self.startDate];
+            NSAssert(length > 0, @"Session should be greater than zero");
+            self.allEvents = [KZEvents eventsFromDisk];
+            
+            [self tagSessionWithLength:@(length)];
+            [self sendEvents];
+            
+        } else {
+            // should resume with the previous events and session.
+            [self reset];
+        }
     }
 }
 
 - (void) didEnterBackground {
-    [self saveAnalyticsSessionState];
+    if (self.uploading == NO) {
+        [self saveAnalyticsSessionState];
+    }
 }
 
 - (void) saveAnalyticsSessionState
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [self.allEvents save];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setValue:self.currentSessionUUID forKey:kSessionUUID];
     [userDefaults setValue:self.startDate forKey:kStartDate];
     [userDefaults setValue:[NSDate date] forKey:kBackgroundDate];
@@ -143,6 +173,8 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     [userDefaults removeObjectForKey:kStartDate];
     [userDefaults removeObjectForKey:kSessionUUID];
     [userDefaults removeObjectForKey:kBackgroundDate];
+    
+    [self.allEvents reset];
 }
 
 @end
