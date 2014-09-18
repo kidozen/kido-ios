@@ -39,6 +39,10 @@
 
 /* Begin PBXBuildFile section */
 		6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D1B967119CB4F4500C2CF66 /* KZAnalyticsSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D1B966F19CB4F4500C2CF66 /* KZAnalyticsSession.h */; };
+		6D1B967219CB4F4500C2CF66 /* KZAnalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B967019CB4F4500C2CF66 /* KZAnalyticsSession.m */; };
+		6D1B967819CB5AAD00C2CF66 /* KZAnalyticsUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D1B967619CB5AAD00C2CF66 /* KZAnalyticsUploader.h */; };
+		6D1B967919CB5AAD00C2CF66 /* KZAnalyticsUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B967719CB5AAD00C2CF66 /* KZAnalyticsUploader.m */; };
 		6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C85AE1917B71A00E59BD8 /* loggingTests.m */; };
 		6D291A88191BFE28003AEFAF /* storageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A87191BFE28003AEFAF /* storageTests.m */; };
 		6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -243,6 +247,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D1B966F19CB4F4500C2CF66 /* KZAnalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAnalyticsSession.h; sourceTree = "<group>"; };
+		6D1B967019CB4F4500C2CF66 /* KZAnalyticsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAnalyticsSession.m; sourceTree = "<group>"; };
+		6D1B967619CB5AAD00C2CF66 /* KZAnalyticsUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAnalyticsUploader.h; sourceTree = "<group>"; };
+		6D1B967719CB5AAD00C2CF66 /* KZAnalyticsUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAnalyticsUploader.m; sourceTree = "<group>"; };
 		6D1C85AE1917B71A00E59BD8 /* loggingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loggingTests.m; sourceTree = "<group>"; };
 		6D291A87191BFE28003AEFAF /* storageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = storageTests.m; sourceTree = "<group>"; };
 		6D291A9E191BFEE8003AEFAF /* NSDictionary+Mongo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Mongo.h"; sourceTree = "<group>"; };
@@ -496,6 +504,10 @@
 				6DCD626319C876EE00700BA4 /* Events */,
 				6DE7505319B78FB7001FD3BB /* KZAnalytics.h */,
 				6DE7505419B78FB7001FD3BB /* KZAnalytics.m */,
+				6D1B966F19CB4F4500C2CF66 /* KZAnalyticsSession.h */,
+				6D1B967019CB4F4500C2CF66 /* KZAnalyticsSession.m */,
+				6D1B967619CB5AAD00C2CF66 /* KZAnalyticsUploader.h */,
+				6D1B967719CB5AAD00C2CF66 /* KZAnalyticsUploader.m */,
 			);
 			name = Analytics;
 			sourceTree = "<group>";
@@ -699,6 +711,7 @@
 				6DCD627619C8AE4600700BA4 /* KZSessionEvent.h in Headers */,
 				8E0774D21619F35500FA21D9 /* KZPubSubChannel.h in Headers */,
 				8E0774CD1619F35500FA21D9 /* KZIdentityProvider.h in Headers */,
+				6D1B967119CB4F4500C2CF66 /* KZAnalyticsSession.h in Headers */,
 				8E0774C91619F35500FA21D9 /* KZApplication.h in Headers */,
 				8E0774D31619F35500FA21D9 /* KZQueue.h in Headers */,
 				8E0774D41619F35500FA21D9 /* KZResponse.h in Headers */,
@@ -721,6 +734,7 @@
 				6DCEDDD619391E9F00A38C39 /* KZTokenController.h in Headers */,
 				AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */,
 				6D291AA0191BFEE8003AEFAF /* NSDictionary+Mongo.h in Headers */,
+				6D1B967819CB5AAD00C2CF66 /* KZAnalyticsUploader.h in Headers */,
 				8E0774DB1619F35500FA21D9 /* NSString+Utilities.h in Headers */,
 				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
 				6DCD627B19C8C80400700BA4 /* AutoCoding.h in Headers */,
@@ -899,6 +913,7 @@
 				8E0774A51619D9AF00FA21D9 /* KZIdentityProviderFactory.m in Sources */,
 				8E0774A61619D9AF00FA21D9 /* KZLogging.m in Sources */,
 				6DCD626719C8770B00700BA4 /* KZClickEvent.m in Sources */,
+				6D1B967919CB5AAD00C2CF66 /* KZAnalyticsUploader.m in Sources */,
 				6DCEDDD719391E9F00A38C39 /* KZTokenController.m in Sources */,
 				6DCD627719C8AE4600700BA4 /* KZSessionEvent.m in Sources */,
 				6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */,
@@ -935,6 +950,7 @@
 				AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */,
 				AAEF1B8B16A755B900A33C76 /* NSData+Conversion.m in Sources */,
 				6DCEDDA01938D26600A38C39 /* KZAuthenticationConfig.m in Sources */,
+				6D1B967219CB4F4500C2CF66 /* KZAnalyticsSession.m in Sources */,
 				AAC92C481725954200D1FF88 /* KZService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,6 +11,7 @@
 @interface KZSessionEvent : KZCustomEvent
 
 -(instancetype) initWithAttributes:(NSDictionary *)attributes
+                     sessionLength:(NSNumber *)length
                        sessionUUID:(NSString *)sessionUUID;
 
 @end

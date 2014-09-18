@@ -11,8 +11,12 @@
 @implementation KZSessionEvent
 
 -(instancetype) initWithAttributes:(NSDictionary *)attributes
+                     sessionLength:(NSNumber *)length
                        sessionUUID:(NSString *)sessionUUID
 {
+    NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    attr[@"sessionLength"] = length;
+    
     return [super initWithEventName:@"user-session" attributes:attributes sessionUUID:sessionUUID];
 }
 
