@@ -16,11 +16,14 @@ static NSString *const kStartDate = @"startDate";
 static NSString *const kSessionUUID = @"sessionUUID";
 static NSString *const kBackgroundDate = @"backgroundDate";
 
+static NSUInteger kMaximumSecondsToUpload = 300;
+
 @interface KZAnalyticsUploader()
 
 @property (nonatomic, assign) BOOL uploading;
 @property (nonatomic, strong) KZLogging *logging;
 @property (nonatomic, strong) KZAnalyticsSession *session;
+@property (nonatomic, strong) NSTimer *uploadTimer;
 
 @end
 
@@ -29,6 +32,8 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.uploadTimer invalidate];
+    
 }
 
 - (instancetype) initWithSession:(KZAnalyticsSession *)session loggingService:(KZLogging *)logging
@@ -38,6 +43,8 @@ static NSString *const kBackgroundDate = @"backgroundDate";
         self.uploading = NO;
         self.session = session;
         self.logging = logging;
+        self.maximumSecondsToUpload = kMaximumSecondsToUpload;
+        [self startTimer];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didEnterBackground)
@@ -90,6 +97,47 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     }
 }
 
+- (void) startTimer {
+
+    [self.uploadTimer invalidate];
+    self.uploadTimer = [NSTimer scheduledTimerWithTimeInterval:self.maximumSecondsToUpload target:self selector:@selector(sendCurrentEvents) userInfo:nil repeats:NO];
+}
+
+- (void)sendCurrentEvents {
+    
+    if ([self.session hasEvents]) {
+
+        NSLog(@"AutoUploading - events to send are :%@", self.session.events);
+        
+
+        self.uploading = YES;
+        __weak KZAnalyticsUploader *safeMe = self;
+        
+        [self.logging write:self.session.events
+                    message:@""
+                  withLevel:LogLevelInfo
+                 completion:^(KZResponse *response)
+         {
+             safeMe.uploading = NO;
+             
+             if (response.error == nil && response.urlResponse.statusCode < 300) {
+                 [safeMe.session removeSavedEvents];
+                 [safeMe.session removeCurrentEvents];
+                 // we fire the timer once again.
+                 
+                 [safeMe startTimer];
+             }
+             
+         }];
+    } else {
+        NSLog(@"No events to send. Will try later.");
+        [self.uploadTimer invalidate];
+        
+        [self startTimer];
+    }
+    
+}
+
 - (void)sendEvents
 {
     // TODO: Uncomment when we've got the service ready.
@@ -112,6 +160,7 @@ static NSString *const kBackgroundDate = @"backgroundDate";
         [safeMe resetSessionState];
      }];
 }
+
 
 
 - (void) saveAnalyticsSessionState {

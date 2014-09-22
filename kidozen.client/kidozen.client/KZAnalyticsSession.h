@@ -28,5 +28,8 @@
 - (void)startNewSession;
 - (void)save;
 - (void)loadEventsFromDisk;
+- (void)removeCurrentEvents;
+
+- (BOOL)hasEvents;
 
 @end

@@ -19,5 +19,6 @@
 - (void)removeSavedEvents;
 - (void)addEvent:(KZEvent *)event;
 - (void)save;
+- (void)removeCurrentEvents;
 
 @end

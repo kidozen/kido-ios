@@ -52,6 +52,10 @@ static int kDefaultSessionTimeout = 5;
     [self.allEvents removeSavedEvents];
 }
 
+- (void)removeCurrentEvents {
+    [self.allEvents removeCurrentEvents];
+    
+}
 - (void)startNewSession {
     
     self.allEvents = [[KZEvents alloc] init];
@@ -66,6 +70,10 @@ static int kDefaultSessionTimeout = 5;
 
 - (NSArray *)events {
     return self.allEvents.events;
+}
+
+- (BOOL)hasEvents {
+    return [self.allEvents.events count] > 0;
 }
 
 - (BOOL)shouldUploadSessionUsingBackgroundDate:(NSDate *)backgroundDate

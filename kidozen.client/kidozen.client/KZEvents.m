@@ -48,6 +48,10 @@ static NSString *const kEventsFilename = @"kEventsFilename";
     return self;
 }
 
+- (void)removeCurrentEvents {
+    [self.events removeAllObjects];
+}
+
 - (void)save {
     NSString *eventsPathFilename = [kEventsFilename documentsPath];
     

@@ -16,4 +16,9 @@
 - (instancetype) initWithSession:(KZAnalyticsSession *)session
                   loggingService:(KZLogging *)logging;
 
+
+// There is a timer that will try to upload all current events every maximumSecondsToUpload.
+// Defaults to 240 seconds.
+@property (nonatomic, assign) NSUInteger maximumSecondsToUpload;
+
 @end
