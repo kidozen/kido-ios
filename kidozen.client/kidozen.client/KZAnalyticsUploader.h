@@ -18,7 +18,7 @@
 
 
 // There is a timer that will try to upload all current events every maximumSecondsToUpload.
-// Defaults to 240 seconds.
+// Defaults to 300 seconds (5 minutes)
 @property (nonatomic, assign) NSUInteger maximumSecondsToUpload;
 
 @end
