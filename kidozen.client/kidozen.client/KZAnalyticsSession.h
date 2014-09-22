@@ -23,7 +23,9 @@
 - (BOOL)shouldUploadSessionUsingBackgroundDate:(NSDate *)backgroundDate;
 - (void)logSessionWithLength:(NSNumber *)length;
 - (void)logEvent:(KZEvent *)event;
-- (void)reset;
+
+- (void)removeSavedEvents;
+- (void)startNewSession;
 - (void)save;
 - (void)loadEventsFromDisk;
 

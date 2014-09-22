@@ -48,9 +48,11 @@ static int kDefaultSessionTimeout = 5;
     [self.allEvents save];
 }
 
-- (void)reset {
-    
+- (void)removeSavedEvents {
     [self.allEvents removeSavedEvents];
+}
+
+- (void)startNewSession {
     
     self.allEvents = [[KZEvents alloc] init];
     self.sessionUUID = [[NSUUID UUID] UUIDString];

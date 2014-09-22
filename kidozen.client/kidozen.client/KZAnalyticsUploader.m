@@ -78,12 +78,15 @@ static NSString *const kBackgroundDate = @"backgroundDate";
             [self.session logSessionWithLength:@(length)];
             [self sendEvents];
         } else {
-            [self reset];
+            [self.session removeSavedEvents];
+            [self resetSessionState];
         }
         
     } else {
         // should resume with the previous events and session.
-        [self reset];
+        // We only need to remove the date when we enter to background state.
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kBackgroundDate];
+
     }
 }
 
@@ -91,7 +94,7 @@ static NSString *const kBackgroundDate = @"backgroundDate";
 {
     // TODO: Uncomment when we've got the service ready.
     NSLog(@"Events to send are :%@", self.session.events);
-    
+
     self.uploading = YES;
     __weak KZAnalyticsUploader *safeMe = self;
     
@@ -100,12 +103,14 @@ static NSString *const kBackgroundDate = @"backgroundDate";
               withLevel:LogLevelInfo
              completion:^(KZResponse *response)
     {
-         safeMe.uploading = NO;
-         if (response.error == nil && response.urlResponse.statusCode < 300) {
-             [safeMe reset];
-         }
+        safeMe.uploading = NO;
+        
+        if (response.error == nil && response.urlResponse.statusCode < 300) {
+            [safeMe.session removeSavedEvents];
+        }
+        
+        [safeMe resetSessionState];
      }];
-    
 }
 
 
@@ -122,14 +127,15 @@ static NSString *const kBackgroundDate = @"backgroundDate";
     
 }
 
-- (void) reset {
-    // remove local file.
+// removeDatesAndSession
+- (void) resetSessionState {
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults removeObjectForKey:kStartDate];
     [userDefaults removeObjectForKey:kSessionUUID];
     [userDefaults removeObjectForKey:kBackgroundDate];
-    
-    [self.session reset];
+
+    [self.session startNewSession];
 }
 
 - (void) didEnterBackground {
