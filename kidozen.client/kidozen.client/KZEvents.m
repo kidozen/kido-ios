@@ -41,8 +41,8 @@ static NSString *const kEventsFilename = @"kEventsFilename";
     
     self = [self init];
     if (self) {
-        if (events) {
-            self.events = events;
+        if ([events count] > 0) {
+            [self.events addObjectsFromArray:events];
         }
     }
     return self;
@@ -57,7 +57,7 @@ static NSString *const kEventsFilename = @"kEventsFilename";
 }
 
 - (void)addEvent:(KZEvent *)event {
-    if (event) {
+    if (event) {        
         [self.events addObject:[event serializedEvent]];
     }
 }
