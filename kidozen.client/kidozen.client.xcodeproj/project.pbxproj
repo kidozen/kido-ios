@@ -59,6 +59,8 @@
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
 		6D8017EE1968A74800E99FB7 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8017EC1968A74800E99FB7 /* Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D8017EF1968A74800E99FB7 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8017ED1968A74800E99FB7 /* Base64.m */; };
+		6D97AE1019D4A9C00004A31E /* KZDataVizualizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D97AE0E19D4A9C00004A31E /* KZDataVizualizationViewController.h */; };
+		6D97AE1119D4A9C00004A31E /* KZDataVizualizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D97AE0F19D4A9C00004A31E /* KZDataVizualizationViewController.m */; };
 		6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */; };
 		6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -238,6 +240,8 @@
 		6D8017ED1968A74800E99FB7 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../thirdParty/Base64/Base64.m; sourceTree = "<group>"; };
 		6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CrashReporter.xcodeproj; path = "../thirdParty/plcrashreporter-1.2-rc4/CrashReporter.xcodeproj"; sourceTree = "<group>"; };
 		6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../thirdParty/SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
+		6D97AE0E19D4A9C00004A31E /* KZDataVizualizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDataVizualizationViewController.h; sourceTree = "<group>"; };
+		6D97AE0F19D4A9C00004A31E /* KZDataVizualizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDataVizualizationViewController.m; sourceTree = "<group>"; };
 		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
 		6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationServices.m; sourceTree = "<group>"; };
 		6DCB876519462C64005B75B9 /* KZPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZPassiveAuthViewController.h; sourceTree = "<group>"; };
@@ -447,6 +451,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6D97AE0A19D4A8B30004A31E /* DataViz */ = {
+			isa = PBXGroup;
+			children = (
+				6D97AE0E19D4A9C00004A31E /* KZDataVizualizationViewController.h */,
+				6D97AE0F19D4A9C00004A31E /* KZDataVizualizationViewController.m */,
+			);
+			name = DataViz;
+			sourceTree = "<group>";
+		};
 		6DCEDDCF19391D7F00A38C39 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,6 +527,7 @@
 		8EB8652C1614D11800DD60E6 /* kidozen.client */ = {
 			isa = PBXGroup;
 			children = (
+				6D97AE0A19D4A8B30004A31E /* DataViz */,
 				6D4ACD471937CBA400958E65 /* KZObject.h */,
 				6D4ACD481937CBA400958E65 /* KZObject.m */,
 				6D40013A1976B8F600D5F511 /* Application */,
@@ -611,6 +625,7 @@
 				8E0774DA1619F35500FA21D9 /* NSDictionary+JSONCategories.h in Headers */,
 				6D8017EE1968A74800E99FB7 /* Base64.h in Headers */,
 				6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */,
+				6D97AE1019D4A9C00004A31E /* KZDataVizualizationViewController.h in Headers */,
 				8E0774D81619F35500FA21D9 /* KZUser.h in Headers */,
 				6D4ACD371937A84900958E65 /* KZApplicationConfiguration.h in Headers */,
 				6D4001521976D1B000D5F511 /* KZBaseService+ProtectedMethods.h in Headers */,
@@ -794,6 +809,7 @@
 				8E0774AC1619D9AF00FA21D9 /* KZBaseService.m in Sources */,
 				8E0774AD1619D9AF00FA21D9 /* KZSMSSender.m in Sources */,
 				8E0774AE1619D9AF00FA21D9 /* KZStorage.m in Sources */,
+				6D97AE1119D4A9C00004A31E /* KZDataVizualizationViewController.m in Sources */,
 				8EE16FAD161B52B6006BAA59 /* NSString+Utilities.m in Sources */,
 				8E0774AF1619D9AF00FA21D9 /* KZUser.m in Sources */,
 				6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */,
