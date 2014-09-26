@@ -1,3 +1,6 @@
+
+#import <UIKit/UIKit.h>
+
 #import "KZApplication.h"
 #import "NSString+Utilities.h"
 #import "KZIdentityProviderFactory.h"
@@ -10,8 +13,8 @@
 #import "KZApplicationAuthentication.h"
 #import "KZApplicationServices.h"
 #import "KZCrashReporter.h"
+#import "KZDataVisualizationViewController.h"
 
-#import <UIKit/UIKit.h>
 
 @interface KZApplication ()
 
@@ -363,6 +366,23 @@
 - (KZNotification *)pushNotifications
 {
     return self.appServices.pushNotifications;
+}
+
+@end
+
+
+@implementation KZApplication(DataVisualization)
+
+- (void)showDataVisualizationWithName:(NSString *)datavizName
+{
+    KZDataVisualizationViewController *vc = [[KZDataVisualizationViewController alloc] initWithEndPoint:self.applicationConfig.domain
+                                                                                             datavizName:datavizName
+                                                                                         tokenController:self.appAuthentication.tokenController];
+    
+    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
+    
+    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:vc];
+    [rootController presentModalViewController:webNavigation animated:YES];
 }
 
 @end

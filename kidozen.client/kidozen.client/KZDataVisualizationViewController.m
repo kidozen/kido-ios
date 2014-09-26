@@ -1,41 +1,44 @@
 //
-//  KZDataVizualizationViewController.m
+//  KZDataVisualizationViewController.m
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 9/25/14.
 //  Copyright (c) 2014 Tellago Studios. All rights reserved.
 //
 
-#import "KZDataVizualizationViewController.h"
+#import "KZDataVisualizationViewController.h"
 #import "KZTokenController.h"
 #import "SVHTTPRequest.h"
+#import "SSZipArchive.h"
 
-@interface KZDataVizualizationViewController () <UIWebViewDelegate>
+@interface KZDataVisualizationViewController () <UIWebViewDelegate>
 
 @property (nonatomic, copy) NSString *downloadURLString;
 
-@property (nonatomic, copy) NSString *applicationName;
+@property (nonatomic, copy) NSString *datavizName;
 @property (nonatomic, copy) NSString *tenantName;
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @property (nonatomic, weak) KZTokenController *tokenController;
+
+@property (nonatomic, strong) SVHTTPClient *httpClient;
+
 @end
 
-@implementation KZDataVizualizationViewController
+@implementation KZDataVisualizationViewController
 
 - (id) initWithEndPoint:(NSString *)endPoint
-        applicationName:(NSString *)applicationName
-             tenantName:(NSString *)tenantName
+            datavizName:(NSString *)datavizName
         tokenController:(KZTokenController *)tokenController
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.downloadURLString = [NSString stringWithFormat:@"%@/dataviz/%@/app/download", endPoint, applicationName];
-        self.applicationName = applicationName;
+        self.downloadURLString = [NSString stringWithFormat:@"https://%@/dataviz/%@/app/download", endPoint, datavizName];
+        self.datavizName = datavizName;
         self.tokenController = tokenController;
-        self.tenantName = tenantName;
+        self.httpClient = [SVHTTPClient sharedClient];
     }
     return self;
     
@@ -75,39 +78,77 @@
 {
     [self.activityView startAnimating];
     
-    __weak KZDataVizualizationViewController *safeMe = self;
-    
-    NSString *path = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"store.zip"];
-    [SVHTTPRequest GET:self.downloadURLString
-            parameters:nil
-            saveToPath:path
-              progress:^(float progress) {
-                  NSLog(@"%@",[NSString stringWithFormat:@"Downloading (%.0f%%)", progress*100]);
+    __weak KZDataVisualizationViewController *safeMe = self;
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
+
+    [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
+    [self.httpClient GET:self.downloadURLString
+              parameters:nil
+              saveToPath:path
+                progress:^(float progress) {
+                    // update progress
+                    NSLog(@"%.2f", progress);
+                    
+    } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil) {
+            NSLog(@"Successsss");
+            [safeMe unzipFileAtPath:path folderName:safeMe.datavizName];
+            [safeMe.activityView stopAnimating];
+        } else {
+            NSLog(@"error is %@", error);
+            // show error
+        }
         
-              } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-                  [safeMe.activityView stopAnimating];
-              }];
+    }];
 }
 
 - (void) loadBarButtonItem
 {
-    self.navigationItem.leftBarButtonItem = [self cancelBarButtonItem];
+    self.navigationItem.leftBarButtonItem = [self closeButton];
 }
 
--(UIBarButtonItem*) cancelBarButtonItem
+-(UIBarButtonItem*) closeButton
 {
-    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                          target:self
-                                                         action:@selector(cancelDataVizualization)];
+                                                         action:@selector(closeDataVizualization)];
 }
 
 
-- (void)cancelDataVizualization
+- (void)closeDataVizualization
 {
-    // TODO:
-    // cancel download if any
+    [self.httpClient cancelAllRequests];
     [self dismissModalViewControllerAnimated:YES];
 }
+
+-(void)unzipFileAtPath:(NSString *)filePath folderName:(NSString *)folderName
+{
+    dispatch_queue_t main = dispatch_get_main_queue();
+    dispatch_async(main, ^ {
+                           //Write To
+                           NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+                           NSString *documentsDirectory = [paths objectAtIndex:0]; // Get cache folder
+                        NSError *error;
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ([fm fileExistsAtPath:filePath isDirectory:NO]) {
+            
+        NSLog(@"filepath is %@", filePath);
+        [SSZipArchive unzipFileAtPath:filePath toDestination:documentsDirectory overwrite:YES password:nil error:&error delegate:nil];
+        
+        NSLog(@"ERror %@", error);
+        } else {
+            NSLog(@"File does not exist");
+        }
+    });
+}
+
+
+
+
+
 
 #pragma mark - UIWebViewDelegate
 

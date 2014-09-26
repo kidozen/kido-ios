@@ -13,11 +13,10 @@
 /*
  * This ViewController contains a webview that displays data visualization
  */
-@interface KZDataVizualizationViewController : UIViewController
+@interface KZDataVisualizationViewController : UIViewController
 
 - (id) initWithEndPoint:(NSString *)endPoint
-        applicationName:(NSString *)applicationName
-             tenantName:(NSString *)tenantName
+            datavizName:(NSString *)datavizName
         tokenController:(KZTokenController *)tokenController;
 
 @end

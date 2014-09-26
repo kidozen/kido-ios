@@ -273,3 +273,10 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 @end
 
+
+@interface KZApplication(DataVisualization)
+
+- (void)showDataVisualizationWithName:(NSString *)datavizName;
+
+@end
+
