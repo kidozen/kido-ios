@@ -94,14 +94,9 @@
                     
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil) {
-            NSLog(@"Successsss");
             [safeMe unzipFileAtPath:path folderName:safeMe.datavizName];
             [safeMe.activityView stopAnimating];
-        } else {
-            NSLog(@"error is %@", error);
-            // show error
         }
-        
     }];
 }
 
@@ -120,7 +115,9 @@
 
 - (void)closeDataVizualization
 {
+    // Cleanup.
     [self.httpClient cancelAllRequests];
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -135,10 +132,8 @@
         NSFileManager *fm = [NSFileManager defaultManager];
         if ([fm fileExistsAtPath:filePath isDirectory:NO]) {
             
-        NSLog(@"filepath is %@", filePath);
-        [SSZipArchive unzipFileAtPath:filePath toDestination:documentsDirectory overwrite:YES password:nil error:&error delegate:nil];
-        
-        NSLog(@"ERror %@", error);
+            [SSZipArchive unzipFileAtPath:filePath toDestination:documentsDirectory overwrite:YES password:nil error:&error delegate:nil];
+            
         } else {
             NSLog(@"File does not exist");
         }
