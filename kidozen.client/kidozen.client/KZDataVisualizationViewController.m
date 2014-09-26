@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UIProgressView *progressView;
 
 @property (nonatomic, weak) KZTokenController *tokenController;
 
@@ -39,6 +40,7 @@
         self.datavizName = datavizName;
         self.tokenController = tokenController;
         self.httpClient = [SVHTTPClient sharedClient];
+        self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     }
     return self;
     
@@ -50,6 +52,7 @@
     [self loadBarButtonItem];
     [self configureWebView];
     [self configureActivityView];
+    [self configureProgressView];
     [self downloadZipFile];
     
 
@@ -60,6 +63,13 @@
     self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
+}
+
+- (void)configureProgressView
+{
+    [self.view addSubview:self.progressView];
+    self.progressView.center = self.view.center;
+    
 }
 
 - (void) configureActivityView
@@ -76,27 +86,24 @@
 
 - (void) downloadZipFile
 {
-    [self.activityView startAnimating];
-    
     __weak KZDataVisualizationViewController *safeMe = self;
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0]; // Get documents folder
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
+    NSString *path = [[self tempDictionary] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
-    [self.httpClient GET:self.downloadURLString
+    [self.httpClient GET:@"http://168.192.1.140:8000/dataviz-stockinfoviz.zip" // TODO: self.downloadURLString
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
-                    // update progress
-                    NSLog(@"%.2f", progress);
+                    [safeMe.progressView setProgress:progress animated:YES];
                     
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        
         if (error == nil) {
-            [safeMe unzipFileAtPath:path folderName:safeMe.datavizName];
-            [safeMe.activityView stopAnimating];
+            [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
+            [safeMe.progressView removeFromSuperview];
         }
+        
     }];
 }
 
@@ -118,23 +125,58 @@
     // Cleanup.
     [self.httpClient cancelAllRequests];
     
+    NSFileManager *fm = [NSFileManager defaultManager];
+    [fm removeItemAtPath:[self dataVizDirectory] error:nil];
+    [fm removeItemAtPath:[self dataVizFileName] error:nil];
+    
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (NSString *)tempDictionary
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    return [paths objectAtIndex:0];
+}
+
+- (NSString *)dataVizDirectory
+{
+    return [[self tempDictionary] stringByAppendingPathComponent:self.datavizName];
+}
+
+- (NSString *) dataVizFileName
+{
+    return [[self dataVizDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 }
 
 -(void)unzipFileAtPath:(NSString *)filePath folderName:(NSString *)folderName
 {
+    
+    __weak KZDataVisualizationViewController *safeMe = self;
+    [self.activityView startAnimating];
+
     dispatch_queue_t main = dispatch_get_main_queue();
     dispatch_async(main, ^ {
-                           //Write To
-                           NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-                           NSString *documentsDirectory = [paths objectAtIndex:0]; // Get cache folder
-                        NSError *error;
+        
+        NSError *error;
         NSFileManager *fm = [NSFileManager defaultManager];
         if ([fm fileExistsAtPath:filePath isDirectory:NO]) {
             
-            [SSZipArchive unzipFileAtPath:filePath toDestination:documentsDirectory overwrite:YES password:nil error:&error delegate:nil];
+            if ([SSZipArchive unzipFileAtPath:filePath
+                                toDestination:folderName
+                                    overwrite:YES
+                                     password:nil
+                                        error:&error
+                                     delegate:nil] == YES)
+            {
+                
+                [safeMe loadWebViewUsingDirectory:folderName];
+                // load  documentsDirectory in webView.
+
+            }
             
         } else {
+            [safeMe.activityView stopAnimating];
+
             NSLog(@"File does not exist");
         }
     });
@@ -142,6 +184,13 @@
 
 
 
+- (void)loadWebViewUsingDirectory:(NSString *)directoryPath {
+    NSString *indexFile = [directoryPath stringByAppendingPathComponent:@"index.html"];
+    NSURL *url = [NSURL fileURLWithPath:indexFile];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+    
+}
 
 
 
@@ -201,6 +250,8 @@
 //    if (self.completion) {
 //        self.completion(nil, nil, error);
 //    }
+    
+    NSLog(@"Error is %@", error);
     
     [self dismissModalViewControllerAnimated:YES];
 }
