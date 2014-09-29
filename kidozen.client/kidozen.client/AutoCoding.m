@@ -49,34 +49,40 @@ static NSString *const AutocodingException = @"AutocodingException";
 
 + (instancetype)objectWithContentsOfFile:(NSString *)filePath
 {
-    //load the file
-    NSData *data = [NSData dataWithContentsOfFile:filePath];
-    
     //attempt to deserialise data as a plist
     id object = nil;
-    if (data)
-    {
-        NSPropertyListFormat format;
-        object = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:&format error:NULL];
-       
-		//success?
-		if (object)
-		{
-			//check if object is an NSCoded unarchive
-			if ([object respondsToSelector:@selector(objectForKey:)] && [(NSDictionary *)object objectForKey:@"$archiver"])
-			{
-				object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-			}
-		}
-		else
-		{
-			//return raw data
-			object = data;
-		}
+    @try {
+        //load the file
+        NSData *data = [NSData dataWithContentsOfFile:filePath];
+        
+        if (data)
+        {
+            NSPropertyListFormat format;
+            object = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:&format error:NULL];
+            
+            //success?
+            if (object)
+            {
+                //check if object is an NSCoded unarchive
+                if ([object respondsToSelector:@selector(objectForKey:)] && [(NSDictionary *)object objectForKey:@"$archiver"])
+                {
+                    object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+                }
+            }
+            else
+            {
+                //return raw data
+                object = data;
+            }
+        }
+        
     }
-    
-	//return object
-	return object;
+    @catch (NSException *exception) {
+        NSLog(@"Error while opening file %@. %@", filePath, exception);
+    }
+    @finally {
+        return object;
+    }
 }
 
 - (BOOL)writeToFile:(NSString *)filePath atomically:(BOOL)useAuxiliaryFile
@@ -120,7 +126,7 @@ static NSString *const AutocodingException = @"AutocodingException";
         objc_property_t property = properties[i];
         const char *propertyName = property_getName(property);
         __autoreleasing NSString *key = @(propertyName);
-
+        
         //check if codable
         if (![uncodableProperties containsObject:key])
         {
