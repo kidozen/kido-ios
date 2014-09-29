@@ -17,6 +17,8 @@
 
 - (id) initWithEndPoint:(NSString *)endPoint
             datavizName:(NSString *)datavizName
+                 tenant:(NSString *)tenantName
+                appName:(NSString *)appName
         tokenController:(KZTokenController *)tokenController;
 
 @end

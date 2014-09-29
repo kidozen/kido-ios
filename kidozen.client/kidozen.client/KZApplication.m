@@ -377,6 +377,8 @@
 {
     KZDataVisualizationViewController *vc = [[KZDataVisualizationViewController alloc] initWithEndPoint:self.applicationConfig.domain
                                                                                              datavizName:datavizName
+                                                                                                 tenant:self.tenantMarketPlace
+                                                                                                appName:self.applicationConfig.name
                                                                                          tokenController:self.appAuthentication.tokenController];
     
     UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];

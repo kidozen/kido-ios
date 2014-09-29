@@ -17,6 +17,7 @@
 
 @property (nonatomic, copy) NSString *datavizName;
 @property (nonatomic, copy) NSString *tenantName;
+@property (nonatomic, copy) NSString *appName;
 
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
@@ -32,12 +33,17 @@
 
 - (id) initWithEndPoint:(NSString *)endPoint
             datavizName:(NSString *)datavizName
+                 tenant:(NSString *)tenantName
+                appName:(NSString *)appName
         tokenController:(KZTokenController *)tokenController
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.downloadURLString = [NSString stringWithFormat:@"https://%@/dataviz/%@/app/download", endPoint, datavizName];
         self.datavizName = datavizName;
+        self.appName = appName;
+        self.tenantName = tenantName;
+        
         self.tokenController = tokenController;
         self.httpClient = [SVHTTPClient sharedClient];
         self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
@@ -88,10 +94,10 @@
 {
     __weak KZDataVisualizationViewController *safeMe = self;
 
-    NSString *path = [[self tempDictionary] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
+    NSString *path = [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
-    [self.httpClient GET:@"http://168.192.1.140:8000/dataviz-stockinfoviz.zip" // TODO: self.downloadURLString
+    [self.httpClient GET:@"http://168.192.1.140:8000/stockinfoviz.zip" // TODO: self.downloadURLString
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
@@ -100,7 +106,7 @@
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         
         if (error == nil) {
-            [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
+            [safeMe unzipFileAtPath:path folderName:[self tempDirectory]];
             [safeMe.progressView removeFromSuperview];
         }
         
@@ -132,21 +138,6 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (NSString *)tempDictionary
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    return [paths objectAtIndex:0];
-}
-
-- (NSString *)dataVizDirectory
-{
-    return [[self tempDictionary] stringByAppendingPathComponent:self.datavizName];
-}
-
-- (NSString *) dataVizFileName
-{
-    return [[self dataVizDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
-}
 
 -(void)unzipFileAtPath:(NSString *)filePath folderName:(NSString *)folderName
 {
@@ -168,10 +159,8 @@
                                         error:&error
                                      delegate:nil] == YES)
             {
-                
-                [safeMe loadWebViewUsingDirectory:folderName];
-                // load  documentsDirectory in webView.
-
+                [safeMe replacePlaceHolders];
+                [safeMe loadWebView];
             }
             
         } else {
@@ -182,11 +171,31 @@
     });
 }
 
+- (void)replacePlaceHolders
+{
+    NSURL *url = [self indexFileURL];
+    NSError *error;
+    NSString *indexString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    if (error != nil) {
+        NSLog(@"Error found while opening for replacing placeholder values. %@", error);
+    }
+    
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{token}}" withString:self.tokenController.kzToken];
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{tenant}}"  withString:self.tenantName];
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{appName}}" withString:self.appName];
+    
+    NSError *writeError;
+    [indexString writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
+    if (writeError != nil) {
+        NSLog(@"Error while writing replaced index.html. %@", writeError);
+    }
+}
 
 
-- (void)loadWebViewUsingDirectory:(NSString *)directoryPath {
-    NSString *indexFile = [directoryPath stringByAppendingPathComponent:@"index.html"];
-    NSURL *url = [NSURL fileURLWithPath:indexFile];
+
+
+- (void)loadWebView {
+    NSURL *url = [self indexFileURL];
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     
@@ -254,6 +263,31 @@
     NSLog(@"Error is %@", error);
     
     [self dismissModalViewControllerAnimated:YES];
+}
+
+
+
+
+- (NSString *)tempDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    return [paths objectAtIndex:0];
+}
+
+- (NSString *)dataVizDirectory
+{
+    return [[self tempDirectory] stringByAppendingPathComponent:self.datavizName];
+}
+
+- (NSString *) dataVizFileName
+{
+    return [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
+}
+
+- (NSURL *) indexFileURL
+{
+    NSString *indexFile = [[self dataVizDirectory] stringByAppendingPathComponent:@"index.html"];
+    return [NSURL fileURLWithPath:indexFile];
 }
 
 @end
