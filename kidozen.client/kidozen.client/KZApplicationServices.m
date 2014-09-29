@@ -33,6 +33,7 @@
 @property (strong, nonatomic) KZMail *mail;
 @property (strong, nonatomic) KZNotification *pushNotifications;
 @property (nonatomic, strong) KZAnalytics *analytics;
+@property (nonatomic, strong) KZLogging *eventsLogger;
 
 @end
 
@@ -130,11 +131,33 @@
 
 - (void) initializeLogging
 {
+    [self initializeGeneralLogging];
+    [self initializeEventsLogging];
+}
+
+
+- (void) initializeGeneralLogging
+{
     self.log = [[KZLogging alloc] initWithEndpoint:self.applicationConfig.loggingV3
                                            andName:nil];
     self.log.tokenController = self.tokenController;
     [self.log setStrictSSL:self.strictSSL];
 }
+
+- (void)initializeEventsLogging
+{
+    NSMutableString *eventsLoggerEndPoint = [NSMutableString stringWithString:self.applicationConfig.url];
+    if ([eventsLoggerEndPoint indexOf:@"/"] == [eventsLoggerEndPoint length] ) {
+        [eventsLoggerEndPoint appendString:@"/"];
+    }
+    [eventsLoggerEndPoint appendString: @"api/v3/logging/events"];
+    
+    self.eventsLogger = [[KZLogging alloc] initWithEndpoint:eventsLoggerEndPoint
+                                                    andName:nil];
+    self.eventsLogger.tokenController = self.tokenController;
+    [self.eventsLogger setStrictSSL:self.strictSSL];
+}
+
 
 -(void) write:(id)object message:(NSString *)message withLevel:(LogLevel)level completion:(void (^)(KZResponse *))block
 {
@@ -172,8 +195,8 @@
 
 - (void) initializeAnalytics
 {
-    NSAssert(self.log != nil, @"Log service should not be nil");
-    self.analytics = [[KZAnalytics alloc] initWithLoggingService:self.log];
+    NSAssert(self.eventsLogger != nil, @"Events log service should not be nil");
+    self.analytics = [[KZAnalytics alloc] initWithLoggingService:self.eventsLogger];
 }
 
 - (void)tagClick:(NSString *)buttonName
