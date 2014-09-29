@@ -82,6 +82,8 @@ static NSUInteger kMaximumSecondsToUpload = 300;
         // We only consider valid length values.
         if (length > 0) {
             [self.session loadEventsFromDisk];
+            NSLog(@"session events are self.session.events %@", self.session.events);
+            
             [self.session logSessionWithLength:@(length)];
             [self sendEvents];
         } else {
@@ -107,11 +109,10 @@ static NSUInteger kMaximumSecondsToUpload = 300;
     
     if ([self.session hasEvents]) {
 
-        NSLog(@"AutoUploading - events to send are :%@", self.session.events);
-        
-
         self.uploading = YES;
         __weak KZAnalyticsUploader *safeMe = self;
+        
+        safeMe.uploading = NO;
         
         [self.logging write:self.session.events
                     message:@""
@@ -120,15 +121,19 @@ static NSUInteger kMaximumSecondsToUpload = 300;
          {
              safeMe.uploading = NO;
              
+             // If there is no error...
              if (response.error == nil && response.urlResponse.statusCode < 300) {
                  [safeMe.session removeSavedEvents];
                  [safeMe.session removeCurrentEvents];
-                 // we fire the timer once again.
                  
-                 [safeMe startTimer];
              }
              
+             [safeMe.uploadTimer invalidate];
+             [safeMe startTimer];
+             
          }];
+
+
     } else {
         NSLog(@"No events to send. Will try later.");
         [self.uploadTimer invalidate];
@@ -140,9 +145,6 @@ static NSUInteger kMaximumSecondsToUpload = 300;
 
 - (void)sendEvents
 {
-    // TODO: Uncomment when we've got the service ready.
-    NSLog(@"Events to send are :%@", self.session.events);
-
     self.uploading = YES;
     __weak KZAnalyticsUploader *safeMe = self;
     
@@ -152,11 +154,12 @@ static NSUInteger kMaximumSecondsToUpload = 300;
              completion:^(KZResponse *response)
     {
         safeMe.uploading = NO;
-        
+    
+        // if no errors
         if (response.error == nil && response.urlResponse.statusCode < 300) {
             [safeMe.session removeSavedEvents];
         }
-        
+    
         [safeMe resetSessionState];
      }];
 }
@@ -176,7 +179,8 @@ static NSUInteger kMaximumSecondsToUpload = 300;
     
 }
 
-// removeDatesAndSession
+// Removes dates for session length and SessionUUID,
+// so that we can start a new session.
 - (void) resetSessionState {
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
