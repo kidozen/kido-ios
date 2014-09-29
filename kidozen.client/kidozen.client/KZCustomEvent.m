@@ -34,11 +34,9 @@
     NSDictionary *params;
     
     if (self.attributes != nil) {
-        NSMutableDictionary *mutableAttributes = [NSMutableDictionary dictionaryWithDictionary:self.attributes];
-        mutableAttributes[@"sessionUUID"] = self.sessionUUID;
-        
         params = @{@"eventName" : self.eventName,
-                   @"eventAttr" : mutableAttributes};
+                   @"sessionUUID" : self.sessionUUID,
+                   @"eventAttr" : self.attributes};
     } else {
         params = @{@"eventName" : self.eventName,
                    @"sessionUUID" : self.sessionUUID };

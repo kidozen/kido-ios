@@ -16,8 +16,9 @@
 {
     NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
     attr[@"sessionLength"] = length;
+    attr[@"platform"] = @"iOS";
     
-    return [super initWithEventName:@"user-session" attributes:attributes sessionUUID:sessionUUID];
+    return [super initWithEventName:@"user-session" attributes:attr sessionUUID:sessionUUID];
 }
 
 @end
