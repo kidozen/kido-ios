@@ -44,6 +44,7 @@
         
         self.datavizName = datavizName;
         self.appName = appName;
+        
         self.tenantName = tenantName;
         
         self.tokenController = tokenController;
@@ -109,7 +110,7 @@
     NSString *path = [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
-    [self.httpClient GET:self.downloadURLString
+    [self.httpClient GET:@"http://168.192.1.140:8000/stockinfoviz.zip"
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
@@ -127,7 +128,7 @@
                     
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil) {
-            [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
+            [safeMe unzipFileAtPath:path folderName:[self tempDirectory]];//[self dataVizDirectory]];
             [safeMe.progressView removeFromSuperview];
         }
     }];
@@ -185,8 +186,6 @@
             
         } else {
             [safeMe.activityView stopAnimating];
-
-            NSLog(@"File does not exist");
         }
     });
 }
@@ -199,8 +198,10 @@
     if (error != nil) {
         NSLog(@"Error found while opening for replacing placeholder values. %@", error);
     }
-    
-    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{token}}" withString:self.tokenController.kzToken];
+    NSLog(@" jsonified token is %@", [self.tokenController jsonifiedAuthenticationResponse]);
+    NSLog(@"tenantName is %@", self.tenantName);
+    NSLog(@"appname is %@", self.appName);
+
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{token}}" withString:[self.tokenController jsonifiedAuthenticationResponse]];
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{tenant}}"  withString:self.tenantName];
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{appName}}" withString:self.appName];
