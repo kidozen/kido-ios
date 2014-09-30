@@ -35,17 +35,20 @@
             datavizName:(NSString *)datavizName
                  tenant:(NSString *)tenantName
                 appName:(NSString *)appName
+              strictSSL:(BOOL)strictSSL
         tokenController:(KZTokenController *)tokenController
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.downloadURLString = [NSString stringWithFormat:@"https://%@/dataviz/%@/app/download", endPoint, datavizName];
+        self.downloadURLString = [NSString stringWithFormat:@"%@api/v2/visualizations/%@/app/download", endPoint, datavizName];
+        
         self.datavizName = datavizName;
         self.appName = appName;
         self.tenantName = tenantName;
         
         self.tokenController = tokenController;
         self.httpClient = [SVHTTPClient sharedClient];
+        [self initializeHttpClientWithStrictSSL:strictSSL];
         self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     }
     return self;
@@ -62,6 +65,15 @@
     [self downloadZipFile];
     
 
+}
+
+-(void) initializeHttpClientWithStrictSSL:(BOOL)strictSSL
+{
+    if (!self.httpClient) {
+        self.httpClient = [[SVHTTPClient alloc] init];
+    }
+    
+    [self.httpClient setDismissNSURLAuthenticationMethodServerTrust:!strictSSL];
 }
 
 - (void) configureWebView
@@ -97,19 +109,27 @@
     NSString *path = [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
-    [self.httpClient GET:@"http://168.192.1.140:8000/stockinfoviz.zip" // TODO: self.downloadURLString
+    [self.httpClient GET:self.downloadURLString
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
-                    [safeMe.progressView setProgress:progress animated:YES];
+                    
+                    if (progress < 0) {
+                        if (safeMe.activityView.isAnimating == NO) {
+                            [safeMe.activityView startAnimating];
+                        }
+                        
+                        safeMe.progressView.hidden = YES;
+                        
+                    } else {
+                        [safeMe.progressView setProgress:progress animated:YES];
+                    }
                     
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-        
         if (error == nil) {
-            [safeMe unzipFileAtPath:path folderName:[self tempDirectory]];
+            [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
             [safeMe.progressView removeFromSuperview];
         }
-        
     }];
 }
 
@@ -220,30 +240,6 @@
 {
     [self.activityView stopAnimating];
     self.view.userInteractionEnabled = YES;
-
-    
-//    NSString *payload = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-//    
-//    if ([payload hasPrefix:SUCCESS_PAYLOAD_PREFIX]) {
-//        NSString *b64 = [payload stringByReplacingOccurrencesOfString:SUCCESS_PAYLOAD_PREFIX withString:@""];
-//        NSString *json = [b64 base64DecodedString];
-//        NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding]
-//                                                                       options:nil
-//                                                                         error:nil];
-//        if (self.completion != nil) {
-//            self.completion(jsonDictionary[@"access_token"], jsonDictionary[@"refresh_token"], nil);
-//            [self dismissModalViewControllerAnimated:YES];
-//        }
-//        
-//    } else if ([payload hasPrefix:ERROR_PAYLOAD_PREFIX]) {
-//        
-//        NSString *errorMessage = [payload stringByReplacingOccurrencesOfString:ERROR_PAYLOAD_PREFIX withString:@""];
-//        NSError *error = [NSError errorWithDomain:@"KZPassiveAuthenticationError"
-//                                             code:0
-//                                         userInfo:@{@"Error message": errorMessage}];
-//        [self handleError:error];
-//        
-//    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -256,12 +252,7 @@
 
 - (void) handleError:(NSError *)error
 {
-//    if (self.completion) {
-//        self.completion(nil, nil, error);
-//    }
-    
-    NSLog(@"Error is %@", error);
-    
+    NSLog(@"Error while loading webview is %@", error);
     [self dismissModalViewControllerAnimated:YES];
 }
 

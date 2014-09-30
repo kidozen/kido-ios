@@ -19,6 +19,7 @@
             datavizName:(NSString *)datavizName
                  tenant:(NSString *)tenantName
                 appName:(NSString *)appName
+              strictSSL:(BOOL)strictSSL
         tokenController:(KZTokenController *)tokenController;
 
 @end
