@@ -38,6 +38,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		6D0326FE19DAFD36009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC953B219D5B313005E3540 /* libz.dylib */; };
+		6D03270219DAFD65009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC953B219D5B313005E3540 /* libz.dylib */; };
 		6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C85AE1917B71A00E59BD8 /* loggingTests.m */; };
 		6D291A88191BFE28003AEFAF /* storageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A87191BFE28003AEFAF /* storageTests.m */; };
@@ -350,6 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D0326FE19DAFD36009C8B2B /* libz.dylib in Frameworks */,
 				AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */,
 				AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */,
 				AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */,
@@ -362,6 +365,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D03270219DAFD65009C8B2B /* libz.dylib in Frameworks */,
 				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
