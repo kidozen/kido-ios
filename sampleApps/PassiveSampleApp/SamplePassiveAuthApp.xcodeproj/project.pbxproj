@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D0326FD19DADFC4009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0326FC19DADFC4009C8B2B /* libz.dylib */; };
 		6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B213D196EEDFA00088F5C /* kz.client.a */; };
 		6D435C3A196326EB00A710EF /* MainPassiveAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */; };
 		6D435C3B196326EB00A710EF /* MainPassiveAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D435C39196326EB00A710EF /* MainPassiveAuthViewController.xib */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D0326FC19DADFC4009C8B2B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6D1B213D196EEDFA00088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
 		6D435C37196326EB00A710EF /* MainPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPassiveAuthViewController.h; sourceTree = "<group>"; };
 		6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPassiveAuthViewController.m; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D0326FD19DADFC4009C8B2B /* libz.dylib in Frameworks */,
 				6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */,
 				6D6CBFA419362D0B00135CFA /* Accounts.framework in Frameworks */,
 				6D6CBF9F19362CFD00135CFA /* Social.framework in Frameworks */,
@@ -124,6 +127,7 @@
 		6D76F5101923E3DA000A361F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D0326FC19DADFC4009C8B2B /* libz.dylib */,
 				6D1B213D196EEDFA00088F5C /* kz.client.a */,
 				6DE2A0871963525E002556B0 /* kz.client.a */,
 				6D6CBFA319362D0B00135CFA /* Accounts.framework */,
