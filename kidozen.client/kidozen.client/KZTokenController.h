@@ -32,6 +32,9 @@
 
 - (void)updateRefreshTokenWith:(NSString *)refreshToken;
 
+- (void)storeAuthenticationResponse:(NSDictionary *)authenticationResponse;
+- (NSString *)jsonifiedAuthenticationResponse;
+
 // Tokens have an expiration time, this will trigger the timer which, when reaches 0,
 // the callback method will get called.
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback;

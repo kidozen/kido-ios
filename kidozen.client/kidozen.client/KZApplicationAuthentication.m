@@ -145,6 +145,8 @@ NSString *const kAccessTokenKey = @"access_token";
                 safeMe.kzUser.user = user;
                 safeMe.kzUser.pass = password;
                 
+                [safeMe.tokenController storeAuthenticationResponse:response];
+                
                 [safeMe.tokenController updateAccessTokenWith:[response objectForKey:@"rawToken"]
                                                accessTokenKey:[safeMe getAccessTokenCacheKey]];
                 
@@ -271,6 +273,8 @@ NSString *const kAccessTokenKey = @"access_token";
                                     safeMe.lastPassword = nil;
                                     safeMe.lastUserName = nil;
                                     
+                                    [safeMe.tokenController storeAuthenticationResponse:responseForToken];
+                                    
                                     [safeMe.tokenController updateAccessTokenWith:responseForToken[kAccessTokenKey]
                                                                    accessTokenKey:[safeMe getAccessTokenCacheKey]];
                                     
@@ -333,6 +337,8 @@ NSString *const kAccessTokenKey = @"access_token";
                                     if (error != nil) {
                                         callback(error);
                                     }
+                                    
+                                    [safeMe.tokenController storeAuthenticationResponse:responseForToken];
                                     
                                     [safeMe.tokenController updateAccessTokenWith:responseForToken[kAccessTokenKey]
                                                                    accessTokenKey:[safeMe getAccessTokenCacheKey]];

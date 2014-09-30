@@ -18,6 +18,10 @@
 
 @property (nonatomic, strong) NSTimer *tokenTimer;
 
+// We store the dictionary that comes as authentication response.
+// It's required for data visualization.
+@property (nonatomic, strong) NSDictionary *authenticationResponse;
+
 @property (nonatomic, copy) void(^timerCallback)(void);
 
 @end
@@ -73,6 +77,23 @@
 -(void) removeTokensFromCache
 {
     [self.tokenCache removeAllObjects];
+}
+
+
+- (void)storeAuthenticationResponse:(NSDictionary *)authenticationResponse
+{
+    self.authenticationResponse = authenticationResponse;
+}
+
+- (NSString *)jsonifiedAuthenticationResponse
+{
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.authenticationResponse
+                                                       options:0
+                                                         error:&error];
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
 }
 
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
