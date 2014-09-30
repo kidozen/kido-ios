@@ -222,11 +222,11 @@ NSString *const kAccessTokenKey = @"access_token";
     
     self.authCompletionBlock = block;
     
-    passiveAuthVC.completion = ^(NSString *token, NSString *refreshToken, NSError *error) {
+    passiveAuthVC.completion = ^(NSDictionary *fullResponse, NSError *error) {
         if (error != nil) {
             return [safeMe failAuthenticationWithError:error];
         } else {
-            [safeMe completePassiveAuthenticationWithToken:token refreshToken:refreshToken];
+            [safeMe completePassiveAuthenticationWithResponse:fullResponse];
         }
     };
     
@@ -235,8 +235,13 @@ NSString *const kAccessTokenKey = @"access_token";
     [rootController presentModalViewController:webNavigation animated:YES];
 }
 
-- (void)completePassiveAuthenticationWithToken:(NSString *)token refreshToken:(NSString *)refreshToken
+- (void)completePassiveAuthenticationWithResponse:(NSDictionary *)jsonDictionary
 {
+
+    NSString *token = jsonDictionary[@"access_token"];
+    NSString *refreshToken = jsonDictionary[@"refresh_token"];
+
+    [self.tokenController storeAuthenticationResponse:jsonDictionary];
     [self.tokenController updateAccessTokenWith:token
                                  accessTokenKey:[self getAccessTokenCacheKey]];
     

@@ -114,7 +114,7 @@
                                                                        options:nil
                                                                          error:nil];
         if (self.completion != nil) {
-            self.completion(jsonDictionary[@"access_token"], jsonDictionary[@"refresh_token"], nil);
+            self.completion(jsonDictionary, nil);
             [self dismissModalViewControllerAnimated:YES];
         }
         
@@ -140,7 +140,7 @@
 - (void) handleError:(NSError *)error
 {
     if (self.completion) {
-        self.completion(nil, nil, error);
+        self.completion(nil, error);
     }
     
     [self dismissModalViewControllerAnimated:YES];

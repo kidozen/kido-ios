@@ -16,6 +16,6 @@
 
 - (id) initWithURLString:(NSString *)urlString;
 
-@property (nonatomic, copy) void(^completion)(NSString *token, NSString *refreshToken, NSError *error);
+@property (nonatomic, copy) void(^completion)(NSDictionary *fullResponse, NSError *error);
 
 @end
