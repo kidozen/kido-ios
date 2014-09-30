@@ -201,6 +201,7 @@
     }
     
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{token}}" withString:self.tokenController.kzToken];
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{token}}" withString:[self.tokenController jsonifiedAuthenticationResponse]];
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{tenant}}"  withString:self.tenantName];
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{appName}}" withString:self.appName];
     
