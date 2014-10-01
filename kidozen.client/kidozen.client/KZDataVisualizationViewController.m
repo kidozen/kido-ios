@@ -58,6 +58,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = self.datavizName;
     
     [self loadBarButtonItem];
     [self configureWebView];
@@ -198,9 +199,6 @@
     if (error != nil) {
         NSLog(@"Error found while opening for replacing placeholder values. %@", error);
     }
-    NSLog(@" jsonified token is %@", [self.tokenController jsonifiedAuthenticationResponse]);
-    NSLog(@"tenantName is %@", self.tenantName);
-    NSLog(@"appname is %@", self.appName);
 
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{token}}" withString:[self.tokenController jsonifiedAuthenticationResponse]];
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{tenant}}"  withString:self.tenantName];
@@ -254,7 +252,15 @@
 
 - (void) handleError:(NSError *)error
 {
-    NSLog(@"Error while loading webview is %@", error);
+    
+    NSString *message = [NSString stringWithFormat:@"Error while loading visualization. Please try again later. Error is %@", error];
+    
+    [[[UIAlertView alloc] initWithTitle:@"Could not load visualization"
+                                message:message
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles: nil] show];
+
     [self dismissModalViewControllerAnimated:YES];
 }
 
