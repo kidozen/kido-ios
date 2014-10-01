@@ -232,7 +232,7 @@
 /**
  * Starts a passive authentication flow.
  */
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))callback
 {
     [self.appAuthentication doPassiveAuthenticationWithCompletion:callback];
     
@@ -368,6 +368,25 @@
     return self.appServices.pushNotifications;
 }
 
+#pragma mark - Analytics
+
+- (void)tagClick:(NSString *)buttonName
+{
+    [self.appServices tagClick:buttonName];
+}
+
+- (void)tagView:(NSString *)viewName
+{
+    [self.appServices tagView:viewName];
+}
+
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes
+{
+    [self.appServices tagEvent:customEventName
+                    attributes:attributes];
+}
+
 @end
 
 
@@ -387,5 +406,7 @@
     UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:vc];
     [rootController presentModalViewController:webNavigation animated:YES];
 }
+
+
 
 @end

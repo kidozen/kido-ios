@@ -1,7 +1,6 @@
 #import "KZNotification.h"
 #import "KZBaseService+ProtectedMethods.h"
-
-NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename";
+#import "KZDeviceInfo.h"
 
 @interface KZNotification ()
 
@@ -16,7 +15,8 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
     self = [super initWithEndpoint:endpoint andName:name];
     if (self)
     {
-        self.uniqueIdentifier = [self getUniqueIdentification];
+        KZDeviceInfo *info = [[KZDeviceInfo alloc] init];
+        self.uniqueIdentifier = [info getUniqueIdentification];
     }
     return self;
 }
@@ -155,22 +155,6 @@ NSString *const kUniqueIdentificationFilename = @"kUniqueIdentificationFilename"
                               error:error];
                  
              }];
-}
-
-
-- (NSString *)getUniqueIdentification
-{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString *uniqueID = (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kUniqueIdentificationFilename];
-    
-    if (uniqueID == nil) {
-        uniqueID = [[NSUUID UUID] UUIDString];
-        [userDefaults setValue:uniqueID forKey:kUniqueIdentificationFilename];
-        [userDefaults synchronize];
-    }
-    
-    return  uniqueID;
 }
 
 @end

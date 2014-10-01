@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6D1B213C196ED8E500088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B213B196ED8E500088F5C /* kz.client.a */; };
 		6D99202818EF339D000A6C5D /* libCrashSampleLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D99202618EF339D000A6C5D /* libCrashSampleLib.a */; };
+		6DC4794E19C9BA460050FC2A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */; };
+		6DC4795019C9BA5B0050FC2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */; };
 		6DF1E9EC18EC6EB9000C3AA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1E9EB18EC6EB9000C3AA7 /* Foundation.framework */; };
 		6DF1E9EE18EC6EB9000C3AA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1E9ED18EC6EB9000C3AA7 /* CoreGraphics.framework */; };
 		6DF1E9F018EC6EB9000C3AA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1E9EF18EC6EB9000C3AA7 /* UIKit.framework */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		6D1B213B196ED8E500088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
 		6D99202618EF339D000A6C5D /* libCrashSampleLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrashSampleLib.a; path = crasherLib/libCrashSampleLib.a; sourceTree = "<group>"; };
+		6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6DE2A0C8192652AD0020C69A /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = "../kido-ios/outputLibrary/kz.client.a"; sourceTree = "<group>"; };
 		6DF1E9E818EC6EB9000C3AA7 /* CrashSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrashSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DF1E9EB18EC6EB9000C3AA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DC4795019C9BA5B0050FC2A /* SystemConfiguration.framework in Frameworks */,
+				6DC4794E19C9BA460050FC2A /* CoreTelephony.framework in Frameworks */,
 				6D1B213C196ED8E500088F5C /* kz.client.a in Frameworks */,
 				6D99202818EF339D000A6C5D /* libCrashSampleLib.a in Frameworks */,
 				6DF1EA4B18EC7212000C3AA7 /* libc++.dylib in Frameworks */,
@@ -114,6 +120,8 @@
 		6DF1E9EA18EC6EB9000C3AA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */,
+				6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */,
 				6D1B213B196ED8E500088F5C /* kz.client.a */,
 				6DE2A0C8192652AD0020C69A /* kz.client.a */,
 				6D99202618EF339D000A6C5D /* libCrashSampleLib.a */,

@@ -8,6 +8,7 @@
 
 #import "KZCrashReporter.h"
 #import "KZBaseService+ProtectedMethods.h"
+#import "NSString+Path.h"
 
 // Importing/Redeclaring methods.
 @interface KZBaseService ()
@@ -188,7 +189,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 
 - (void) saveReportToFile:(NSString *) reportdataasstring {
 
-    NSString *outputPath = [self pathForFilename:@"KidozenCrashReport.crash"];
+    NSString *outputPath = [@"KidozenCrashReport.crash" documentsPath];
  
     if (![reportdataasstring writeToFile:outputPath atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
         self.crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Failed to write crash report" forKey:@"description"]];
@@ -232,15 +233,8 @@ finish:
 
 - (NSString *)breadcrumbFilename
 {
-    return [self pathForFilename:@"CrashUserLogs.log"];
+    return [@"CrashUserLogs.log" documentsPath];
 }
 
-- (NSString *)pathForFilename:(NSString *)filename
-{
-    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [pathArray objectAtIndex:0];
-    return [documentsDirectory stringByAppendingPathComponent:filename];
-    
-}
 @end
 

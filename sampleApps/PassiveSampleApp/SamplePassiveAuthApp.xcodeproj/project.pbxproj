@@ -72,7 +72,6 @@
 		6DCB877E19463ECC005B75B9 /* next.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = next.html; sourceTree = "<group>"; };
 		6DCB877F19463ECC005B75B9 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		6DE2A04C19241B230020C69A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		6DE2A0871963525E002556B0 /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = "SamplePassiveAuthApp/kido-lib/kz.client.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +128,6 @@
 			children = (
 				6D0326FC19DADFC4009C8B2B /* libz.dylib */,
 				6D1B213D196EEDFA00088F5C /* kz.client.a */,
-				6DE2A0871963525E002556B0 /* kz.client.a */,
 				6D6CBFA319362D0B00135CFA /* Accounts.framework */,
 				6D6CBF9E19362CFD00135CFA /* Social.framework */,
 				6DE2A04C19241B230020C69A /* libicucore.dylib */,

@@ -208,7 +208,7 @@ NSString *const kAccessTokenKey = @"access_token";
                   }];
 }
 
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))block
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))block
 {
     NSString *passiveUrlString = self.applicationConfig.authConfig.signInUrl;
     NSAssert(passiveUrlString, @"Must not be nil");
