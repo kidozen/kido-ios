@@ -92,7 +92,7 @@
                                                        options:0
                                                          error:&error];
     
-    return [NSString stringWithFormat:@"\"%@\"",[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback

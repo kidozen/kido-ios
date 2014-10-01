@@ -129,7 +129,7 @@
                     
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil) {
-            [safeMe unzipFileAtPath:path folderName:[self tempDirectory]];//[self dataVizDirectory]];
+            [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
             [safeMe.progressView removeFromSuperview];
         }
     }];
@@ -200,13 +200,13 @@
         NSLog(@"Error found while opening for replacing placeholder values. %@", error);
     }
 
-    NSString *options = [NSString stringWithFormat:@"{\"token\" : %@", [self.tokenController jsonifiedAuthenticationResponse]];
+    NSString *options = [NSString stringWithFormat:@"{\"token\" : %@}", [self.tokenController jsonifiedAuthenticationResponse]];
     NSString *marketplace = [NSString stringWithFormat:@"\"%@\"", self.tenantName];
     NSString *appName = [NSString stringWithFormat:@"\"%@\"", self.appName];
     
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{:options}}" withString:options];
     indexString = [indexString stringByReplacingOccurrencesOfString:@"{{:marketplace}}"  withString:marketplace];
-    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{:appName}}" withString:appName];
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{:name}}" withString:appName];
     
     NSError *writeError;
     [indexString writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
