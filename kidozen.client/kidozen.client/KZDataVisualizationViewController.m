@@ -40,7 +40,7 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.downloadURLString = [NSString stringWithFormat:@"%@api/v2/visualizations/%@/app/download", endPoint, datavizName];
+        self.downloadURLString = [NSString stringWithFormat:@"%@api/v2/visualizations/%@/app/download?type=mobile", endPoint, datavizName];
         
         self.datavizName = datavizName;
         self.appName = appName;
@@ -111,7 +111,7 @@
     NSString *path = [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
-    [self.httpClient GET:@"http://168.192.1.140:8000/stockinfoviz.zip"
+    [self.httpClient GET:self.downloadURLString // @"http://168.192.1.140:8000/stockinfoviz.zip"
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
@@ -200,9 +200,13 @@
         NSLog(@"Error found while opening for replacing placeholder values. %@", error);
     }
 
-    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{token}}" withString:[self.tokenController jsonifiedAuthenticationResponse]];
-    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{tenant}}"  withString:self.tenantName];
-    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{appName}}" withString:self.appName];
+    NSString *options = [NSString stringWithFormat:@"{\"token\" : %@", [self.tokenController jsonifiedAuthenticationResponse]];
+    NSString *marketplace = [NSString stringWithFormat:@"\"%@\"", self.tenantName];
+    NSString *appName = [NSString stringWithFormat:@"\"%@\"", self.appName];
+    
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{:options}}" withString:options];
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{:marketplace}}"  withString:marketplace];
+    indexString = [indexString stringByReplacingOccurrencesOfString:@"{{:appName}}" withString:appName];
     
     NSError *writeError;
     [indexString writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:&writeError];

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D03275A19DC975C009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275919DC975C009C8B2B /* libz.dylib */; };
+		6D03275C19DC9761009C8B2B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275B19DC9761009C8B2B /* SystemConfiguration.framework */; };
+		6D03276219DC977A009C8B2B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03276119DC977A009C8B2B /* CoreTelephony.framework */; };
 		6D12BC37195C63C100BBCB73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC36195C63C100BBCB73 /* Foundation.framework */; };
 		6D12BC39195C63C100BBCB73 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC38195C63C100BBCB73 /* CoreGraphics.framework */; };
 		6D12BC3B195C63C100BBCB73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC3A195C63C100BBCB73 /* UIKit.framework */; };
@@ -37,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D03275919DC975C009C8B2B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6D03275B19DC9761009C8B2B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6D03275D19DC9767009C8B2B /* libsystem_network.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsystem_network.dylib; path = usr/lib/system/libsystem_network.dylib; sourceTree = SDKROOT; };
+		6D03275F19DC976D009C8B2B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6D03276119DC977A009C8B2B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6D12BC33195C63C100BBCB73 /* pushTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pushTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D12BC36195C63C100BBCB73 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6D12BC38195C63C100BBCB73 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,6 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D03276219DC977A009C8B2B /* CoreTelephony.framework in Frameworks */,
+				6D03275C19DC9761009C8B2B /* SystemConfiguration.framework in Frameworks */,
+				6D03275A19DC975C009C8B2B /* libz.dylib in Frameworks */,
 				6D1B2139196ED09D00088F5C /* kz.client.a in Frameworks */,
 				6D12BC6F195C681900BBCB73 /* libc++.dylib in Frameworks */,
 				6D12BC6D195C681400BBCB73 /* libicucore.dylib in Frameworks */,
@@ -110,6 +121,11 @@
 		6D12BC35195C63C100BBCB73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D03276119DC977A009C8B2B /* CoreTelephony.framework */,
+				6D03275F19DC976D009C8B2B /* CFNetwork.framework */,
+				6D03275D19DC9767009C8B2B /* libsystem_network.dylib */,
+				6D03275B19DC9761009C8B2B /* SystemConfiguration.framework */,
+				6D03275919DC975C009C8B2B /* libz.dylib */,
 				6D1B2138196ED09D00088F5C /* kz.client.a */,
 				6D12BC6E195C681900BBCB73 /* libc++.dylib */,
 				6D12BC6C195C681400BBCB73 /* libicucore.dylib */,
@@ -407,6 +423,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SamplePushTestApp/kido-libs",
 					"/Users/miya/src/kido-ios/outputLibrary",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -436,6 +453,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SamplePushTestApp/kido-libs",
 					"/Users/miya/src/kido-ios/outputLibrary",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

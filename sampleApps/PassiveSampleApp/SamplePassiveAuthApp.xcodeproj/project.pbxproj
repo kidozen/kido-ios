@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6D0326FD19DADFC4009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0326FC19DADFC4009C8B2B /* libz.dylib */; };
+		6D03275419DC5294009C8B2B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275319DC5294009C8B2B /* CFNetwork.framework */; };
+		6D03275619DC52AC009C8B2B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275519DC52AC009C8B2B /* SystemConfiguration.framework */; };
+		6D03275819DC52B7009C8B2B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275719DC52B7009C8B2B /* CoreTelephony.framework */; };
 		6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B213D196EEDFA00088F5C /* kz.client.a */; };
 		6D435C3A196326EB00A710EF /* MainPassiveAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */; };
 		6D435C3B196326EB00A710EF /* MainPassiveAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D435C39196326EB00A710EF /* MainPassiveAuthViewController.xib */; };
@@ -43,6 +46,9 @@
 
 /* Begin PBXFileReference section */
 		6D0326FC19DADFC4009C8B2B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6D03275319DC5294009C8B2B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6D03275519DC52AC009C8B2B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6D03275719DC52B7009C8B2B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6D1B213D196EEDFA00088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
 		6D435C37196326EB00A710EF /* MainPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPassiveAuthViewController.h; sourceTree = "<group>"; };
 		6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPassiveAuthViewController.m; sourceTree = "<group>"; };
@@ -79,6 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D03275819DC52B7009C8B2B /* CoreTelephony.framework in Frameworks */,
+				6D03275619DC52AC009C8B2B /* SystemConfiguration.framework in Frameworks */,
+				6D03275419DC5294009C8B2B /* CFNetwork.framework in Frameworks */,
 				6D0326FD19DADFC4009C8B2B /* libz.dylib in Frameworks */,
 				6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */,
 				6D6CBFA419362D0B00135CFA /* Accounts.framework in Frameworks */,
@@ -126,6 +135,9 @@
 		6D76F5101923E3DA000A361F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D03275719DC52B7009C8B2B /* CoreTelephony.framework */,
+				6D03275519DC52AC009C8B2B /* SystemConfiguration.framework */,
+				6D03275319DC5294009C8B2B /* CFNetwork.framework */,
 				6D0326FC19DADFC4009C8B2B /* libz.dylib */,
 				6D1B213D196EEDFA00088F5C /* kz.client.a */,
 				6D6CBFA319362D0B00135CFA /* Accounts.framework */,
