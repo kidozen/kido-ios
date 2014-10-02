@@ -18,10 +18,6 @@
 
 @property (nonatomic, strong) NSTimer *tokenTimer;
 
-// We store the dictionary that comes as authentication response.
-// It's required for data visualization.
-@property (nonatomic, strong) NSDictionary *authenticationResponse;
-
 @property (nonatomic, copy) void(^timerCallback)(void);
 
 @end

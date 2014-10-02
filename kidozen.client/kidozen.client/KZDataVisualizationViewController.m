@@ -11,6 +11,8 @@
 #import "SVHTTPRequest.h"
 #import "SSZipArchive.h"
 
+#define kAuthenticationString @"authenticationResponse"
+
 @interface KZDataVisualizationViewController () <UIWebViewDelegate>
 
 @property (nonatomic, copy) NSString *downloadURLString;
@@ -30,6 +32,10 @@
 @end
 
 @implementation KZDataVisualizationViewController
+
+- (void) dealloc {
+    [self.tokenController removeObserver:self forKeyPath:kAuthenticationString];
+}
 
 - (id) initWithEndPoint:(NSString *)endPoint
             datavizName:(NSString *)datavizName
@@ -51,6 +57,12 @@
         self.httpClient = [SVHTTPClient sharedClient];
         [self initializeHttpClientWithStrictSSL:strictSSL];
         self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        
+        [self.tokenController addObserver:self
+                               forKeyPath:kAuthenticationString
+                                  options:NSKeyValueObservingOptionNew
+                                  context:nil];
+
     }
     return self;
     
@@ -291,6 +303,19 @@
 {
     NSString *indexFile = [[self dataVizDirectory] stringByAppendingPathComponent:@"index.html"];
     return [NSURL fileURLWithPath:indexFile];
+}
+
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:kAuthenticationString])
+    {
+        
+        // TODO: Update token in index.html upon expiration
+        // Here we should update the token with the new one, though the
+        // problem is that the index.html file is already loaded.
+    
+    }
 }
 
 @end

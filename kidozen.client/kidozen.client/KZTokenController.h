@@ -18,6 +18,10 @@
 @property (nonatomic, copy, readonly) NSString *kzToken;
 @property (nonatomic, copy, readonly) NSString *ipToken;
 
+// We store the dictionary that comes as authentication response.
+// It's required for data visualization.
+@property (nonatomic, strong) NSDictionary *authenticationResponse;
+
 @property (nonatomic, copy, readonly) NSString *refreshToken;
 
 
@@ -32,7 +36,6 @@
 
 - (void)updateRefreshTokenWith:(NSString *)refreshToken;
 
-- (void)storeAuthenticationResponse:(NSDictionary *)authenticationResponse;
 - (NSString *)jsonifiedAuthenticationResponse;
 
 // Tokens have an expiration time, this will trigger the timer which, when reaches 0,
