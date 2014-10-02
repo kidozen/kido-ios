@@ -10,9 +10,12 @@
 #import "KZTokenController.h"
 #import "SVHTTPRequest.h"
 #import "SSZipArchive.h"
+#import "KZApplicationAuthentication.h"
+#import "KZUser.h"
+#import "KZApplicationConfiguration.h"
 
 #define kAuthenticationString @"authenticationResponse"
-
+#define kDownloadURLTemplate @"%@api/v2/visualizations/%@/app/download?type=mobile"
 @interface KZDataVisualizationViewController () <UIWebViewDelegate>
 
 @property (nonatomic, copy) NSString *downloadURLString;
@@ -29,6 +32,9 @@
 
 @property (nonatomic, strong) SVHTTPClient *httpClient;
 
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
+
 @end
 
 @implementation KZDataVisualizationViewController
@@ -37,31 +43,28 @@
     [self.tokenController removeObserver:self forKeyPath:kAuthenticationString];
 }
 
-- (id) initWithEndPoint:(NSString *)endPoint
-            datavizName:(NSString *)datavizName
-                 tenant:(NSString *)tenantName
-                appName:(NSString *)appName
-              strictSSL:(BOOL)strictSSL
-        tokenController:(KZTokenController *)tokenController
+- (instancetype) initWithApplicationConfig:(KZApplicationConfiguration *)appConfig
+                                   appAuth:(KZApplicationAuthentication *)appAuth
+                                    tenant:(NSString *)tenant
+                                 strictSSL:(BOOL)strictSSL
+                               dataVizName:(NSString *)datavizName;
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.downloadURLString = [NSString stringWithFormat:@"%@api/v2/visualizations/%@/app/download?type=mobile", endPoint, datavizName];
+        self.downloadURLString = [NSString stringWithFormat:kDownloadURLTemplate, appConfig.html5Url, datavizName];
         
         self.datavizName = datavizName;
-        self.appName = appName;
+        self.appName = appConfig.name;
         
-        self.tenantName = tenantName;
+        self.username = appAuth.kzUser.user;
+        self.password = appAuth.kzUser.pass;
         
-        self.tokenController = tokenController;
+        self.tenantName = tenant;
+        
+        self.tokenController = appAuth.tokenController;
         self.httpClient = [SVHTTPClient sharedClient];
         [self initializeHttpClientWithStrictSSL:strictSSL];
         self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        
-        [self.tokenController addObserver:self
-                               forKeyPath:kAuthenticationString
-                                  options:NSKeyValueObservingOptionNew
-                                  context:nil];
 
     }
     return self;
@@ -212,7 +215,8 @@
         NSLog(@"Error found while opening for replacing placeholder values. %@", error);
     }
 
-    NSString *options = [NSString stringWithFormat:@"{\"token\" : %@}", [self.tokenController jsonifiedAuthenticationResponse]];
+    NSString *options = [NSString stringWithFormat:@"{\"token\" : %@, \"username\" : %@, \"password\":%@}", [self.tokenController jsonifiedAuthenticationResponse], self.username, self.password];
+    
     NSString *marketplace = [NSString stringWithFormat:@"\"%@\"", self.tenantName];
     NSString *appName = [NSString stringWithFormat:@"\"%@\"", self.appName];
     
@@ -303,19 +307,6 @@
 {
     NSString *indexFile = [[self dataVizDirectory] stringByAppendingPathComponent:@"index.html"];
     return [NSURL fileURLWithPath:indexFile];
-}
-
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if([keyPath isEqualToString:kAuthenticationString])
-    {
-        
-        // TODO: Update token in index.html upon expiration
-        // Here we should update the token with the new one, though the
-        // problem is that the index.html file is already loaded.
-    
-    }
 }
 
 @end

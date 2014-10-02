@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class KZTokenController;
+@class KZApplicationAuthentication;
+@class KZApplicationConfiguration;
 
 /*
  * This ViewController contains a webview that displays data visualization
  */
 @interface KZDataVisualizationViewController : UIViewController
 
-- (id) initWithEndPoint:(NSString *)endPoint
-            datavizName:(NSString *)datavizName
-                 tenant:(NSString *)tenantName
-                appName:(NSString *)appName
-              strictSSL:(BOOL)strictSSL
-        tokenController:(KZTokenController *)tokenController;
+- (instancetype) initWithApplicationConfig:(KZApplicationConfiguration *)appConfig
+                                   appAuth:(KZApplicationAuthentication *)appAuth
+                                    tenant:(NSString *)tenant
+                                 strictSSL:(BOOL)strictSSL
+                               dataVizName:(NSString *)datavizName;
 
 @end

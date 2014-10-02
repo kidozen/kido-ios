@@ -394,12 +394,12 @@
 
 - (void)showDataVisualizationWithName:(NSString *)datavizName
 {
-    KZDataVisualizationViewController *vc = [[KZDataVisualizationViewController alloc] initWithEndPoint:self.applicationConfig.html5Url
-                                                                                             datavizName:datavizName
-                                                                                                 tenant:self.tenantMarketPlace
-                                                                                                appName:self.applicationConfig.name
-                                                                                              strictSSL:self.strictSSL
-                                                                                         tokenController:self.appAuthentication.tokenController];
+    KZDataVisualizationViewController *vc = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
+                                                                                                         appAuth:self.appAuthentication
+                                                                                                          tenant:self.tenantMarketPlace
+                                                                                                       strictSSL:self.strictSSL
+                                                                                                     dataVizName:datavizName];
+    
     
     UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     
