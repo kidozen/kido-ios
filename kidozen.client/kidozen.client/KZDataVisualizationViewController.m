@@ -215,7 +215,12 @@
         NSLog(@"Error found while opening for replacing placeholder values. %@", error);
     }
 
-    NSString *options = [NSString stringWithFormat:@"{\"token\" : %@, \"username\" : %@, \"password\":%@}", [self.tokenController jsonifiedAuthenticationResponse], self.username, self.password];
+    NSString *options;
+    if (self.username != nil && self.password != nil) {
+        options = [NSString stringWithFormat:@"{\"token\" : %@, \"username\" : %@, \"password\":%@}", [self.tokenController jsonifiedAuthenticationResponse], self.username, self.password];
+    } else {
+        options = [NSString stringWithFormat:@"{\"token\" : %@ }", [self.tokenController jsonifiedAuthenticationResponse]];
+    }
     
     NSString *marketplace = [NSString stringWithFormat:@"\"%@\"", self.tenantName];
     NSString *appName = [NSString stringWithFormat:@"\"%@\"", self.appName];
