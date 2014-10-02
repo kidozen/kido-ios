@@ -82,8 +82,8 @@ NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
 - (void)finishAuthentication
 {
     UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-        self.mainPassiveViewController = [[MainPassiveAuthViewController alloc] init];
-        [nav pushViewController:self.mainPassiveViewController animated:YES];
+    self.mainPassiveViewController = [[MainPassiveAuthViewController alloc] init];
+    [nav pushViewController:self.mainPassiveViewController animated:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -113,4 +113,12 @@ NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+@end
+
+@implementation NSURLRequest(DataController)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
+{
+    return YES;
+}
 @end
