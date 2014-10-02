@@ -75,12 +75,6 @@
     [self.tokenCache removeAllObjects];
 }
 
-
-- (void)storeAuthenticationResponse:(NSDictionary *)authenticationResponse
-{
-    self.authenticationResponse = authenticationResponse;
-}
-
 - (NSString *)jsonifiedAuthenticationResponse
 {
     NSError *error;
@@ -100,23 +94,17 @@
 
     if (timeout > 0) {
         self.timerCallback = callback;
-        if (self.tokenTimer != nil) {
-            [self.tokenTimer invalidate];
-            self.tokenTimer = nil;
-        }
         
-        __block NSTimer *safeTokenTimer = self.tokenTimer;
-        __weak KZTokenController *safeMe = self;
+        [self.tokenTimer invalidate];
+        self.tokenTimer = nil;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            safeTokenTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
-                                                          target:safeMe
-                                                        selector:@selector(tokenExpires)
-                                                        userInfo:callback
-                                                         repeats:NO];
-            [[NSRunLoop currentRunLoop] addTimer:safeTokenTimer forMode:NSDefaultRunLoopMode];
-            [[NSRunLoop currentRunLoop] run];
-        });
+        self.tokenTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
+                                                           target:self
+                                                         selector:@selector(tokenExpires)
+                                                         userInfo:callback
+                                                          repeats:NO];
+        
+
     } else {
         NSLog(@"Warning, key expiration is zero");
     }
