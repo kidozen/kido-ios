@@ -142,8 +142,6 @@ NSString *const kAccessTokenKey = @"access_token";
             }
             else {
                 safeMe.isAuthenticated = true;
-                safeMe.kzUser.user = user;
-                safeMe.kzUser.pass = password;
                 
                 [safeMe.tokenController setAuthenticationResponse:response];
                 
@@ -154,7 +152,7 @@ NSString *const kAccessTokenKey = @"access_token";
                                                     ipKey:[safeMe getIpCacheKey]];
                 
                 [safeMe parseUserInfo:safeMe.tokenController.kzToken];
-                
+
                 [safeMe.tokenController startTokenExpirationTimer:safeMe.kzUser.expiresOn
                                                          callback:^{
                                                              [safeMe tokenExpires];
@@ -432,6 +430,8 @@ NSString *const kAccessTokenKey = @"access_token";
 -(void) parseUserInfo:(NSString *) token
 {
     self.kzUser = [[KZUser alloc] initWithToken:token];
+    self.kzUser.user = self.lastUserName;
+    self.kzUser.pass = self.lastPassword;
 }
 
 

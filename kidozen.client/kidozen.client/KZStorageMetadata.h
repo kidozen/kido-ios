@@ -8,16 +8,16 @@
 }
 
 
-@property (nonatomic, strong) NSString * _id;
-@property (nonatomic, strong) NSString * createdBy;
+@property (nonatomic, copy) NSString * _id;
+@property (nonatomic, copy) NSString * createdBy;
 @property (nonatomic, strong) NSDate * createdOn;
 @property (nonatomic) BOOL isPrivate;
 @property (nonatomic) NSInteger sync;
-@property (nonatomic, strong) NSString * updatedBy;
+@property (nonatomic, copy) NSString * updatedBy;
 @property (nonatomic, strong) NSDate * updatedOn;
 
-@property (nonatomic, strong) NSString * createdOnAsString;
-@property (nonatomic, strong) NSString * updatedOnAsString;
+@property (nonatomic, copy) NSString * createdOnAsString;
+@property (nonatomic, copy) NSString * updatedOnAsString;
 
 - (id) initWithDictionary:(NSDictionary *) dictionary;
 - (NSDictionary *) serialize;

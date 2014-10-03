@@ -42,7 +42,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
 @property (nonatomic, strong) NSURLConnection *operationConnection;
 @property (nonatomic, strong) NSObject *operationParameters;
 @property (nonatomic, strong) NSHTTPURLResponse *operationURLResponse;
-@property (nonatomic, strong) NSString *operationSavePath;
+@property (nonatomic, copy) NSString *operationSavePath;
 @property (nonatomic, assign) CFRunLoopRef operationRunLoop;
 
 #if TARGET_OS_IPHONE
@@ -61,7 +61,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
 @property (nonatomic, copy) void (^operationProgressBlock)(float progress);
 
 @property (nonatomic, readwrite) SVHTTPRequestState state;
-@property (nonatomic, strong) NSString *requestPath;
+@property (nonatomic, copy) NSString *requestPath;
 @property (nonatomic, strong) SVHTTPClient *client;
 
 @property (nonatomic, strong) NSTimer *timeoutTimer; // see http://stackoverflow.com/questions/2736967

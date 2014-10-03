@@ -17,7 +17,7 @@
     NSError  * _error;
     NSHTTPURLResponse * _httpResponse;
 }
-@property (nonatomic, strong) NSString * token;
+@property (nonatomic, copy) NSString * token;
 @property (nonatomic, strong) RequestTokenCompletionBlock requestCompletion;
 @property (nonatomic, assign) BOOL strictSSL;
 @end

@@ -31,10 +31,10 @@
 /**
  * The current user name
  */
-@property (nonatomic, strong) NSString * user;
+@property (nonatomic, copy) NSString * user;
 /**
  * The password
  */
-@property (nonatomic, strong) NSString * pass;
+@property (nonatomic, copy) NSString * pass;
 
 @end

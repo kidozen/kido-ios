@@ -43,7 +43,7 @@ typedef NSUInteger SVHTTPRequestMethod;
 + (void)setDefaultTimeoutInterval:(NSTimeInterval)interval;
 + (void)setDefaultUserAgent:(NSString*)userAgent;
 
-@property (nonatomic, strong) NSString *userAgent;
+@property (nonatomic, copy) NSString *userAgent;
 @property (nonatomic, readwrite) BOOL sendParametersAsJSON;
 @property (nonatomic, readwrite) NSURLRequestCachePolicy cachePolicy;
 @property (nonatomic, readwrite) NSUInteger timeoutInterval;
