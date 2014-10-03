@@ -131,6 +131,7 @@
               saveToPath:path
                 progress:^(float progress) {
                     
+                    // Only show the progressView if progress > 0
                     if (progress < 0) {
                         if (safeMe.activityView.isAnimating == NO) {
                             [safeMe.activityView startAnimating];
@@ -146,6 +147,8 @@
         if (error == nil) {
             [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
             [safeMe.progressView removeFromSuperview];
+        } else {
+            [safeMe handleError:error];
         }
     }];
 }
@@ -198,10 +201,13 @@
             {
                 [safeMe replacePlaceHolders];
                 [safeMe loadWebView];
+            } else {
+                [safeMe handleError:error];
             }
             
         } else {
             [safeMe.activityView stopAnimating];
+            [safeMe handleError:nil];
         }
     });
 }
@@ -212,7 +218,7 @@
     NSError *error;
     NSString *indexString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
     if (error != nil) {
-        NSLog(@"Error found while opening for replacing placeholder values. %@", error);
+        [self handleError:error];
     }
 
     NSString *options;
@@ -232,7 +238,7 @@
     NSError *writeError;
     [indexString writeToURL:url atomically:YES encoding:NSUTF8StringEncoding error:&writeError];
     if (writeError != nil) {
-        NSLog(@"Error while writing replaced index.html. %@", writeError);
+        [self handleError:writeError];
     }
 }
 
@@ -274,11 +280,14 @@
     [self handleError:error];
 }
 
-
 - (void) handleError:(NSError *)error
 {
-    
-    NSString *message = [NSString stringWithFormat:@"Error while loading visualization. Please try again later. Error is %@", error];
+    NSString *message;
+    if (error != nil) {
+        message = [NSString stringWithFormat:@"Error while loading visualization. Please try again later. Error is %@", error];
+    } else {
+        message = @"Please try again later";
+    }
     
     [[[UIAlertView alloc] initWithTitle:@"Could not load visualization"
                                 message:message
@@ -288,9 +297,6 @@
 
     [self dismissModalViewControllerAnimated:YES];
 }
-
-
-
 
 - (NSString *)tempDirectory
 {
