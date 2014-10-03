@@ -14,8 +14,8 @@
 #import "KZUser.h"
 #import "KZApplicationConfiguration.h"
 
-#define kAuthenticationString @"authenticationResponse"
 #define kDownloadURLTemplate @"%@api/v2/visualizations/%@/app/download?type=mobile"
+
 @interface KZDataVisualizationViewController () <UIWebViewDelegate>
 
 @property (nonatomic, copy) NSString *downloadURLString;
@@ -34,14 +34,11 @@
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *provider;
 
 @end
 
 @implementation KZDataVisualizationViewController
-
-- (void) dealloc {
-    [self.tokenController removeObserver:self forKeyPath:kAuthenticationString];
-}
 
 - (instancetype) initWithApplicationConfig:(KZApplicationConfiguration *)appConfig
                                    appAuth:(KZApplicationAuthentication *)appAuth
@@ -58,6 +55,7 @@
         
         self.username = appAuth.kzUser.user;
         self.password = appAuth.kzUser.pass;
+        self.provider = appAuth.kzUser.provider;
         
         self.tenantName = tenant;
         
@@ -80,7 +78,6 @@
     [self configureActivityView];
     [self configureProgressView];
     [self downloadZipFile];
-    
 
 }
 
@@ -221,13 +218,7 @@
         [self handleError:error];
     }
 
-    NSString *options;
-    if (self.username != nil && self.password != nil) {
-        options = [NSString stringWithFormat:@"{\"token\" : %@, \"username\" : \"%@\", \"password\":\"%@\"}", [self.tokenController jsonifiedAuthenticationResponse], self.username, self.password];
-    } else {
-        options = [NSString stringWithFormat:@"{\"token\" : %@ }", [self.tokenController jsonifiedAuthenticationResponse]];
-    }
-    
+    NSString *options = [self stringOptionsForTokenRefresh];
     NSString *marketplace = [NSString stringWithFormat:@"\"%@\"", self.tenantName];
     NSString *appName = [NSString stringWithFormat:@"\"%@\"", self.appName];
     
@@ -243,7 +234,27 @@
 }
 
 
-
+- (NSString *) stringOptionsForTokenRefresh {
+    NSData *jsonData;
+    if (self.username != nil && self.password != nil && self.provider != nil ) {
+        
+        jsonData = [NSJSONSerialization dataWithJSONObject:@{ @"token" : self.tokenController.authenticationResponse,
+                                                          @"username" : self.username,
+                                                          @"password" : self.password,
+                                                          @"provider" : self.provider
+                                                          }
+                                               options:0
+                                                 error:nil];
+        
+        
+    } else {
+        jsonData = [NSJSONSerialization dataWithJSONObject:@{ @"token" : self.tokenController.authenticationResponse}
+                                               options:0
+                                                 error:nil];
+    }
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
 
 - (void)loadWebView {
     NSURL *url = [self indexFileURL];

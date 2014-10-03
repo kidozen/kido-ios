@@ -33,6 +33,12 @@
     }
 }
 
+- (NSDictionary *)authenticationResponse
+{
+    NSLog(@"Expiration time is %@", _authenticationResponse[@"expirationTime"]);
+    return _authenticationResponse;
+}
+
 - (void) updateIPTokenWith:(NSString *)ipToken ipKey:(NSString *)ipKey
 {
     if (ipToken != nil && ipToken.length > 0) {
@@ -75,15 +81,6 @@
     [self.tokenCache removeAllObjects];
 }
 
-- (NSString *)jsonifiedAuthenticationResponse
-{
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.authenticationResponse
-                                                       options:0
-                                                         error:&error];
-    
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-}
 
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
 {

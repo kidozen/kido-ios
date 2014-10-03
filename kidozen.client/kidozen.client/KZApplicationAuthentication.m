@@ -432,6 +432,8 @@ NSString *const kAccessTokenKey = @"access_token";
     self.kzUser = [[KZUser alloc] initWithToken:token];
     self.kzUser.user = self.lastUserName;
     self.kzUser.pass = self.lastPassword;
+    self.kzUser.provider = self.lastProviderKey;
+    
 }
 
 
