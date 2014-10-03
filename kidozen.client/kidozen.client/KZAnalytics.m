@@ -14,6 +14,7 @@
 @interface KZAnalytics ()
 
 @property (nonatomic, strong) KZAnalyticsSession *session;
+@property (nonatomic, strong) KZLogging *loggingService;
 @property (nonatomic, strong) KZAnalyticsUploader *sessionUploader;
 
 @end
@@ -25,11 +26,18 @@
     self = [super init];
     if (self) {
         self.session = [[KZAnalyticsSession alloc] init];
-        self.sessionUploader = [[KZAnalyticsUploader alloc] initWithSession:self.session
-                                                             loggingService:logging];
-        
+        self.loggingService = logging;
     }
     return self;
+}
+
+- (void)enableAnalytics:(BOOL)enable {
+    if (enable == YES) {
+        self.sessionUploader = [[KZAnalyticsUploader alloc] initWithSession:self.session
+                                                             loggingService:self.loggingService];
+    } else {
+        self.sessionUploader = nil;
+    }
 }
 
 - (void)tagClick:(NSString *)buttonName
