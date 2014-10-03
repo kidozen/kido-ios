@@ -38,8 +38,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		6D0326FE19DAFD36009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC953B219D5B313005E3540 /* libz.dylib */; };
-		6D03270219DAFD65009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC953B219D5B313005E3540 /* libz.dylib */; };
 		6D03273619DC519A009C8B2B /* AutoCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D03271A19DC519A009C8B2B /* AutoCoding.h */; };
 		6D03273719DC519A009C8B2B /* AutoCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03271B19DC519A009C8B2B /* AutoCoding.m */; };
 		6D03273819DC519A009C8B2B /* KZAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D03271C19DC519A009C8B2B /* KZAnalytics.h */; };
@@ -68,6 +66,7 @@
 		6D03274F19DC519A009C8B2B /* NSString+Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03273319DC519A009C8B2B /* NSString+Path.m */; };
 		6D03275019DC519A009C8B2B /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D03273419DC519A009C8B2B /* Reachability.h */; };
 		6D03275119DC519A009C8B2B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03273519DC519A009C8B2B /* Reachability.m */; };
+		6D0327A919DED93D009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC953B219D5B313005E3540 /* libz.dylib */; };
 		6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DCEDD9D1938D26600A38C39 /* KZAuthenticationConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D1C85AF1917B71A00E59BD8 /* loggingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C85AE1917B71A00E59BD8 /* loggingTests.m */; };
 		6D291A88191BFE28003AEFAF /* storageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D291A87191BFE28003AEFAF /* storageTests.m */; };
@@ -155,7 +154,6 @@
 		AA211CDE1667B35600848407 /* KZStorageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = AA211CDB1667B35600848407 /* KZStorageMetadata.m */; };
 		AA50FE9518E5CD3B00DE42F7 /* KZCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = AA50FE9318E5CD3B00DE42F7 /* KZCrashReporter.m */; };
 		AA50FE9618E5CD3B00DE42F7 /* KZCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = AA50FE9418E5CD3B00DE42F7 /* KZCrashReporter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4204165D327400EB6443 /* libicucore.dylib */; };
 		AAC92C471725954200D1FF88 /* KZService.h in Headers */ = {isa = PBXBuildFile; fileRef = AAC92C451725954200D1FF88 /* KZService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAC92C481725954200D1FF88 /* KZService.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC92C461725954200D1FF88 /* KZService.m */; };
@@ -166,7 +164,6 @@
 		AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
 		AAE6E8DA18C10D8100FB046A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0F7EB01730515200C55706 /* UIKit.framework */; };
 		AAE6E8E018C10D8100FB046A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAE6E8DE18C10D8100FB046A /* InfoPlist.strings */; };
-		AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33E1843BAEB00CBCFC2 /* Constants.h */; };
 		AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = AA68A33F1843BAEB00CBCFC2 /* Constants.m */; };
 		AAE6E8EB18C10DBF00FB046A /* datasourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88418C0E80B00FB046A /* datasourceTests.m */; };
 		AAEF1B8916A755B900A33C76 /* NSData+Conversion.h in Headers */ = {isa = PBXBuildFile; fileRef = AAEF1B8716A755B900A33C76 /* NSData+Conversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -408,8 +405,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D0326FE19DAFD36009C8B2B /* libz.dylib in Frameworks */,
-				AA7418B41843B9360084C779 /* libicucore.dylib in Frameworks */,
 				AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */,
 				AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */,
 				AA0F7EAD1730514000C55706 /* Security.framework in Frameworks */,
@@ -421,7 +416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D03270219DAFD65009C8B2B /* libz.dylib in Frameworks */,
+				6D0327A919DED93D009C8B2B /* libz.dylib in Frameworks */,
 				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
@@ -1025,7 +1020,6 @@
 			files = (
 				6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
 				AACBD73B18CA579400518D14 /* applicationTests.m in Sources */,
-				AAE6E8E918C10DBF00FB046A /* Constants.h in Sources */,
 				6D40014F1976CE9E00D5F511 /* smsTests.m in Sources */,
 				AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */,
 				6D677C401921073B000DF367 /* mailTests.m in Sources */,
