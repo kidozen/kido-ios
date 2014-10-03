@@ -217,7 +217,7 @@
 
     NSString *options;
     if (self.username != nil && self.password != nil) {
-        options = [NSString stringWithFormat:@"{\"token\" : %@, \"username\" : %@, \"password\":%@}", [self.tokenController jsonifiedAuthenticationResponse], self.username, self.password];
+        options = [NSString stringWithFormat:@"{\"token\" : %@, \"username\" : \"%@\", \"password\":\"%@\"}", [self.tokenController jsonifiedAuthenticationResponse], self.username, self.password];
     } else {
         options = [NSString stringWithFormat:@"{\"token\" : %@ }", [self.tokenController jsonifiedAuthenticationResponse]];
     }
