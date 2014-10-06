@@ -60,6 +60,8 @@
 - (void) tagEvent:(NSString *)customEventName
        attributes:(NSDictionary *)attributes;
 
+- (void) enableAnalytics;
+
 #pragma mark - Email
 
 -(void) sendMailTo:(NSString *)to

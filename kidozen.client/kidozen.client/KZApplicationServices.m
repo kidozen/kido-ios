@@ -217,6 +217,10 @@
                   attributes:attributes];
 }
 
+- (void) enableAnalytics
+{
+    [self.analytics enableAnalytics:YES];
+}
 
 #pragma mark - Email
 

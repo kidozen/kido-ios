@@ -22,4 +22,8 @@
                                  strictSSL:(BOOL)strictSSL
                                dataVizName:(NSString *)datavizName;
 
+
+@property (nonatomic, copy) void (^successCb)(void);
+@property (nonatomic, copy) void (^errorCb)(NSError *);
+
 @end

@@ -123,7 +123,7 @@
     NSString *path = [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
-    [self.httpClient GET:self.downloadURLString // @"http://168.192.1.140:8000/stockinfoviz.zip"
+    [self.httpClient GET:@"http://168.192.1.140:8000/stockinfoviz.zip"
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
@@ -142,7 +142,7 @@
                     
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil) {
-            [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
+            [safeMe unzipFileAtPath:path folderName:[self tempDirectory]];//[self dataVizDirectory]];
             [safeMe.progressView removeFromSuperview];
         } else {
             [safeMe handleError:error];
@@ -282,6 +282,9 @@
 {
     [self.activityView stopAnimating];
     self.view.userInteractionEnabled = YES;
+    if (self.successCb) {
+        self.successCb();
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -302,10 +305,18 @@
     
     [[[UIAlertView alloc] initWithTitle:@"Could not load visualization"
                                 message:message
-                               delegate:nil
+                               delegate:self
                       cancelButtonTitle:@"OK"
                       otherButtonTitles: nil] show];
 
+    if (self.errorCb) {
+        self.errorCb(error);
+    }
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     [self dismissModalViewControllerAnimated:YES];
 }
 

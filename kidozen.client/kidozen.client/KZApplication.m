@@ -387,19 +387,25 @@
                     attributes:attributes];
 }
 
+- (void) enableAnalytics
+{
+    [self.appServices enableAnalytics];
+}
+
 @end
 
 
 @implementation KZApplication(DataVisualization)
 
-- (void)showDataVisualizationWithName:(NSString *)datavizName
+- (void)showDataVisualizationWithName:(NSString *)datavizName sucess:(void (^)(void))success error:(void (^)(NSError *error))failure
 {
     KZDataVisualizationViewController *vc = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
                                                                                                          appAuth:self.appAuthentication
                                                                                                           tenant:self.tenantMarketPlace
                                                                                                        strictSSL:self.strictSSL
                                                                                                      dataVizName:datavizName];
-    
+    vc.successCb = success;
+    vc.errorCb = failure;
     
     UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     

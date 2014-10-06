@@ -90,6 +90,8 @@
 		6D8017EF1968A74800E99FB7 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8017ED1968A74800E99FB7 /* Base64.m */; };
 		6D97AE1019D4A9C00004A31E /* KZDataVisualizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D97AE1119D4A9C00004A31E /* KZDataVisualizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */; };
+		6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */; };
+		6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */; };
 		6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */; };
 		6DC9539C19D5ADA4005E3540 /* SSZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC9539A19D5ADA4005E3540 /* SSZipArchive.h */; };
@@ -308,6 +310,8 @@
 		6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../thirdParty/SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
 		6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDataVisualizationViewController.h; sourceTree = "<group>"; };
 		6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDataVisualizationViewController.m; sourceTree = "<group>"; };
+		6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
 		6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationServices.m; sourceTree = "<group>"; };
 		6DC9539A19D5ADA4005E3540 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSZipArchive.h; path = ../../thirdParty/SSZipArchive/SSZipArchive.h; sourceTree = "<group>"; };
@@ -416,6 +420,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */,
+				6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */,
 				6D0327A919DED93D009C8B2B /* libz.dylib in Frameworks */,
 				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
@@ -655,6 +661,8 @@
 		8EB865291614D11800DD60E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */,
+				6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */,
 				6DC953B219D5B313005E3540 /* libz.dylib */,
 				6D43DBDF1968BF2300D023CF /* kz.client.a */,
 				6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */,

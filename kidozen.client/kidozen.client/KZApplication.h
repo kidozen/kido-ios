@@ -282,10 +282,14 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 - (void) tagEvent:(NSString *)customEventName
        attributes:(NSDictionary *)attributes;
 
+- (void) enableAnalytics;
+
 @end
 
 @interface KZApplication(DataVisualization)
 
-- (void)showDataVisualizationWithName:(NSString *)datavizName;
+- (void)showDataVisualizationWithName:(NSString *)datavizName
+                               sucess:(void (^)(void))success
+                                error:(void (^)(NSError *error))failure;
 
 @end
