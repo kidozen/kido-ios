@@ -32,7 +32,11 @@
     NSString *datavizName = self.dataVizNameTextField.text;
     
     if (datavizName.length > 0) {
-        [self.kzApplication showDataVisualizationWithName:datavizName];
+        [self.kzApplication showDataVisualizationWithName:datavizName sucess:^{
+            NSLog(@"yeah.. app loaded");
+        } error:^(NSError *error) {
+            NSLog(@"Error found... %@", error);
+        }];
     }
 }
 
