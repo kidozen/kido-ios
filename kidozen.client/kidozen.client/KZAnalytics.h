@@ -13,6 +13,11 @@
 // By Default, analytics are disabled.
 - (void)enableAnalytics:(BOOL)enable;
 
+// this method will erase all current and saved analytics and
+// start over.
+- (void)resetAnalytics;
+
+
 - (void)tagClick:(NSString *)buttonName;
 - (void)tagView:(NSString *)viewName;
 

@@ -33,12 +33,6 @@
     }
 }
 
-- (NSDictionary *)authenticationResponse
-{
-    NSLog(@"Expiration time is %@", _authenticationResponse[@"expirationTime"]);
-    return _authenticationResponse;
-}
-
 - (void) updateIPTokenWith:(NSString *)ipToken ipKey:(NSString *)ipKey
 {
     if (ipToken != nil && ipToken.length > 0) {

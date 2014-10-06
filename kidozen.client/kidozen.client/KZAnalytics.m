@@ -40,6 +40,12 @@
     }
 }
 
+- (void)resetAnalytics {
+    [self.session removeSavedEvents];
+    [self.session removeCurrentEvents];
+    [self.session startNewSession];
+}
+
 - (void)tagClick:(NSString *)buttonName
 {
     KZClickEvent *clickEvent = [[KZClickEvent alloc] initWithEventValue:buttonName
