@@ -179,8 +179,8 @@
     // If user authenticated with username and password, one way to test whether it successfully
     // overrode the applicationKey token, is to try to call a datasource which only has permissions
     // to run using username and password.
-//    [self executeDataSource];
-    [self clearLog];
+    [self executeDataSource];
+//    [self clearLog];
     
 }
 
