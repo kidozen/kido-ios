@@ -27,9 +27,9 @@
 
 // This property tells us how much time the app needs to be in the background
 // so that, when it comes to foreground, a new session is considered or not.
-@property (nonatomic, assign) NSUInteger sessionTimeOut;
+@property (nonatomic, assign) NSUInteger sessionSecondsTimeOut;
 
 // This is the maximum amount of seconds until we upload events.
-@property (nonatomic, assign) NSUInteger uploadMaxThreshold;
+@property (nonatomic, assign) NSUInteger uploadMaxSecondsThreshold;
 
 @end

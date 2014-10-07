@@ -46,6 +46,22 @@
     [self.session startNewSession];
 }
 
+- (void)setSessionSecondsTimeOut:(NSUInteger)sessionSecondsTimeOut {
+    self.session.sessionTimeout = sessionSecondsTimeOut;
+}
+
+- (NSUInteger) sessionSecondsTimeOut {
+    return self.session.sessionTimeout;
+}
+
+- (void)setUploadMaxSecondsThreshold:(NSUInteger)uploadMaxSecondsThreshold {
+    self.sessionUploader.maximumSecondsToUpload = uploadMaxSecondsThreshold;
+}
+
+- (NSUInteger)uploadMaxSecondsThreshold {
+    return self.sessionUploader.maximumSecondsToUpload;
+}
+
 - (void)tagClick:(NSString *)buttonName
 {
     KZClickEvent *clickEvent = [[KZClickEvent alloc] initWithEventValue:buttonName
