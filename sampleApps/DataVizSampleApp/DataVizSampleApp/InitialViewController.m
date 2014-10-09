@@ -21,6 +21,7 @@
     [super viewDidLoad];
     [self.activityIndicator startAnimating];
     self.view.userInteractionEnabled = NO;
+    self.title = @"Kidozen";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,7 +34,7 @@
     
     if (datavizName.length > 0) {
         [self.kzApplication showDataVisualizationWithName:datavizName sucess:^{
-            NSLog(@"yeah.. app loaded");
+            NSLog(@"Data Visualization loaded");
         } error:^(NSError *error) {
             NSLog(@"Error found... %@", error);
         }];
