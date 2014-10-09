@@ -123,7 +123,7 @@
     NSString *path = [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
 
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
-    [self.httpClient GET:@"http://168.192.1.140:8000/stockinfoviz.zip"
+    [self.httpClient GET:self.downloadURLString
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
@@ -142,7 +142,7 @@
                     
     } completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil) {
-            [safeMe unzipFileAtPath:path folderName:[self tempDirectory]];//[self dataVizDirectory]];
+            [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
             [safeMe.progressView removeFromSuperview];
         } else {
             [safeMe handleError:error];
@@ -239,9 +239,9 @@
     if (self.username != nil && self.password != nil && self.provider != nil ) {
         
         jsonData = [NSJSONSerialization dataWithJSONObject:@{ @"token" : self.tokenController.authenticationResponse,
-                                                          @"username" : self.username,
-                                                          @"password" : self.password,
-                                                          @"provider" : self.provider
+                                                           @"username" : self.username,
+                                                           @"password" : self.password,
+                                                           @"provider" : self.provider
                                                           }
                                                options:0
                                                  error:nil];
