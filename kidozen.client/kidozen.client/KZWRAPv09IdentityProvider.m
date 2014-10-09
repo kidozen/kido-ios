@@ -1,5 +1,6 @@
 #import "KZWRAPv09IdentityProvider.h"
 #import "NSString+Utilities.h"
+#import "NSData+Conversion.h"
 
 @interface KZWRAPv09IdentityProvider (private)
 - (NSString *) getAssert:(NSString *) text;
@@ -32,6 +33,11 @@
         if ([urlResponse statusCode]>300) {
             NSMutableDictionary* details = [NSMutableDictionary dictionary];
             [details setValue:[NSHTTPURLResponse localizedStringForStatusCode:[urlResponse statusCode]] forKey:NSLocalizedDescriptionKey];
+            
+            if ([response isKindOfClass:[NSData class]]) {
+                NSData *data = response;
+                [details setValue:[data KZ_UTF8String] forKey:@"errorDescription"];
+            }
             restError = [NSError errorWithDomain:@"testsIdentityProvider" code:[urlResponse statusCode] userInfo:details];
             block(nil, restError);
         }
