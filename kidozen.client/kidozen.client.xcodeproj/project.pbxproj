@@ -40,7 +40,7 @@
 /* Begin PBXBuildFile section */
 		6D03273619DC519A009C8B2B /* AutoCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D03271A19DC519A009C8B2B /* AutoCoding.h */; };
 		6D03273719DC519A009C8B2B /* AutoCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03271B19DC519A009C8B2B /* AutoCoding.m */; };
-		6D03273819DC519A009C8B2B /* KZAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D03271C19DC519A009C8B2B /* KZAnalytics.h */; };
+		6D03273819DC519A009C8B2B /* KZAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D03271C19DC519A009C8B2B /* KZAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D03273919DC519A009C8B2B /* KZAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03271D19DC519A009C8B2B /* KZAnalytics.m */; };
 		6D03273A19DC519A009C8B2B /* KZAnalyticsSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D03271E19DC519A009C8B2B /* KZAnalyticsSession.h */; };
 		6D03273B19DC519A009C8B2B /* KZAnalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03271F19DC519A009C8B2B /* KZAnalyticsSession.m */; };
