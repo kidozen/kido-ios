@@ -20,6 +20,7 @@
 @class KZNotification;
 @class KZMail;
 @class KZDatasource;
+@class KZAnalytics;
 
 #if TARGET_OS_IPHONE
 @class KZPubSubChannel;
@@ -273,6 +274,8 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 
 #pragma mark - Analytics
+
+@property (readonly, nonatomic) KZAnalytics *analytics;
 
 
 - (void)tagClick:(NSString *)buttonName;
