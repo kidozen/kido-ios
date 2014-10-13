@@ -14,7 +14,7 @@
 #import "KZApplicationServices.h"
 #import "KZCrashReporter.h"
 #import "KZDataVisualizationViewController.h"
-
+#import "KZAnalytics.h"
 
 @interface KZApplication ()
 
@@ -369,6 +369,10 @@
 }
 
 #pragma mark - Analytics
+
+- (KZAnalytics *)analytics {
+    return self.appServices.analytics;
+}
 
 - (void)tagClick:(NSString *)buttonName
 {

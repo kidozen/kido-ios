@@ -21,6 +21,7 @@
 @class KZResponse;
 @class KZMail;
 @class KZNotification;
+@class KZAnalytics;
 
 /*
  * The main idea of this class is to handle everything related to Logging,
@@ -52,6 +53,8 @@
 
 
 #pragma mark - Analytics
+
+@property (nonatomic, readonly) KZAnalytics *analytics;
 
 - (void)tagClick:(NSString *)buttonName;
 
