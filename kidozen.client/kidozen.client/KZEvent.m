@@ -22,7 +22,8 @@
 {
     self = [super init];
     if (self) {
-        self.eventName = eventName;
+        NSCharacterSet *chSet = [NSCharacterSet characterSetWithCharactersInString:@" -,.;:"];
+        self.eventName = [[eventName componentsSeparatedByCharactersInSet: chSet] componentsJoinedByString: @""];
         self.sessionUUID = sessionUUID;
     }
     return self;
