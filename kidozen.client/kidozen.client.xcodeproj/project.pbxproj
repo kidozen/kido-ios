@@ -88,6 +88,8 @@
 		6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D6C85EE18F2D17A002CA3A0 /* libc++.dylib */; };
 		6D8017EE1968A74800E99FB7 /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8017EC1968A74800E99FB7 /* Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D8017EF1968A74800E99FB7 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8017ED1968A74800E99FB7 /* Base64.m */; };
+		6D8CEE0619F01D7700259796 /* KZLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8CEE0419F01D7700259796 /* KZLocationManager.h */; };
+		6D8CEE0719F01D7700259796 /* KZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8CEE0519F01D7700259796 /* KZLocationManager.m */; };
 		6D97AE1019D4A9C00004A31E /* KZDataVisualizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D97AE1119D4A9C00004A31E /* KZDataVisualizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */; };
 		6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */; };
@@ -308,6 +310,8 @@
 		6D8017ED1968A74800E99FB7 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = ../../thirdParty/Base64/Base64.m; sourceTree = "<group>"; };
 		6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CrashReporter.xcodeproj; path = "../thirdParty/plcrashreporter-1.2-rc4/CrashReporter.xcodeproj"; sourceTree = "<group>"; };
 		6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../thirdParty/SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
+		6D8CEE0419F01D7700259796 /* KZLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZLocationManager.h; sourceTree = "<group>"; };
+		6D8CEE0519F01D7700259796 /* KZLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZLocationManager.m; sourceTree = "<group>"; };
 		6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDataVisualizationViewController.h; sourceTree = "<group>"; };
 		6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDataVisualizationViewController.m; sourceTree = "<group>"; };
 		6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -464,6 +468,8 @@
 				6D03273119DC519A009C8B2B /* KZViewEvent.m */,
 				6D03273419DC519A009C8B2B /* Reachability.h */,
 				6D03273519DC519A009C8B2B /* Reachability.m */,
+				6D8CEE0419F01D7700259796 /* KZLocationManager.h */,
+				6D8CEE0519F01D7700259796 /* KZLocationManager.m */,
 			);
 			name = Analytics;
 			sourceTree = "<group>";
@@ -786,6 +792,7 @@
 				6D4ACD491937CBA400958E65 /* KZObject.h in Headers */,
 				AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */,
 				6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */,
+				6D8CEE0619F01D7700259796 /* KZLocationManager.h in Headers */,
 				6D03273E19DC519A009C8B2B /* KZClickEvent.h in Headers */,
 				6D03273C19DC519A009C8B2B /* KZAnalyticsUploader.h in Headers */,
 				AAC92C471725954200D1FF88 /* KZService.h in Headers */,
@@ -1010,6 +1017,7 @@
 				6D03273919DC519A009C8B2B /* KZAnalytics.m in Sources */,
 				8E0774B01619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m in Sources */,
 				8E0774B11619D9AF00FA21D9 /* NSDictionary+JSONCategories.m in Sources */,
+				6D8CEE0719F01D7700259796 /* KZLocationManager.m in Sources */,
 				8E0774B31619D9AF00FA21D9 /* Query.m in Sources */,
 				8E0774B61619DC7E00FA21D9 /* KZApplication.m in Sources */,
 				AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */,

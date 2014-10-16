@@ -11,7 +11,7 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
-
+#import "KZLocationManager.h"
 
 @interface KZDeviceInfo()
 
@@ -21,6 +21,8 @@
 @property (nonatomic, copy, readwrite) NSString *systemVersion;
 @property (nonatomic, strong) CTTelephonyNetworkInfo *networkInfo;
 @property (nonatomic, strong) Reachability *reachability;
+@property (nonatomic, readwrite, copy) NSString *isoCountryCode;
+@property (nonatomic, strong) KZLocationManager *locationManager;
 
 @end
 
@@ -48,6 +50,16 @@
     self.deviceModel = currentDevice.model;
     self.systemVersion = currentDevice.systemVersion;
     
+    self.isoCountryCode = @"Unknown";
+
+    self.locationManager = [[KZLocationManager alloc] init];
+    __weak KZDeviceInfo *safeMe = self;
+    
+    self.locationManager.didUpdateLocation = ^(CLPlacemark *placemark) {
+        safeMe.isoCountryCode = placemark.ISOcountryCode;
+    };
+
+    
 }
 - (CTCarrier *)configureCarrier
 {
@@ -64,17 +76,7 @@
 
 - (NSString *)carrierName
 {
-    return self.carrier.carrierName ?: @"Simulated Carrier";
-}
-
-- (NSString *)mobileCountryCode
-{
-    return self.carrier.mobileCountryCode ? : @"Simulated Country Code";
-}
-
-- (NSString *)isoCountryCode
-{
-    return self.carrier.isoCountryCode ?: @"Simulated Country Code";
+    return self.carrier.carrierName ?: @"Unknown";
 }
 
 - (NSString *)configureAppVersion
@@ -91,7 +93,6 @@
 {
     return @{@"carrierName": self.carrierName,
              @"networkAccess": self.currentRadioAccessTechnology,
-             @"mobileCountryCode" : self.mobileCountryCode,
              @"isoCountryCode" : self.isoCountryCode,
              @"deviceModel" : self.deviceModel ? : @"Simulator",
              @"systemVersion" : self.systemVersion,
