@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D03276419DC98CF009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03276319DC98CF009C8B2B /* libz.dylib */; };
 		6D1B213C196ED8E500088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B213B196ED8E500088F5C /* kz.client.a */; };
+		6D8CEE2219F070BC00259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE2119F070BC00259796 /* CoreLocation.framework */; };
 		6D99202818EF339D000A6C5D /* libCrashSampleLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D99202618EF339D000A6C5D /* libCrashSampleLib.a */; };
 		6DC4794E19C9BA460050FC2A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */; };
 		6DC4795019C9BA5B0050FC2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		6D03276319DC98CF009C8B2B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6D1B213B196ED8E500088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
+		6D8CEE2119F070BC00259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6D99202618EF339D000A6C5D /* libCrashSampleLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrashSampleLib.a; path = crasherLib/libCrashSampleLib.a; sourceTree = "<group>"; };
 		6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -75,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE2219F070BC00259796 /* CoreLocation.framework in Frameworks */,
 				6D03276419DC98CF009C8B2B /* libz.dylib in Frameworks */,
 				6DC4795019C9BA5B0050FC2A /* SystemConfiguration.framework in Frameworks */,
 				6DC4794E19C9BA460050FC2A /* CoreTelephony.framework in Frameworks */,
@@ -123,6 +126,7 @@
 		6DF1E9EA18EC6EB9000C3AA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D8CEE2119F070BC00259796 /* CoreLocation.framework */,
 				6D03276319DC98CF009C8B2B /* libz.dylib */,
 				6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */,
 				6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */,

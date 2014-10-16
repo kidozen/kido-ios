@@ -30,6 +30,7 @@
 		6D76F52D1923E3DB000A361F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F5151923E3DA000A361F /* UIKit.framework */; };
 		6D76F5351923E3DB000A361F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D76F5331923E3DB000A361F /* InfoPlist.strings */; };
 		6D76F5371923E3DB000A361F /* SamplePassiveAuthAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D76F5361923E3DB000A361F /* SamplePassiveAuthAppTests.m */; };
+		6D8CEE2419F070D100259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE2319F070D100259796 /* CoreLocation.framework */; };
 		6DE2A04D19241B230020C69A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE2A04C19241B230020C69A /* libicucore.dylib */; };
 		6DE2A05219241B2F0020C69A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCB83A91924198300D14C02 /* libc++.dylib */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		6D76F5321923E3DB000A361F /* SamplePassiveAuthAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SamplePassiveAuthAppTests-Info.plist"; sourceTree = "<group>"; };
 		6D76F5341923E3DB000A361F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D76F5361923E3DB000A361F /* SamplePassiveAuthAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SamplePassiveAuthAppTests.m; sourceTree = "<group>"; };
+		6D8CEE2319F070D100259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6DCB83A91924198300D14C02 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6DCB877E19463ECC005B75B9 /* next.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = next.html; sourceTree = "<group>"; };
 		6DCB877F19463ECC005B75B9 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE2419F070D100259796 /* CoreLocation.framework in Frameworks */,
 				6D03275819DC52B7009C8B2B /* CoreTelephony.framework in Frameworks */,
 				6D03275619DC52AC009C8B2B /* SystemConfiguration.framework in Frameworks */,
 				6D03275419DC5294009C8B2B /* CFNetwork.framework in Frameworks */,
@@ -135,6 +138,7 @@
 		6D76F5101923E3DA000A361F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D8CEE2319F070D100259796 /* CoreLocation.framework */,
 				6D03275719DC52B7009C8B2B /* CoreTelephony.framework */,
 				6D03275519DC52AC009C8B2B /* SystemConfiguration.framework */,
 				6D03275319DC5294009C8B2B /* CFNetwork.framework */,

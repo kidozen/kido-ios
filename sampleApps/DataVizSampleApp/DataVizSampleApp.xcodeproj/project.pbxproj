@@ -19,6 +19,7 @@
 		6D0327A319DD85FB009C8B2B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0327A219DD85FB009C8B2B /* libc++.dylib */; };
 		6D0327A719DD8700009C8B2B /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0327A519DD8700009C8B2B /* InitialViewController.m */; };
 		6D0327A819DD8700009C8B2B /* InitialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D0327A619DD8700009C8B2B /* InitialViewController.xib */; };
+		6D8CEE2019F070A100259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE1F19F070A100259796 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		6D0327A419DD8700009C8B2B /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
 		6D0327A519DD8700009C8B2B /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
 		6D0327A619DD8700009C8B2B /* InitialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitialViewController.xib; sourceTree = "<group>"; };
+		6D8CEE1F19F070A100259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE2019F070A100259796 /* CoreLocation.framework in Frameworks */,
 				6D0327A319DD85FB009C8B2B /* libc++.dylib in Frameworks */,
 				6D0327A119DD85F5009C8B2B /* libicucore.dylib in Frameworks */,
 				6D03279F19DD85EA009C8B2B /* CoreTelephony.framework in Frameworks */,
@@ -138,6 +141,7 @@
 		6D03279D19DD85B4009C8B2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D8CEE1F19F070A100259796 /* CoreLocation.framework */,
 				6D0327A219DD85FB009C8B2B /* libc++.dylib */,
 				6D0327A019DD85F5009C8B2B /* libicucore.dylib */,
 				6D03279E19DD85EA009C8B2B /* CoreTelephony.framework */,
@@ -449,6 +453,7 @@
 				6D03279319DD84E9009C8B2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D03279419DD84E9009C8B2B /* Build configuration list for PBXNativeTarget "DataVizSampleAppTests" */ = {
 			isa = XCConfigurationList;
@@ -457,6 +462,7 @@
 				6D03279619DD84E9009C8B2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
