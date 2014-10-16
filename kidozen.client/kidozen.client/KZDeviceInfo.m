@@ -28,6 +28,17 @@
 
 @implementation KZDeviceInfo
 
+
++ (instancetype)sharedDeviceInfo {
+    
+    static KZDeviceInfo *sharedDevice = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedDevice = [[self alloc] init];
+    });
+    return sharedDevice;
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -43,6 +54,11 @@
     return self;
 }
 
+- (void) enableGeoLocation
+{
+    [self.locationManager enableLocationMgr];
+}
+
 - (void)configureDeviceInfo
 {
     UIDevice *currentDevice = [UIDevice currentDevice];
@@ -56,6 +72,7 @@
     __weak KZDeviceInfo *safeMe = self;
     
     self.locationManager.didUpdateLocation = ^(CLPlacemark *placemark) {
+        NSLog(@"Location is %@", placemark.ISOcountryCode);
         safeMe.isoCountryCode = placemark.ISOcountryCode;
     };
 

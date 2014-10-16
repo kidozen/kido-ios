@@ -8,7 +8,9 @@
 
 #import "KZObject.h"
 
-@interface KZDeviceInfo : KZObject
+@interface KZDeviceInfo : NSObject
+
++(instancetype) sharedDeviceInfo;
 
 @property (nonatomic, copy, readonly) NSString *appVersion;
 @property (nonatomic, copy, readonly) NSString *deviceModel;
@@ -18,5 +20,6 @@
 
 - (NSDictionary *)properties;
 - (NSString *) getUniqueIdentification;
+- (void) enableGeoLocation;
 
 @end

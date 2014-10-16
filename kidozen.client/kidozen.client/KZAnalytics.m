@@ -10,6 +10,7 @@
 #import "KZSessionEvent.h"
 #import "KZAnalyticsSession.h"
 #import "KZAnalyticsUploader.h"
+#import "KZDeviceInfo.h"
 
 @interface KZAnalytics ()
 
@@ -35,6 +36,8 @@
     if (enable == YES) {
         self.sessionUploader = [[KZAnalyticsUploader alloc] initWithSession:self.session
                                                              loggingService:self.loggingService];
+        [[KZDeviceInfo sharedDeviceInfo] enableGeoLocation];
+        
     } else {
         self.sessionUploader = nil;
     }

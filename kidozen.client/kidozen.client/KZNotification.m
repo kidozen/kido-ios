@@ -15,7 +15,7 @@
     self = [super initWithEndpoint:endpoint andName:name];
     if (self)
     {
-        KZDeviceInfo *info = [[KZDeviceInfo alloc] init];
+        KZDeviceInfo *info = [KZDeviceInfo sharedDeviceInfo];
         self.uniqueIdentifier = [info getUniqueIdentification];
     }
     return self;

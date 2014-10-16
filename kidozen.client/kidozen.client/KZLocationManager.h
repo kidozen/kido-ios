@@ -13,7 +13,8 @@
 @interface KZLocationManager : NSObject
 
 @property (nonatomic, readonly) CLLocationManager *locationManager;
-
 @property (nonatomic, copy) void (^didUpdateLocation)(CLPlacemark *placemark);
+
+- (void) enableLocationMgr;
 
 @end

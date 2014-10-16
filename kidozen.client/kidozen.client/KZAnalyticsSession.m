@@ -34,7 +34,8 @@ static int kDefaultSessionTimeout = 5;
         self.sessionUUID = [[NSUUID UUID] UUIDString];
         self.startSessionDate = [NSDate date];
         self.sessionTimeout = kDefaultSessionTimeout;
-        self.deviceInfo = [[KZDeviceInfo alloc] init];
+        self.deviceInfo = [KZDeviceInfo sharedDeviceInfo];
+
     }
     return self;
 }
