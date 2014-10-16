@@ -90,6 +90,8 @@
 		6D8017EF1968A74800E99FB7 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8017ED1968A74800E99FB7 /* Base64.m */; };
 		6D8CEE0619F01D7700259796 /* KZLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D8CEE0419F01D7700259796 /* KZLocationManager.h */; };
 		6D8CEE0719F01D7700259796 /* KZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8CEE0519F01D7700259796 /* KZLocationManager.m */; };
+		6D8CEE1419F06EE400259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE1319F06EE400259796 /* CoreLocation.framework */; };
+		6D8CEE1819F06F3300259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE1319F06EE400259796 /* CoreLocation.framework */; };
 		6D97AE1019D4A9C00004A31E /* KZDataVisualizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D97AE1119D4A9C00004A31E /* KZDataVisualizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */; };
 		6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */; };
@@ -312,6 +314,7 @@
 		6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SVHTTPRequest.xcodeproj; path = ../thirdParty/SVHTTPRequest/SVHTTPRequest.xcodeproj; sourceTree = "<group>"; };
 		6D8CEE0419F01D7700259796 /* KZLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZLocationManager.h; sourceTree = "<group>"; };
 		6D8CEE0519F01D7700259796 /* KZLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZLocationManager.m; sourceTree = "<group>"; };
+		6D8CEE1319F06EE400259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDataVisualizationViewController.h; sourceTree = "<group>"; };
 		6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDataVisualizationViewController.m; sourceTree = "<group>"; };
 		6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -413,6 +416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE1419F06EE400259796 /* CoreLocation.framework in Frameworks */,
 				AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */,
 				AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */,
 				AA0F7EAD1730514000C55706 /* Security.framework in Frameworks */,
@@ -424,6 +428,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE1819F06F3300259796 /* CoreLocation.framework in Frameworks */,
 				6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */,
 				6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */,
 				6D0327A919DED93D009C8B2B /* libz.dylib in Frameworks */,
@@ -667,6 +672,7 @@
 		8EB865291614D11800DD60E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D8CEE1319F06EE400259796 /* CoreLocation.framework */,
 				6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */,
 				6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */,
 				6DC953B219D5B313005E3540 /* libz.dylib */,
