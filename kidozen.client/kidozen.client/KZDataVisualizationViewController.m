@@ -14,7 +14,7 @@
 #import "KZUser.h"
 #import "KZApplicationConfiguration.h"
 
-#define kDownloadURLTemplate @"%@api/v2/visualizations/%@/app/download?type=mobile"
+#define kDownloadURLTemplate @"https://%@/api/v2/visualizations/%@/app/download?type=mobile"
 
 @interface KZDataVisualizationViewController () <UIWebViewDelegate>
 
@@ -48,7 +48,7 @@
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        self.downloadURLString = [NSString stringWithFormat:kDownloadURLTemplate, appConfig.html5Url, datavizName];
+        self.downloadURLString = [NSString stringWithFormat:kDownloadURLTemplate, appConfig.domain, datavizName];
         
         self.datavizName = datavizName;
         self.appName = appConfig.name;
