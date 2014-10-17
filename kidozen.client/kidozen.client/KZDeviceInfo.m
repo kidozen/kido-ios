@@ -87,7 +87,7 @@
     if (self.reachability.isReachableViaWiFi == YES) {
         return @"WiFi";
     } else {
-        return self.networkInfo.currentRadioAccessTechnology ?: @"Simulated access";
+        return self.networkInfo.currentRadioAccessTechnology ?: @"Unknown";
     }
 }
 
