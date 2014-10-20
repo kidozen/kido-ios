@@ -27,6 +27,7 @@
 @property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, strong) UILabel *bytesWritten;
 
 @property (nonatomic, weak) KZTokenController *tokenController;
 
@@ -63,6 +64,7 @@
         self.httpClient = [SVHTTPClient sharedClient];
         [self initializeHttpClientWithStrictSSL:strictSSL];
         self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        self.bytesWritten = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
 
     }
     return self;
@@ -77,6 +79,7 @@
     [self configureWebView];
     [self configureActivityView];
     [self configureProgressView];
+    [self configureBytesWritten];
     [self downloadZipFile];
 
 }
@@ -101,7 +104,20 @@
 {
     [self.view addSubview:self.progressView];
     self.progressView.center = self.view.center;
+}
+
+- (void)configureBytesWritten
+{
+    [self.view addSubview:self.bytesWritten];
+    self.bytesWritten.center = self.view.center;
+    self.bytesWritten.font = [UIFont fontWithName:@"Helvetica" size:14];
+    self.bytesWritten.textColor = [UIColor grayColor];
+    self.bytesWritten.textAlignment = NSTextAlignmentCenter;
     
+    CGRect fr = self.bytesWritten.frame;
+    int offset = 5;
+    fr.origin.y = self.activityView.frame.origin.y + self.activityView.frame.size.height + offset;
+    self.bytesWritten.frame = fr;
 }
 
 - (void) configureActivityView
@@ -121,22 +137,37 @@
     __weak KZDataVisualizationViewController *safeMe = self;
 
     NSString *path = [[self tempDirectory] stringByAppendingPathComponent:[self.datavizName stringByAppendingString:@".zip"]];
-
+    self.progressView.hidden = YES;
+    [self.activityView startAnimating];
+    
     [self.httpClient setHeaders:@{@"Authorization" : self.tokenController.kzToken}];
     [self.httpClient GET:self.downloadURLString
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
+
+                    NSFileManager *man = [NSFileManager defaultManager];
+                    NSDictionary *attrs = [man attributesOfItemAtPath: path error: NULL];
                     
                     // Only show the progressView if progress > 0
                     if (progress < 0) {
                         if (safeMe.activityView.isAnimating == NO) {
                             [safeMe.activityView startAnimating];
                         }
+                        if (safeMe.bytesWritten.superview == nil) {
+                            [safeMe configureBytesWritten];
+                        }
                         
-                        safeMe.progressView.hidden = YES;
+                        safeMe.bytesWritten.text = [NSString stringWithFormat:@"%.0f kBytes", [attrs fileSize] / 1024.0];
+                        
                         
                     } else {
+                        if (safeMe.activityView.isAnimating == YES) {
+                            [safeMe.activityView stopAnimating  ];
+                        }
+                        safeMe.bytesWritten.hidden = YES;
+                        safeMe.progressView.hidden = NO;
+
                         [safeMe.progressView setProgress:progress animated:YES];
                     }
                     
@@ -144,6 +175,7 @@
         if (error == nil) {
             [safeMe unzipFileAtPath:path folderName:[self dataVizDirectory]];
             [safeMe.progressView removeFromSuperview];
+            [safeMe.bytesWritten removeFromSuperview];
         } else {
             [safeMe handleError:error];
         }
