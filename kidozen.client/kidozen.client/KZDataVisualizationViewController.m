@@ -145,7 +145,6 @@
               parameters:nil
               saveToPath:path
                 progress:^(float progress) {
-
                     NSFileManager *man = [NSFileManager defaultManager];
                     NSDictionary *attrs = [man attributesOfItemAtPath: path error: NULL];
                     

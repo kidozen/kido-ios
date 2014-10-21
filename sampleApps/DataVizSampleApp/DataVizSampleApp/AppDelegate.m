@@ -10,11 +10,11 @@
 #import "InitialViewController.h"
 #import <KZApplication.h>
 
-NSString * const kzAppCenterUrl = @"APP_CENTER_URL";
-NSString * const kzAppName = @"APP_NAME";
-NSString * const kzApplicationKey = @"APP_KEY";
-NSString * const kUser = @"USER";
-NSString * const kPassword = @"PASSWORD";
+NSString * const kzAppCenterUrl = @"https://loadtests.qa.kidozen.com";
+NSString * const kzAppName = @"testexpiration";
+NSString * const kzApplicationKey = @"zbOIwN3KhH184K3C12hJle7rMKEmNR1jaheAZKAAhNM=";
+NSString * const kUser = @"loadtests@kidozen.com";
+NSString * const kPassword = @"pass";
 
 @interface AppDelegate ()
 
@@ -48,7 +48,11 @@ NSString * const kPassword = @"PASSWORD";
                                                            applicationKey:kzApplicationKey
                                                                 strictSSL:NO
                                                               andCallback:^(KZResponse *r) {
-                                                                  
+//                                                                  [safeMe.kzApplication doPassiveAuthenticationWithCompletion:^(id a) {
+//                                                                      [safeMe.initialViewController enableUserInteraction];
+//                                                                      safeMe.initialViewController.kzApplication = safeMe.kzApplication;
+//                                                                  }];
+//
                                                                   [safeMe.kzApplication authenticateUser:kUser
                                                                                             withProvider:@"Kidozen"
                                                                                              andPassword:kPassword

@@ -10,10 +10,24 @@
 #import "KZApplication.h"
 #import "InitialViewController.h"
 #import "MainPassiveAuthViewController.h"
+#import "KZApplicationConfiguration.h"
 
-NSString * const kzAppCenterUrl = @"YOUR_APP_CENTER_URL";
-NSString * const kzAppName = @"YOUR_APP";
-NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
+NSString * const kzAppCenterUrl = @"https://loadtests.qa.kidozen.com";
+NSString * const kzAppName = @"tasks";
+NSString * const kzApplicationKey = @"NuSSOjO4d/4Zmm+lbG3ntlGkmeHCPn8x20cj82O4bIo=";
+//NSString * const kzApplicationKey = @"GZJQetc+VH9JLWoHnLEwlk7tw+XPSniMUSuIzK9kDxE="; tests.qa tasks
+
+
+//NSString * const kzAppCenterUrl = @"https://tests.qa.kidozen.com";
+//NSString * const kzAppName = @"tasks";
+//NSString * const kzApplicationKey = @"GZJQetc+VH9JLWoHnLEwlk7tw+XPSniMUSuIzK9kDxE="; // tests.qa tasks
+
+//
+//NSString * const kzAppCenterUrl = @"https://armonia.kidocloud.com";
+//NSString * const kzAppName = @"tasks";
+//NSString * const kzApplicationKey = @"g1M98x5z4ErptQrXGGZ9Djw4yC2nJr8lzpEm6HVQqCc=";
+
+
 
 @interface AppDelegate()
 
@@ -69,7 +83,7 @@ NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
                                                                                                   delegate:nil
                                                                                          cancelButtonTitle:@"OK"
                                                                                          otherButtonTitles: nil] show];
-
+                                                                       
                                                                    } else {
                                                                        [safeMe.initialViewController startInteraction];
                                                                    }

@@ -453,7 +453,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
     [self.operationConnection start];
     
 #if !(defined SVHTTPREQUEST_DISABLE_LOGGING)
-    NSLog(@"[%@] %@", self.operationRequest.HTTPMethod, self.operationRequest.URL.absoluteString);
+    NSLog(@"[%@] %@ -- %@ -- %@", self.operationRequest.HTTPMethod, self.operationRequest.URL.absoluteString, self.operationRequest.HTTPBody, self.operationRequest.allHTTPHeaderFields);
 #endif
     
     // make NSRunLoop stick around until operation is finished
