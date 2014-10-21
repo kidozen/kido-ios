@@ -80,7 +80,7 @@
 {
 #ifdef CURRENTLY_TESTING
     NSLog(@"-- Currently testing, setting timeout to 30 sec.");
-    timeout = 30;
+    timeout = 45;
 #endif
 
     if (timeout > 0) {
