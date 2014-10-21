@@ -73,7 +73,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = self.datavizName;
+    self.title = @"Data Visualization";
     
     [self loadBarButtonItem];
     [self configureWebView];
