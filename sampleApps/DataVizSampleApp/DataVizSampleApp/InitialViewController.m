@@ -33,10 +33,10 @@
     NSString *datavizName = self.dataVizNameTextField.text;
     
     if (datavizName.length > 0) {
-        [self.kzApplication showDataVisualizationWithName:datavizName sucess:^{
-            NSLog(@"Data Visualization loaded");
+        [self.kzApplication showDataVisualizationWithName:datavizName success:^{
+            // Success code.
         } error:^(NSError *error) {
-            NSLog(@"Error found... %@", error);
+            // Handle error as you like.
         }];
     }
 }

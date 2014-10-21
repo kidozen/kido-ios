@@ -292,7 +292,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 @interface KZApplication(DataVisualization)
 
 - (void)showDataVisualizationWithName:(NSString *)datavizName
-                               sucess:(void (^)(void))success
+                               success:(void (^)(void))success
                                 error:(void (^)(NSError *error))failure;
 
 @end

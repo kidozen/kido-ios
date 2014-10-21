@@ -401,7 +401,7 @@
 
 @implementation KZApplication(DataVisualization)
 
-- (void)showDataVisualizationWithName:(NSString *)datavizName sucess:(void (^)(void))success error:(void (^)(NSError *error))failure
+- (void)showDataVisualizationWithName:(NSString *)datavizName success:(void (^)(void))success error:(void (^)(NSError *error))failure
 {
     KZDataVisualizationViewController *vc = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
                                                                                                          appAuth:self.appAuthentication
