@@ -102,6 +102,10 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
              andPassword:(NSString *)password;
 
 
+/**
+    Handles authentication when you only have your application's Application Key.
+    @param callback is the block that will always gets called when it finishes.
+ */
 - (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *))callback;
 
 /**
