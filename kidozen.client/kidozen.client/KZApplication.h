@@ -278,19 +278,43 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 @property (readonly, nonatomic) KZAnalytics *analytics;
 
 
+/** 
+    This tags the click/tap event.
+    @param buttonName is a string to be logged as the button name
+ */
 - (void)tagClick:(NSString *)buttonName;
 
+/// This tags the event where the user is presented a particular view.
 - (void)tagView:(NSString *)viewName;
 
+/**
+    This tags a customEvent with the corresponding custom attributes.
+    @param customEventName is the name the user wants to tag.
+    @param attributes is the dictionary that are part of the customEvent.
+ */
 - (void) tagEvent:(NSString *)customEventName
        attributes:(NSDictionary *)attributes;
 
+/**
+    By default, analytics are disabled. You can enable analytics by calling 
+    this method.
+ */
 - (void) enableAnalytics;
 
 @end
 
 @interface KZApplication(DataVisualization)
 
+/**
+    This method will display a modal view controller which contains a webView that will load
+    the corresponding data visualization.
+    The visualization should exist in the server and the user should have tap on Preview at least once.
+    (this will not be required in the future)
+    @param dataVizName is the name of the visualization. It should be exactly the same as what appears
+                       in the web.
+    @param success is the block that will be called when the datavisualization has been loaded.
+    @param error is the block that will be called when an error occurs.
+ */
 - (void)showDataVisualizationWithName:(NSString *)datavizName
                                success:(void (^)(void))success
                                 error:(void (^)(NSError *error))failure;

@@ -153,7 +153,7 @@
 }
 
 
-- (void)xxxtestShouldOverrideApplicationKeyWithUsernameAndPassword
+- (void)testShouldOverrideApplicationKeyWithUsernameAndPassword
 {
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -201,7 +201,7 @@
 
 
 // I cannot seem to make this work due to not being able to add the CURRENTLY_TESTING macro
--(void) xxxtestShouldTimeOutAndRecoverKey
+-(void) testShouldTimeOutAndRecoverKey
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     __weak loggingTests *safeMe = self;
