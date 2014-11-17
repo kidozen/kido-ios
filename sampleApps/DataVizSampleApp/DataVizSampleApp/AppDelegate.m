@@ -10,11 +10,11 @@
 #import "InitialViewController.h"
 #import <KZApplication.h>
 
-NSString * const kzAppCenterUrl = @"";
-NSString * const kzAppName = @"";
-NSString * const kzApplicationKey = @"=";
-NSString * const kUser = @"";
-NSString * const kPassword = @"";
+NSString * const kzAppCenterUrl = @"https://loadtests.qa.kidozen.com";
+NSString * const kzAppName = @"tasks";
+NSString * const kzApplicationKey = @"t8Iz3NN6S/0nXQUWwS221f79/7p/3Fbuae351x7VhbA=";
+NSString * const kUser = @"loadtests@kidozen.com";
+NSString * const kPassword = @"pass";
 
 @interface AppDelegate ()
 
@@ -48,19 +48,19 @@ NSString * const kPassword = @"";
                                                            applicationKey:kzApplicationKey
                                                                 strictSSL:NO
                                                               andCallback:^(KZResponse *r) {
-//                                                                  [safeMe.kzApplication doPassiveAuthenticationWithCompletion:^(id a) {
-//                                                                      [safeMe.initialViewController enableUserInteraction];
-//                                                                      safeMe.initialViewController.kzApplication = safeMe.kzApplication;
-//                                                                  }];
-//
-                                                                  [safeMe.kzApplication authenticateUser:kUser
-                                                                                            withProvider:@"Kidozen"
-                                                                                             andPassword:kPassword
-                                                                                              completion:^(id c) {
-                                                                                                  [safeMe.initialViewController enableUserInteraction];
-                                                                                                  safeMe.initialViewController.kzApplication = safeMe.kzApplication;
+                                                                  [safeMe.kzApplication doPassiveAuthenticationWithCompletion:^(id a) {
+                                                                      [safeMe.initialViewController enableUserInteraction];
+                                                                      safeMe.initialViewController.kzApplication = safeMe.kzApplication;
+                                                                  }];
 
-                                                                                              }];
+//                                                                  [safeMe.kzApplication authenticateUser:kUser
+//                                                                                            withProvider:@"Kidozen"
+//                                                                                             andPassword:kPassword
+//                                                                                              completion:^(id c) {
+//                                                                                                  [safeMe.initialViewController enableUserInteraction];
+//                                                                                                  safeMe.initialViewController.kzApplication = safeMe.kzApplication;
+//
+//                                                                                              }];
                                                                   
                                                               }];
 
