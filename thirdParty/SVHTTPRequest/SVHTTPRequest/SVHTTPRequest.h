@@ -67,6 +67,14 @@ typedef NSUInteger SVHTTPRequestMethod;
                          progress:(void (^)(float))progressBlock
                        completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
+- (SVHTTPRequest*)initWithAddress:(NSString*)urlString
+                           method:(SVHTTPRequestMethod)method
+                       parameters:(NSObject*)parameters
+                       saveToPath:(NSString*)savePath
+                         progress:(void (^)(float))progressBlock
+                      inputStream:(NSInputStream *)inputStream
+                       completion:(SVHTTPRequestCompletionHandler)completionBlock;
+
 - (void)signRequestWithUsername:(NSString*)username password:(NSString*)password;
 
 @end
