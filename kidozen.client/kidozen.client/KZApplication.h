@@ -20,6 +20,7 @@
 @class KZNotification;
 @class KZMail;
 @class KZDatasource;
+@class KZFile;
 @class KZAnalytics;
 
 #if TARGET_OS_IPHONE
@@ -178,6 +179,9 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * @return a new DataSource object
  */
 - (KZDatasource *)DataSourceWithName:(NSString *)name;
+
+
+- (KZFile *)fileService;
 
 #if TARGET_OS_IPHONE
 /**
