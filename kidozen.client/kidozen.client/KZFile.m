@@ -9,6 +9,7 @@
 #import "KZFile.h"
 #import "KZTokenController.h"
 #import "KZBaseService+ProtectedMethods.h"
+#import "NSString+Path.h"
 
 @implementation KZFile
 
@@ -17,25 +18,22 @@
     
 }
 
-- (void) uploadFileData:(NSData *)data filename:(NSString *)filename callback:(void (^)(KZResponse *r))block
+- (void) uploadFileData:(NSData *)data filePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
 {
-
-    NSDictionary *parameters = @{@"x-file-name" : filename };
-    
+    NSDictionary *parameters = @{@"x-file-name" : [filePath onlyFilename] };
     NSInputStream *stream = [[NSInputStream alloc] initWithData:data];
 
     __weak KZFile *safeMe = self;
     
     [self addAuthorizationHeader];
-    
-    [self.client POST:@"" // TODO: Path for upload.
+    NSString *path = [filePath directoriesFullPath];
+    [self.client POST:path
                stream:stream
            parameters:parameters
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
             }];
 }
-
 - (void) deleteFilePath:(NSString *)filePath callback:(void (^)(KZResponse *))block
 {
     
