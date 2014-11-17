@@ -10,11 +10,11 @@
 #import "InitialViewController.h"
 #import <KZApplication.h>
 
-NSString * const kzAppCenterUrl = @"https://loadtests.qa.kidozen.com";
-NSString * const kzAppName = @"testexpiration";
-NSString * const kzApplicationKey = @"zbOIwN3KhH184K3C12hJle7rMKEmNR1jaheAZKAAhNM=";
-NSString * const kUser = @"loadtests@kidozen.com";
-NSString * const kPassword = @"pass";
+NSString * const kzAppCenterUrl = @"";
+NSString * const kzAppName = @"";
+NSString * const kzApplicationKey = @"=";
+NSString * const kUser = @"";
+NSString * const kPassword = @"";
 
 @interface AppDelegate ()
 
