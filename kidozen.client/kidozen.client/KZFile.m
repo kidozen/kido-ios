@@ -8,6 +8,7 @@
 
 #import "KZFile.h"
 #import "KZTokenController.h"
+#import "KZBaseService+ProtectedMethods.h"
 
 @implementation KZFile
 
@@ -16,34 +17,23 @@
     
 }
 
-- (void) uploadFileData:(NSData *)data callback:(void (^)(KZResponse *r))block
+- (void) uploadFileData:(NSData *)data filename:(NSString *)filename callback:(void (^)(KZResponse *r))block
 {
 
-
-
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:@"https://tasks-tests.qa.kidozen.com/uploads/"];
-    [request setValue:@"Keep-Alive" forHTTPHeaderField:@"Connection"];
-    [request setValue:@"name.txt" forHTTPHeaderField:@"x-file-name"];
-    [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:self.tokenController.kzToken forHTTPHeaderField:@"Authorization"];
+    NSDictionary *parameters = @{@"x-file-name" : filename };
     
     NSInputStream *stream = [[NSInputStream alloc] initWithData:data];
-    [request setHTTPBodyStream:stream];
-    [request setHTTPMethod:@"POST"];
+
+    __weak KZFile *safeMe = self;
     
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               NSLog(@"Finished with status code: %i", [(NSHTTPURLResponse *)response statusCode]);
-                           }];
+    [self addAuthorizationHeader];
     
-    
-    
-//    [self.client POST:"path"
-//           parameters:nil // params?
-//           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-//        
-//    }];
+    [self.client POST:@"" // TODO: Path for upload.
+               stream:stream
+           parameters:parameters
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
+            }];
 }
 
 - (void) deleteFilePath:(NSString *)filePath callback:(void (^)(KZResponse *))block

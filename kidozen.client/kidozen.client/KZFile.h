@@ -11,7 +11,7 @@
 @interface KZFile : KZBaseService
 
 - (void) downloadFilePath:(NSString *)filePath callback:(void (^)(KZResponse *))block;
-- (void) uploadFileData:(NSData *)data callback:(void (^)(KZResponse *))block;
+- (void) uploadFileData:(NSData *)data filename:(NSString *)filename callback:(void (^)(KZResponse *r))block;
 - (void) deleteFilePath:(NSString *)filePath callback:(void (^)(KZResponse *))block;
 - (void) browseAtPath:(NSString *)path callback:(void (^)(KZResponse *))block;
 
