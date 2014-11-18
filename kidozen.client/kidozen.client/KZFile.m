@@ -16,11 +16,11 @@
 - (void) downloadFilePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
 {
     
-    filePath = [self sanitizePath:filePath];
+    filePath = [self sanitizePath:filePath isDirectory:NO];
     
+    [self.client setValue:@"no-cache" forHTTPHeaderField:@"Pragma"];
+    [self.client setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
     [self addAuthorizationHeader];
-    [self.client setValue:@"Pragma" forHTTPHeaderField:@"no-cache"];
-    [self.client setValue:@"Cache-Control" forHTTPHeaderField:@"no-cache"];
     
     __weak KZFile *safeMe = self;
     
@@ -33,7 +33,7 @@
 - (void) uploadFileData:(NSData *)data filePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
 {
     
-    filePath = [self sanitizePath:filePath];
+    filePath = [self sanitizePath:filePath isDirectory:NO];
     
     NSDictionary *parameters = @{@"x-file-name" : [filePath onlyFilename] };
     NSInputStream *stream = [[NSInputStream alloc] initWithData:data];
@@ -49,17 +49,29 @@
                [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
             }];
 }
+
 - (void) deleteFilePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
 {
     
 }
 
-- (void) browseAtPath:(NSString *)path callback:(void (^)(KZResponse *r))block
+- (void) browseAtPath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
 {
+    filePath = [self sanitizePath:filePath isDirectory:YES];
     
+    [self.client setValue:@"no-cache" forHTTPHeaderField:@"Pragma"];
+    [self.client setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
+    [self addAuthorizationHeader];
+    
+    __weak KZFile *safeMe = self;
+    
+    [self.client GET:filePath parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
+    }];
+
 }
 
-- (NSString *)sanitizePath:(NSString *)filePath {
+- (NSString *)sanitizePath:(NSString *)filePath isDirectory:(BOOL)isDirectory {
     if ([filePath length] == 0) {
         [NSException raise:NSInvalidArgumentException format:@"FilePath must not be empty."];
     }
@@ -72,8 +84,10 @@
         path = [NSString stringWithFormat:@"/%@", path];
     }
     
-    if (![filePath hasSuffix:@"/"]) {
-        path = [NSString stringWithFormat:@"%@/", path];
+    if (isDirectory == YES) {
+        if (![filePath hasSuffix:@"/"]) {
+            path = [NSString stringWithFormat:@"%@/", path];
+        }
     }
     
     return path;
