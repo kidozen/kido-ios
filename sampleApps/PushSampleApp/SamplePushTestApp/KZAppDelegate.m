@@ -10,7 +10,7 @@
 #import <KZApplication.h>
 #import "MainViewController.h"
 
-NSString * const kzAppCenterUrl = @"YOUR_APP_CENTER_URL";
+NSString * const kzAppCenterUrl = @"https://your.app.center.url";
 NSString * const kzAppName = @"YOUR_APP";
 NSString * const kzUser = @"YOU_USER@KIDOZEN.COM";
 NSString * const kzPassword = @"YOUR_PASSWORD";

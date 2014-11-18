@@ -10,12 +10,12 @@
 #import "KZApplication.h"
 #import "MainCrashViewController.h"
 
-NSString * const kzAppCenterUrl = @"https://armonia.kidocloud.com"; //URL of the tenant's marketplece
-NSString * const kzAppName = @"tasks"; // app name
-NSString * const kzUser = @"armonia@kidozen.com"; //kidozen user
-NSString * const kzPassword = @"pass"; //kidozen password
-NSString * const kzProvider = @"Kidozen";
-NSString * const kzApplicationKey = @"7xsSYzCm3swRICO5y1zHZatufO+fzrBQm3Y2ulA2qHc=";
+NSString * const kzAppCenterUrl = @""; //URL of the tenant's marketplece
+NSString * const kzAppName = @""; // app name
+NSString * const kzUser = @""; //kidozen user
+NSString * const kzPassword = @""; //kidozen password
+NSString * const kzProvider = @"";
+NSString * const kzApplicationKey = @"";
 
 @interface KZAppDelegate()
 

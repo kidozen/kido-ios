@@ -14,7 +14,7 @@
 		<string>https://github.com/kidozen/kido-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>sampleApps/PassiveSampleApp/SamplePassiveAuthApp.xcodeproj/project.xcworkspace</string>
+	<string>sampleApps/PassiveSampleApp/SamplePassiveAuthApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>9BF6AB18C93DF7D0F9F29959A03580FCC4DC83F7</key>
