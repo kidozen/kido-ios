@@ -21,6 +21,14 @@
                       progress:(void (^)(float))progressBlock
                     completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
+- (SVHTTPRequest*)queueRequest:(NSString*)path
+                        method:(SVHTTPRequestMethod)method
+                    parameters:(NSDictionary*)parameters
+                    saveToPath:(NSString*)savePath
+                   inputStream:(NSInputStream *)inputStream
+                      progress:(void (^)(float))progressBlock
+                    completion:(SVHTTPRequestCompletionHandler)completionBlock;
+
 @property (nonatomic, strong) NSMutableDictionary *HTTPHeaderFields;
 
 @end
@@ -81,6 +89,21 @@
 - (SVHTTPRequest*)POST:(NSString *)path parameters:(NSDictionary *)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock {
     return [self queueRequest:path method:SVHTTPRequestMethodPOST parameters:parameters saveToPath:nil progress:nil completion:completionBlock];
 }
+- (SVHTTPRequest*)POST:(NSString*)path
+                stream:(NSInputStream *)stream
+            parameters:(NSDictionary *)parameters
+            completion:(SVHTTPRequestCompletionHandler)completionBlock
+{
+ 
+   return [self queueRequest:path
+                      method:SVHTTPRequestMethodPOST
+                  parameters:parameters
+                  saveToPath:nil
+                 inputStream:stream
+                    progress:nil
+                  completion:completionBlock];
+}
+
 
 - (SVHTTPRequest*)POST:(NSString *)path parameters:(NSDictionary *)parameters progress:(void (^)(float))progressBlock completion:(void (^)(id, NSHTTPURLResponse*, NSError *))completionBlock {
     return [self queueRequest:path method:SVHTTPRequestMethodPOST parameters:parameters saveToPath:nil progress:progressBlock completion:completionBlock];
@@ -127,10 +150,28 @@
 
 - (SVHTTPRequest*)queueRequest:(NSString*)path
                         method:(SVHTTPRequestMethod)method
-                    parameters:(NSObject*)parameters
+                    parameters:(NSDictionary*)parameters
                     saveToPath:(NSString*)savePath
                       progress:(void (^)(float))progressBlock
-                    completion:(SVHTTPRequestCompletionHandler)completionBlock  {
+                    completion:(SVHTTPRequestCompletionHandler)completionBlock
+{
+    return [self queueRequest:path
+                       method:method
+                   parameters:parameters
+                   saveToPath:savePath
+                  inputStream:nil
+                     progress:progressBlock
+                   completion:completionBlock];
+}
+
+- (SVHTTPRequest*)queueRequest:(NSString*)path
+                        method:(SVHTTPRequestMethod)method
+                    parameters:(NSDictionary*)parameters
+                    saveToPath:(NSString*)savePath
+                   inputStream:(NSInputStream *)inputStream
+                      progress:(void (^)(float))progressBlock
+                    completion:(SVHTTPRequestCompletionHandler)completionBlock
+{
     NSString *basePath = [self.basePath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSString *completeURLString = [NSString stringWithFormat:@"%@%@", basePath , [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
     id mergedParameters;
@@ -148,6 +189,7 @@
                                                                                                    parameters:mergedParameters
                                                                                                    saveToPath:savePath
                                                                                                      progress:progressBlock
+                                                                                                  inputStream:inputStream
                                                                                                    completion:completionBlock];
     requestOperation.sendParametersAsJSON = self.sendParametersAsJSON;
     requestOperation.cachePolicy = self.cachePolicy;
@@ -155,7 +197,7 @@
     requestOperation.timeoutInterval = self.timeoutInterval;
     requestOperation.headers = self.headers;
     requestOperation.dismissNSURLAuthenticationMethodServerTrust=_dismissNSURLAuthenticationMethodServerTrust;
-
+    
     [(id<SVHTTPRequestPrivateMethods>)requestOperation setClient:self];
     
     [self.HTTPHeaderFields enumerateKeysAndObjectsUsingBlock:^(NSString *field, NSString *value, BOOL *stop) {
@@ -169,6 +211,6 @@
     [self.operationQueue addOperation:requestOperation];
     
     return requestOperation;
+    
 }
-
 @end

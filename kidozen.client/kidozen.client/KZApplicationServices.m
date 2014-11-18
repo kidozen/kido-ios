@@ -23,6 +23,7 @@
 #import "KZMail.h"
 #import "KZNotification.h"
 #import "KZAnalytics.h"
+#import "KZFileStorage.h"
 
 @interface KZApplicationServices()
 
@@ -125,6 +126,16 @@
     ch.tokenController = self.tokenController;
     [ch setStrictSSL:self.strictSSL];
     return ch;
+}
+
+-(KZFileStorage *) fileService
+{
+    KZFileStorage *fs = [[KZFileStorage alloc] initWithEndpoint:self.applicationConfig.files
+                                                        andName:nil];
+    
+    fs.tokenController = self.tokenController;
+    [fs setStrictSSL:self.strictSSL];
+    return fs;
 }
 
 #pragma mark - Logging

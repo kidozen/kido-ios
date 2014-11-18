@@ -11,5 +11,7 @@
 @interface NSString(Path)
 
 - (NSString *)documentsPath;
+- (NSString *)directoriesFullPath;
+- (NSString *)onlyFilename;
 
 @end

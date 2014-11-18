@@ -290,6 +290,11 @@
     return [self.appServices PubSubChannelWithName:name];
 }
 
+- (KZFileStorage *)fileService
+{
+    return [self.appServices fileService];
+}
+
 #endif
 
 

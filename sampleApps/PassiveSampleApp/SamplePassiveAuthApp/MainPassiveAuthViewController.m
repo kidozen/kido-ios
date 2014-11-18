@@ -35,7 +35,7 @@
     
     self.ds = [[AppDelegate sharedDelegate].kzApplication DataSourceWithName:@"GetCityWeather"];
     [self.ds QueryWithData:@{@"city" : @"Buenos Aires"} completion:^(KZResponse *r) {
-        NSLog(@"Response is %@", r);
+        NSLog(@"Response is %@", r.response);
     }];
     
 }

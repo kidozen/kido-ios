@@ -28,7 +28,6 @@
         self.locationManager.delegate = self;
         self.locationManager.distanceFilter = DEFAULT_DISTANCE_FILTER;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-        self.locationManager.pausesLocationUpdatesAutomatically = YES;
     }
     return self;
 }
