@@ -94,6 +94,7 @@
 		6D8CEE1819F06F3300259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE1319F06EE400259796 /* CoreLocation.framework */; };
 		6D97AE1019D4A9C00004A31E /* KZDataVisualizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D97AE1119D4A9C00004A31E /* KZDataVisualizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */; };
+		6DA452461A1B7D8C00F2A7D6 /* fileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA452451A1B7D8C00F2A7D6 /* fileTests.m */; };
 		6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */; };
 		6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */; };
 		6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -319,6 +320,7 @@
 		6D8CEE1319F06EE400259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZDataVisualizationViewController.h; sourceTree = "<group>"; };
 		6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZDataVisualizationViewController.m; sourceTree = "<group>"; };
+		6DA452451A1B7D8C00F2A7D6 /* fileTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fileTests.m; sourceTree = "<group>"; };
 		6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
@@ -747,6 +749,7 @@
 				6D677C3F1921073B000DF367 /* mailTests.m */,
 				6D40014E1976CE9E00D5F511 /* smsTests.m */,
 				6D40016A1978687600D5F511 /* configurationTests.m */,
+				6DA452451A1B7D8C00F2A7D6 /* fileTests.m */,
 				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
 			);
 			path = "Integration Tests";
@@ -1048,6 +1051,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DA452461A1B7D8C00F2A7D6 /* fileTests.m in Sources */,
 				6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
 				AACBD73B18CA579400518D14 /* applicationTests.m in Sources */,
 				6D40014F1976CE9E00D5F511 /* smsTests.m in Sources */,
