@@ -8,6 +8,10 @@
 
 #import "KZBaseService.h"
 
+/**
+ * This is the File Service, which will let you perform some operations such as
+ * uploading, deleting, getting files from the kidocloud.
+ */
 @interface KZFile : KZBaseService
 
 - (void) downloadFilePath:(NSString *)filePath callback:(void (^)(KZResponse *))block;
