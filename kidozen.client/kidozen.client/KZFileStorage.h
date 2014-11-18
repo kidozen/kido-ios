@@ -15,7 +15,7 @@
 @interface KZFileStorage : KZBaseService
 
 /**
-*  By Calling this method it'll download the file that it located in the filePath provided.
+*  This method will download the file that is located at the filePath provided.
 *
 *  @param filePath This is the full path to the file you want to download.
 *  It should not end with a '/', as it's a file
@@ -34,6 +34,17 @@
  *                  correctly uploaded.
  */
 - (void) uploadFileData:(NSData *)data filePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block;
+
+
+/**
+ *  This method will delete the file/directory that is located at the filePath provided.
+ *
+ *  @param filePath This is the full path to the file/directory you want to download. If you wish
+ *                  to delete a directory, filePath should end with '/'
+ *
+ *  @param block    Will contain the KZResponse. You can check whether the result of the operation
+ *                  by looking at the KZResponse.urlResponse property.
+ */
 - (void) deleteFilePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block;
 
 /**

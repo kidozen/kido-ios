@@ -52,7 +52,18 @@
 
 - (void) deleteFilePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
 {
+    filePath = [self sanitizePath:filePath isDirectory:NO];
     
+    [self.client setValue:@"no-cache" forHTTPHeaderField:@"Pragma"];
+    [self.client setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
+    [self addAuthorizationHeader];
+    
+    __weak KZFileStorage *safeMe = self;
+    
+    [self.client DELETE:filePath parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+        [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
+    }];
+
 }
 
 - (void) browseAtPath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
