@@ -118,6 +118,29 @@
     
 }
 
+- (void)testDeleteFile
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    
+    self.fileService = [self.application fileService];
+    
+    [self.fileService deleteFilePath:@"/ios/"
+                              callback:^(KZResponse *r) {
+                                  XCTAssertEqual(204, r.urlResponse.statusCode, @"Invalid status code");
+                                  
+                                  NSLog(@"Response for download is %@", r.urlResponse);
+                                  dispatch_semaphore_signal(semaphore);
+                                  
+                                  
+                              }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:100]];
+    
+}
+
+
 - (UIImage *)imageTestWithText:(NSString *)string
 {
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:16]};
