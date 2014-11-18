@@ -79,9 +79,14 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
             restError = [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{@"Message": msg}];
         }
         
-        id typedResponse;
+        id typedResponse = response;
         if ([response isKindOfClass:[NSData class]]) {
-            typedResponse = [response KZ_UTF8String];
+            NSString *utf8String = [response KZ_UTF8String];
+            
+            if (utf8String != nil) {
+                typedResponse = utf8String;
+            }
+
         } else {
             typedResponse = response;
         }
