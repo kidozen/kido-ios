@@ -290,7 +290,7 @@
     return [self.appServices PubSubChannelWithName:name];
 }
 
-- (KZFile *)fileService
+- (KZFileStorage *)fileService
 {
     return [self.appServices fileService];
 }

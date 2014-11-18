@@ -23,7 +23,7 @@
 #import "KZMail.h"
 #import "KZNotification.h"
 #import "KZAnalytics.h"
-#import "KZFile.h"
+#import "KZFileStorage.h"
 
 @interface KZApplicationServices()
 
@@ -128,10 +128,10 @@
     return ch;
 }
 
--(KZFile *) fileService
+-(KZFileStorage *) fileService
 {
-    KZFile *fs = [[KZFile alloc] initWithEndpoint:self.applicationConfig.files
-                                          andName:nil];
+    KZFileStorage *fs = [[KZFileStorage alloc] initWithEndpoint:self.applicationConfig.files
+                                                        andName:nil];
     
     fs.tokenController = self.tokenController;
     [fs setStrictSSL:self.strictSSL];

@@ -15,7 +15,7 @@
 @class KZConfiguration;
 @class KZSMSSender;
 @class KZDatasource;
-@class KZFile;
+@class KZFileStorage;
 @class KZPubSubChannel;
 @class KZApplicationConfiguration;
 @class KZTokenController;
@@ -40,7 +40,7 @@
 - (KZConfiguration *)ConfigurationWithName:(NSString *)name;
 - (KZSMSSender *)SMSSenderWithNumber:(NSString *)number;
 - (KZDatasource *)DataSourceWithName:(NSString *)name;
-- (KZFile *)fileService;
+- (KZFileStorage *)fileService;
 
 #if TARGET_OS_IPHONE
 - (KZPubSubChannel *)PubSubChannelWithName:(NSString *) name;

@@ -10,12 +10,12 @@
 #import <XCTest/XCTest.h>
 #import "KZApplication.h"
 #import "Constants.h"
-#import "KZFile.h"
+#import "KZFileStorage.h"
 
 @interface fileTests : XCTestCase
 
 @property (nonatomic, strong) KZApplication * application;
-@property (nonatomic, strong) KZFile *fileService;
+@property (nonatomic, strong) KZFileStorage *fileService;
 
 @end
 

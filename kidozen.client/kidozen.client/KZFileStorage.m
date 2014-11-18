@@ -1,17 +1,17 @@
 //
-//  KZFile.m
+//  KZFileStorage.m
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 10/31/14.
 //  Copyright (c) 2014 Tellago Studios. All rights reserved.
 //
 
-#import "KZFile.h"
+#import "KZFileStorage.h"
 #import "KZTokenController.h"
 #import "KZBaseService+ProtectedMethods.h"
 #import "NSString+Path.h"
 
-@implementation KZFile
+@implementation KZFileStorage
 
 - (void) downloadFilePath:(NSString *)filePath callback:(void (^)(KZResponse *r))block
 {
@@ -22,7 +22,7 @@
     [self.client setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
     [self addAuthorizationHeader];
     
-    __weak KZFile *safeMe = self;
+    __weak KZFileStorage *safeMe = self;
     
     [self.client GET:filePath parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
@@ -38,7 +38,7 @@
     NSDictionary *parameters = @{@"x-file-name" : [filePath onlyFilename] };
     NSInputStream *stream = [[NSInputStream alloc] initWithData:data];
 
-    __weak KZFile *safeMe = self;
+    __weak KZFileStorage *safeMe = self;
     
     [self addAuthorizationHeader];
     NSString *path = [filePath directoriesFullPath];
@@ -63,7 +63,7 @@
     [self.client setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
     [self addAuthorizationHeader];
     
-    __weak KZFile *safeMe = self;
+    __weak KZFileStorage *safeMe = self;
     
     [self.client GET:filePath parameters:nil completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
         [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
