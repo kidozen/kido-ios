@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  Main base class for classes that have to be configured by the 
+ *  JSON configuration response.
+ */
 @interface KZObject : NSObject
 
 - (void)configureWithDictionary:(NSDictionary *)dictionary;

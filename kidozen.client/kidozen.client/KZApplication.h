@@ -36,7 +36,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * Main KidoZen application object
  *
  */
-@interface KZApplication : KZObject
+@interface KZApplication : NSObject
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 @property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;
