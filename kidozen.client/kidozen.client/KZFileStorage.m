@@ -71,6 +71,10 @@
 
 }
 
+
+// This method will sanitize the filePath for this particular use case.
+// If it's a directory, it should start with a '/' and end with a '/'
+// Otherwise, it should start with '/' and NOT end with '/'
 - (NSString *)sanitizePath:(NSString *)filePath isDirectory:(BOOL)isDirectory {
     if ([filePath length] == 0) {
         [NSException raise:NSInvalidArgumentException format:@"FilePath must not be empty."];
