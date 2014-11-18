@@ -12,6 +12,19 @@
 #import "KZSessionEvent.h"
 #import "KZLogging.h"
 
+@interface KZAnalyticsSession()
+
+/**
+ *  Will log a session with the corresponding length.
+ *  When the events are send, we also need to send the session's length.
+ *  It is added by the SDK at that particular moment. No need to call this method
+ *
+ *  @param length is the amount of seconds the session lasted.
+ */
+- (void)logSessionWithLength:(NSNumber *)length;
+
+@end
+
 static NSString *const kStartDate = @"startDate";
 static NSString *const kSessionUUID = @"sessionUUID";
 static NSString *const kBackgroundDate = @"backgroundDate";
