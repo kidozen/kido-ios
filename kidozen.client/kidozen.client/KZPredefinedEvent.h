@@ -8,10 +8,14 @@
 
 #import "KZEvent.h"
 
+/**
+ *  Subclasses of this class will be events by default that the SDK will handle.
+ */
 @interface KZPredefinedEvent : KZEvent
 
-@property (nonatomic, readonly, copy) NSString *eventValue;
-
 - (instancetype)initWithEventName:(NSString *)eventName value:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID;
+
+// Will contain the value of the event, such as "OkButton" or "InitialView" or something like that.
+@property (nonatomic, readonly, copy) NSString *eventValue;
 
 @end

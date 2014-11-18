@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-// This class will tell us the country in which we are
+// This class will tell us the country in which we are.
+// For now, we only need this use case.
 @interface KZLocationManager : NSObject
 
 @property (nonatomic, readonly) CLLocationManager *locationManager;
