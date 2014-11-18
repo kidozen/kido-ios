@@ -878,8 +878,9 @@
 		8EB8651E1614D11800DD60E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = KZ;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = "Tellago Studios";
+				ORGANIZATIONNAME = KidoZen;
 				TargetAttributes = {
 					AAE6E8D618C10D8100FB046A = {
 						TestTargetID = 8EB865261614D11800DD60E6;

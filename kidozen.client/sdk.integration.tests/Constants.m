@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Christian Carnero on 11/25/13.
-//  Copyright (c) 2013 Tellago Studios. All rights reserved.
+//  Copyright (c) 2013 KidoZen. All rights reserved.
 //
 
 #import "Constants.h"
