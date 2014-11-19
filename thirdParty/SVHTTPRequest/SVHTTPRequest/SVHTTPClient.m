@@ -15,6 +15,7 @@
 #define X_KIDO_SDK_VERSION_HEADER  @"X-Kido-SDK-Version"
 
 #define X_KIDO_SDK_HEADER_VALUE  @"iOS"
+#define X_KIDO_SDK_VERSION_VALUE @"1.2.1"
 
 @interface SVHTTPClient ()
 
@@ -61,7 +62,7 @@
         self.operationQueue = [[NSOperationQueue alloc] init];
         self.basePath = @"";
         [self setValue:X_KIDO_SDK_HEADER_VALUE forHTTPHeaderField:X_KIDO_SDK_HEADER];
-        [self setValue:@"1.2.1" forHTTPHeaderField:X_KIDO_SDK_VERSION_HEADER];
+        [self setValue:X_KIDO_SDK_VERSION_VALUE forHTTPHeaderField:X_KIDO_SDK_VERSION_HEADER];
 
     }
     
