@@ -12,17 +12,13 @@
 	<dict>
 		<key>9BF6AB18C93DF7D0F9F29959A03580FCC4DC83F7</key>
 		<string>https://github.com/kidozen/kido-ios.git</string>
-		<key>CD68FDCE-D433-4464-A9A0-2C92D4382C2F</key>
-		<string>https://github.com/square/SocketRocket.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>kidozen.client/kidozen.client.xcodeproj/project.xcworkspace</string>
+	<string>kidozen.client/kidozen.client.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>9BF6AB18C93DF7D0F9F29959A03580FCC4DC83F7</key>
 		<string>../../..</string>
-		<key>CD68FDCE-D433-4464-A9A0-2C92D4382C2F</key>
-		<string>../../../../SocketRocket</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/kidozen/kido-ios.git</string>
@@ -39,14 +35,6 @@
 			<string>9BF6AB18C93DF7D0F9F29959A03580FCC4DC83F7</string>
 			<key>IDESourceControlWCCName</key>
 			<string>kido-ios</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CD68FDCE-D433-4464-A9A0-2C92D4382C2F</string>
-			<key>IDESourceControlWCCName</key>
-			<string>SocketRocket</string>
 		</dict>
 	</array>
 </dict>

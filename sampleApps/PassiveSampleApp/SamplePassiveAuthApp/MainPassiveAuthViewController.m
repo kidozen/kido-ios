@@ -18,6 +18,8 @@
 @interface MainPassiveAuthViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labelClaimName;
 @property (strong, nonatomic) KZDatasource *ds;
+@property (weak, nonatomic) IBOutlet UITextView *responseView;
+@property (weak, nonatomic) IBOutlet UITextField *datasourceField;
 
 @end
 
@@ -31,11 +33,15 @@
     self.labelClaimName.text= [NSString stringWithFormat:@"Hello: %@",  [claims objectForKey:claimName] ];
 }
 
+
 - (IBAction)queryDS:(id)sender {
     
-    self.ds = [[AppDelegate sharedDelegate].kzApplication DataSourceWithName:@"GetCityWeather"];
+    self.ds = [[AppDelegate sharedDelegate].kzApplication DataSourceWithName:self.datasourceField.text];
+    __weak MainPassiveAuthViewController * safeMe = self;
+    
     [self.ds QueryWithData:@{@"city" : @"Buenos Aires"} completion:^(KZResponse *r) {
         NSLog(@"Response is %@", r.response);
+        safeMe.responseView.text = r.response;
     }];
     
 }
