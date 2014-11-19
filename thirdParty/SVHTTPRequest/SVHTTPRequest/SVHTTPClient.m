@@ -10,6 +10,12 @@
 #import "SVHTTPClient.h"
 #import "SVHTTPRequest.h"
 
+
+#define X_KIDO_SDK_HEADER  @"X-Kido-SDK"
+#define X_KIDO_SDK_VERSION_HEADER  @"X-Kido-SDK-Version"
+
+#define X_KIDO_SDK_HEADER_VALUE  @"iOS"
+
 @interface SVHTTPClient ()
 
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
@@ -54,6 +60,9 @@
     if (self = [super init]) {
         self.operationQueue = [[NSOperationQueue alloc] init];
         self.basePath = @"";
+        [self setValue:X_KIDO_SDK_HEADER_VALUE forHTTPHeaderField:X_KIDO_SDK_HEADER];
+        [self setValue:@"1.2.1" forHTTPHeaderField:X_KIDO_SDK_VERSION_HEADER];
+
     }
     
     return self;
