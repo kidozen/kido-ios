@@ -50,20 +50,20 @@ NSString * const kPassword = @"";
                                                               andCallback:^(KZResponse *r) {
                                                                   
                                                                   // Test using passive authentication
-                                                                  [safeMe.kzApplication doPassiveAuthenticationWithCompletion:^(id a) {
-                                                                      [safeMe.initialViewController enableUserInteraction];
-                                                                      safeMe.initialViewController.kzApplication = safeMe.kzApplication;
-                                                                  }];
+//                                                                  [safeMe.kzApplication doPassiveAuthenticationWithCompletion:^(id a) {
+//                                                                      [safeMe.initialViewController enableUserInteraction];
+//                                                                      safeMe.initialViewController.kzApplication = safeMe.kzApplication;
+//                                                                  }];
 
                                                                   // Uncomment if you need to test with username/password authentication.
-//                                                                  [safeMe.kzApplication authenticateUser:kUser
-//                                                                                            withProvider:@"Kidozen"
-//                                                                                             andPassword:kPassword
-//                                                                                              completion:^(id c) {
-//                                                                                                  [safeMe.initialViewController enableUserInteraction];
-//                                                                                                  safeMe.initialViewController.kzApplication = safeMe.kzApplication;
-//
-//                                                                                              }];
+                                                                  [safeMe.kzApplication authenticateUser:kUser
+                                                                                            withProvider:@"Kidozen"
+                                                                                             andPassword:kPassword
+                                                                                              completion:^(id c) {
+                                                                                                  [safeMe.initialViewController enableUserInteraction];
+                                                                                                  safeMe.initialViewController.kzApplication = safeMe.kzApplication;
+
+                                                                                              }];
                                                                   
                                                               }];
 
