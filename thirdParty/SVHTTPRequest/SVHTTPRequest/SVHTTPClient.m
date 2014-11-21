@@ -69,8 +69,8 @@
     if (self = [super init]) {
         self.operationQueue = [[NSOperationQueue alloc] init];
         self.basePath = @"";
-//        [self setValue:X_KIDO_SDK_HEADER_VALUE forHTTPHeaderField:X_KIDO_SDK_HEADER];
-//        [self setValue:X_KIDO_SDK_VERSION_VALUE forHTTPHeaderField:X_KIDO_SDK_VERSION_HEADER];
+        [self setValue:X_KIDO_SDK_HEADER_VALUE forHTTPHeaderField:X_KIDO_SDK_HEADER];
+        [self setValue:X_KIDO_SDK_VERSION_VALUE forHTTPHeaderField:X_KIDO_SDK_VERSION_HEADER];
 
     }
     

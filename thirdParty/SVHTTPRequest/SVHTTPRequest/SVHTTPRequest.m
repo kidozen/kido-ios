@@ -218,15 +218,19 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
                       inputStream:(NSInputStream *)inputStream
                        completion:(SVHTTPRequestCompletionHandler)completionBlock
 {
+    
     SVHTTPRequest *request = [[[self class] alloc] initWithAddress:urlString
                                                             method:method
                                                         parameters:parameters
+                                                        saveToPath:savePath
+                                                          progress:progressBlock
                                                         completion:completionBlock];
     
-    [request.operationRequest setHTTPBodyStream:inputStream];
-    
+    if (inputStream != nil) {
+        [request.operationRequest setHTTPBodyStream:inputStream];
+    }
+
     return request;
-    
 }
 
 - (void)addParametersToRequest:(NSObject*)parameters {
