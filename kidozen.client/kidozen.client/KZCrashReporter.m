@@ -157,6 +157,8 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     
     [self.client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 
+        NSLog(@"Response for dump is %@", urlResponse);
+
         if (!error) {
             NSError *purgeError;
             if (![safeMe.baseReporter purgePendingCrashReportAndReturnError:&purgeError]) {
@@ -165,6 +167,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 
             [safeMe removeBreadcrumbsFile];
         }
+        
         
         safeMe.crashReporterError = error;
         if (response) {
