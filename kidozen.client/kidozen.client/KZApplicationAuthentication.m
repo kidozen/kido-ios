@@ -199,6 +199,7 @@ NSString *const kAccessTokenKey = @"access_token";
 
                           [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
                           callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
+                          return;
                       }
                       
                       callback(response, nil);
