@@ -20,6 +20,7 @@ static int kDefaultSessionTimeout = 5;
 @property (nonatomic, readwrite, copy) NSString *sessionUUID;
 @property (nonatomic, strong) NSDate *startSessionDate;
 @property (nonatomic, strong) KZDeviceInfo *deviceInfo;
+@property (nonatomic, strong) NSMutableDictionary *sessionAttributes;
 
 @end
 
@@ -35,6 +36,7 @@ static int kDefaultSessionTimeout = 5;
         self.startSessionDate = [NSDate date];
         self.sessionTimeout = kDefaultSessionTimeout;
         self.deviceInfo = [KZDeviceInfo sharedDeviceInfo];
+        self.sessionAttributes = [[NSMutableDictionary alloc] init];
 
     }
     return self;
@@ -85,7 +87,14 @@ static int kDefaultSessionTimeout = 5;
 }
 
 - (KZSessionEvent *)eventForCurrentSessionWithLength:(NSNumber *)length {
-    KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:self.deviceInfo.properties
+    NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithDictionary:self.deviceInfo.properties];
+    
+    if (self.sessionAttributes.allKeys.count > 0)
+    {
+        [attrs addEntriesFromDictionary:self.sessionAttributes];
+    }
+    
+    KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:attrs
                                                                 sessionLength:length
                                                                   sessionUUID:self.sessionUUID];
     return sessionEvent;
@@ -94,6 +103,13 @@ static int kDefaultSessionTimeout = 5;
 - (void)logSessionWithLength:(NSNumber *)length
 {
     [self logEvent:[self eventForCurrentSessionWithLength:length]];
+}
+
+- (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key
+{
+    if (key != nil && value != nil) {
+        self.sessionAttributes[key] = value;
+    }
 }
 
 @end

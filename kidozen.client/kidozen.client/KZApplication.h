@@ -286,6 +286,8 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 @property (readonly, nonatomic) KZAnalytics *analytics;
 
 
+#pragma mark - Handy methods.
+
 /** 
     This tags the click/tap event.
     @param buttonName is a string to be logged as the button name
@@ -302,6 +304,14 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 - (void) tagEvent:(NSString *)customEventName
        attributes:(NSDictionary *)attributes;
+
+/**
+ *  Sets custom session attributes.
+ *
+ *  @param value It's the string value for your attribute.
+ *  @param key   It's the custom attribute session's key
+ */
+- (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key;
 
 /**
     By default, analytics are disabled. You can enable analytics by calling 

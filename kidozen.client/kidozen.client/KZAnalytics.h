@@ -5,8 +5,11 @@
 #import "KZObject.h"
 
 @class KZLogging;
+@class KZAnalyticsSession;
 
 @interface KZAnalytics : NSObject
+
+@property (nonatomic, readonly) KZAnalyticsSession *session;
 
 - (instancetype)initWithLoggingService:(KZLogging *)loggingService;
 

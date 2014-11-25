@@ -15,6 +15,7 @@
 #import "KZCrashReporter.h"
 #import "KZDataVisualizationViewController.h"
 #import "KZAnalytics.h"
+#import "KZAnalyticsSession.h"
 
 @interface KZApplication ()
 
@@ -399,6 +400,12 @@
 - (void) enableAnalytics
 {
     [self.appServices enableAnalytics];
+}
+
+
+- (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key
+{
+    [self.analytics.session setValue:value forSessionAttribute:key];
 }
 
 @end

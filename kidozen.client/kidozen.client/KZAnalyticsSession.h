@@ -41,6 +41,16 @@
 @property (nonatomic, readonly, strong) NSDate *startSessionDate;
 
 /**
+ *  All session attributes, which where assigned using the method
+ *
+ *  - (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key;
+ *
+ */
+@property (nonatomic, readonly) NSMutableDictionary *sessionAttributes;
+
+
+
+/**
  *  Will return whether the session events should be uploaded to the cloud, which 
  *  depends on the sessionTimeOut.
  *
@@ -88,5 +98,13 @@
  *  @return YES if we've got events in this session. NO otherwise.
  */
 - (BOOL)hasEvents;
+
+/**
+ *  Sets custom session attributes.
+ *
+ *  @param value It's the string value for your attribute.
+ *  @param key   It's the custom attribute session's key
+ */
+- (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key;
 
 @end
