@@ -84,7 +84,7 @@ typedef struct {
 
 static NSString *const SRWebSocketAppendToSecKeyString = @"258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
 
-static inline int32_t validate_dispatch_data_partial_string(NSData *data);
+static inline long validate_dispatch_data_partial_string(NSData *data);
 static inline void SRFastLog(NSString *format, ...);
 
 @interface NSData (SRWebSocket)
@@ -120,7 +120,7 @@ static inline void SRFastLog(NSString *format, ...);
 static NSString *newSHA1String(const char *bytes, size_t length) {
     uint8_t md[CC_SHA1_DIGEST_LENGTH];
     
-    CC_SHA1(bytes, length, md);
+    CC_SHA1(bytes, (CC_LONG)length, md);
     
     return [[NSData dataWithBytes:md length:CC_SHA1_DIGEST_LENGTH] base64Encoding];
 }
@@ -551,7 +551,7 @@ static __strong NSData *CRLFCRLF;
     CFReadStreamRef readStream = NULL;
     CFWriteStreamRef writeStream = NULL;
     
-    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)host, port, &readStream, &writeStream);
+    CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)host, (UInt32)port, &readStream, &writeStream);
     
     _outputStream = CFBridgingRelease(writeStream);
     _inputStream = CFBridgingRelease(readStream);
@@ -1226,7 +1226,7 @@ static const char CRLFCRLFBytes[] = {'\r', '\n', '\r', '\n'};
                     size_t scanSize = currentDataSize - _currentStringScanPosition;
                     
                     NSData *scan_data = [_currentFrameData subdataWithRange:NSMakeRange(_currentStringScanPosition, scanSize)];
-                    int32_t valid_utf8_size = validate_dispatch_data_partial_string(scan_data);
+                    long valid_utf8_size = validate_dispatch_data_partial_string(scan_data);
                     
                     if (valid_utf8_size == -1) {
                         [self closeWithCode:SRStatusCodeInvalidUTF8 reason:@"Text frames must be valid UTF-8"];
@@ -1446,7 +1446,7 @@ static const size_t SRFrameHeaderOverhead = 32;
                 uint8_t buffer[bufferSize];
                 
                 while (_inputStream.hasBytesAvailable) {
-                    int bytes_read = [_inputStream read:buffer maxLength:bufferSize];
+                    NSInteger bytes_read = [_inputStream read:buffer maxLength:bufferSize];
                     
                     if (bytes_read > 0) {
                         [_readBuffer appendBytes:buffer length:bytes_read];
@@ -1607,7 +1607,7 @@ static inline void SRFastLog(NSString *format, ...)  {
 
 #ifdef HAS_ICU
 
-static inline int32_t validate_dispatch_data_partial_string(NSData *data) {
+static inline long validate_dispatch_data_partial_string(NSData *data) {
     const void * contents = [data bytes];
     long size = [data length];
     
@@ -1652,7 +1652,7 @@ static inline int32_t validate_dispatch_data_partial_string(NSData *data) {
 #else
 
 // This is a hack, and probably not optimal
-static inline int32_t validate_dispatch_data_partial_string(NSData *data) {
+static inline long validate_dispatch_data_partial_string(NSData *data) {
     static const int maxCodepointSize = 3;
     
     for (int i = 0; i < maxCodepointSize; i++) {
