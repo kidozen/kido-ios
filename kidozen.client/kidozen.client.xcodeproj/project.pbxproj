@@ -28,7 +28,7 @@
 				6DF1EBBE18EDF72F000C3AA7 /* ShellScript */,
 			);
 			dependencies = (
-				6DF37EA619868E7200F18F37 /* PBXTargetDependency */,
+				6D3D66061A260C8500FC3445 /* PBXTargetDependency */,
 				6D8018011968ACDE00E99FB7 /* PBXTargetDependency */,
 				6D8018031968ACDE00E99FB7 /* PBXTargetDependency */,
 			);
@@ -181,6 +181,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6D3D66051A260C8500FC3445 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DFF94B818EE63E200EA324F;
+			remoteInfo = SocketRocket.fat;
+		};
+		6D3D66071A260D0200FC3445 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F6B2082C1450F597009315AF;
+			remoteInfo = SocketRocket;
+		};
+		6D3D66091A260D0200FC3445 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AA50FE4E18E5C39300DE42F7;
+			remoteInfo = SVHTTPRequest;
+		};
+		6D3D660B1A260D0200FC3445 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CD31510EE936A9000FDE88;
+			remoteInfo = CrashReporter;
+		};
 		6D43DBDA1968B26300D023CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
@@ -243,13 +271,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6DFF94BC18EE63ED00EA324F;
 			remoteInfo = SocketRocket.device;
-		};
-		6DF37EA519868E7200F18F37 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DFF94B818EE63E200EA324F;
-			remoteInfo = SocketRocket.fat;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -851,6 +872,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D3D66081A260D0200FC3445 /* PBXTargetDependency */,
+				6D3D660A1A260D0200FC3445 /* PBXTargetDependency */,
+				6D3D660C1A260D0200FC3445 /* PBXTargetDependency */,
 			);
 			name = kidozen.client;
 			productName = kidozen.client;
@@ -1073,6 +1097,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D3D66061A260C8500FC3445 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket.fat;
+			targetProxy = 6D3D66051A260C8500FC3445 /* PBXContainerItemProxy */;
+		};
+		6D3D66081A260D0200FC3445 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SocketRocket;
+			targetProxy = 6D3D66071A260D0200FC3445 /* PBXContainerItemProxy */;
+		};
+		6D3D660A1A260D0200FC3445 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SVHTTPRequest;
+			targetProxy = 6D3D66091A260D0200FC3445 /* PBXContainerItemProxy */;
+		};
+		6D3D660C1A260D0200FC3445 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CrashReporter;
+			targetProxy = 6D3D660B1A260D0200FC3445 /* PBXContainerItemProxy */;
+		};
 		6D43DBE21968BF2C00D023CF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
@@ -1102,11 +1146,6 @@
 			isa = PBXTargetDependency;
 			name = SocketRocket.device;
 			targetProxy = 6DF37E9E19868E6900F18F37 /* PBXContainerItemProxy */;
-		};
-		6DF37EA619868E7200F18F37 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SocketRocket.fat;
-			targetProxy = 6DF37EA519868E7200F18F37 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
