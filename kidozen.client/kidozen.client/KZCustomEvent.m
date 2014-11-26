@@ -20,8 +20,9 @@
 -(instancetype) initWithEventName:(NSString *)eventName
                        attributes:(NSDictionary *)attributes
                       sessionUUID:(NSString *)sessionUUID
+                      timeElapsed:(NSNumber *)timeElapsed
 {
-    self = [super initWithEventName:eventName sessionUUID:sessionUUID];
+    self = [super initWithEventName:eventName sessionUUID:sessionUUID timeElapsed:timeElapsed];
     
     if (self) {
         self.attributes = attributes;
@@ -36,10 +37,12 @@
     if (self.attributes != nil) {
         params = @{@"eventName" : self.eventName,
                    @"sessionUUID" : self.sessionUUID,
-                   @"eventAttr" : self.attributes};
+                   @"eventAttr" : self.attributes,
+                   @"elapsedTime" : self.timeElapsed };
     } else {
         params = @{@"eventName" : self.eventName,
-                   @"sessionUUID" : self.sessionUUID };
+                   @"sessionUUID" : self.sessionUUID,
+                   @"elapsedTime" : self.timeElapsed };
     }
 
     return params;

@@ -25,6 +25,7 @@
  */
 -(instancetype) initWithEventName:(NSString *)eventName
                        attributes:(NSDictionary *)attributes
-                      sessionUUID:(NSString *)sessionUUID;
+                      sessionUUID:(NSString *)sessionUUID
+                      timeElapsed:(NSNumber *)timeElapsed;
 
 @end

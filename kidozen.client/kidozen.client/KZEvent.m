@@ -12,19 +12,23 @@
 
 @property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, copy) NSString *sessionUUID;
+@property (nonatomic, strong) NSNumber *timeElapsed;
 
 @end
 
 
 @implementation KZEvent
 
--(instancetype) initWithEventName:(NSString *)eventName sessionUUID:(NSString *)sessionUUID
+-(instancetype) initWithEventName:(NSString *)eventName
+                      sessionUUID:(NSString *)sessionUUID
+                      timeElapsed:(NSNumber *)timeElapsed
 {
     self = [super init];
     if (self) {
         NSCharacterSet *chSet = [NSCharacterSet characterSetWithCharactersInString:@" -,.;:"];
         self.eventName = [[eventName componentsSeparatedByCharactersInSet: chSet] componentsJoinedByString: @""];
         self.sessionUUID = sessionUUID;
+        self.timeElapsed = timeElapsed;
     }
     return self;
 }

@@ -21,6 +21,8 @@
  *
  *  @return an instance of KZClickEvent.
  */
--(instancetype) initWithEventValue:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID;
+-(instancetype) initWithEventValue:(NSString *)eventValue
+                       sessionUUID:(NSString *)sessionUUID
+                       timeElapsed:(NSNumber *)timeElapsed;
 
 @end

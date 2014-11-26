@@ -94,9 +94,11 @@ static int kDefaultSessionTimeout = 5;
         [attrs addEntriesFromDictionary:self.sessionAttributes];
     }
     
+    // Session events are always the initial point.
     KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:attrs
                                                                 sessionLength:length
-                                                                  sessionUUID:self.sessionUUID];
+                                                                  sessionUUID:self.sessionUUID
+                                                                  timeElapsed:@(0)];
     return sessionEvent;
 }
 

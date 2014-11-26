@@ -10,9 +10,9 @@
 
 @implementation KZClickEvent
 
--(instancetype) initWithEventValue:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID;
+-(instancetype) initWithEventValue:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID timeElapsed:(NSNumber *)timeElapsed
 {
-    return [super initWithEventName:@"Click" value:eventValue sessionUUID:sessionUUID];
+    return [super initWithEventName:@"Click" value:eventValue sessionUUID:sessionUUID timeElapsed:timeElapsed];
 }
 
 

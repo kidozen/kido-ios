@@ -18,10 +18,13 @@
  *  @param sessionUUID The session ID to which this event belongs.
  *
  */
--(instancetype) initWithEventName:(NSString *)eventName sessionUUID:(NSString *)sessionUUID;
+-(instancetype) initWithEventName:(NSString *)eventName
+                      sessionUUID:(NSString *)sessionUUID
+                      timeElapsed:(NSNumber *)timeElapsed;
 
 @property (nonatomic, readonly, copy) NSString *eventName;
 @property (nonatomic, readonly, copy) NSString *sessionUUID;
+@property (nonatomic, readonly) NSNumber *timeElapsed;
 
 /**
  *  @return a dictionary representation of this event

@@ -13,6 +13,7 @@
 
 @property (nonatomic, readwrite, copy) NSString *eventName;
 @property (nonatomic, readwrite, copy) NSString *sessionUUID;
+@property (nonatomic, strong) NSNumber *timeElapsed;
 
 @end
 
@@ -24,9 +25,13 @@
 
 @implementation KZPredefinedEvent
 
--(instancetype) initWithEventName:(NSString *)eventName value:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID
+-(instancetype) initWithEventName:(NSString *)eventName
+                            value:(NSString *)eventValue
+                      sessionUUID:(NSString *)sessionUUID
+                      timeElapsed:(NSNumber *)timeElapsed
 {
-    self = [super initWithEventName:eventName sessionUUID:sessionUUID];
+    self = [super initWithEventName:eventName sessionUUID:sessionUUID timeElapsed:timeElapsed];
+    
     if (self) {
         self.eventValue = eventValue;
     }
@@ -38,7 +43,8 @@
     
     return  @{@"eventName" : self.eventName,
               @"eventValue" : self.eventValue,
-              @"sessionUUID" : self.sessionUUID};
+              @"sessionUUID" : self.sessionUUID,
+              @"elapsedTime" : self.timeElapsed };
 }
 
 @end

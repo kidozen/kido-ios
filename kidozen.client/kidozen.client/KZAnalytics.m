@@ -65,17 +65,32 @@
     return self.sessionUploader.maximumSecondsToUpload;
 }
 
+- (NSNumber *)elapsedTimeSinceStart {
+    
+    NSTimeInterval interval = [NSDate date].timeIntervalSince1970 - self.session.startSessionDate.timeIntervalSince1970;
+    
+    // Just in case...
+    if (interval > 0) {
+        return @(interval);
+    } else {
+        return @(0);
+    }
+}
+
 - (void)tagClick:(NSString *)buttonName
 {
+    
     KZClickEvent *clickEvent = [[KZClickEvent alloc] initWithEventValue:buttonName
-                                                            sessionUUID:self.session.sessionUUID];
+                                                            sessionUUID:self.session.sessionUUID
+                                                            timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:clickEvent];
 }
 
 - (void)tagView:(NSString *)viewName
 {
     KZViewEvent *viewEvent = [[KZViewEvent alloc] initWithEventValue:viewName
-                                                         sessionUUID:self.session.sessionUUID];
+                                                         sessionUUID:self.session.sessionUUID
+                                                         timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:viewEvent];
 }
 
@@ -85,7 +100,8 @@
 {
     KZCustomEvent *customEvent = [[KZCustomEvent alloc] initWithEventName:customEventName
                                                                attributes:attributes
-                                                              sessionUUID:self.session.sessionUUID];
+                                                              sessionUUID:self.session.sessionUUID
+                                                              timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:customEvent];
 
 }

@@ -13,12 +13,16 @@
 -(instancetype) initWithAttributes:(NSDictionary *)attributes
                      sessionLength:(NSNumber *)length
                        sessionUUID:(NSString *)sessionUUID
+                       timeElapsed:(NSNumber *)timeElapsed
 {
     NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
     attr[@"sessionLength"] = length;
     attr[@"platform"] = @"iOS";
     
-    return [super initWithEventName:@"user-session" attributes:attr sessionUUID:sessionUUID];
+    return [super initWithEventName:@"user-session"
+                         attributes:attr
+                        sessionUUID:sessionUUID
+                        timeElapsed:timeElapsed];
 }
 
 @end

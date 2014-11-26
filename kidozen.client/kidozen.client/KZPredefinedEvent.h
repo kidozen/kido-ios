@@ -13,7 +13,10 @@
  */
 @interface KZPredefinedEvent : KZEvent
 
-- (instancetype)initWithEventName:(NSString *)eventName value:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID;
+- (instancetype)initWithEventName:(NSString *)eventName
+                            value:(NSString *)eventValue
+                      sessionUUID:(NSString *)sessionUUID
+                      timeElapsed:(NSNumber *)timeElapsed;
 
 // Will contain the value of the event, such as "OkButton" or "InitialView" or something like that.
 @property (nonatomic, readonly, copy) NSString *eventValue;

@@ -10,9 +10,11 @@
 
 @implementation KZViewEvent
 
--(instancetype) initWithEventValue:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID;
+-(instancetype) initWithEventValue:(NSString *)eventValue
+                       sessionUUID:(NSString *)sessionUUID
+                       timeElapsed:(NSNumber *)timeElapsed
 {
-    return [super initWithEventName:@"View" value:eventValue sessionUUID:sessionUUID];
+    return [super initWithEventName:@"View" value:eventValue sessionUUID:sessionUUID timeElapsed:timeElapsed];
 }
 
 @end

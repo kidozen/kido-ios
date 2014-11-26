@@ -20,6 +20,8 @@
  *  @param sessionUUID is the session ID to which the event belongs.
  *
  */
--(instancetype) initWithEventValue:(NSString *)eventValue sessionUUID:(NSString *)sessionUUID;
+-(instancetype) initWithEventValue:(NSString *)eventValue
+                       sessionUUID:(NSString *)sessionUUID
+                       timeElapsed:(NSNumber *)timeElapsed;
 
 @end
