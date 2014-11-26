@@ -204,7 +204,7 @@
 				6DF1E9E418EC6EB9000C3AA7 /* Sources */,
 				6DF1E9E518EC6EB9000C3AA7 /* Frameworks */,
 				6DF1E9E618EC6EB9000C3AA7 /* Resources */,
-				6D5D8AF01964550100C7611E /* ShellScript */,
+				6D5D8AF01964550100C7611E /* Upload dSYM to Kidozen */,
 			);
 			buildRules = (
 			);
@@ -288,18 +288,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6D5D8AF01964550100C7611E /* ShellScript */ = {
+		6D5D8AF01964550100C7611E /* Upload dSYM to Kidozen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Upload dSYM to Kidozen";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "DSYM_FILE_PATH=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\n\necho \"kido app-crash $DSYM_FILE_PATH\"\n";
+			shellPath = /bin/bash;
+			shellScript = "export PATH=$PATH:/usr/local/sbin:/usr/local/bin\nexport NODE_PATH=\"/usr/local/lib/node_modules/\"\n\n\nUPLOAD_DSYM=false # If you want to disable dSYM Uploading, set this to false\nUPLOAD_ONLY_IN_RELEASE=true #If you want to also upload when in Debug mode, set this to false\n\nDSYM_FILE_PATH=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\nAPPNAME=\"YOUR_APP_NAME_HERE\"\nAPP_CENTER_URL=\"APP_CENTER_URL\"\n\nif [ \"$UPLOAD_DSYM\" == true ]; then\n    if [ \"YOUR_APP_NAME_HERE\" == \"${APPNAME}\" ]; then\n\n        echo \"warning: Please add the application name. It's the one in the application center url.\"\n\n    elif [ \"APP_CENTER_URL\" == \"${APP_CENTER_URL}\" ]; then\n\n        echo \"warning: Please add your app center url.\"\n\n    elif [ \"Release\" == \"${CONFIGURATION}\" ] || [ \"$UPLOAD_ONLY_IN_RELEASE\" == false ]; then\n\n        echo \"Remember to run kido hosting ${APP_CENTER_URL} in a terminal so that kido command can upload the dSYM file.\"\n        echo \"Please refer to http://docs.kidozen.com/ios-and-android-crash-reports/#Uploading-iOS-symbols for complete documentation.\"\n\n        kido app-crash $DSYM_FILE_PATH $APPNAME $APP_CENTER_URL\n    fi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -442,7 +443,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/crasherLib",
-					"$(PROJECT_DIR)/kidoLib",
 					"/Users/miya/src/kido-ios/outputLibrary",
 				);
 				OTHER_LDFLAGS = (
@@ -473,7 +473,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/crasherLib",
-					"$(PROJECT_DIR)/kidoLib",
 					"/Users/miya/src/kido-ios/outputLibrary",
 				);
 				OTHER_LDFLAGS = (
