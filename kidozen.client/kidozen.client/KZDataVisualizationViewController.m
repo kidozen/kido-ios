@@ -65,15 +65,16 @@
         [self initializeHttpClientWithStrictSSL:strictSSL];
         self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         self.bytesWritten = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
-
     }
     return self;
     
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Data Visualization";
+    self.title = self.datavizName;
+    self.navigationController.navigationBarHidden = YES;
     
     [self loadBarButtonItem];
     [self configureWebView];
@@ -97,8 +98,19 @@
 {
     self.webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     self.webView.delegate = self;
+    self.webView.scrollView.scrollEnabled = YES;
     [self.view addSubview:self.webView];
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight |
+                                    UIViewAutoresizingFlexibleWidth |
+                                    UIViewAutoresizingFlexibleLeftMargin |
+                                    UIViewAutoresizingFlexibleRightMargin |
+                                    UIViewAutoresizingFlexibleTopMargin |
+                                    UIViewAutoresizingFlexibleBottomMargin;
+
+    self.webView.autoresizingMask = self.view.autoresizingMask;
+    
 }
+
 
 - (void)configureProgressView
 {

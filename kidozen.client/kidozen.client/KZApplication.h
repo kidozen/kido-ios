@@ -8,6 +8,7 @@
 
 #import "KZLogging.h"
 #import "KZObject.h"
+#import <UIKit/UIKit.h>
 
 @class KZApplicationConfiguration;
 @class KZCrashReporter;
@@ -336,5 +337,19 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 - (void)showDataVisualizationWithName:(NSString *)datavizName
                                success:(void (^)(void))success
                                 error:(void (^)(NSError *error))failure;
+
+/**
+ *  This method returns the view containing the uiwebview, progress and loading indicator.
+ *
+ *  @param dataVizName is the name of the visualization. It should be exactly the same as what appears
+ *                     in the web.
+ *  @param success     is the block that will be called when the datavisualization has been loaded.
+ *  @param failure     is the block that will be called when an error occurs.
+ *
+ *  @return the view that will contain the webview.
+ */
+- (UIView *)dataVisualizationWithName:(NSString *)dataVizName
+                          success:(void (^)(void))success
+                            error:(void (^)(NSError *error))failure;
 
 @end

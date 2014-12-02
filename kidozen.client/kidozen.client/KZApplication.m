@@ -30,6 +30,8 @@
 @property (nonatomic, strong) KZApplicationAuthentication *appAuthentication;
 @property (nonatomic, assign) BOOL strictSSL;
 
+@property (nonatomic, strong) KZDataVisualizationViewController *dataVizVC;
+
 @end
 
 @implementation KZApplication
@@ -415,18 +417,37 @@
 
 - (void)showDataVisualizationWithName:(NSString *)datavizName success:(void (^)(void))success error:(void (^)(NSError *error))failure
 {
-    KZDataVisualizationViewController *vc = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
-                                                                                                         appAuth:self.appAuthentication
-                                                                                                          tenant:self.tenantMarketPlace
-                                                                                                       strictSSL:self.strictSSL
-                                                                                                     dataVizName:datavizName];
-    vc.successCb = success;
-    vc.errorCb = failure;
+    self.dataVizVC = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
+                                                                                  appAuth:self.appAuthentication
+                                                                                   tenant:self.tenantMarketPlace
+                                                                                strictSSL:self.strictSSL
+                                                                              dataVizName:datavizName];
+    
+    // Here we don't care about the view, so we just call the callback.
+    self.dataVizVC.successCb = success;
+    
+    self.dataVizVC.errorCb = failure;
     
     UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     
-    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:vc];
+    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:self.dataVizVC];
     [rootController presentModalViewController:webNavigation animated:YES];
+}
+
+- (UIView *)dataVisualizationWithName:(NSString *)datavizName
+                          success:(void (^)(void))success
+                            error:(void (^)(NSError *error))failure
+{
+    self.dataVizVC = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
+                                                                                  appAuth:self.appAuthentication
+                                                                                   tenant:self.tenantMarketPlace
+                                                                                strictSSL:self.strictSSL
+                                                                              dataVizName:datavizName];
+    self.dataVizVC.successCb = success;
+    self.dataVizVC.errorCb = failure;
+    
+    return  self.dataVizVC.view;
+    
 }
 
 
