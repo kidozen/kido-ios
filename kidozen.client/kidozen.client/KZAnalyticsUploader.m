@@ -95,9 +95,9 @@ static NSUInteger kMaximumSecondsToUpload = 300;
         // We only consider valid length values.
         if (length > 0) {
             [self.session loadEventsFromDisk];
-            NSLog(@"session events are self.session.events %@", self.session.events);
             
             [self.session logSessionWithLength:@(length)];
+            NSLog(@"session events are self.session.events %@", self.session.events);
             [self sendEvents];
         } else {
             [self.session removeSavedEvents];
