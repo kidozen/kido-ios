@@ -346,10 +346,11 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  *  @param success     is the block that will be called when the datavisualization has been loaded.
  *  @param failure     is the block that will be called when an error occurs.
  *
- *  @return the view that will contain the webview.
+ *  @return the view that will contain the webview displaying the data visualization, as well as the 
+ *          progress indicator.
  */
 - (UIView *)dataVisualizationWithName:(NSString *)dataVizName
-                          success:(void (^)(void))success
-                            error:(void (^)(NSError *error))failure;
+                              success:(void (^)(void))success
+                                error:(void (^)(NSError *error))failure;
 
 @end
