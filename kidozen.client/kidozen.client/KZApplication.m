@@ -417,16 +417,7 @@
 
 - (void)showDataVisualizationWithName:(NSString *)datavizName success:(void (^)(void))success error:(void (^)(NSError *error))failure
 {
-    self.dataVizVC = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
-                                                                                  appAuth:self.appAuthentication
-                                                                                   tenant:self.tenantMarketPlace
-                                                                                strictSSL:self.strictSSL
-                                                                              dataVizName:datavizName];
-    
-    // Here we don't care about the view, so we just call the callback.
-    self.dataVizVC.successCb = success;
-    
-    self.dataVizVC.errorCb = failure;
+    [self configureDataVizWithName:datavizName success:success error:failure];
     
     UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
     
@@ -438,18 +429,27 @@
                           success:(void (^)(void))success
                             error:(void (^)(NSError *error))failure
 {
-    self.dataVizVC = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
-                                                                                  appAuth:self.appAuthentication
-                                                                                   tenant:self.tenantMarketPlace
-                                                                                strictSSL:self.strictSSL
-                                                                              dataVizName:datavizName];
-    self.dataVizVC.successCb = success;
-    self.dataVizVC.errorCb = failure;
+    [self configureDataVizWithName:datavizName success:success error:failure];
     
     return  self.dataVizVC.view;
     
 }
 
+- (void) configureDataVizWithName:(NSString*)datavizName
+                          success:(void (^)(void))success
+                            error:(void (^)(NSError *error))failure
+{
+    
+    self.dataVizVC = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
+                                                                                  appAuth:self.appAuthentication
+                                                                                   tenant:self.tenantMarketPlace
+                                                                                strictSSL:self.strictSSL
+                                                                              dataVizName:datavizName];
+    
+    self.dataVizVC.successCb = success;
+    self.dataVizVC.errorCb = failure;
+
+}
 
 
 @end
