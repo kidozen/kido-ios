@@ -1,5 +1,6 @@
 #import "KZPubSubChannel.h"
 #import "KZBaseService+ProtectedMethods.h"
+#import "KZTokenController.h"
 
 @implementation KZPubSubChannel
 @synthesize wsEndpoint = _wsEndpoint;
@@ -39,8 +40,14 @@
 
 -(void) subscribe:(WebSocketEventBlock) completionEventBlock
 {
+
     self.webSocketCompletionEventBlock = completionEventBlock;
     NSMutableURLRequest * nsurl = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:_wsEndpoint]];
+
+    if (self.tokenController.kzToken != nil) {
+        [nsurl setValue:self.tokenController.kzToken forHTTPHeaderField:@"Authorization"];
+    }
+    
     _webSocket = [[SRWebSocket alloc] initWithURLRequest:nsurl];
     [_webSocket setDelegate:self];
     [_webSocket open];
@@ -60,14 +67,12 @@
 
 -(void) webSocketDidOpen:(SRWebSocket *)webSocket
 {
-    //DLog(@"webSocketDidOpen");
     NSString * connect = [NSString stringWithFormat:@"bindToChannel::{\"application\":\"local\",\"channel\":\"%@\"}",_channelName];
     [_webSocket send:connect];
 }
 
 -(void) webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
 {
-    //DLog(@"didReceiveMessage: %@", message);
     NSError * error = nil;
     message = [message substringFromIndex:[message indexOf:@"::"] + 2];
     NSDictionary *jsonMessage =
@@ -84,14 +89,12 @@
 }
 -(void) webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
-    //DLog(@"didFailWithError: %@", error);
     if (_webSocketCompletionEventBlock) {
         _webSocketCompletionEventBlock(error);
     }
 }
 -(void) webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-    //DLog(@"Close code: %u",code);
     NSDictionary *message = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:code],@"code", reason,@"reason",[NSNumber numberWithBool:wasClean],@"wasClean", nil];
     if (_webSocketCompletionEventBlock) {
         _webSocketCompletionEventBlock(message);
