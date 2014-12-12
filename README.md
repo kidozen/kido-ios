@@ -14,6 +14,7 @@ Repeat the operation with the following frameworks:
   - security.framework
   - cfnetwork.framework
   - coreTelephony.framework
+  - coreLocation.framework
   - libz.dylib
   - libc++.dylib
   - SystemConfiguration.framework
