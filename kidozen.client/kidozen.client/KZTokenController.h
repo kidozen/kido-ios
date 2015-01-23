@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 5/30/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,6 +17,10 @@
 @property (nonatomic, copy, readonly) NSString *rawAccessToken;
 @property (nonatomic, copy, readonly) NSString *kzToken;
 @property (nonatomic, copy, readonly) NSString *ipToken;
+
+// We store the dictionary that comes as authentication response.
+// It's required for data visualization.
+@property (nonatomic, strong) NSDictionary *authenticationResponse;
 
 @property (nonatomic, copy, readonly) NSString *refreshToken;
 

@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 6/9/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -16,6 +16,6 @@
 
 - (id) initWithURLString:(NSString *)urlString;
 
-@property (nonatomic, copy) void(^completion)(NSString *token, NSString *refreshToken, NSError *error);
+@property (nonatomic, copy) void(^completion)(NSDictionary *fullResponse, NSError *error);
 
 @end

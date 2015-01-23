@@ -8,6 +8,7 @@
 
 #import "KZLogging.h"
 #import "KZObject.h"
+#import <UIKit/UIKit.h>
 
 @class KZApplicationConfiguration;
 @class KZCrashReporter;
@@ -20,6 +21,8 @@
 @class KZNotification;
 @class KZMail;
 @class KZDatasource;
+@class KZFileStorage;
+@class KZAnalytics;
 
 #if TARGET_OS_IPHONE
 @class KZPubSubChannel;
@@ -34,7 +37,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * Main KidoZen application object
  *
  */
-@interface KZApplication : KZObject
+@interface KZApplication : NSObject
 
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 @property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;
@@ -101,6 +104,10 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
              andPassword:(NSString *)password;
 
 
+/**
+    Handles authentication when you only have your application's Application Key.
+    @param callback is the block that will always gets called when it finishes.
+ */
 - (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *))callback;
 
 /**
@@ -108,7 +115,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * @param callback can be a KZResponse or an  NSError, whether the authentication
  * was successful or not.
  */
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback;
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))callback;
 
 /* If you want to change the authentication callback, you can do so by
  * setting this property.
@@ -173,6 +180,9 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  * @return a new DataSource object
  */
 - (KZDatasource *)DataSourceWithName:(NSString *)name;
+
+
+- (KZFileStorage *)fileService;
 
 #if TARGET_OS_IPHONE
 /**
@@ -271,5 +281,76 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 @property (readonly, nonatomic) KZNotification * pushNotifications;
 
+
+#pragma mark - Analytics
+
+@property (readonly, nonatomic) KZAnalytics *analytics;
+
+
+#pragma mark - Handy methods.
+
+/** 
+    This tags the click/tap event.
+    @param buttonName is a string to be logged as the button name
+ */
+- (void)tagClick:(NSString *)buttonName;
+
+/// This tags the event where the user is presented a particular view.
+- (void)tagView:(NSString *)viewName;
+
+/**
+    This tags a customEvent with the corresponding custom attributes.
+    @param customEventName is the name the user wants to tag.
+    @param attributes is the dictionary that are part of the customEvent.
+ */
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes;
+
+/**
+ *  Sets custom session attributes.
+ *
+ *  @param value It's the string value for your attribute.
+ *  @param key   It's the custom attribute session's key
+ */
+- (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key;
+
+/**
+    By default, analytics are disabled. You can enable analytics by calling 
+    this method.
+ */
+- (void) enableAnalytics;
+
 @end
 
+@interface KZApplication(DataVisualization)
+
+/**
+    This method will display a modal view controller which contains a webView that will load
+    the corresponding data visualization.
+    The visualization should exist in the server and the user should have tap on Preview at least once.
+    (this will not be required in the future)
+    @param dataVizName is the name of the visualization. It should be exactly the same as what appears
+                       in the web.
+    @param success is the block that will be called when the datavisualization has been loaded.
+    @param error is the block that will be called when an error occurs.
+ */
+- (void)showDataVisualizationWithName:(NSString *)datavizName
+                               success:(void (^)(void))success
+                                error:(void (^)(NSError *error))failure;
+
+/**
+ *  This method returns the view containing the uiwebview, progress and loading indicator.
+ *
+ *  @param dataVizName is the name of the visualization. It should be exactly the same as what appears
+ *                     in the web.
+ *  @param success     is the block that will be called when the datavisualization has been loaded.
+ *  @param failure     is the block that will be called when an error occurs.
+ *
+ *  @return the view that will contain the webview displaying the data visualization, as well as the 
+ *          progress indicator.
+ */
+- (UIView *)dataVisualizationWithName:(NSString *)dataVizName
+                              success:(void (^)(void))success
+                                error:(void (^)(NSError *error))failure;
+
+@end

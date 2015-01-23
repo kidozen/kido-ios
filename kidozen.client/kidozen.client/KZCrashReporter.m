@@ -3,11 +3,12 @@
 //  kidozen.client
 //
 //  Created by Christian Carnero on 3/17/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import "KZCrashReporter.h"
 #import "KZBaseService+ProtectedMethods.h"
+#import "NSString+Path.h"
 
 // Importing/Redeclaring methods.
 @interface KZBaseService ()
@@ -156,6 +157,8 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
     
     [self.client POST:@"" parameters:jsonDictionary completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
 
+        NSLog(@"Response for dump is %@", urlResponse);
+
         if (!error) {
             NSError *purgeError;
             if (![safeMe.baseReporter purgePendingCrashReportAndReturnError:&purgeError]) {
@@ -164,6 +167,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 
             [safeMe removeBreadcrumbsFile];
         }
+        
         
         safeMe.crashReporterError = error;
         if (response) {
@@ -188,7 +192,7 @@ void post_crash_callback (siginfo_t *info, ucontext_t *uap, void *context) {
 
 - (void) saveReportToFile:(NSString *) reportdataasstring {
 
-    NSString *outputPath = [self pathForFilename:@"KidozenCrashReport.crash"];
+    NSString *outputPath = [@"KidozenCrashReport.crash" documentsPath];
  
     if (![reportdataasstring writeToFile:outputPath atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
         self.crashReporterError = [NSError errorWithDomain:@"CrashReporter" code:1 userInfo:[NSDictionary dictionaryWithObject:@"Failed to write crash report" forKey:@"description"]];
@@ -232,15 +236,8 @@ finish:
 
 - (NSString *)breadcrumbFilename
 {
-    return [self pathForFilename:@"CrashUserLogs.log"];
+    return [@"CrashUserLogs.log" documentsPath];
 }
 
-- (NSString *)pathForFilename:(NSString *)filename
-{
-    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [pathArray objectAtIndex:0];
-    return [documentsDirectory stringByAppendingPathComponent:filename];
-    
-}
 @end
 

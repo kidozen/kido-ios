@@ -11,6 +11,6 @@
     NSString * _wrapName, *_wrapPassword, *_wrapScope;
 }
 @property (nonatomic, assign) BOOL strictSSL ;
-@property (nonatomic, strong) NSString * token;
+@property (nonatomic, copy) NSString * token;
 
 @end

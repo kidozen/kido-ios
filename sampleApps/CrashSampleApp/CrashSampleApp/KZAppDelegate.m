@@ -10,9 +10,12 @@
 #import "KZApplication.h"
 #import "MainCrashViewController.h"
 
-NSString * const kzAppCenterUrl = @"YOUR_APP_CENTER_URL";
-NSString * const kzAppName = @"YOUR_APP";
-NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
+NSString * const kzAppCenterUrl = @""; //URL of the tenant's marketplece
+NSString * const kzAppName = @""; // app name
+NSString * const kzUser = @""; //kidozen user
+NSString * const kzPassword = @""; //kidozen password
+NSString * const kzProvider = @"";
+NSString * const kzApplicationKey = @"";
 
 @interface KZAppDelegate()
 
@@ -90,4 +93,11 @@ NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
     return  (KZAppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
+@end
+
+@implementation NSURLRequest(DataController)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
+{
+    return YES;
+}
 @end

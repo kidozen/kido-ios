@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D03276419DC98CF009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03276319DC98CF009C8B2B /* libz.dylib */; };
 		6D1B213C196ED8E500088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B213B196ED8E500088F5C /* kz.client.a */; };
+		6D8CEE2219F070BC00259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE2119F070BC00259796 /* CoreLocation.framework */; };
 		6D99202818EF339D000A6C5D /* libCrashSampleLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D99202618EF339D000A6C5D /* libCrashSampleLib.a */; };
+		6DC4794E19C9BA460050FC2A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */; };
+		6DC4795019C9BA5B0050FC2A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */; };
 		6DF1E9EC18EC6EB9000C3AA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1E9EB18EC6EB9000C3AA7 /* Foundation.framework */; };
 		6DF1E9EE18EC6EB9000C3AA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1E9ED18EC6EB9000C3AA7 /* CoreGraphics.framework */; };
 		6DF1E9F018EC6EB9000C3AA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DF1E9EF18EC6EB9000C3AA7 /* UIKit.framework */; };
@@ -38,8 +42,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D03276319DC98CF009C8B2B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		6D1B213B196ED8E500088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
+		6D8CEE2119F070BC00259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6D99202618EF339D000A6C5D /* libCrashSampleLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCrashSampleLib.a; path = crasherLib/libCrashSampleLib.a; sourceTree = "<group>"; };
+		6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6DE2A0C8192652AD0020C69A /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = "../kido-ios/outputLibrary/kz.client.a"; sourceTree = "<group>"; };
 		6DF1E9E818EC6EB9000C3AA7 /* CrashSampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrashSampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DF1E9EB18EC6EB9000C3AA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,6 +77,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE2219F070BC00259796 /* CoreLocation.framework in Frameworks */,
+				6D03276419DC98CF009C8B2B /* libz.dylib in Frameworks */,
+				6DC4795019C9BA5B0050FC2A /* SystemConfiguration.framework in Frameworks */,
+				6DC4794E19C9BA460050FC2A /* CoreTelephony.framework in Frameworks */,
 				6D1B213C196ED8E500088F5C /* kz.client.a in Frameworks */,
 				6D99202818EF339D000A6C5D /* libCrashSampleLib.a in Frameworks */,
 				6DF1EA4B18EC7212000C3AA7 /* libc++.dylib in Frameworks */,
@@ -114,6 +126,10 @@
 		6DF1E9EA18EC6EB9000C3AA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D8CEE2119F070BC00259796 /* CoreLocation.framework */,
+				6D03276319DC98CF009C8B2B /* libz.dylib */,
+				6DC4794F19C9BA5B0050FC2A /* SystemConfiguration.framework */,
+				6DC4794D19C9BA460050FC2A /* CoreTelephony.framework */,
 				6D1B213B196ED8E500088F5C /* kz.client.a */,
 				6DE2A0C8192652AD0020C69A /* kz.client.a */,
 				6D99202618EF339D000A6C5D /* libCrashSampleLib.a */,
@@ -188,7 +204,7 @@
 				6DF1E9E418EC6EB9000C3AA7 /* Sources */,
 				6DF1E9E518EC6EB9000C3AA7 /* Frameworks */,
 				6DF1E9E618EC6EB9000C3AA7 /* Resources */,
-				6D5D8AF01964550100C7611E /* ShellScript */,
+				6D5D8AF01964550100C7611E /* Upload dSYM to Kidozen */,
 			);
 			buildRules = (
 			);
@@ -272,18 +288,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6D5D8AF01964550100C7611E /* ShellScript */ = {
+		6D5D8AF01964550100C7611E /* Upload dSYM to Kidozen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Upload dSYM to Kidozen";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "DSYM_FILE_PATH=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\n\necho \"kido app-crash $DSYM_FILE_PATH\"\n";
+			shellPath = /bin/bash;
+			shellScript = "export PATH=$PATH:/usr/local/sbin:/usr/local/bin\nexport NODE_PATH=\"/usr/local/lib/node_modules/\"\n\nUPLOAD_DSYM=false # If you want to disable dSYM Uploading, set this to false\nUPLOAD_ONLY_IN_RELEASE=true #If you want to also upload when in Debug mode, set this to false\n\n\nDSYM_FILE_PATH=${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\nAPPNAME=\"YOUR_APP_NAME_HERE\"\nAPP_CENTER_URL=\"APP_CENTER_URL\"\n\nif [\"Release\" != \"${CONFIGURATION}\" || [ \"$UPLOAD_ONLY_IN_RELEASE\" == false ]; then\n    echo \"Exporting NODE_TLS_REJECT_UNAUTHORIZED=\\\"0\\\"\"\n    export NODE_TLS_REJECT_UNAUTHORIZED=\"0\"\nfi\n\nif [ \"$UPLOAD_DSYM\" == true ]; then\n    if [ \"YOUR_APP_NAME_HERE\" == \"${APPNAME}\" ]; then\n\n        echo \"warning: Please add the application name. It's the one in the application center url.\"\n\n    elif [ \"APP_CENTER_URL\" == \"${APP_CENTER_URL}\" ]; then\n\n        echo \"warning: Please add your app center url.\"\n\n    elif [ \"Release\" == \"${CONFIGURATION}\" ] || [ \"$UPLOAD_ONLY_IN_RELEASE\" == false ]; then\n\n        echo \"Remember to run kido hosting ${APP_CENTER_URL} in a terminal so that kido command can upload the dSYM file.\"\n        echo \"Please refer to http://docs.kidozen.com/ios-and-android-crash-reports/#Uploading-iOS-symbols for complete documentation.\"\n        echo \"Executing kido app-crash $DSYM_FILE_PATH $APPNAME $APP_CENTER_URL\"\n        kido app-crash $DSYM_FILE_PATH $APPNAME $APP_CENTER_URL\n    fi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -426,7 +443,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/crasherLib",
-					"$(PROJECT_DIR)/kidoLib",
 					"/Users/miya/src/kido-ios/outputLibrary",
 				);
 				OTHER_LDFLAGS = (
@@ -457,7 +473,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/crasherLib",
-					"$(PROJECT_DIR)/kidoLib",
 					"/Users/miya/src/kido-ios/outputLibrary",
 				);
 				OTHER_LDFLAGS = (

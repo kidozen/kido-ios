@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 7/14/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import "KZApplicationAuthentication.h"
@@ -142,8 +142,8 @@ NSString *const kAccessTokenKey = @"access_token";
             }
             else {
                 safeMe.isAuthenticated = true;
-                safeMe.kzUser.user = user;
-                safeMe.kzUser.pass = password;
+                
+                [safeMe.tokenController setAuthenticationResponse:response];
                 
                 [safeMe.tokenController updateAccessTokenWith:[response objectForKey:@"rawToken"]
                                                accessTokenKey:[safeMe getAccessTokenCacheKey]];
@@ -152,7 +152,7 @@ NSString *const kAccessTokenKey = @"access_token";
                                                     ipKey:[safeMe getIpCacheKey]];
                 
                 [safeMe parseUserInfo:safeMe.tokenController.kzToken];
-                
+
                 [safeMe.tokenController startTokenExpirationTimer:safeMe.kzUser.expiresOn
                                                          callback:^{
                                                              [safeMe tokenExpires];
@@ -199,6 +199,7 @@ NSString *const kAccessTokenKey = @"access_token";
 
                           [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
                           callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
+                          return;
                       }
                       
                       callback(response, nil);
@@ -206,7 +207,7 @@ NSString *const kAccessTokenKey = @"access_token";
                   }];
 }
 
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))block
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))block
 {
     NSString *passiveUrlString = self.applicationConfig.authConfig.signInUrl;
     NSAssert(passiveUrlString, @"Must not be nil");
@@ -220,11 +221,11 @@ NSString *const kAccessTokenKey = @"access_token";
     
     self.authCompletionBlock = block;
     
-    passiveAuthVC.completion = ^(NSString *token, NSString *refreshToken, NSError *error) {
+    passiveAuthVC.completion = ^(NSDictionary *fullResponse, NSError *error) {
         if (error != nil) {
             return [safeMe failAuthenticationWithError:error];
         } else {
-            [safeMe completePassiveAuthenticationWithToken:token refreshToken:refreshToken];
+            [safeMe completePassiveAuthenticationWithResponse:fullResponse];
         }
     };
     
@@ -233,8 +234,13 @@ NSString *const kAccessTokenKey = @"access_token";
     [rootController presentModalViewController:webNavigation animated:YES];
 }
 
-- (void)completePassiveAuthenticationWithToken:(NSString *)token refreshToken:(NSString *)refreshToken
+- (void)completePassiveAuthenticationWithResponse:(NSDictionary *)jsonDictionary
 {
+
+    NSString *token = jsonDictionary[@"access_token"];
+    NSString *refreshToken = jsonDictionary[@"refresh_token"];
+
+    [self.tokenController setAuthenticationResponse:jsonDictionary];
     [self.tokenController updateAccessTokenWith:token
                                  accessTokenKey:[self getAccessTokenCacheKey]];
     
@@ -270,6 +276,9 @@ NSString *const kAccessTokenKey = @"access_token";
                                     safeMe.lastProviderKey = nil;
                                     safeMe.lastPassword = nil;
                                     safeMe.lastUserName = nil;
+                                    
+                                    [safeMe.tokenController setAuthenticationResponse:responseForToken];
+
                                     
                                     [safeMe.tokenController updateAccessTokenWith:responseForToken[kAccessTokenKey]
                                                                    accessTokenKey:[safeMe getAccessTokenCacheKey]];
@@ -333,6 +342,8 @@ NSString *const kAccessTokenKey = @"access_token";
                                     if (error != nil) {
                                         callback(error);
                                     }
+                                    
+                                    [safeMe.tokenController setAuthenticationResponse:responseForToken];
                                     
                                     [safeMe.tokenController updateAccessTokenWith:responseForToken[kAccessTokenKey]
                                                                    accessTokenKey:[safeMe getAccessTokenCacheKey]];
@@ -420,6 +431,10 @@ NSString *const kAccessTokenKey = @"access_token";
 -(void) parseUserInfo:(NSString *) token
 {
     self.kzUser = [[KZUser alloc] initWithToken:token];
+    self.kzUser.user = self.lastUserName;
+    self.kzUser.pass = self.lastPassword;
+    self.kzUser.provider = self.lastProviderKey;
+    
 }
 
 

@@ -13,6 +13,11 @@ Import the libicucore.dylib library:
 Repeat the operation with the following frameworks:
   - security.framework
   - cfnetwork.framework
+  - coreTelephony.framework
+  - coreLocation.framework
+  - libz.dylib
+  - libc++.dylib
+  - SystemConfiguration.framework
 
 On the right panel, click the Build Phases
   - Search Header Search Paths and include the path where the KidoZen headers files are

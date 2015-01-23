@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D03275A19DC975C009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275919DC975C009C8B2B /* libz.dylib */; };
+		6D03275C19DC9761009C8B2B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275B19DC9761009C8B2B /* SystemConfiguration.framework */; };
+		6D03276219DC977A009C8B2B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03276119DC977A009C8B2B /* CoreTelephony.framework */; };
 		6D12BC37195C63C100BBCB73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC36195C63C100BBCB73 /* Foundation.framework */; };
 		6D12BC39195C63C100BBCB73 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC38195C63C100BBCB73 /* CoreGraphics.framework */; };
 		6D12BC3B195C63C100BBCB73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC3A195C63C100BBCB73 /* UIKit.framework */; };
@@ -14,29 +17,20 @@
 		6D12BC43195C63C100BBCB73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC42195C63C100BBCB73 /* main.m */; };
 		6D12BC47195C63C100BBCB73 /* KZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC46195C63C100BBCB73 /* KZAppDelegate.m */; };
 		6D12BC49195C63C100BBCB73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D12BC48195C63C100BBCB73 /* Images.xcassets */; };
-		6D12BC50195C63C100BBCB73 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC4F195C63C100BBCB73 /* XCTest.framework */; };
-		6D12BC51195C63C100BBCB73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC36195C63C100BBCB73 /* Foundation.framework */; };
-		6D12BC52195C63C100BBCB73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC3A195C63C100BBCB73 /* UIKit.framework */; };
-		6D12BC5A195C63C100BBCB73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D12BC58195C63C100BBCB73 /* InfoPlist.strings */; };
-		6D12BC5C195C63C100BBCB73 /* SamplePushTestAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC5B195C63C100BBCB73 /* SamplePushTestAppTests.m */; };
 		6D12BC6A195C66E400BBCB73 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC68195C66E400BBCB73 /* MainViewController.m */; };
 		6D12BC6B195C66E400BBCB73 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D12BC69195C66E400BBCB73 /* MainViewController.xib */; };
 		6D12BC6D195C681400BBCB73 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC6C195C681400BBCB73 /* libicucore.dylib */; };
 		6D12BC6F195C681900BBCB73 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC6E195C681900BBCB73 /* libc++.dylib */; };
 		6D1B2139196ED09D00088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B2138196ED09D00088F5C /* kz.client.a */; };
+		6D8CEE2619F0710D00259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE2519F0710D00259796 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		6D12BC53195C63C100BBCB73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D12BC2B195C63C100BBCB73 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6D12BC32195C63C100BBCB73;
-			remoteInfo = SamplePushTestApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		6D03275919DC975C009C8B2B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6D03275B19DC9761009C8B2B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6D03275D19DC9767009C8B2B /* libsystem_network.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsystem_network.dylib; path = usr/lib/system/libsystem_network.dylib; sourceTree = SDKROOT; };
+		6D03275F19DC976D009C8B2B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6D03276119DC977A009C8B2B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6D12BC33195C63C100BBCB73 /* pushTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pushTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D12BC36195C63C100BBCB73 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6D12BC38195C63C100BBCB73 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,7 +42,6 @@
 		6D12BC45195C63C100BBCB73 /* KZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KZAppDelegate.h; sourceTree = "<group>"; };
 		6D12BC46195C63C100BBCB73 /* KZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KZAppDelegate.m; sourceTree = "<group>"; };
 		6D12BC48195C63C100BBCB73 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6D12BC4E195C63C100BBCB73 /* PushTestAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushTestAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D12BC4F195C63C100BBCB73 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6D12BC57195C63C100BBCB73 /* PushTestAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PushTestAppTests-Info.plist"; sourceTree = "<group>"; };
 		6D12BC59195C63C100BBCB73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -59,6 +52,7 @@
 		6D12BC6C195C681400BBCB73 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		6D12BC6E195C681900BBCB73 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6D1B2138196ED09D00088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
+		6D8CEE2519F0710D00259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,22 +60,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE2619F0710D00259796 /* CoreLocation.framework in Frameworks */,
+				6D03276219DC977A009C8B2B /* CoreTelephony.framework in Frameworks */,
+				6D03275C19DC9761009C8B2B /* SystemConfiguration.framework in Frameworks */,
+				6D03275A19DC975C009C8B2B /* libz.dylib in Frameworks */,
 				6D1B2139196ED09D00088F5C /* kz.client.a in Frameworks */,
 				6D12BC6F195C681900BBCB73 /* libc++.dylib in Frameworks */,
 				6D12BC6D195C681400BBCB73 /* libicucore.dylib in Frameworks */,
 				6D12BC39195C63C100BBCB73 /* CoreGraphics.framework in Frameworks */,
 				6D12BC3B195C63C100BBCB73 /* UIKit.framework in Frameworks */,
 				6D12BC37195C63C100BBCB73 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6D12BC4B195C63C100BBCB73 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D12BC50195C63C100BBCB73 /* XCTest.framework in Frameworks */,
-				6D12BC52195C63C100BBCB73 /* UIKit.framework in Frameworks */,
-				6D12BC51195C63C100BBCB73 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				6D12BC33195C63C100BBCB73 /* pushTestApp.app */,
-				6D12BC4E195C63C100BBCB73 /* PushTestAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,6 +97,12 @@
 		6D12BC35195C63C100BBCB73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D8CEE2519F0710D00259796 /* CoreLocation.framework */,
+				6D03276119DC977A009C8B2B /* CoreTelephony.framework */,
+				6D03275F19DC976D009C8B2B /* CFNetwork.framework */,
+				6D03275D19DC9767009C8B2B /* libsystem_network.dylib */,
+				6D03275B19DC9761009C8B2B /* SystemConfiguration.framework */,
+				6D03275919DC975C009C8B2B /* libz.dylib */,
 				6D1B2138196ED09D00088F5C /* kz.client.a */,
 				6D12BC6E195C681900BBCB73 /* libc++.dylib */,
 				6D12BC6C195C681400BBCB73 /* libicucore.dylib */,
@@ -185,24 +178,6 @@
 			productReference = 6D12BC33195C63C100BBCB73 /* pushTestApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6D12BC4D195C63C100BBCB73 /* PushTestAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6D12BC62195C63C100BBCB73 /* Build configuration list for PBXNativeTarget "PushTestAppTests" */;
-			buildPhases = (
-				6D12BC4A195C63C100BBCB73 /* Sources */,
-				6D12BC4B195C63C100BBCB73 /* Frameworks */,
-				6D12BC4C195C63C100BBCB73 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6D12BC54195C63C100BBCB73 /* PBXTargetDependency */,
-			);
-			name = PushTestAppTests;
-			productName = SamplePushTestAppTests;
-			productReference = 6D12BC4E195C63C100BBCB73 /* PushTestAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -215,9 +190,6 @@
 				TargetAttributes = {
 					6D12BC32195C63C100BBCB73 = {
 						DevelopmentTeam = AH6FMFPPV3;
-					};
-					6D12BC4D195C63C100BBCB73 = {
-						TestTargetID = 6D12BC32195C63C100BBCB73;
 					};
 				};
 			};
@@ -234,7 +206,6 @@
 			projectRoot = "";
 			targets = (
 				6D12BC32195C63C100BBCB73 /* PushTestApp */,
-				6D12BC4D195C63C100BBCB73 /* PushTestAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -247,14 +218,6 @@
 				6D12BC41195C63C100BBCB73 /* InfoPlist.strings in Resources */,
 				6D12BC6B195C66E400BBCB73 /* MainViewController.xib in Resources */,
 				6D12BC49195C63C100BBCB73 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6D12BC4C195C63C100BBCB73 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D12BC5A195C63C100BBCB73 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,23 +234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6D12BC4A195C63C100BBCB73 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6D12BC5C195C63C100BBCB73 /* SamplePushTestAppTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6D12BC54195C63C100BBCB73 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6D12BC32195C63C100BBCB73 /* PushTestApp */;
-			targetProxy = 6D12BC53195C63C100BBCB73 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6D12BC3F195C63C100BBCB73 /* InfoPlist.strings */ = {
@@ -407,6 +354,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SamplePushTestApp/kido-libs",
 					"/Users/miya/src/kido-ios/outputLibrary",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -436,6 +384,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SamplePushTestApp/kido-libs",
 					"/Users/miya/src/kido-ios/outputLibrary",
+					"$(SDKROOT)/usr/lib/system",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -444,46 +393,6 @@
 				PRODUCT_NAME = pushTestApp;
 				PROVISIONING_PROFILE = "7F1F83E3-EBA5-4A0D-B891-253DCD53AA04";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		6D12BC63195C63C100BBCB73 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SamplePushTestApp.app/SamplePushTestApp";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SamplePushTestApp/SamplePushTestApp-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "SamplePushTestAppTests/PushTestAppTests-Info.plist";
-				PRODUCT_NAME = PushTestAppTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		6D12BC64195C63C100BBCB73 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SamplePushTestApp.app/SamplePushTestApp";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SamplePushTestApp/SamplePushTestApp-Prefix.pch";
-				INFOPLIST_FILE = "SamplePushTestAppTests/PushTestAppTests-Info.plist";
-				PRODUCT_NAME = PushTestAppTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -504,15 +413,6 @@
 			buildConfigurations = (
 				6D12BC60195C63C100BBCB73 /* Debug */,
 				6D12BC61195C63C100BBCB73 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6D12BC62195C63C100BBCB73 /* Build configuration list for PBXNativeTarget "PushTestAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6D12BC63195C63C100BBCB73 /* Debug */,
-				6D12BC64195C63C100BBCB73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

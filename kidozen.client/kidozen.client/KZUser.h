@@ -10,12 +10,14 @@
 @interface KZUser : NSObject
 
 -(id) initWithToken:(NSString *) token;
+
 /**
  * Checks if the user belongs to the role
  * @param role
  * @return
  */
 -(BOOL*) isInRole:(NSString *) role;
+
 /**
  * The claims of this user
  */
@@ -28,13 +30,10 @@
  * The expiration in seconds
  */
 @property (nonatomic) int expiresOn;
-/**
- * The current user name
- */
-@property (nonatomic, strong) NSString * user;
-/**
- * The password
- */
-@property (nonatomic, strong) NSString * pass;
+
+@property (nonatomic, copy) NSString * user;
+@property (nonatomic, copy) NSString * pass;
+
+@property (nonatomic, copy) NSString *provider;
 
 @end

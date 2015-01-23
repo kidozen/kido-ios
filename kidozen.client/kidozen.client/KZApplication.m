@@ -1,3 +1,6 @@
+
+#import <UIKit/UIKit.h>
+
 #import "KZApplication.h"
 #import "NSString+Utilities.h"
 #import "KZIdentityProviderFactory.h"
@@ -10,8 +13,9 @@
 #import "KZApplicationAuthentication.h"
 #import "KZApplicationServices.h"
 #import "KZCrashReporter.h"
-
-#import <UIKit/UIKit.h>
+#import "KZDataVisualizationViewController.h"
+#import "KZAnalytics.h"
+#import "KZAnalyticsSession.h"
 
 @interface KZApplication ()
 
@@ -25,6 +29,8 @@
 @property (nonatomic, strong) KZApplicationServices *appServices;
 @property (nonatomic, strong) KZApplicationAuthentication *appAuthentication;
 @property (nonatomic, assign) BOOL strictSSL;
+
+@property (nonatomic, strong) KZDataVisualizationViewController *dataVizVC;
 
 @end
 
@@ -229,7 +235,7 @@
 /**
  * Starts a passive authentication flow.
  */
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))callback
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))callback
 {
     [self.appAuthentication doPassiveAuthenticationWithCompletion:callback];
     
@@ -285,6 +291,11 @@
 -(KZPubSubChannel *) PubSubChannelWithName:(NSString *) name
 {
     return [self.appServices PubSubChannelWithName:name];
+}
+
+- (KZFileStorage *)fileService
+{
+    return [self.appServices fileService];
 }
 
 #endif
@@ -364,5 +375,81 @@
 {
     return self.appServices.pushNotifications;
 }
+
+#pragma mark - Analytics
+
+- (KZAnalytics *)analytics {
+    return self.appServices.analytics;
+}
+
+- (void)tagClick:(NSString *)buttonName
+{
+    [self.appServices tagClick:buttonName];
+}
+
+- (void)tagView:(NSString *)viewName
+{
+    [self.appServices tagView:viewName];
+}
+
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes
+{
+    [self.appServices tagEvent:customEventName
+                    attributes:attributes];
+}
+
+- (void) enableAnalytics
+{
+    [self.appServices enableAnalytics];
+}
+
+
+- (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key
+{
+    [self.analytics.session setValue:value forSessionAttribute:key];
+}
+
+@end
+
+
+@implementation KZApplication(DataVisualization)
+
+- (void)showDataVisualizationWithName:(NSString *)datavizName success:(void (^)(void))success error:(void (^)(NSError *error))failure
+{
+    [self configureDataVizWithName:datavizName success:success error:failure];
+    
+    UIViewController *rootController = [[[[UIApplication sharedApplication]delegate] window] rootViewController];
+    
+    UINavigationController *webNavigation = [[UINavigationController alloc] initWithRootViewController:self.dataVizVC];
+    [rootController presentModalViewController:webNavigation animated:YES];
+}
+
+- (UIView *)dataVisualizationWithName:(NSString *)datavizName
+                          success:(void (^)(void))success
+                            error:(void (^)(NSError *error))failure
+{
+    [self configureDataVizWithName:datavizName success:success error:failure];
+    
+    return  self.dataVizVC.view;
+    
+}
+
+- (void) configureDataVizWithName:(NSString*)datavizName
+                          success:(void (^)(void))success
+                            error:(void (^)(NSError *error))failure
+{
+    
+    self.dataVizVC = [[KZDataVisualizationViewController alloc] initWithApplicationConfig:self.applicationConfig
+                                                                                  appAuth:self.appAuthentication
+                                                                                   tenant:self.tenantMarketPlace
+                                                                                strictSSL:self.strictSSL
+                                                                              dataVizName:datavizName];
+    
+    self.dataVizVC.successCb = success;
+    self.dataVizVC.errorCb = failure;
+
+}
+
 
 @end

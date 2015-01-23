@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D0326FD19DADFC4009C8B2B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0326FC19DADFC4009C8B2B /* libz.dylib */; };
+		6D03275419DC5294009C8B2B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275319DC5294009C8B2B /* CFNetwork.framework */; };
+		6D03275619DC52AC009C8B2B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275519DC52AC009C8B2B /* SystemConfiguration.framework */; };
+		6D03275819DC52B7009C8B2B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D03275719DC52B7009C8B2B /* CoreTelephony.framework */; };
 		6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D1B213D196EEDFA00088F5C /* kz.client.a */; };
 		6D435C3A196326EB00A710EF /* MainPassiveAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */; };
 		6D435C3B196326EB00A710EF /* MainPassiveAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D435C39196326EB00A710EF /* MainPassiveAuthViewController.xib */; };
@@ -26,6 +30,7 @@
 		6D76F52D1923E3DB000A361F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D76F5151923E3DA000A361F /* UIKit.framework */; };
 		6D76F5351923E3DB000A361F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D76F5331923E3DB000A361F /* InfoPlist.strings */; };
 		6D76F5371923E3DB000A361F /* SamplePassiveAuthAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D76F5361923E3DB000A361F /* SamplePassiveAuthAppTests.m */; };
+		6D8CEE2419F070D100259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE2319F070D100259796 /* CoreLocation.framework */; };
 		6DE2A04D19241B230020C69A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DE2A04C19241B230020C69A /* libicucore.dylib */; };
 		6DE2A05219241B2F0020C69A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCB83A91924198300D14C02 /* libc++.dylib */; };
 /* End PBXBuildFile section */
@@ -41,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D0326FC19DADFC4009C8B2B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		6D03275319DC5294009C8B2B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		6D03275519DC52AC009C8B2B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6D03275719DC52B7009C8B2B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		6D1B213D196EEDFA00088F5C /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = ../../outputLibrary/kz.client.a; sourceTree = "<group>"; };
 		6D435C37196326EB00A710EF /* MainPassiveAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPassiveAuthViewController.h; sourceTree = "<group>"; };
 		6D435C38196326EB00A710EF /* MainPassiveAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPassiveAuthViewController.m; sourceTree = "<group>"; };
@@ -66,11 +75,11 @@
 		6D76F5321923E3DB000A361F /* SamplePassiveAuthAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SamplePassiveAuthAppTests-Info.plist"; sourceTree = "<group>"; };
 		6D76F5341923E3DB000A361F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D76F5361923E3DB000A361F /* SamplePassiveAuthAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SamplePassiveAuthAppTests.m; sourceTree = "<group>"; };
+		6D8CEE2319F070D100259796 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6DCB83A91924198300D14C02 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		6DCB877E19463ECC005B75B9 /* next.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = next.html; sourceTree = "<group>"; };
 		6DCB877F19463ECC005B75B9 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		6DE2A04C19241B230020C69A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		6DE2A0871963525E002556B0 /* kz.client.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = kz.client.a; path = "SamplePassiveAuthApp/kido-lib/kz.client.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +87,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D8CEE2419F070D100259796 /* CoreLocation.framework in Frameworks */,
+				6D03275819DC52B7009C8B2B /* CoreTelephony.framework in Frameworks */,
+				6D03275619DC52AC009C8B2B /* SystemConfiguration.framework in Frameworks */,
+				6D03275419DC5294009C8B2B /* CFNetwork.framework in Frameworks */,
+				6D0326FD19DADFC4009C8B2B /* libz.dylib in Frameworks */,
 				6D1B213E196EEDFA00088F5C /* kz.client.a in Frameworks */,
 				6D6CBFA419362D0B00135CFA /* Accounts.framework in Frameworks */,
 				6D6CBF9F19362CFD00135CFA /* Social.framework in Frameworks */,
@@ -124,8 +138,12 @@
 		6D76F5101923E3DA000A361F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D8CEE2319F070D100259796 /* CoreLocation.framework */,
+				6D03275719DC52B7009C8B2B /* CoreTelephony.framework */,
+				6D03275519DC52AC009C8B2B /* SystemConfiguration.framework */,
+				6D03275319DC5294009C8B2B /* CFNetwork.framework */,
+				6D0326FC19DADFC4009C8B2B /* libz.dylib */,
 				6D1B213D196EEDFA00088F5C /* kz.client.a */,
-				6DE2A0871963525E002556B0 /* kz.client.a */,
 				6D6CBFA319362D0B00135CFA /* Accounts.framework */,
 				6D6CBF9E19362CFD00135CFA /* Social.framework */,
 				6DE2A04C19241B230020C69A /* libicucore.dylib */,

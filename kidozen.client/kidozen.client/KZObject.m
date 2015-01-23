@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 5/29/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import "KZObject.h"
@@ -18,6 +18,10 @@
 
 @implementation KZObject
 
+// Dictionary should be a JSON parsed object, which comes from the
+// kidozen servers.
+// As you can see in the implementation, the main idea is to dynamically
+// setup an object, mapping the dictionary keys to the object's properties.
 - (void) configureWithDictionary:(NSDictionary *)dictionary
 {
     NSDictionary *propertyToClassDictionary = [self propertiesWithClassesDictionary];

@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 5/30/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import "KZTokenController.h"
@@ -75,32 +75,27 @@
     [self.tokenCache removeAllObjects];
 }
 
+
 - (void)startTokenExpirationTimer:(NSInteger)timeout callback:(void(^)(void))callback
 {
 #ifdef CURRENTLY_TESTING
     NSLog(@"-- Currently testing, setting timeout to 30 sec.");
-    timeout = 30;
+    timeout = 45;
 #endif
 
     if (timeout > 0) {
         self.timerCallback = callback;
-        if (self.tokenTimer != nil) {
-            [self.tokenTimer invalidate];
-            self.tokenTimer = nil;
-        }
         
-        __block NSTimer *safeTokenTimer = self.tokenTimer;
-        __weak KZTokenController *safeMe = self;
+        [self.tokenTimer invalidate];
+        self.tokenTimer = nil;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            safeTokenTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
-                                                          target:safeMe
-                                                        selector:@selector(tokenExpires)
-                                                        userInfo:callback
-                                                         repeats:NO];
-            [[NSRunLoop currentRunLoop] addTimer:safeTokenTimer forMode:NSDefaultRunLoopMode];
-            [[NSRunLoop currentRunLoop] run];
-        });
+        self.tokenTimer = [NSTimer scheduledTimerWithTimeInterval:timeout
+                                                           target:self
+                                                         selector:@selector(tokenExpires)
+                                                         userInfo:callback
+                                                          repeats:NO];
+        
+
     } else {
         NSLog(@"Warning, key expiration is zero");
     }

@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 7/14/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -48,7 +48,7 @@
 /**
  * Starts a passive authentication flow.
  */
-- (void)doPassiveAuthenticationWithCompletion:(void (^)(id))block;
+- (void)doPassiveAuthenticationWithCompletion:(void (^)(id a))block;
 
 // Refreshes the current token, which can be the one obtained from authenticathing
 // via username/password, passive authentication or via application key.

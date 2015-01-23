@@ -42,7 +42,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
 @property (nonatomic, strong) NSURLConnection *operationConnection;
 @property (nonatomic, strong) NSObject *operationParameters;
 @property (nonatomic, strong) NSHTTPURLResponse *operationURLResponse;
-@property (nonatomic, strong) NSString *operationSavePath;
+@property (nonatomic, copy) NSString *operationSavePath;
 @property (nonatomic, assign) CFRunLoopRef operationRunLoop;
 
 #if TARGET_OS_IPHONE
@@ -61,7 +61,7 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
 @property (nonatomic, copy) void (^operationProgressBlock)(float progress);
 
 @property (nonatomic, readwrite) SVHTTPRequestState state;
-@property (nonatomic, strong) NSString *requestPath;
+@property (nonatomic, copy) NSString *requestPath;
 @property (nonatomic, strong) SVHTTPClient *client;
 
 @property (nonatomic, strong) NSTimer *timeoutTimer; // see http://stackoverflow.com/questions/2736967
@@ -210,14 +210,52 @@ static NSTimeInterval SVHTTPRequestTimeoutInterval = 100;
     return self;
 }
 
+- (SVHTTPRequest*)initWithAddress:(NSString*)urlString
+                           method:(SVHTTPRequestMethod)method
+                       parameters:(NSObject*)parameters
+                       saveToPath:(NSString*)savePath
+                         progress:(void (^)(float))progressBlock
+                      inputStream:(NSInputStream *)inputStream
+                       completion:(SVHTTPRequestCompletionHandler)completionBlock
+{
+    
+    SVHTTPRequest *request = [[[self class] alloc] initWithAddress:urlString
+                                                            method:method
+                                                        parameters:parameters
+                                                        saveToPath:savePath
+                                                          progress:progressBlock
+                                                        completion:completionBlock];
+    
+    if (inputStream != nil) {
+        [request.operationRequest setHTTPBodyStream:inputStream];
+    }
+
+    return request;
+}
 
 - (void)addParametersToRequest:(NSObject*)parameters {
     
     NSString *method = self.operationRequest.HTTPMethod;
+    NSString *xFileNameKeyHeader = @"x-file-name";
     
     if([method isEqualToString:@"POST"] || [method isEqualToString:@"PUT"]) {
-        
-        if (self.sendParametersAsJSON) {
+        if (self.operationRequest.HTTPBodyStream != nil)
+        {
+            
+            // parameters should have the x-file-name
+            if ([parameters isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dictionary = (NSDictionary *)parameters;
+                if ([dictionary.allKeys containsObject:xFileNameKeyHeader]) {
+                    [self.operationRequest setValue:dictionary[xFileNameKeyHeader] forHTTPHeaderField:xFileNameKeyHeader];
+                } else {
+                    [NSException raise:NSInvalidArgumentException format:@"Parameters should have the x-file-name key"];
+                }
+            }
+            [self.operationRequest setValue:@"Keep-Alive" forHTTPHeaderField:@"Connection"];
+            [self.operationRequest setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
+            
+            
+        } else if (self.sendParametersAsJSON) {
                 [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
                 [self.operationRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
             

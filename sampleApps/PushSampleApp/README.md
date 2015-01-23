@@ -11,3 +11,4 @@ In order to do so, please have a look at the following document.
 http://docs.kidozen.com/ios-push-notifications
 
 Also, first build kidozen's library. To do so, open Kidozen's library, select the kidozen.client.fat and build.
+This will create the required library and then this application will be able to run.

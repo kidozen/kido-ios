@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 6/19/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -15,12 +15,14 @@
 @class KZConfiguration;
 @class KZSMSSender;
 @class KZDatasource;
+@class KZFileStorage;
 @class KZPubSubChannel;
 @class KZApplicationConfiguration;
 @class KZTokenController;
 @class KZResponse;
 @class KZMail;
 @class KZNotification;
+@class KZAnalytics;
 
 /*
  * The main idea of this class is to handle everything related to Logging,
@@ -38,6 +40,7 @@
 - (KZConfiguration *)ConfigurationWithName:(NSString *)name;
 - (KZSMSSender *)SMSSenderWithNumber:(NSString *)number;
 - (KZDatasource *)DataSourceWithName:(NSString *)name;
+- (KZFileStorage *)fileService;
 
 #if TARGET_OS_IPHONE
 - (KZPubSubChannel *)PubSubChannelWithName:(NSString *) name;
@@ -51,6 +54,18 @@
 - (KZLogging *)log;
 
 
+#pragma mark - Analytics
+
+@property (nonatomic, readonly) KZAnalytics *analytics;
+
+- (void)tagClick:(NSString *)buttonName;
+
+- (void)tagView:(NSString *)viewName;
+
+- (void) tagEvent:(NSString *)customEventName
+       attributes:(NSDictionary *)attributes;
+
+- (void) enableAnalytics;
 
 #pragma mark - Email
 

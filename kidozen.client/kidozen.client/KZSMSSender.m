@@ -26,13 +26,15 @@
 }
 -(void) getStatus:(NSString *)messageId completion:(void (^)(KZResponse *))block
 {
+    __weak KZSMSSender *safeMe = self;
+    
     [self addAuthorizationHeader];
     
     [self.client GET:[NSString stringWithFormat:@"/%@",messageId]
           parameters:nil
           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
               
-              [self callCallback:block response:response urlResponse:urlResponse error:error];
+              [safeMe callCallback:block response:response urlResponse:urlResponse error:error];
               
           }];
 }

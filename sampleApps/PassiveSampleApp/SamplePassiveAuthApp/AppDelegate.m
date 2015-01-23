@@ -10,10 +10,11 @@
 #import "KZApplication.h"
 #import "InitialViewController.h"
 #import "MainPassiveAuthViewController.h"
+#import "KZApplicationConfiguration.h"
 
-NSString * const kzAppCenterUrl = @"YOUR_APP_CENTER_URL";
-NSString * const kzAppName = @"YOUR_APP";
-NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
+NSString * const kzAppCenterUrl = @"https://your.app.center.url";
+NSString * const kzAppName = @"";
+NSString * const kzApplicationKey = @"";
 
 @interface AppDelegate()
 
@@ -69,7 +70,7 @@ NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
                                                                                                   delegate:nil
                                                                                          cancelButtonTitle:@"OK"
                                                                                          otherButtonTitles: nil] show];
-
+                                                                       
                                                                    } else {
                                                                        [safeMe.initialViewController startInteraction];
                                                                    }
@@ -82,8 +83,8 @@ NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
 - (void)finishAuthentication
 {
     UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
-        self.mainPassiveViewController = [[MainPassiveAuthViewController alloc] init];
-        [nav pushViewController:self.mainPassiveViewController animated:YES];
+    self.mainPassiveViewController = [[MainPassiveAuthViewController alloc] init];
+    [nav pushViewController:self.mainPassiveViewController animated:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -113,4 +114,12 @@ NSString * const kzApplicationKey = @"YOUR_PROVIDER_KEY";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+@end
+
+@implementation NSURLRequest(DataController)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
+{
+    return YES;
+}
 @end

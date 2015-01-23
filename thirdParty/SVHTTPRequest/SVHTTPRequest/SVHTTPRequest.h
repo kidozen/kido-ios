@@ -43,7 +43,7 @@ typedef NSUInteger SVHTTPRequestMethod;
 + (void)setDefaultTimeoutInterval:(NSTimeInterval)interval;
 + (void)setDefaultUserAgent:(NSString*)userAgent;
 
-@property (nonatomic, strong) NSString *userAgent;
+@property (nonatomic, copy) NSString *userAgent;
 @property (nonatomic, readwrite) BOOL sendParametersAsJSON;
 @property (nonatomic, readwrite) NSURLRequestCachePolicy cachePolicy;
 @property (nonatomic, readwrite) NSUInteger timeoutInterval;
@@ -65,6 +65,14 @@ typedef NSUInteger SVHTTPRequestMethod;
                        parameters:(NSObject*)parameters 
                        saveToPath:(NSString*)savePath
                          progress:(void (^)(float))progressBlock
+                       completion:(SVHTTPRequestCompletionHandler)completionBlock;
+
+- (SVHTTPRequest*)initWithAddress:(NSString*)urlString
+                           method:(SVHTTPRequestMethod)method
+                       parameters:(NSObject*)parameters
+                       saveToPath:(NSString*)savePath
+                         progress:(void (^)(float))progressBlock
+                      inputStream:(NSInputStream *)inputStream
                        completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
 - (void)signRequestWithUsername:(NSString*)username password:(NSString*)password;

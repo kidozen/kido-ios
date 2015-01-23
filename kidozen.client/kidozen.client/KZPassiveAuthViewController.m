@@ -3,7 +3,7 @@
 //  kidozen.client
 //
 //  Created by Nicolas Miyasato on 6/9/14.
-//  Copyright (c) 2014 Tellago Studios. All rights reserved.
+//  Copyright (c) 2014 KidoZen. All rights reserved.
 //
 
 #import "KZPassiveAuthViewController.h"
@@ -114,7 +114,7 @@
                                                                        options:nil
                                                                          error:nil];
         if (self.completion != nil) {
-            self.completion(jsonDictionary[@"access_token"], jsonDictionary[@"refresh_token"], nil);
+            self.completion(jsonDictionary, nil);
             [self dismissModalViewControllerAnimated:YES];
         }
         
@@ -140,7 +140,7 @@
 - (void) handleError:(NSError *)error
 {
     if (self.completion) {
-        self.completion(nil, nil, error);
+        self.completion(nil, error);
     }
     
     [self dismissModalViewControllerAnimated:YES];

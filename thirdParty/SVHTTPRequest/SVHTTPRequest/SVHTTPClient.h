@@ -25,6 +25,11 @@ typedef void (^SVHTTPRequestCompletionHandler)(id response, NSHTTPURLResponse *u
 - (SVHTTPRequest*)GET:(NSString*)path parameters:(NSDictionary*)parameters saveToPath:(NSString*)savePath progress:(void (^)(float progress))progressBlock completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
 - (SVHTTPRequest*)POST:(NSString*)path parameters:(NSObject*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
+- (SVHTTPRequest*)POST:(NSString*)path
+                stream:(NSInputStream *)stream
+            parameters:(NSDictionary *)parameters
+            completion:(SVHTTPRequestCompletionHandler)completionBlock;
+
 - (SVHTTPRequest*)POST:(NSString*)path parameters:(NSObject*)parameters progress:(void (^)(float progress))progressBlock completion:(void (^)(id response, NSHTTPURLResponse *urlResponse, NSError *error))completionBlock;
 - (SVHTTPRequest*)PUT:(NSString*)path parameters:(NSObject*)parameters completion:(SVHTTPRequestCompletionHandler)completionBlock;
 
@@ -37,10 +42,10 @@ typedef void (^SVHTTPRequestCompletionHandler)(id response, NSHTTPURLResponse *u
 
 @property (nonatomic, strong) NSDictionary *baseParameters;
 
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *password;
-@property (nonatomic, strong) NSString *basePath;
-@property (nonatomic, strong) NSString *userAgent;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *basePath;
+@property (nonatomic, copy) NSString *userAgent;
 
 @property (nonatomic, readwrite) BOOL sendParametersAsJSON;
 @property (nonatomic, readwrite) NSURLRequestCachePolicy cachePolicy;
