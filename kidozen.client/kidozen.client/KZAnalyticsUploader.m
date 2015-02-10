@@ -65,6 +65,11 @@ static NSUInteger kMaximumSecondsToUpload = 300;
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didEnterBackground)
+                                                     name:UIApplicationWillTerminateNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(willEnterForegroundNotification)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
@@ -98,6 +103,13 @@ static NSUInteger kMaximumSecondsToUpload = 300;
             
             [self.session logSessionWithLength:@(length)];
             NSLog(@"session events are self.session.events %@", self.session.events);
+            if (self.session.events != nil) {
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.session.events
+                                                               options:NSJSONWritingPrettyPrinted
+                                                                 error:nil];
+                NSLog(@"In json form is %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+            }
+            
             [self sendEvents];
         } else {
             [self.session removeSavedEvents];
@@ -168,6 +180,7 @@ static NSUInteger kMaximumSecondsToUpload = 300;
     
         // if no errors
         if (response.error == nil && response.urlResponse.statusCode < 300) {
+            
             [safeMe.session removeSavedEvents];
         }
     
@@ -203,6 +216,7 @@ static NSUInteger kMaximumSecondsToUpload = 300;
 }
 
 - (void) didEnterBackground {
+    
     if (self.uploading == NO) {
         [self saveAnalyticsSessionState];
     }
