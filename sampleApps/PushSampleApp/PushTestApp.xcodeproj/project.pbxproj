@@ -15,7 +15,7 @@
 		6D12BC3B195C63C100BBCB73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D12BC3A195C63C100BBCB73 /* UIKit.framework */; };
 		6D12BC41195C63C100BBCB73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D12BC3F195C63C100BBCB73 /* InfoPlist.strings */; };
 		6D12BC43195C63C100BBCB73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC42195C63C100BBCB73 /* main.m */; };
-		6D12BC47195C63C100BBCB73 /* KZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC46195C63C100BBCB73 /* KZAppDelegate.m */; };
+		6D12BC47195C63C100BBCB73 /* MyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC46195C63C100BBCB73 /* MyAppDelegate.m */; };
 		6D12BC49195C63C100BBCB73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D12BC48195C63C100BBCB73 /* Images.xcassets */; };
 		6D12BC6A195C66E400BBCB73 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D12BC68195C66E400BBCB73 /* MainViewController.m */; };
 		6D12BC6B195C66E400BBCB73 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D12BC69195C66E400BBCB73 /* MainViewController.xib */; };
@@ -39,8 +39,8 @@
 		6D12BC40195C63C100BBCB73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D12BC42195C63C100BBCB73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6D12BC44195C63C100BBCB73 /* PushTestApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PushTestApp-Prefix.pch"; sourceTree = "<group>"; };
-		6D12BC45195C63C100BBCB73 /* KZAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KZAppDelegate.h; sourceTree = "<group>"; };
-		6D12BC46195C63C100BBCB73 /* KZAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KZAppDelegate.m; sourceTree = "<group>"; };
+		6D12BC45195C63C100BBCB73 /* MyAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAppDelegate.h; sourceTree = "<group>"; };
+		6D12BC46195C63C100BBCB73 /* MyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAppDelegate.m; sourceTree = "<group>"; };
 		6D12BC48195C63C100BBCB73 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6D12BC4F195C63C100BBCB73 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6D12BC57195C63C100BBCB73 /* PushTestAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PushTestAppTests-Info.plist"; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 		6D12BC3C195C63C100BBCB73 /* PushTestApp */ = {
 			isa = PBXGroup;
 			children = (
-				6D12BC45195C63C100BBCB73 /* KZAppDelegate.h */,
-				6D12BC46195C63C100BBCB73 /* KZAppDelegate.m */,
+				6D12BC45195C63C100BBCB73 /* MyAppDelegate.h */,
+				6D12BC46195C63C100BBCB73 /* MyAppDelegate.m */,
 				6D12BC67195C66E400BBCB73 /* MainViewController.h */,
 				6D12BC68195C66E400BBCB73 /* MainViewController.m */,
 				6D12BC69195C66E400BBCB73 /* MainViewController.xib */,
@@ -230,7 +230,7 @@
 			files = (
 				6D12BC43195C63C100BBCB73 /* main.m in Sources */,
 				6D12BC6A195C66E400BBCB73 /* MainViewController.m in Sources */,
-				6D12BC47195C63C100BBCB73 /* KZAppDelegate.m in Sources */,
+				6D12BC47195C63C100BBCB73 /* MyAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +272,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ben Elliott (T9QH59YU78)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -295,6 +296,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "42347434-4c4a-4639-a989-967607aad9ab";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -315,7 +317,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ben Elliott (T9QH59YU78)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -331,6 +334,7 @@
 					$SRCROOT/../../outputLibrary/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "42347434-4c4a-4639-a989-967607aad9ab";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -341,7 +345,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SamplePushTestApp/PushTestApp-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -361,7 +365,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = pushTestApp;
-				PROVISIONING_PROFILE = "7F1F83E3-EBA5-4A0D-B891-253DCD53AA04";
+				PROVISIONING_PROFILE = "42347434-4c4a-4639-a989-967607aad9ab";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -371,7 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SamplePushTestApp/PushTestApp-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -391,7 +395,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = pushTestApp;
-				PROVISIONING_PROFILE = "7F1F83E3-EBA5-4A0D-B891-253DCD53AA04";
+				PROVISIONING_PROFILE = "42347434-4c4a-4639-a989-967607aad9ab";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

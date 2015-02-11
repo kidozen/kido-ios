@@ -100,6 +100,8 @@
 		6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */; };
 		6DBA4A7F19536BDC00DBFB42 /* KZApplicationServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */; };
+		6DBB7D611A8A8C4E00E65E8C /* KZAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBB7D5F1A8A8C4E00E65E8C /* KZAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DBB7D621A8A8C4E00E65E8C /* KZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB7D601A8A8C4E00E65E8C /* KZAppDelegate.m */; };
 		6DC9539C19D5ADA4005E3540 /* SSZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC9539A19D5ADA4005E3540 /* SSZipArchive.h */; };
 		6DC9539D19D5ADA4005E3540 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC9539B19D5ADA4005E3540 /* SSZipArchive.m */; };
 		6DC953A919D5ADE8005E3540 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC953A019D5ADE8005E3540 /* crypt.h */; };
@@ -215,13 +217,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = F6B2082D1450F597009315AF;
 			remoteInfo = SocketRocket;
-		};
-		6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DF1EBBA18EDF726000C3AA7;
-			remoteInfo = kidozen.client.fat;
 		};
 		6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -348,6 +343,8 @@
 		6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6DBA4A7D19536BDC00DBFB42 /* KZApplicationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationServices.h; sourceTree = "<group>"; };
 		6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationServices.m; sourceTree = "<group>"; };
+		6DBB7D5F1A8A8C4E00E65E8C /* KZAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAppDelegate.h; sourceTree = "<group>"; };
+		6DBB7D601A8A8C4E00E65E8C /* KZAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAppDelegate.m; sourceTree = "<group>"; };
 		6DC9539A19D5ADA4005E3540 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSZipArchive.h; path = ../../thirdParty/SSZipArchive/SSZipArchive.h; sourceTree = "<group>"; };
 		6DC9539B19D5ADA4005E3540 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSZipArchive.m; path = ../../thirdParty/SSZipArchive/SSZipArchive.m; sourceTree = "<group>"; };
 		6DC953A019D5ADE8005E3540 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = ../../thirdParty/SSZipArchive/minizip/crypt.h; sourceTree = "<group>"; };
@@ -728,6 +725,8 @@
 			children = (
 				6D4ACD471937CBA400958E65 /* KZObject.h */,
 				6D4ACD481937CBA400958E65 /* KZObject.m */,
+				6DBB7D5F1A8A8C4E00E65E8C /* KZAppDelegate.h */,
+				6DBB7D601A8A8C4E00E65E8C /* KZAppDelegate.m */,
 				6D03271619DC5159009C8B2B /* Analytics */,
 				6D40013A1976B8F600D5F511 /* Application */,
 				6DCEDDCF19391D7F00A38C39 /* Auth */,
@@ -801,6 +800,7 @@
 				6DCB876719462C64005B75B9 /* KZPassiveAuthViewController.h in Headers */,
 				6D03274619DC519A009C8B2B /* KZEvents.h in Headers */,
 				8E0774CC1619F35500FA21D9 /* KZConfiguration.h in Headers */,
+				6DBB7D611A8A8C4E00E65E8C /* KZAppDelegate.h in Headers */,
 				8E0774CE1619F35500FA21D9 /* KZIdentityProviderFactory.h in Headers */,
 				8E0774CF1619F35500FA21D9 /* KZLogging.h in Headers */,
 				8E0774D01619F35500FA21D9 /* KZMail.h in Headers */,
@@ -892,7 +892,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6D43DBE21968BF2C00D023CF /* PBXTargetDependency */,
 			);
 			name = "Integration Tests";
 			productName = "Integration Tests";
@@ -1056,6 +1055,7 @@
 				6D97AE1119D4A9C00004A31E /* KZDataVisualizationViewController.m in Sources */,
 				8EE16FAD161B52B6006BAA59 /* NSString+Utilities.m in Sources */,
 				6DC953B019D5ADE8005E3540 /* zip.c in Sources */,
+				6DBB7D621A8A8C4E00E65E8C /* KZAppDelegate.m in Sources */,
 				6D03273F19DC519A009C8B2B /* KZClickEvent.m in Sources */,
 				8E0774AF1619D9AF00FA21D9 /* KZUser.m in Sources */,
 				6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */,
@@ -1116,11 +1116,6 @@
 			isa = PBXTargetDependency;
 			name = CrashReporter;
 			targetProxy = 6D3D660B1A260D0200FC3445 /* PBXContainerItemProxy */;
-		};
-		6D43DBE21968BF2C00D023CF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
-			targetProxy = 6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */;
 		};
 		6D8018011968ACDE00E99FB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
