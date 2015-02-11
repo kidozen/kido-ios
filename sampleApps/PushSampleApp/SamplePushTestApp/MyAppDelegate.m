@@ -10,12 +10,12 @@
 #import <KZApplication.h>
 #import "MainViewController.h"
 
-NSString * const kzAppCenterUrl = @"https://tests.qa.kidozen.com";
-NSString * const kzAppName = @"tasks";
-NSString * const kzUser = @"tests@kidozen.com";
-NSString * const kzPassword = @"pass";
-NSString * const kzProvider = @"Kidozen";
-NSString * const kzApplicationKey = @"F1/fnldvMTyG0DcljmZB1EHJRg+7KbJA2gISl11FNDE=";
+NSString * const kzAppCenterUrl = @"";
+NSString * const kzAppName = @"";
+NSString * const kzUser = @"@kidozen.com";
+NSString * const kzPassword = @"";
+NSString * const kzProvider = @"";
+NSString * const kzApplicationKey = @"";
 
 @interface MyAppDelegate()
 
@@ -38,19 +38,13 @@ NSString * const kzApplicationKey = @"F1/fnldvMTyG0DcljmZB1EHJRg+7KbJA2gISl11FND
     self.mainViewController = [[MainViewController alloc] init];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
 
-    [super initializeKidozenWithLaunchOptions:launchOptions
+    [self initializeKidozenWithLaunchOptions:launchOptions
                                       success:^{
                                           safeMe.mainViewController.application = safeMe.kzApplication;
                                           [safeMe.window setRootViewController:safeMe.navigationController];
                                       }
                                       failure:^(KZResponse *response) {
-                                          NSString *message = [NSString stringWithFormat:@"%@", response.error];
-                                          
-                                          [[[UIAlertView alloc] initWithTitle:@"Error"
-                                                                      message:message
-                                                                     delegate:self
-                                                            cancelButtonTitle:@"OK"
-                                                            otherButtonTitles: nil] show];
+                                          [safeMe handleError:response.error];
                                       }];
     
     return YES;
@@ -93,6 +87,12 @@ NSString * const kzApplicationKey = @"F1/fnldvMTyG0DcljmZB1EHJRg+7KbJA2gISl11FND
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [super application:application didReceiveRemoteNotification:userInfo];
+
+    NSLog(@"Received %@", userInfo);
+    
+}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
@@ -104,4 +104,14 @@ NSString * const kzApplicationKey = @"F1/fnldvMTyG0DcljmZB1EHJRg+7KbJA2gISl11FND
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void) handleError:(NSError *)error {
+    
+    NSString *message = [NSString stringWithFormat:@"%@", error];
+    
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:message
+                               delegate:self
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles: nil] show];
+}
 @end
