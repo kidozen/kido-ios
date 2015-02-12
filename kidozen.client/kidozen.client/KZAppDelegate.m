@@ -56,7 +56,7 @@
                               if ([safeMe credentialsAvailable] == YES) {
                                   [safeMe authenticate:callback];
                               } else {
-                                  NSLog(@"Warning -- Kidozen is ONLY INITIALIZED, NOT AUTHENTICATED");
+                                  DLog(@"Warning -- Kidozen is ONLY INITIALIZED, NOT AUTHENTICATED");
                                   if (callback != nil) {
                                       callback(r);
                                   }
@@ -91,17 +91,23 @@
 - (void) handleNotificationEvent:(NSDictionary *)notificationDictionary {
     
     if (notificationDictionary != nil) {
+        
         [self.kzApplication enableAnalytics];
         
         NSString *deviceUUID = [[KZDeviceInfo sharedDeviceInfo] getUniqueIdentification];
-        [self.kzApplication tagEvent:@"notificationOpened" attributes:@{@"uniqueId" : deviceUUID}];
+        [self.kzApplication tagEvent:@"notificationOpened" attributes:@{ @"uniqueId" : deviceUUID }];
     }
 }
 
 - (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
-    NSLog(@"My token is: %@", deviceToken);
     self.deviceToken = [deviceToken description];
+}
+
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    [application registerForRemoteNotifications];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -109,8 +115,10 @@
     NSLog(@"Failed to get token, error: %@", error);
 }
 
+
 - (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    if ( application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground  )
+    if ( application.applicationState == UIApplicationStateInactive ||
+         application.applicationState == UIApplicationStateBackground  )
     {
         [self handleNotificationEvent:userInfo];
     }
@@ -119,8 +127,15 @@
 
 
 - (void) registerForRemoteNotifications {
-    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-    
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    UIApplication *application = [UIApplication sharedApplication];
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
+                                                                                             |UIRemoteNotificationTypeSound
+                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    } else {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
+    }
 }
 @end
