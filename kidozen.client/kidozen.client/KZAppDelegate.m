@@ -94,8 +94,10 @@
         
         [self.kzApplication enableAnalytics];
         
-        NSString *deviceUUID = [[KZDeviceInfo sharedDeviceInfo] getUniqueIdentification];
-        [self.kzApplication tagEvent:@"notificationOpened" attributes:@{ @"uniqueId" : deviceUUID }];
+        KZDeviceInfo *info = [KZDeviceInfo sharedDeviceInfo];
+        
+        [self.kzApplication tagEvent:@"notificationOpened"
+                          attributes:[info properties]];
     }
 }
 
