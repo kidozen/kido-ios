@@ -102,12 +102,11 @@ static NSUInteger kMaximumSecondsToUpload = 300;
             [self.session loadEventsFromDisk];
             
             [self.session logSessionWithLength:@(length)];
-            NSLog(@"session events are self.session.events %@", self.session.events);
+            
             if (self.session.events != nil) {
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.session.events
                                                                options:NSJSONWritingPrettyPrinted
                                                                  error:nil];
-                NSLog(@"In json form is %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
             }
             
             [self sendEvents];
@@ -158,7 +157,6 @@ static NSUInteger kMaximumSecondsToUpload = 300;
 
 
     } else {
-        NSLog(@"No events to send. Will try later.");
         [self.uploadTimer invalidate];
         
         [self startTimer];
