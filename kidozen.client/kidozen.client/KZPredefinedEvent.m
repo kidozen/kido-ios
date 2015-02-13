@@ -44,7 +44,9 @@
     return  @{@"eventName" : self.eventName,
               @"eventValue" : self.eventValue,
               @"sessionUUID" : self.sessionUUID,
-              @"elapsedTime" : self.timeElapsed };
+              @"elapsedTime" : self.timeElapsed,
+              @"eventAttr" : @{@"platform" : @"iOS" }
+              };
 }
 
 @end

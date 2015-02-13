@@ -32,19 +32,20 @@
 
 - (NSDictionary *)serializedEvent
 {
-    NSDictionary *params;
+    NSMutableDictionary *attr = [NSMutableDictionary dictionary];
     
     if (self.attributes != nil) {
-        params = @{@"eventName" : self.eventName,
-                   @"sessionUUID" : self.sessionUUID,
-                   @"eventAttr" : self.attributes,
-                   @"elapsedTime" : self.timeElapsed };
-    } else {
-        params = @{@"eventName" : self.eventName,
-                   @"sessionUUID" : self.sessionUUID,
-                   @"elapsedTime" : self.timeElapsed };
+        [attr addEntriesFromDictionary:self.attributes];
     }
+    
+    attr[@"platform"] = @"iOS";
 
+    NSDictionary params = @{@"eventName" : self.eventName,
+                            @"sessionUUID" : self.sessionUUID,
+                            @"eventAttr" : self.attributes,
+                            @"elapsedTime" : self.timeElapsed
+                            };
+    
     return params;
 }
 
