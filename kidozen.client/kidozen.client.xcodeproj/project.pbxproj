@@ -102,6 +102,8 @@
 		6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */; };
 		6DBB7D611A8A8C4E00E65E8C /* KZAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBB7D5F1A8A8C4E00E65E8C /* KZAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DBB7D621A8A8C4E00E65E8C /* KZAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB7D601A8A8C4E00E65E8C /* KZAppDelegate.m */; };
+		6DBB7D9A1A8D44FD00E65E8C /* KZInitialSessionEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DBB7D981A8D44FD00E65E8C /* KZInitialSessionEvent.h */; };
+		6DBB7D9B1A8D44FD00E65E8C /* KZInitialSessionEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBB7D991A8D44FD00E65E8C /* KZInitialSessionEvent.m */; };
 		6DC9539C19D5ADA4005E3540 /* SSZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC9539A19D5ADA4005E3540 /* SSZipArchive.h */; };
 		6DC9539D19D5ADA4005E3540 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC9539B19D5ADA4005E3540 /* SSZipArchive.m */; };
 		6DC953A919D5ADE8005E3540 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DC953A019D5ADE8005E3540 /* crypt.h */; };
@@ -345,6 +347,8 @@
 		6DBA4A7E19536BDC00DBFB42 /* KZApplicationServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationServices.m; sourceTree = "<group>"; };
 		6DBB7D5F1A8A8C4E00E65E8C /* KZAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZAppDelegate.h; sourceTree = "<group>"; };
 		6DBB7D601A8A8C4E00E65E8C /* KZAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZAppDelegate.m; sourceTree = "<group>"; };
+		6DBB7D981A8D44FD00E65E8C /* KZInitialSessionEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZInitialSessionEvent.h; sourceTree = "<group>"; };
+		6DBB7D991A8D44FD00E65E8C /* KZInitialSessionEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZInitialSessionEvent.m; sourceTree = "<group>"; };
 		6DC9539A19D5ADA4005E3540 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSZipArchive.h; path = ../../thirdParty/SSZipArchive/SSZipArchive.h; sourceTree = "<group>"; };
 		6DC9539B19D5ADA4005E3540 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSZipArchive.m; path = ../../thirdParty/SSZipArchive/SSZipArchive.m; sourceTree = "<group>"; };
 		6DC953A019D5ADE8005E3540 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = ../../thirdParty/SSZipArchive/minizip/crypt.h; sourceTree = "<group>"; };
@@ -501,6 +505,8 @@
 				6D03273519DC519A009C8B2B /* Reachability.m */,
 				6D8CEE0419F01D7700259796 /* KZLocationManager.h */,
 				6D8CEE0519F01D7700259796 /* KZLocationManager.m */,
+				6DBB7D981A8D44FD00E65E8C /* KZInitialSessionEvent.h */,
+				6DBB7D991A8D44FD00E65E8C /* KZInitialSessionEvent.m */,
 			);
 			name = Analytics;
 			sourceTree = "<group>";
@@ -816,6 +822,7 @@
 				8E0774D51619F35500FA21D9 /* KZBaseService.h in Headers */,
 				6DC953B119D5ADE8005E3540 /* zip.h in Headers */,
 				8E0774D61619F35500FA21D9 /* KZSMSSender.h in Headers */,
+				6DBB7D9A1A8D44FD00E65E8C /* KZInitialSessionEvent.h in Headers */,
 				6D03274819DC519A009C8B2B /* KZPredefinedEvent.h in Headers */,
 				8E0774D71619F35500FA21D9 /* KZStorage.h in Headers */,
 				8E0774CA1619F35500FA21D9 /* KZADFSIdentityProvider.h in Headers */,
@@ -1048,6 +1055,7 @@
 				8E0774AD1619D9AF00FA21D9 /* KZSMSSender.m in Sources */,
 				6D03274F19DC519A009C8B2B /* NSString+Path.m in Sources */,
 				6DDE016C1A03344F00442906 /* KZFileStorage.m in Sources */,
+				6DBB7D9B1A8D44FD00E65E8C /* KZInitialSessionEvent.m in Sources */,
 				8E0774AE1619D9AF00FA21D9 /* KZStorage.m in Sources */,
 				6D03274919DC519A009C8B2B /* KZPredefinedEvent.m in Sources */,
 				6DC9539D19D5ADA4005E3540 /* SSZipArchive.m in Sources */,
