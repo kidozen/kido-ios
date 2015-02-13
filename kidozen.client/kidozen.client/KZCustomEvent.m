@@ -40,7 +40,7 @@
     
     attr[@"platform"] = @"iOS";
 
-    NSDictionary params = @{@"eventName" : self.eventName,
+    NSDictionary *params = @{@"eventName" : self.eventName,
                             @"sessionUUID" : self.sessionUUID,
                             @"eventAttr" : self.attributes,
                             @"elapsedTime" : self.timeElapsed

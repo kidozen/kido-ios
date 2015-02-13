@@ -112,7 +112,7 @@
              @"networkAccess": self.currentRadioAccessTechnology,
              @"isoCountryCode" : self.isoCountryCode,
              @"deviceModel" : self.deviceModel ? : @"Simulator",
-             @"systemVersion" : self.systemVersion,
+             @"systemVersion" : [NSString stringWithFormat:@"iOS %@", self.systemVersion],
              @"uniqueId" : self.getUniqueIdentification
              };
 }
