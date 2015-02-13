@@ -103,12 +103,6 @@ static NSUInteger kMaximumSecondsToUpload = 300;
             
             [self.session logSessionWithLength:@(length)];
             
-            if (self.session.events != nil) {
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.session.events
-                                                               options:NSJSONWritingPrettyPrinted
-                                                                 error:nil];
-            }
-            
             [self sendEvents];
         } else {
             [self.session removeSavedEvents];
