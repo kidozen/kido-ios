@@ -93,7 +93,7 @@
     // check if notificationdictionary has a badge item.
     if (notificationDictionary != nil)
     {
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        [self resetBadgeCount];
         
         [self.kzApplication enableAnalytics];
         
@@ -104,11 +104,15 @@
     }
 }
 
+- (void) applicationDidBecomeActive
+{
+    [self resetBadgeCount];
+}
+
 - (void) didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     self.deviceToken = [deviceToken description];
 }
-
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
@@ -130,6 +134,9 @@
     
 }
 
+- (void) resetBadgeCount {
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
 
 - (void) registerForRemoteNotifications {
     UIApplication *application = [UIApplication sharedApplication];
