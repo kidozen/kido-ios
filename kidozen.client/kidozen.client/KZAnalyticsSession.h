@@ -19,10 +19,22 @@
 @interface KZAnalyticsSession : NSObject
 
 /**
+ *
+ *  @param userId is the user's Kidozen's ID
+ *
+ */
+- (instancetype)initWithUserId:(NSString *)userId;
+
+/**
  * This property is the session's id. It will be the same through all events
  * contained in this class
  */
 @property (nonatomic, readonly, copy) NSString *sessionUUID;
+
+/**
+ *  This is the user's Kidozen's ID.
+ */
+@property (nonatomic, readonly, copy) NSString *userId;
 
 /**
  * This property represents the amount of seconds your application should

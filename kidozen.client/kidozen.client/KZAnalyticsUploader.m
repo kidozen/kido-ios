@@ -129,6 +129,7 @@ static NSUInteger kMaximumSecondsToUpload = 300;
 
         self.uploading = YES;
         __weak KZAnalyticsUploader *safeMe = self;
+        NSLog(@"Sending %@", self.session.events);
         
         [self.logging write:self.session.events
                     message:@""

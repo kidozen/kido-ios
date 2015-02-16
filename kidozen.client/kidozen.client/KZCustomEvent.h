@@ -20,12 +20,14 @@
  *  @param eventName   Is the name of the Event, such as "TaskCreated"
  *  @param attributes  Is a dictionary that corresponds to the event. Something like @{"Category" : "Critical"}
  *  @param sessionUUID Is the session's ID to which the event belongs.
+ *  @param userID      Is the user's ID from kidozen.
  *
  *  @return an instance of KZCustomEvent.
  */
 -(instancetype) initWithEventName:(NSString *)eventName
                        attributes:(NSDictionary *)attributes
                       sessionUUID:(NSString *)sessionUUID
+                           userId:(NSString *)userId
                       timeElapsed:(NSNumber *)timeElapsed;
 
 @end

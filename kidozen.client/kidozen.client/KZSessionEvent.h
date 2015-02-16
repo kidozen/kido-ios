@@ -26,6 +26,7 @@
 -(instancetype) initWithAttributes:(NSDictionary *)attributes
                      sessionLength:(NSNumber *)length
                        sessionUUID:(NSString *)sessionUUID
+                            userId:(NSString *)userId
                        timeElapsed:(NSNumber *)timeElapsed;
 
 @end

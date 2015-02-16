@@ -23,6 +23,7 @@
  */
 -(instancetype) initWithEventValue:(NSString *)eventValue
                        sessionUUID:(NSString *)sessionUUID
+                            userId:(NSString *)userId
                        timeElapsed:(NSNumber *)timeElapsed;
 
 @end

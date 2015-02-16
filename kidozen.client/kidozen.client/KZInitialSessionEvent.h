@@ -19,11 +19,12 @@
  *
  *  @param attributes  dictionary that contains information related to the current session along with
  *                     information related to the device.
- *  @param length      amount of seconds that the current se
  *  @param sessionUUID the session identifier
+ *  @param userId      is the user's Kidozen's ID
  *
  */
 -(instancetype) initWithAttributes:(NSDictionary *)attributes
-                       sessionUUID:(NSString *)sessionUUID;
+                       sessionUUID:(NSString *)sessionUUID
+                            userId:(NSString *)userId;
 
 @end

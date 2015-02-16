@@ -18,10 +18,12 @@
  *
  *  @param eventValue  is the button name, such as "LoginView"
  *  @param sessionUUID is the session ID to which the event belongs.
+ *  @param userId      is the user's Kidozen's ID.
  *
  */
 -(instancetype) initWithEventValue:(NSString *)eventValue
                        sessionUUID:(NSString *)sessionUUID
+                            userId:(NSString *)userId
                        timeElapsed:(NSNumber *)timeElapsed;
 
 @end

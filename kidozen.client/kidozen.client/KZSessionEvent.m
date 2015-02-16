@@ -14,6 +14,7 @@
 -(instancetype) initWithAttributes:(NSDictionary *)attributes
                      sessionLength:(NSNumber *)length
                        sessionUUID:(NSString *)sessionUUID
+                            userId:(NSString *)userId
                        timeElapsed:(NSNumber *)timeElapsed
 {
     NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
@@ -24,6 +25,7 @@
     return [super initWithEventName:@"sessionEnd"
                          attributes:attr
                         sessionUUID:sessionUUID
+                             userId:userId
                         timeElapsed:timeElapsed];
 }
 

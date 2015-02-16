@@ -20,12 +20,13 @@
  */
 -(instancetype) initWithEventName:(NSString *)eventName
                       sessionUUID:(NSString *)sessionUUID
+                           userId:(NSString *)userId
                       timeElapsed:(NSNumber *)timeElapsed;
 
 @property (nonatomic, readonly, copy) NSString *eventName;
 @property (nonatomic, readonly, copy) NSString *sessionUUID;
 @property (nonatomic, readonly) NSNumber *timeElapsed;
-@property (nonatomic, readwrite, copy) NSString *userId;
+@property (nonatomic, readonly, copy) NSString *userId;
 
 /**
  *  @return a dictionary representation of this event

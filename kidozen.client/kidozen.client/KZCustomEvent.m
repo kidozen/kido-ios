@@ -21,9 +21,13 @@
 -(instancetype) initWithEventName:(NSString *)eventName
                        attributes:(NSDictionary *)attributes
                       sessionUUID:(NSString *)sessionUUID
+                           userId:(NSString *)userId
                       timeElapsed:(NSNumber *)timeElapsed
 {
-    self = [super initWithEventName:eventName sessionUUID:sessionUUID timeElapsed:timeElapsed];
+    self = [super initWithEventName:eventName
+                        sessionUUID:sessionUUID
+                             userId:userId
+                        timeElapsed:timeElapsed];
     
     if (self) {
         self.attributes = attributes;

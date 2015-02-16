@@ -26,7 +26,6 @@
 {
     self = [super init];
     if (self) {
-        self.session = [[KZAnalyticsSession alloc] init];
         self.loggingService = logging;
     }
     return self;
@@ -34,6 +33,8 @@
 
 - (void)enableAnalytics:(BOOL)enable {
     if (enable == YES) {
+        self.session = [[KZAnalyticsSession alloc] initWithUserId:self.userId];
+        
         self.sessionUploader = [[KZAnalyticsUploader alloc] initWithSession:self.session
                                                              loggingService:self.loggingService];
         [[KZDeviceInfo sharedDeviceInfo] enableGeoLocation];
@@ -82,6 +83,7 @@
     
     KZClickEvent *clickEvent = [[KZClickEvent alloc] initWithEventValue:buttonName
                                                             sessionUUID:self.session.sessionUUID
+                                                                 userId:self.userId
                                                             timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:clickEvent];
 }
@@ -90,6 +92,7 @@
 {
     KZViewEvent *viewEvent = [[KZViewEvent alloc] initWithEventValue:viewName
                                                          sessionUUID:self.session.sessionUUID
+                                                              userId:self.userId
                                                          timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:viewEvent];
 }
@@ -101,6 +104,7 @@
     KZCustomEvent *customEvent = [[KZCustomEvent alloc] initWithEventName:customEventName
                                                                attributes:attributes
                                                               sessionUUID:self.session.sessionUUID
+                                                                   userId:self.userId
                                                               timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:customEvent];
 
