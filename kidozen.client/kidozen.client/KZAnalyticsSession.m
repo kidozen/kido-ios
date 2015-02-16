@@ -71,7 +71,6 @@ static int kDefaultSessionTimeout = 5;
     
     KZInitialSessionEvent *sessionStart = [[KZInitialSessionEvent alloc] initWithAttributes:self.deviceInfo.properties
                                                                                 sessionUUID:self.sessionUUID];
-    NSLog(@"Adding %@", sessionStart);
     
     [self.allEvents addEvent:sessionStart];
     
