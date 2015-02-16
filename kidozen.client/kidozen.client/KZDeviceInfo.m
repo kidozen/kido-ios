@@ -113,7 +113,8 @@
              @"isoCountryCode" : self.isoCountryCode,
              @"deviceModel" : self.deviceModel ? : @"Simulator",
              @"systemVersion" : [NSString stringWithFormat:@"iOS %@", self.systemVersion],
-             @"uniqueId" : self.getUniqueIdentification
+             @"uniqueId" : self.getUniqueIdentification,
+             @"appVersion" : self.appVersion
              };
 }
 

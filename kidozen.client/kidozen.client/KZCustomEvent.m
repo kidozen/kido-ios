@@ -7,6 +7,7 @@
 //
 
 #import "KZCustomEvent.h"
+#import "KZDeviceInfo.h"
 
 @interface KZCustomEvent()
 
@@ -39,6 +40,7 @@
     }
     
     attr[@"platform"] = @"iOS";
+    attr[@"appVersion"] = [KZDeviceInfo sharedDeviceInfo].appVersion;
 
     NSDictionary *params = @{@"eventName" : self.eventName,
                             @"sessionUUID" : self.sessionUUID,

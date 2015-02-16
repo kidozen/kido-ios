@@ -7,6 +7,7 @@
 //
 
 #import "KZPredefinedEvent.h"
+#import "KZDeviceInfo.h"
 
 // we import private/protected properties.
 @interface KZEvent()
@@ -41,11 +42,13 @@
 
 - (NSDictionary *)serializedEvent {
     
+
     return  @{@"eventName" : self.eventName,
               @"eventValue" : self.eventValue,
               @"sessionUUID" : self.sessionUUID,
               @"elapsedTime" : self.timeElapsed,
-              @"eventAttr" : @{@"platform" : @"iOS" }
+              @"eventAttr" : @{ @"platform" : @"iOS",
+                               @"appVersion" : [KZDeviceInfo sharedDeviceInfo].appVersion }
               };
 }
 

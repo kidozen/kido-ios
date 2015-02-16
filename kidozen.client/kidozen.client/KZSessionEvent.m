@@ -7,6 +7,7 @@
 //
 
 #import "KZSessionEvent.h"
+#import "KZDeviceInfo.h"
 
 @implementation KZSessionEvent
 
@@ -18,6 +19,7 @@
     NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
     attr[@"sessionLength"] = length;
     attr[@"platform"] = @"iOS";
+    attr[@"appVersion"] = [KZDeviceInfo sharedDeviceInfo].appVersion;
     
     return [super initWithEventName:@"sessionEnd"
                          attributes:attr
