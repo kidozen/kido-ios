@@ -90,7 +90,16 @@
 
 - (void) handleNotificationEvent:(NSDictionary *)notificationDictionary {
     
-    if (notificationDictionary != nil) {
+    // check if notificationdictionary has a badge item.
+    if (notificationDictionary != nil)
+    {
+        
+        NSDictionary *aps = [notificationDictionary objectForKey:@"aps"];
+        
+        if ([aps objectForKey:@"badge"] != nil) {
+            [UIApplication sharedApplication].applicationIconBadgeNumber = [[aps objectForKey:@"badge"] intValue];
+        }
+        
         
         [self.kzApplication enableAnalytics];
         
