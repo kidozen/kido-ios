@@ -5,6 +5,8 @@ NSTimeInterval kTimeOffset = 10;
 @interface KZUser()
 
 @property (nonatomic, copy) NSString *kzToken;
+@property (nonatomic, copy, readwrite) NSString *userId;
+
 - (void) parse;
 @end
 
@@ -43,6 +45,10 @@ NSString *const KEY_EXPIRES = @"ExpiresOn";
             NSTimeInterval rightNowTimestamp = [[NSDate date] timeIntervalSince1970];
             
             self.expiresOn = round(futureTimestamp - rightNowTimestamp - kTimeOffset);
+        }
+        
+        if ([key hasSuffix:@"userid"]) {
+            self.userId = [components objectAtIndex:1];            
         }
     }
 }
