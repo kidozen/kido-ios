@@ -25,6 +25,7 @@
 @property (nonatomic, readonly, copy) NSString *eventName;
 @property (nonatomic, readonly, copy) NSString *sessionUUID;
 @property (nonatomic, readonly) NSNumber *timeElapsed;
+@property (nonatomic, readwrite, copy) NSString *userId;
 
 /**
  *  @return a dictionary representation of this event

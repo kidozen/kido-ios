@@ -48,7 +48,7 @@ NSString *const KEY_EXPIRES = @"ExpiresOn";
         }
         
         if ([key hasSuffix:@"userid"]) {
-            self.userId = [components objectAtIndex:1];            
+            self.userId = [components objectAtIndex:1];
         }
     }
 }

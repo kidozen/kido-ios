@@ -41,9 +41,10 @@
     
     attr[@"platform"] = @"iOS";
     attr[@"appVersion"] = [KZDeviceInfo sharedDeviceInfo].appVersion;
-
+    
     NSDictionary *params = @{@"eventName" : self.eventName,
                             @"sessionUUID" : self.sessionUUID,
+                             @"userid" : self.userId,
                             @"eventAttr" : self.attributes,
                             @"elapsedTime" : self.timeElapsed
                             };

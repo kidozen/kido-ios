@@ -401,6 +401,7 @@
 
 - (void) enableAnalytics
 {
+    self.analytics.userId = self.kzUser.userId;
     [self.appServices enableAnalytics];
 }
 

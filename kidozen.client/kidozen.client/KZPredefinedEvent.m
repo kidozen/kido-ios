@@ -47,6 +47,7 @@
               @"eventValue" : self.eventValue,
               @"sessionUUID" : self.sessionUUID,
               @"elapsedTime" : self.timeElapsed,
+              @"userid" : self.userId,
               @"eventAttr" : @{ @"platform" : @"iOS",
                                @"appVersion" : [KZDeviceInfo sharedDeviceInfo].appVersion }
               };

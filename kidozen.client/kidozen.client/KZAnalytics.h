@@ -10,6 +10,7 @@
 @interface KZAnalytics : NSObject
 
 @property (nonatomic, readonly) KZAnalyticsSession *session;
+@property (nonatomic, copy) NSString *userId;
 
 - (instancetype)initWithLoggingService:(KZLogging *)loggingService;
 
