@@ -19,7 +19,7 @@
     attr[@"sessionLength"] = length;
     attr[@"platform"] = @"iOS";
     
-    return [super initWithEventName:@"user-session"
+    return [super initWithEventName:@"sessionEnd"
                          attributes:attr
                         sessionUUID:sessionUUID
                         timeElapsed:timeElapsed];
