@@ -103,7 +103,7 @@
     if (version == nil || [version isEqualToString:@""])
         version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
-    return version;
+    return version != nil ? version : @"";
 }
 
 - (NSDictionary *)properties
