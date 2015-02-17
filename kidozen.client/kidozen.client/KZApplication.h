@@ -40,7 +40,9 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 @protocol KZGoodTechnologiesDelegate <NSObject>
 
-- (void) getGTToken:(void(^)(NSString *token))success
+- (void) getGTToken:(NSString *)challenge
+             server:(NSString *)serverURLString
+            success:(void(^)(NSString *token))success
               error:(void (^)(NSError *error))failure;
 
 @end

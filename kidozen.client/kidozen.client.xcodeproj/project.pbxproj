@@ -216,12 +216,19 @@
 			remoteGlobalIDString = F6B2082D1450F597009315AF;
 			remoteInfo = SocketRocket;
 		};
-		6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */ = {
+		6D4DC94A1A93FF0F00D4404E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6DF1EBBA18EDF726000C3AA7;
-			remoteInfo = kidozen.client.fat;
+			containerPortal = 6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6D4DC92B1A93FF0E00D4404E;
+			remoteInfo = KZGood;
+		};
+		6D4DC94C1A93FF0F00D4404E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6D4DC9361A93FF0E00D4404E;
+			remoteInfo = KZGoodTests;
 		};
 		6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -330,6 +337,7 @@
 		6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationConfiguration.m; sourceTree = "<group>"; };
 		6D4ACD471937CBA400958E65 /* KZObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZObject.h; sourceTree = "<group>"; };
 		6D4ACD481937CBA400958E65 /* KZObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZObject.m; sourceTree = "<group>"; };
+		6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KZGood.xcodeproj; path = KZGood/KZGood.xcodeproj; sourceTree = "<group>"; };
 		6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationAuthentication.h; sourceTree = "<group>"; };
 		6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationAuthentication.m; sourceTree = "<group>"; };
 		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
@@ -596,6 +604,15 @@
 			name = IdentityProviders;
 			sourceTree = "<group>";
 		};
+		6D4DC9461A93FF0E00D4404E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D4DC94B1A93FF0F00D4404E /* libKZGood.a */,
+				6D4DC94D1A93FF0F00D4404E /* KZGoodTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6D8017F11968A75700E99FB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,6 +698,7 @@
 		8EB8651C1614D11800DD60E6 = {
 			isa = PBXGroup;
 			children = (
+				6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */,
 				6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */,
 				6D8017F81968A75C00E99FB7 /* SVHTTPRequest.xcodeproj */,
 				6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */,
@@ -892,7 +910,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6D43DBE21968BF2C00D023CF /* PBXTargetDependency */,
 			);
 			name = "Integration Tests";
 			productName = "Integration Tests";
@@ -930,6 +947,10 @@
 					ProjectRef = 6D8017F01968A75700E99FB7 /* CrashReporter.xcodeproj */;
 				},
 				{
+					ProductGroup = 6D4DC9461A93FF0E00D4404E /* Products */;
+					ProjectRef = 6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */;
+				},
+				{
 					ProductGroup = 6D43DBD51968B26300D023CF /* Products */;
 					ProjectRef = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
 				},
@@ -954,6 +975,20 @@
 			fileType = archive.ar;
 			path = libSocketRocket.a;
 			remoteRef = 6D43DBDA1968B26300D023CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D4DC94B1A93FF0F00D4404E /* libKZGood.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKZGood.a;
+			remoteRef = 6D4DC94A1A93FF0F00D4404E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6D4DC94D1A93FF0F00D4404E /* KZGoodTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KZGoodTests.xctest;
+			remoteRef = 6D4DC94C1A93FF0F00D4404E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		6D8017F71968A75700E99FB7 /* libCrashReporter-iphoneos.a */ = {
@@ -1116,11 +1151,6 @@
 			isa = PBXTargetDependency;
 			name = CrashReporter;
 			targetProxy = 6D3D660B1A260D0200FC3445 /* PBXContainerItemProxy */;
-		};
-		6D43DBE21968BF2C00D023CF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
-			targetProxy = 6D43DBE11968BF2C00D023CF /* PBXContainerItemProxy */;
 		};
 		6D8018011968ACDE00E99FB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

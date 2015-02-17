@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		6D4DC9531A94092B00D4404E /* libKZGood.fat */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6D4DC9541A94092B00D4404E /* Build configuration list for PBXAggregateTarget "libKZGood.fat" */;
+			buildPhases = (
+				6D4DC9571A94093400D4404E /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = libKZGood.fat;
+			productName = libKZGood.fat;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		6D4DC92F1A93FF0E00D4404E /* KZGood.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D4DC92E1A93FF0E00D4404E /* KZGood.h */; };
+		6D4DC9311A93FF0E00D4404E /* KZGood.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4DC9301A93FF0E00D4404E /* KZGood.m */; };
+		6D4DC9511A94002C00D4404E /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9501A94002C00D4404E /* GD.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6D4DC9291A93FF0E00D4404E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				6D4DC92F1A93FF0E00D4404E /* KZGood.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6D4DC92B1A93FF0E00D4404E /* libKZGood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libKZGood.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D4DC92E1A93FF0E00D4404E /* KZGood.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KZGood.h; sourceTree = "<group>"; };
+		6D4DC9301A93FF0E00D4404E /* KZGood.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KZGood.m; sourceTree = "<group>"; };
+		6D4DC93C1A93FF0E00D4404E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D4DC9501A94002C00D4404E /* GD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GD.framework; path = System/Library/Frameworks/GD.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D4DC9281A93FF0E00D4404E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D4DC9511A94002C00D4404E /* GD.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6D4DC9221A93FF0D00D4404E = {
+			isa = PBXGroup;
+			children = (
+				6D4DC9521A94079600D4404E /* Frameworks */,
+				6D4DC92D1A93FF0E00D4404E /* KZGood */,
+				6D4DC93A1A93FF0E00D4404E /* KZGoodTests */,
+				6D4DC92C1A93FF0E00D4404E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D4DC92C1A93FF0E00D4404E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D4DC92B1A93FF0E00D4404E /* libKZGood.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D4DC92D1A93FF0E00D4404E /* KZGood */ = {
+			isa = PBXGroup;
+			children = (
+				6D4DC92E1A93FF0E00D4404E /* KZGood.h */,
+				6D4DC9301A93FF0E00D4404E /* KZGood.m */,
+			);
+			path = KZGood;
+			sourceTree = "<group>";
+		};
+		6D4DC93A1A93FF0E00D4404E /* KZGoodTests */ = {
+			isa = PBXGroup;
+			children = (
+				6D4DC93B1A93FF0E00D4404E /* Supporting Files */,
+			);
+			path = KZGoodTests;
+			sourceTree = "<group>";
+		};
+		6D4DC93B1A93FF0E00D4404E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D4DC93C1A93FF0E00D4404E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D4DC9521A94079600D4404E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D4DC9501A94002C00D4404E /* GD.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D4DC92A1A93FF0E00D4404E /* KZGood */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D4DC93F1A93FF0E00D4404E /* Build configuration list for PBXNativeTarget "KZGood" */;
+			buildPhases = (
+				6D4DC9271A93FF0E00D4404E /* Sources */,
+				6D4DC9281A93FF0E00D4404E /* Frameworks */,
+				6D4DC9291A93FF0E00D4404E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KZGood;
+			productName = KZGood;
+			productReference = 6D4DC92B1A93FF0E00D4404E /* libKZGood.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D4DC9231A93FF0D00D4404E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = KidoZen;
+				TargetAttributes = {
+					6D4DC92A1A93FF0E00D4404E = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					6D4DC9531A94092B00D4404E = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 6D4DC9261A93FF0D00D4404E /* Build configuration list for PBXProject "KZGood" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6D4DC9221A93FF0D00D4404E;
+			productRefGroup = 6D4DC92C1A93FF0E00D4404E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D4DC92A1A93FF0E00D4404E /* KZGood */,
+				6D4DC9531A94092B00D4404E /* libKZGood.fat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6D4DC9571A94093400D4404E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# define output folder environment variable\nOUTPUTFOLDER=../../outputLibrary\n\n# Step 1. Build Device and Simulator versions\nxcodebuild -target KZGood ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphoneos BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\nxcodebuild -target KZGood ONLY_ACTIVE_ARCH=NO -configuration ${CONFIGURATION} -sdk iphonesimulator -arch x86_64 -arch i386 BUILD_DIR=\"${BUILD_DIR}\" BUILD_ROOT=\"${BUILD_ROOT}\"\n\n# make sure the output directory exists\nmkdir -p \"${OUTPUTFOLDER}/include\"\n\n# Step 2. Create universal binary file using lipo\nlipo -create -output \"${OUTPUTFOLDER}/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\"\n\n# Last touch. copy the header files. Just for convenience\necho \"COPYING HEADER FILES TO $OUTPUTFOLDER\"\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/${PROJECT_NAME}/\" \"${OUTPUTFOLDER}/include\"\nrm -rf ./build\n\necho \"Your universal library lib${PROJECT_NAME}.a is in $OUTPUTFOLDER\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D4DC9271A93FF0E00D4404E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D4DC9311A93FF0E00D4404E /* KZGood.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6D4DC93D1A93FF0E00D4404E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6D4DC93E1A93FF0E00D4404E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D4DC9401A93FF0E00D4404E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../outputLibrary/include",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../outputLibrary/",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6D4DC9411A93FF0E00D4404E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../outputLibrary/include",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(SRCROOT)/../../outputLibrary/",
+					"/Users/miya/src/kido-ios/outputLibrary",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6D4DC9551A94092B00D4404E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		6D4DC9561A94092B00D4404E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D4DC9261A93FF0D00D4404E /* Build configuration list for PBXProject "KZGood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D4DC93D1A93FF0E00D4404E /* Debug */,
+				6D4DC93E1A93FF0E00D4404E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D4DC93F1A93FF0E00D4404E /* Build configuration list for PBXNativeTarget "KZGood" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D4DC9401A93FF0E00D4404E /* Debug */,
+				6D4DC9411A93FF0E00D4404E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6D4DC9541A94092B00D4404E /* Build configuration list for PBXAggregateTarget "libKZGood.fat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D4DC9551A94092B00D4404E /* Debug */,
+				6D4DC9561A94092B00D4404E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D4DC9231A93FF0D00D4404E /* Project object */;
+}
