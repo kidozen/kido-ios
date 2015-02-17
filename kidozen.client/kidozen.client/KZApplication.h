@@ -24,6 +24,8 @@
 @class KZFileStorage;
 @class KZAnalytics;
 
+@protocol KZGoodTechnologiesDelegate;
+
 #if TARGET_OS_IPHONE
 @class KZPubSubChannel;
 #endif
@@ -31,6 +33,18 @@
 typedef void (^AuthCompletionBlock)(id);
 typedef void (^TokenExpiresBlock)(id);
 typedef void (^InitializationCompleteBlock)(KZResponse *);
+
+/**
+ *  Whoever implements this protocol interacts with Good Technologies and retrieves
+ *  the token that we need;
+ */
+@protocol KZGoodTechnologiesDelegate <NSObject>
+
+- (void) getGTToken:(void(^)(NSString *token))success
+              error:(void (^)(NSError *error))failure;
+
+@end
+
 
 /**
  *
@@ -42,6 +56,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 @property (nonatomic, readonly) KZCrashReporter *crashreporter;
 @property (nonatomic, copy) InitializationCompleteBlock onInitializationComplete;
 @property (nonatomic, readonly) KZApplicationConfiguration *applicationConfig;
+@property (nonatomic, weak) id<KZGoodTechnologiesDelegate> gtDelegate;
 
 /**
  * Constructor
@@ -355,8 +370,3 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
 
 @end
 
-@protocol KZGoodTechnologiesDelegate <NSObject>
-
-- (void) didReceiveGTToken:(void(^)(NSString *token))success error:(void (^)(NSError *error))failure;
-
-@end
