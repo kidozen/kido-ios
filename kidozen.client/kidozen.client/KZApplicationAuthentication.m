@@ -196,7 +196,11 @@ NSString *const kAccessTokenKey = @"access_token";
                           NSMutableDictionary* details = [NSMutableDictionary dictionary];
                           details[NSLocalizedDescriptionKey] = @"KidoZen service returns an invalid response";
                           details[@"Error message"] = [error localizedDescription] ? : @"Could not authenticate with application key";
-
+                          
+                          if ([response isKindOfClass:[NSDictionary class]]) {
+                              [details addEntriesFromDictionary:response];
+                          }
+                          
                           [details setValue:@"KidoZen service returns an invalid response" forKey:NSLocalizedDescriptionKey];
                           callback(response, [NSError errorWithDomain:@"KZWRAPv09IdentityProvider" code:[urlResponse statusCode] userInfo:details]);
                           return;
