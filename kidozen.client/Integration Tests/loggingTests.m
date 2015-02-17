@@ -32,6 +32,7 @@
                                                                    strictSSL:NO
                                                                  andCallback:^(KZResponse * r) {
                                                                      XCTAssertNotNil(r.response,@"Invalid response");
+                                                                     XCTAssertNil(r.error, @"Must not have an error");
                                                                      if (r.error != nil) {
                                                                          NSLog(@"Error is %@", r.error);
                                                                          XCTAssertNil(r.error, @"Found error");

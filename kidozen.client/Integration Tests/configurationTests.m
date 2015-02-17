@@ -34,6 +34,7 @@
                                                                   strictSSL:NO
                                                                 andCallback:^(KZResponse * r) {
                                                                     XCTAssertNotNil(r.response,@"Invalid response");
+                                                                    XCTAssertNil(r.error, @"Must not have an error");
                                                                     [r.application authenticateUser:kzUser withProvider:kzProvider andPassword:kzPassword completion:^(id c) {
                                                                         NSAssert(![c  isKindOfClass:[NSError class]], @"error must be null");
 

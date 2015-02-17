@@ -30,6 +30,7 @@
                                                                   strictSSL:NO
                                                                 andCallback:^(KZResponse * r) {
                                                                     XCTAssertNotNil(r.response,@"Invalid response");
+                                                                    XCTAssertNil(r.error, @"Must not have an error");
                                                                     [r.application authenticateUser:kzUser
                                                                                        withProvider:kzProvider
                                                                                         andPassword:kzPassword

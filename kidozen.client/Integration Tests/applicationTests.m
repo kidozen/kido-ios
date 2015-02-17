@@ -28,6 +28,7 @@
                                                                    strictSSL:NO
                                                                  andCallback:^(KZResponse * r) {
                                                                      XCTAssertNotNil(r.response,@"Invalid response");
+                                                                     XCTAssertNil(r.error, @"Must not have an error");
                                                                      dispatch_semaphore_signal(semaphore);
                                                                  }];
         assert(self.application);
