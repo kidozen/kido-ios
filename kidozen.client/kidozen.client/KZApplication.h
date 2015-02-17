@@ -354,3 +354,9 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
                                 error:(void (^)(NSError *error))failure;
 
 @end
+
+@protocol KZGoodTechnologiesDelegate <NSObject>
+
+- (void) didReceiveGTToken:(void(^)(NSString *token))success error:(void (^)(NSError *error))failure;
+
+@end
