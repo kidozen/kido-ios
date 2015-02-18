@@ -50,8 +50,9 @@
     
     [[[GDiOS sharedInstance] getWindow] makeKeyAndVisible];
     
-    [self setGood:[GDiOS sharedInstance]];
-    [self.good setDelegate:self];
+    self.good = [GDiOS sharedInstance];
+    self.good.delegate = self;
+    
     [self.good authorize];
     
 }
