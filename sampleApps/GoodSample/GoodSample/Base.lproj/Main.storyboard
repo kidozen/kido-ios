@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6246"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,8 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Token will be here." translatesAutoresizingMaskIntoConstraints="NO" id="jcI-7b-1Bn">
+                                <rect key="frame" x="16" y="357" width="343" height="302"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="302" id="1lR-44-sFn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-Hi-Q1f">
-                                <rect key="frame" x="140" y="319" width="95" height="30"/>
+                                <rect key="frame" x="140" y="120" width="95" height="30"/>
+                                <color key="backgroundColor" red="0.84420321129999998" green="0.84420321129999998" blue="0.84420321129999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Get GT Token">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -28,12 +39,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="gKc-Hi-Q1f" secondAttribute="centerY" id="Bpb-xl-YxE"/>
-                            <constraint firstAttribute="centerX" secondItem="gKc-Hi-Q1f" secondAttribute="centerX" id="SuO-0t-1Hf"/>
+                            <constraint firstItem="jcI-7b-1Bn" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="13o-Rb-4Q3"/>
+                            <constraint firstItem="jcI-7b-1Bn" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="WiM-03-clI"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="jcI-7b-1Bn" secondAttribute="bottom" constant="8" id="bzV-sw-XXE"/>
+                            <constraint firstItem="gKc-Hi-Q1f" firstAttribute="centerX" secondItem="jcI-7b-1Bn" secondAttribute="centerX" id="nUb-cQ-hhT"/>
+                            <constraint firstItem="gKc-Hi-Q1f" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="100" id="tdy-nN-Y4D"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="textView" destination="jcI-7b-1Bn" id="bUu-qu-9wC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
