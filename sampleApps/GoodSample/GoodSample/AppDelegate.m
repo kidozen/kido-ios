@@ -7,10 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import <KZApplication.h>
+#import <KZGood.h>
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) KZApplication *kzApplication;
+@property (nonatomic, strong) KZGood *goodDelegate;
 
 @end
 
@@ -37,6 +40,8 @@
                                                                     completion:^(id kr)
                                     {
                                         NSAssert(![kr  isKindOfClass:[NSError class]], @"error must be null");
+                                        safeMe.goodDelegate = [[KZGood alloc] initWithWindow:safeMe.window];
+                                        safeMe.kzApplication.gtDelegate = safeMe.goodDelegate;
                                         
                                         safeMe.window.rootViewController.view.userInteractionEnabled = YES;
                                     }];
@@ -67,6 +72,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
++ (AppDelegate *) sharedDelegate
+{
+    return (AppDelegate*) [UIApplication sharedApplication].delegate;
 }
 
 @end

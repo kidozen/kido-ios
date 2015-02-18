@@ -15,5 +15,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong, readonly) KZApplication *kzApplication;
 
++(AppDelegate *) sharedDelegate;
+
 @end
 
