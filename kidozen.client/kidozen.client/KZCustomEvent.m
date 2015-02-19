@@ -49,7 +49,7 @@
     NSDictionary *params = @{@"eventName" : self.eventName,
                             @"sessionUUID" : self.sessionUUID,
                              @"userid" : self.userId,
-                            @"eventAttr" : self.attributes,
+                            @"eventAttr" : attr,
                             @"elapsedTime" : self.timeElapsed
                             };
     
