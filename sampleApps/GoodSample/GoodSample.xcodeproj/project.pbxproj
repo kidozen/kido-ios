@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D64D6FC1A9E8341007FC5B5 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D64D6FB1A9E8341007FC5B5 /* LocalAuthentication.framework */; };
+		0DF277851A9E84D600A4C58B /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9BC1A940E2F00D4404E /* kz.client.a */; };
+		0DF277861A9E84D600A4C58B /* libKZGood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9BD1A940E2F00D4404E /* libKZGood.a */; };
 		6D4DC9991A940D7100D4404E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4DC9981A940D7100D4404E /* main.m */; };
 		6D4DC99C1A940D7100D4404E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4DC99B1A940D7100D4404E /* AppDelegate.m */; };
 		6D4DC99F1A940D7100D4404E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4DC99E1A940D7100D4404E /* ViewController.m */; };
@@ -14,8 +17,6 @@
 		6D4DC9A41A940D7100D4404E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DC9A31A940D7100D4404E /* Images.xcassets */; };
 		6D4DC9A71A940D7100D4404E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DC9A51A940D7100D4404E /* LaunchScreen.xib */; };
 		6D4DC9B31A940D7100D4404E /* GoodSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4DC9B21A940D7100D4404E /* GoodSampleTests.m */; };
-		6D4DC9BE1A940E2F00D4404E /* kz.client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9BC1A940E2F00D4404E /* kz.client.a */; };
-		6D4DC9BF1A940E2F00D4404E /* libKZGood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9BD1A940E2F00D4404E /* libKZGood.a */; };
 		6D4DC9C21A940E5E00D4404E /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9C11A940E5E00D4404E /* GD.framework */; };
 		6D4DC9C41A940E8400D4404E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9C31A940E8400D4404E /* CoreLocation.framework */; };
 		6D4DC9C61A940E8A00D4404E /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9C51A940E8A00D4404E /* libc++.dylib */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D64D6FB1A9E8341007FC5B5 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		6D4DC9931A940D7100D4404E /* GoodSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoodSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D4DC9971A940D7100D4404E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D4DC9981A940D7100D4404E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -88,6 +90,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF277851A9E84D600A4C58B /* kz.client.a in Frameworks */,
+				0DF277861A9E84D600A4C58B /* libKZGood.a in Frameworks */,
+				0D64D6FC1A9E8341007FC5B5 /* LocalAuthentication.framework in Frameworks */,
 				6D4DC9E71A94145400D4404E /* libstdc++.6.0.9.dylib in Frameworks */,
 				6D4DC9CF1A94119800D4404E /* Security.framework in Frameworks */,
 				6D4DC9E51A94143000D4404E /* QuartzCore.framework in Frameworks */,
@@ -106,8 +111,6 @@
 				6D4DC9C61A940E8A00D4404E /* libc++.dylib in Frameworks */,
 				6D4DC9C41A940E8400D4404E /* CoreLocation.framework in Frameworks */,
 				6D4DC9C21A940E5E00D4404E /* GD.framework in Frameworks */,
-				6D4DC9BE1A940E2F00D4404E /* kz.client.a in Frameworks */,
-				6D4DC9BF1A940E2F00D4404E /* libKZGood.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +187,7 @@
 		6D4DC9C01A940E5000D4404E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D64D6FB1A9E8341007FC5B5 /* LocalAuthentication.framework */,
 				6D4DC9E61A94145400D4404E /* libstdc++.6.0.9.dylib */,
 				6D4DC9E41A94143000D4404E /* QuartzCore.framework */,
 				6D4DC9E21A94142700D4404E /* CoreGraphics.framework */,
@@ -442,12 +446,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					$SRCROOT/../../outputLibrary/,
-					"/Users/miya/src/kido-ios/outputLibrary",
+					"/Users/lean/Desktop/good/kido-ios/outputLibrary",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -465,12 +466,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					$SRCROOT/../../outputLibrary/,
-					"/Users/miya/src/kido-ios/outputLibrary",
+					"/Users/lean/Desktop/good/kido-ios/outputLibrary",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -528,6 +526,7 @@
 				6D4DC9B81A940D7100D4404E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6D4DC9B91A940D7100D4404E /* Build configuration list for PBXNativeTarget "GoodSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +535,7 @@
 				6D4DC9BB1A940D7100D4404E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

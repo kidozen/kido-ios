@@ -43,4 +43,33 @@
     
 }
 
+- (IBAction)getKidozenToken:(id)sender {
+    __weak ViewController *safeMe = self;
+    
+    NSString *u = [NSString stringWithFormat:@"https://auth-qa.kidozen.com/v1/armonia/gd?scope=tasks&token=%@", safeMe.textView.text];
+    NSURL *url = [NSURL URLWithString:u];
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+   
+    safeMe.textView.text = ret;
+    
+    
+}
+
+- (IBAction)getKidozenStorage:(id)sender {
+    __weak ViewController *safeMe = self;
+    
+    NSString *u = [NSString stringWithFormat:@"https://auth-qa.kidozen.com/v1/armonia/gd?scope=tasks&token=%@", safeMe.textView.text];
+    NSURL *url = [NSURL URLWithString:u];
+    
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    safeMe.textView.text = ret;
+    
+    
+}
+
+
 @end

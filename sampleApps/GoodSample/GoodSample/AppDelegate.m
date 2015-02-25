@@ -10,6 +10,12 @@
 #import <KZApplication.h>
 #import <KZGood.h>
 
+#define kzAppCenterUrl @"https://demo18.kidocloud.com"
+#define kzAppName @"tasks"
+#define kzApplicationKey @"dooOMoQpfSso3iBCyp/RuimGiKo6RKT8Q9doi6u8Xas="
+#define kzUser @"demo18@kidozen.com"
+#define kzPassword @"pass"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) KZApplication *kzApplication;
