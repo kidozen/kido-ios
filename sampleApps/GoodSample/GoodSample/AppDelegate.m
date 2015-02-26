@@ -10,10 +10,10 @@
 #import <KZApplication.h>
 #import <KZGood.h>
 
-#define kzAppCenterUrl @"https://demo18.kidocloud.com"
+#define kzAppCenterUrl @"https://armonia.kidocloud.com"
 #define kzAppName @"tasks"
-#define kzApplicationKey @"dooOMoQpfSso3iBCyp/RuimGiKo6RKT8Q9doi6u8Xas="
-#define kzUser @"demo18@kidozen.com"
+#define kzApplicationKey @"g1M98x5z4ErptQrXGGZ9Djw4yC2nJr8lzpEm6HVQqCc="
+#define kzUser @"armonia@kidozen.com"
 #define kzPassword @"pass"
 
 @interface AppDelegate ()
