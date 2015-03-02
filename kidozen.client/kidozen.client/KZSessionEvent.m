@@ -22,7 +22,7 @@
     attr[@"platform"] = @"iOS";
     attr[@"appVersion"] = [KZDeviceInfo sharedDeviceInfo].appVersion;
     
-    return [super initWithEventName:@"sessionEnd"
+    return [super initWithEventName:@"usersession"
                          attributes:attr
                         sessionUUID:sessionUUID
                              userId:userId
