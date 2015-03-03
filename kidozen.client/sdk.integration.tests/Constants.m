@@ -8,9 +8,9 @@
 
 #import "Constants.h"
 
-NSString * const kzAppCenterUrl = @""; //URL of the tenant's marketplece
-NSString * const kzAppName = @""; // app name
-NSString * const kzUser = @""; //kidozen user
-NSString * const kzPassword = @""; //kidozen password
-NSString * const kzProvider = @"";
-NSString * const kzApplicationKey = @"";
+NSString * const kzAppCenterUrl = @"https://tests.qa.kidozen.com";
+NSString * const kzAppName = @"tasks";
+NSString * const kzUser = @"tests@kidozen.com";
+NSString * const kzPassword = @"pass";
+NSString * const kzProvider = @"Kidozen";
+NSString * const kzApplicationKey = @"F1/fnldvMTyG0DcljmZB1EHJRg+7KbJA2gISl11FNDE=";

@@ -8,18 +8,18 @@
 
 #import "AppDelegate.h"
 #import <KZApplication.h>
-#import <KZGood.h>
 
-#define kzAppCenterUrl @"https://armonia.kidocloud.com"
-#define kzAppName @"tasks"
-#define kzApplicationKey @"g1M98x5z4ErptQrXGGZ9Djw4yC2nJr8lzpEm6HVQqCc="
-#define kzUser @"armonia@kidozen.com"
-#define kzPassword @"pass"
+#define kzAppCenterUrl @""
+#define kzAppName @""
+#define kzApplicationKey @""
+#define kzUser @""
+#define kzPassword @""
+
+
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) KZApplication *kzApplication;
-@property (nonatomic, strong) KZGood *goodDelegate;
 
 @end
 
@@ -37,20 +37,8 @@
                                                                      strictSSL:NO
                                                                    andCallback:^(KZResponse *response)
                                {
-                                   
-                                   NSAssert(!response.error, @"error must be null");
-                                   
-                                   [safeMe.kzApplication authenticateUser:kzUser
-                                                                  withProvider:@"Kidozen"
-                                                                   andPassword:kzPassword
-                                                                    completion:^(id kr)
-                                    {
-                                        NSAssert(![kr  isKindOfClass:[NSError class]], @"error must be null");
-                                        safeMe.goodDelegate = [[KZGood alloc] initWithWindow:safeMe.window];
-                                        safeMe.kzApplication.gtDelegate = safeMe.goodDelegate;
-                                        
-                                        safeMe.window.rootViewController.view.userInteractionEnabled = YES;
-                                    }];
+                                    NSAssert(!response.error, @"error must be null");
+                                    safeMe.window.rootViewController.view.userInteractionEnabled = YES;
                                    
                                }];
     
