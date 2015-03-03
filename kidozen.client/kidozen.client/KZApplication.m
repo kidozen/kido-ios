@@ -225,6 +225,15 @@
     
 }
 
+-(void) authenticateWithChallenge:(NSString *)challenge
+                         provider:(NSString *)provider
+                       completion:(void(^)(id))block
+{
+    [self.appAuthentication authenticateWithChallenge:challenge
+                                             provider:provider
+                                           completion:block];
+}
+
 - (void)handleAuthenticationViaApplicationKeyWithCallback:(void(^)(NSError *))callback
 {
     [self.appAuthentication handleAuthenticationWithApplicationKey:self.applicationKey

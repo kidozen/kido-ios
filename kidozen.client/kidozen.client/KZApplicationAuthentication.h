@@ -41,6 +41,21 @@
             withProvider:(NSString *)provider
              andPassword:(NSString *)password;
 
+/**
+ *  This way of authenticating is used for GD (Good Technologies) authentication. You
+ *  have to provide a challenge and the server to which you are authenticating to.
+ *  It'll open up a webview (handled by Good Technologies SDK included in here) and 
+ *  there you have to provide your credentials.
+ *
+ *  @param challenge The challenge with which a token will get generated.
+ *  @param provider  The provider you will
+ *  @param block     The callback what will get called.
+ */
+-(void) authenticateWithChallenge:(NSString *)challenge
+                         provider:(NSString *)provider
+                       completion:(void(^)(id))block;
+
+
 // Passive authentication, with corresponding applicationKey;
 - (void)handleAuthenticationWithApplicationKey:(NSString *)applicationKey
                                       callback:(void(^)(NSError *outerError))callback;

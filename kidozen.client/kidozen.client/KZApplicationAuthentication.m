@@ -12,6 +12,7 @@
 #import "KZAuthenticationConfig.h"
 #import "KZIdentityProviderFactory.h"
 #import "KZIdentityProvider.h"
+#import "KZGoodIdentityProvider.h"
 #import "SVHTTPClient.h"
 #import "KZUser.h"
 #import "KZPassiveAuthViewController.h"
@@ -28,6 +29,8 @@ NSString *const kAccessTokenKey = @"access_token";
 @property (nonatomic, copy) NSString *lastUserName;
 @property (nonatomic, copy) NSString *lastPassword;
 @property (nonatomic, copy) NSString *lastProviderKey;
+
+@property (nonatomic, strong) NSDictionary *authParams;
 
 @property (nonatomic, strong) SVHTTPClient *defaultClient;
 
@@ -62,15 +65,24 @@ NSString *const kAccessTokenKey = @"access_token";
     return self;
 }
 
+-(void) authenticateWithChallenge:(NSString *)challenge
+                         provider:(NSString *)provider
+                       completion:(void(^)(id)) block
+{
+    
+    self.authCompletionBlock = block;
+    self.authParams = @{kChallengeKey : challenge};
+                        
+    [self authenticateUser:@"nousername" withProvider:provider andPassword:@"nopassword"];
+    
+}
+
 -(void) authenticateUser:(NSString *)user
             withProvider:(NSString *)provider
              andPassword:(NSString *)password
               completion:(void (^)(id))block
 {
     self.authCompletionBlock = block;
-    self.lastUserName = user;
-    self.lastPassword = password;
-    self.lastProviderKey = provider;
     
     [self authenticateUser:user withProvider:provider andPassword:password];
 }
@@ -110,8 +122,14 @@ NSString *const kAccessTokenKey = @"access_token";
     
     __weak KZApplicationAuthentication *safeMe = self;
     
-    if (!self.ip)
+    if (!self.ip) {
         self.ip = [KZIdentityProviderFactory createProvider:providerProtocol strictSSL:self.strictSSL ];
+        
+        if (self.authParams != nil) {
+            [self.ip configure:self.authParams];
+        }
+    }
+    
     
     [self.ip initializeWithUserName:user password:password andScope:authServiceScope];
     [self.ip requestToken:providerIPEndpoint completion:^(NSString *ipToken, NSError *error) {
@@ -121,9 +139,9 @@ NSString *const kAccessTokenKey = @"access_token";
                 return ;
             }
         }
-        
+
         NSDictionary *params = @{@"wrap_scope": applicationScope,
-                                 @"wrap_assertion_format" : @"SAML",
+                                 @"wrap_assertion_format" : [safeMe formatForProviderProtocol:providerProtocol],
                                  @"wrap_assertion" : ipToken};
         
         [safeMe initializeHttpClient];
@@ -145,7 +163,13 @@ NSString *const kAccessTokenKey = @"access_token";
                 
                 [safeMe.tokenController setAuthenticationResponse:response];
                 
-                [safeMe.tokenController updateAccessTokenWith:[response objectForKey:@"rawToken"]
+                NSString *theToken = [response objectForKey:@"rawToken"];
+                
+                if (theToken == nil) {
+                    theToken = [response objectForKey:@"access_token"];
+                }
+                
+                [safeMe.tokenController updateAccessTokenWith:theToken
                                                accessTokenKey:[safeMe getAccessTokenCacheKey]];
                 
                 [safeMe.tokenController updateIPTokenWith:ipToken
@@ -176,6 +200,14 @@ NSString *const kAccessTokenKey = @"access_token";
             }
         }];
     }];
+}
+
+- (NSString *)formatForProviderProtocol:(NSString *)providerProtocol {
+    if ([[@"good" lowercaseString] isEqualToString:providerProtocol]) {
+        return @"good";
+    } else {
+        return @"SAML";
+    }
 }
 
 - (void)authenticateWithApplicationKey:(NSString *)applicationKey
