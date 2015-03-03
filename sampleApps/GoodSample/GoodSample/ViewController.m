@@ -9,9 +9,12 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 #import <KZApplication.h>
+#import <KZStorage.h>
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIButton *getGDTokenButton;
+@property (weak, nonatomic) IBOutlet UIButton *storageButton;
 
 @end
 
@@ -30,72 +33,31 @@
     KZApplication *kzApplication = [AppDelegate sharedDelegate].kzApplication;
     __weak ViewController *safeMe = self;
     
-    [kzApplication.gtDelegate getGTToken:@"challenge"
-                                  server:@"goodcontrol.kidozen.com"
-                                 success:^(NSString *token) {
-                                     NSLog(@"THE TOKEN IS %@", token);
-                                     safeMe.textView.text = token;
-        
-                                 } error:^(NSError *error) {
-                                     NSLog(@"There was an error dude... %@", error);
-                                     safeMe.textView.text = error.localizedDescription;
-                                 }];
-    
-}
-
-- (IBAction)getKidozenToken:(id)sender {
-    __weak ViewController *safeMe = self;
-    
-    NSString *u = [NSString stringWithFormat:@"https://auth-qa.kidozen.com/v1/armonia/gd?scope=tasks&token=%@", safeMe.textView.text];
-    NSURL *url = [NSURL URLWithString:u];
-    
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-   
-    safeMe.textView.text = ret;
-    
+    [kzApplication authenticateWithChallenge:@"challenge"
+                                    provider:@"Good"
+                                  completion:^(id c) {
+                                      
+                                      NSAssert(![c  isKindOfClass:[NSError class]], @"error must be null");
+                                      safeMe.getGDTokenButton.userInteractionEnabled = NO;
+                                      safeMe.textView.text = @"Tap on the Storage Button";
+                                      safeMe.storageButton.userInteractionEnabled = YES;
+    }];
     
 }
 
 - (IBAction)getKidozenStorage:(id)sender {
-    __weak ViewController *safeMe = self;
-    
-    NSString *token = safeMe.textView.text;
-    NSError *error = nil;
-    
-    id obj = [NSJSONSerialization
-              JSONObjectWithData:[token dataUsingEncoding:NSUTF8StringEncoding]
-              options:0
-              error:&error];
-    
-    token = [obj objectForKey:@"access_token"];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://tasks-armonia.kidocloud.com/storage/local"]];
-    
-    NSString *authHeader = [NSString stringWithFormat:@"Bearer %@", token];
-    
-    [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
-    [request setHTTPMethod:@"GET"];
+    KZApplication *kzApplication = [AppDelegate sharedDelegate].kzApplication;
 
-    NSURLConnection * con = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [con start];
     
-}
-
-// This method is used to receive the data which we get using post method.
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData*)data {
+    KZStorage *storage = [kzApplication StorageWithName:@"just-in-case"];
     __weak ViewController *safeMe = self;
 
-    safeMe.textView.text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-}
-
-// This method receives the error report in case of connection is not made to server.
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-}
-
-// This method is used to process the data after connection has made successfully.
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
+    NSString * queryString = @"{}";
+    [storage query:queryString withBlock:^(KZResponse * r) {
+        NSLog(@"response is %@", r);
+        safeMe.textView.text = [NSString stringWithFormat:@"%@", r.response];
+        
+    }];
 }
 
 @end

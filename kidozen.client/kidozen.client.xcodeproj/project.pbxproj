@@ -83,6 +83,22 @@
 		6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */; };
 		6D4ACD491937CBA400958E65 /* KZObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD471937CBA400958E65 /* KZObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD481937CBA400958E65 /* KZObject.m */; };
+		6D58D9FE1AA502DF00C2587B /* KZGoodIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D58D9FC1AA502DF00C2587B /* KZGoodIdentityProvider.h */; };
+		6D58D9FF1AA502DF00C2587B /* KZGoodIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D58D9FD1AA502DF00C2587B /* KZGoodIdentityProvider.m */; };
+		6D58DA061AA5E97E00C2587B /* libKZGood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA051AA5E97E00C2587B /* libKZGood.a */; };
+		6D58DA081AA5E9B200C2587B /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA071AA5E9B200C2587B /* LocalAuthentication.framework */; };
+		6D58DA0A1AA5E9BA00C2587B /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA091AA5E9BA00C2587B /* libstdc++.dylib */; };
+		6D58DA0C1AA5E9BF00C2587B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA0B1AA5E9BF00C2587B /* QuartzCore.framework */; };
+		6D58DA0E1AA5E9CC00C2587B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA0D1AA5E9CC00C2587B /* CoreGraphics.framework */; };
+		6D58DA101AA5E9DB00C2587B /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA0F1AA5E9DB00C2587B /* libstdc++.6.0.9.dylib */; };
+		6D58DA121AA5E9E000C2587B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA111AA5E9E000C2587B /* AdSupport.framework */; };
+		6D58DA141AA5E9E500C2587B /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA131AA5E9E500C2587B /* QuickLook.framework */; };
+		6D58DA161AA5E9EB00C2587B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA151AA5E9EB00C2587B /* MessageUI.framework */; };
+		6D58DA181AA5E9F200C2587B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA171AA5E9F200C2587B /* MobileCoreServices.framework */; };
+		6D58DA1A1AA5E9FC00C2587B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA191AA5E9FC00C2587B /* CoreData.framework */; };
+		6D58DA1B1AA5EA0900C2587B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4206165D32B900EB6443 /* Security.framework */; };
+		6D58DA1C1AA5EA0F00C2587B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4208165D32BE00EB6443 /* CFNetwork.framework */; };
+		6D58DA1E1AA5EA2500C2587B /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA1D1AA5EA2500C2587B /* GD.framework */; };
 		6D5BBE1419741558008576D5 /* KZApplicationAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */; };
 		6D5BBE1519741558008576D5 /* KZApplicationAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */; };
 		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
@@ -223,12 +239,12 @@
 			remoteGlobalIDString = 6D4DC92B1A93FF0E00D4404E;
 			remoteInfo = KZGood;
 		};
-		6D4DC94C1A93FF0F00D4404E /* PBXContainerItemProxy */ = {
+		6D58DA021AA5096A00C2587B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6D4DC9361A93FF0E00D4404E;
-			remoteInfo = KZGoodTests;
+			proxyType = 1;
+			remoteGlobalIDString = 6D4DC92A1A93FF0E00D4404E;
+			remoteInfo = KZGood;
 		};
 		6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -338,6 +354,20 @@
 		6D4ACD471937CBA400958E65 /* KZObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZObject.h; sourceTree = "<group>"; };
 		6D4ACD481937CBA400958E65 /* KZObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZObject.m; sourceTree = "<group>"; };
 		6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KZGood.xcodeproj; path = KZGood/KZGood.xcodeproj; sourceTree = "<group>"; };
+		6D58D9FC1AA502DF00C2587B /* KZGoodIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZGoodIdentityProvider.h; sourceTree = "<group>"; };
+		6D58D9FD1AA502DF00C2587B /* KZGoodIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZGoodIdentityProvider.m; sourceTree = "<group>"; };
+		6D58DA051AA5E97E00C2587B /* libKZGood.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libKZGood.a; path = ../outputLibrary/libKZGood.a; sourceTree = "<group>"; };
+		6D58DA071AA5E9B200C2587B /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		6D58DA091AA5E9BA00C2587B /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		6D58DA0B1AA5E9BF00C2587B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6D58DA0D1AA5E9CC00C2587B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6D58DA0F1AA5E9DB00C2587B /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		6D58DA111AA5E9E000C2587B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		6D58DA131AA5E9E500C2587B /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		6D58DA151AA5E9EB00C2587B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6D58DA171AA5E9F200C2587B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		6D58DA191AA5E9FC00C2587B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6D58DA1D1AA5EA2500C2587B /* GD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GD.framework; path = System/Library/Frameworks/GD.framework; sourceTree = SDKROOT; };
 		6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationAuthentication.h; sourceTree = "<group>"; };
 		6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationAuthentication.m; sourceTree = "<group>"; };
 		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
@@ -465,15 +495,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D58DA1E1AA5EA2500C2587B /* GD.framework in Frameworks */,
+				6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */,
+				6D58DA1C1AA5EA0F00C2587B /* CFNetwork.framework in Frameworks */,
+				6D58DA1B1AA5EA0900C2587B /* Security.framework in Frameworks */,
+				6D58DA1A1AA5E9FC00C2587B /* CoreData.framework in Frameworks */,
+				6D58DA181AA5E9F200C2587B /* MobileCoreServices.framework in Frameworks */,
+				6D58DA161AA5E9EB00C2587B /* MessageUI.framework in Frameworks */,
+				6D58DA141AA5E9E500C2587B /* QuickLook.framework in Frameworks */,
+				6D58DA121AA5E9E000C2587B /* AdSupport.framework in Frameworks */,
+				6D58DA101AA5E9DB00C2587B /* libstdc++.6.0.9.dylib in Frameworks */,
+				AAE6E8DA18C10D8100FB046A /* UIKit.framework in Frameworks */,
+				6D58DA0E1AA5E9CC00C2587B /* CoreGraphics.framework in Frameworks */,
+				6D58DA0C1AA5E9BF00C2587B /* QuartzCore.framework in Frameworks */,
+				6D58DA0A1AA5E9BA00C2587B /* libstdc++.dylib in Frameworks */,
+				6D58DA081AA5E9B200C2587B /* LocalAuthentication.framework in Frameworks */,
+				6D58DA061AA5E97E00C2587B /* libKZGood.a in Frameworks */,
 				6D8CEE1819F06F3300259796 /* CoreLocation.framework in Frameworks */,
 				6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */,
-				6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */,
 				6D0327A919DED93D009C8B2B /* libz.dylib in Frameworks */,
 				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
 				AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */,
-				AAE6E8DA18C10D8100FB046A /* UIKit.framework in Frameworks */,
 				AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +644,8 @@
 				8E07749C1619D9AF00FA21D9 /* KZWRAPv09IdentityProvider.m */,
 				8E07747F1619D9AF00FA21D9 /* KZADFSIdentityProvider.h */,
 				8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */,
+				6D58D9FC1AA502DF00C2587B /* KZGoodIdentityProvider.h */,
+				6D58D9FD1AA502DF00C2587B /* KZGoodIdentityProvider.m */,
 			);
 			name = IdentityProviders;
 			sourceTree = "<group>";
@@ -608,7 +654,6 @@
 			isa = PBXGroup;
 			children = (
 				6D4DC94B1A93FF0F00D4404E /* libKZGood.a */,
-				6D4DC94D1A93FF0F00D4404E /* KZGoodTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -721,6 +766,18 @@
 		8EB865291614D11800DD60E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D58DA1D1AA5EA2500C2587B /* GD.framework */,
+				6D58DA191AA5E9FC00C2587B /* CoreData.framework */,
+				6D58DA171AA5E9F200C2587B /* MobileCoreServices.framework */,
+				6D58DA151AA5E9EB00C2587B /* MessageUI.framework */,
+				6D58DA131AA5E9E500C2587B /* QuickLook.framework */,
+				6D58DA111AA5E9E000C2587B /* AdSupport.framework */,
+				6D58DA0F1AA5E9DB00C2587B /* libstdc++.6.0.9.dylib */,
+				6D58DA0D1AA5E9CC00C2587B /* CoreGraphics.framework */,
+				6D58DA0B1AA5E9BF00C2587B /* QuartzCore.framework */,
+				6D58DA091AA5E9BA00C2587B /* libstdc++.dylib */,
+				6D58DA071AA5E9B200C2587B /* LocalAuthentication.framework */,
+				6D58DA051AA5E97E00C2587B /* libKZGood.a */,
 				6D8CEE1319F06EE400259796 /* CoreLocation.framework */,
 				6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */,
 				6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */,
@@ -844,6 +901,7 @@
 				8E0774DC1619F35500FA21D9 /* Query.h in Headers */,
 				8E0774D91619F35500FA21D9 /* KZWRAPv09IdentityProvider.h in Headers */,
 				6DC953AB19D5ADE8005E3540 /* ioapi.h in Headers */,
+				6D58D9FE1AA502DF00C2587B /* KZGoodIdentityProvider.h in Headers */,
 				6D03274C19DC519A009C8B2B /* KZViewEvent.h in Headers */,
 				6D03274419DC519A009C8B2B /* KZEvent.h in Headers */,
 				6D4ACD491937CBA400958E65 /* KZObject.h in Headers */,
@@ -890,6 +948,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D58DA031AA5096A00C2587B /* PBXTargetDependency */,
 				6D3D66081A260D0200FC3445 /* PBXTargetDependency */,
 				6D3D660A1A260D0200FC3445 /* PBXTargetDependency */,
 				6D3D660C1A260D0200FC3445 /* PBXTargetDependency */,
@@ -982,13 +1041,6 @@
 			fileType = archive.ar;
 			path = libKZGood.a;
 			remoteRef = 6D4DC94A1A93FF0F00D4404E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6D4DC94D1A93FF0F00D4404E /* KZGoodTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = KZGoodTests.xctest;
-			remoteRef = 6D4DC94C1A93FF0F00D4404E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		6D8017F71968A75700E99FB7 /* libCrashReporter-iphoneos.a */ = {
@@ -1085,6 +1137,7 @@
 				6D03274F19DC519A009C8B2B /* NSString+Path.m in Sources */,
 				6DDE016C1A03344F00442906 /* KZFileStorage.m in Sources */,
 				8E0774AE1619D9AF00FA21D9 /* KZStorage.m in Sources */,
+				6D58D9FF1AA502DF00C2587B /* KZGoodIdentityProvider.m in Sources */,
 				6D03274919DC519A009C8B2B /* KZPredefinedEvent.m in Sources */,
 				6DC9539D19D5ADA4005E3540 /* SSZipArchive.m in Sources */,
 				6D03274719DC519A009C8B2B /* KZEvents.m in Sources */,
@@ -1151,6 +1204,11 @@
 			isa = PBXTargetDependency;
 			name = CrashReporter;
 			targetProxy = 6D3D660B1A260D0200FC3445 /* PBXContainerItemProxy */;
+		};
+		6D58DA031AA5096A00C2587B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KZGood;
+			targetProxy = 6D58DA021AA5096A00C2587B /* PBXContainerItemProxy */;
 		};
 		6D8018011968ACDE00E99FB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1242,6 +1300,7 @@
 					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
 					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
 					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+					$SRCROOT/KZGood/KZGood,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1426,6 +1485,7 @@
 					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
 					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
 					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+					$SRCROOT/KZGood/KZGood,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1448,6 +1508,7 @@
 					"$SRCROOT/../thirdParty/plcrashreporter-1.2-rc4/Source",
 					$SRCROOT/../thirdParty/SVHTTPRequest/SVHTTPRequest,
 					$SRCROOT/../thirdParty/SocketRocket/SocketRocket,
+					$SRCROOT/KZGood/KZGood,
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
