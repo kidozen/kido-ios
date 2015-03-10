@@ -102,7 +102,7 @@
         
         KZDeviceInfo *info = [KZDeviceInfo sharedDeviceInfo];
         
-        NSMutableDictionary attributes = [[NSDictionary alloc] initWithDictionary:[info properties]];
+        NSMutableDictionary *attributes = [[NSMutableDictionary alloc] initWithDictionary:[info properties]];
         if (notificationDictionary[@"kidoId"] != nil) {
             attributes[@"kidoId"] = notificationDictionary[@"kidoId"];
         }
