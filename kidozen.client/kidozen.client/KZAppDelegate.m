@@ -93,14 +93,22 @@
     // check if notificationdictionary has a badge item.
     if (notificationDictionary != nil)
     {
+        
+        // Application has been opened by tapping on the notification.
+        // So, we reset the badge count.
         [self resetBadgeCount];
         
         [self.kzApplication enableAnalytics];
         
         KZDeviceInfo *info = [KZDeviceInfo sharedDeviceInfo];
         
+        NSMutableDictionary attributes = [[NSDictionary alloc] initWithDictionary:[info properties]];
+        if (notificationDictionary[@"kidoId"] != nil) {
+            attributes[@"kidoId"] = notificationDictionary[@"kidoId"];
+        }
+        
         [self.kzApplication tagEvent:@"notificationOpened"
-                          attributes:[info properties]];
+                          attributes:attributes];
     }
 }
 
