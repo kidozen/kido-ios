@@ -29,7 +29,9 @@
 
 @property (nonatomic, copy) NSString *deviceToken;
 
+
 - (void) initializeKidozenWithLaunchOptions:(NSDictionary *)launchOptions
+                               authenticate:(BOOL)authenticate
                                     success:(void (^)(void))success
                                     failure:(void (^)(KZResponse *response))failure;
 

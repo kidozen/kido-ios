@@ -12,13 +12,25 @@
 #import "KZAnalyticsUploader.h"
 #import "KZDeviceInfo.h"
 
+
+@interface KZOpenedFromNotificationService : KZBaseService
+
+- (void) applicationDidOpenWithNotificationId:(NSString *)notificationId;
+
+@end
+
+
+
+
 @interface KZAnalytics ()
 
 @property (nonatomic, strong) KZAnalyticsSession *session;
 @property (nonatomic, strong) KZLogging *loggingService;
 @property (nonatomic, strong) KZAnalyticsUploader *sessionUploader;
+@property (nonatomic, strong) KZOpenedFromNotificationService *notificationOpenedService;
 
 @end
+
 
 @implementation KZAnalytics
 
@@ -108,6 +120,52 @@
                                                               timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:customEvent];
 
+}
+
+- (void) openedFromNotification:(NSString *)notificationId
+{
+    
+    if (self.notificationOpenedService == nil) {
+        self.notificationOpenedService = [[KZOpenedFromNotificationService alloc] init];
+    }
+    
+    [self.notificationOpenedService applicationDidOpenWithNotificationId:notificationId];
+}
+
+@end
+
+
+// Bringing private methods.
+@interface KZBaseService ()
+
+- (void)addAuthorizationHeader;
+
+@end
+
+
+@implementation KZOpenedFromNotificationService
+
+- (instancetype)init
+{
+    if ((self = [super initWithEndpoint:@"/notification" andName:nil] )) {
+ 
+    }
+    
+    return self;
+}
+
+- (void) applicationDidOpenWithNotificationId:(NSString *)notificationId {
+
+    NSString *endPoint = [NSString stringWithFormat:@"/%@/ios/opened", notificationId];
+    
+    [self addAuthorizationHeader];
+    
+    [self.client POST:endPoint
+           parameters:nil 
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               
+        
+    }];
 }
 
 @end

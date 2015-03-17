@@ -411,6 +411,11 @@
     [self.analytics.session setValue:value forSessionAttribute:key];
 }
 
+- (void) openFromNotification:(NSString *)notificationId
+{
+    [self.analytics openedFromNotification:notificationId];
+}
+
 @end
 
 

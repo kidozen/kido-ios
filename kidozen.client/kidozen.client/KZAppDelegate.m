@@ -12,6 +12,8 @@
 #import "KZUser.h"
 #import "KZDeviceInfo.h"
 
+static NSString *const KIDO_ID = @"notificationId";
+
 @interface KZAppDelegate()
 
 @end
@@ -19,6 +21,7 @@
 @implementation KZAppDelegate
 
 - (void) initializeKidozenWithLaunchOptions:(NSDictionary *)launchOptions
+                               authenticate:(BOOL)authenticate
                                     success:(void (^)(void))success
                                     failure:(void (^)(KZResponse *))failure
 {
@@ -30,13 +33,16 @@
     [self initializeKidozen:^(id response) {
 
         [safeMe handleLaunchOptions:launchOptions];
-        
-        if ([response isKindOfClass:[KZUser class]]) {
+
+        // This method only initializes. So we don't fail if we don't want to
+        // authenticate.
+        if ([response isKindOfClass:[KZUser class]] || authenticate == NO) {
             if (success != nil) {
                 success();
             }
         } else  {
-            if (failure != nil) {
+            // We only fail when we want to authenticate and couldn't
+            if (failure != nil && authenticate == YES) {
                 failure(response);
             }
         }
@@ -103,12 +109,11 @@
         KZDeviceInfo *info = [KZDeviceInfo sharedDeviceInfo];
         
         NSMutableDictionary *attributes = [[NSMutableDictionary alloc] initWithDictionary:[info properties]];
-        if (notificationDictionary[@"kidoId"] != nil) {
-            attributes[@"kidoId"] = notificationDictionary[@"kidoId"];
+        if (notificationDictionary[KIDO_ID] != nil) {
+            attributes[KIDO_ID] = notificationDictionary[KIDO_ID];
         }
         
-        [self.kzApplication tagEvent:@"notificationOpened"
-                          attributes:attributes];
+//        [self.kzApplication openedFromNotification:notificationId];
     }
 }
 
