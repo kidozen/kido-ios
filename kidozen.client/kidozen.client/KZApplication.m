@@ -411,9 +411,9 @@
     [self.analytics.session setValue:value forSessionAttribute:key];
 }
 
-- (void) openFromNotification:(NSString *)notificationId
+- (void) openedFromNotification:(NSDictionary *)trackContext
 {
-    [self.analytics openedFromNotification:notificationId];
+    [self.analytics openedFromNotification:trackContext];
 }
 
 @end

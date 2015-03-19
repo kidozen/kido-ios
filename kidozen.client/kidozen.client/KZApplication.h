@@ -325,7 +325,7 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
     This method will notify kidozen that the application has been opened by
     tapping on a notification.
 */
-- (void) openFromNotification:(NSString *)notificationId;
+- (void) openedFromNotification:(NSDictionary *)trackContext;
 
 
 @end

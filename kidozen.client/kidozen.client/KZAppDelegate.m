@@ -12,7 +12,7 @@
 #import "KZUser.h"
 #import "KZDeviceInfo.h"
 
-static NSString *const KIDO_ID = @"notificationId";
+static NSString *const TRACK_CONTEXT = @"trackContext";
 
 @interface KZAppDelegate()
 
@@ -67,8 +67,6 @@ static NSString *const KIDO_ID = @"notificationId";
                                       callback(r);
                                   }
                               }
-                              
-                              
                           }];
 }
 
@@ -104,16 +102,10 @@ static NSString *const KIDO_ID = @"notificationId";
         // So, we reset the badge count.
         [self resetBadgeCount];
         
-        [self.kzApplication enableAnalytics];
-        
-        KZDeviceInfo *info = [KZDeviceInfo sharedDeviceInfo];
-        
-        NSMutableDictionary *attributes = [[NSMutableDictionary alloc] initWithDictionary:[info properties]];
-        if (notificationDictionary[KIDO_ID] != nil) {
-            attributes[KIDO_ID] = notificationDictionary[KIDO_ID];
+        if (notificationDictionary[TRACK_CONTEXT] != nil) {
+            [self.kzApplication openedFromNotification:notificationDictionary[TRACK_CONTEXT]];
         }
         
-//        [self.kzApplication openedFromNotification:notificationId];
     }
 }
 

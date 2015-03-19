@@ -59,7 +59,7 @@
  *  tapped on a notification. 
  *  The instance for analytics does not need to be enabled.
  */
-- (void) openedFromNotification:(NSString *)notificationId;
+- (void) openedFromNotification:(NSDictionary *)trackContext;
 
 /**
  *  This property tells us how much time the app needs to be in the background

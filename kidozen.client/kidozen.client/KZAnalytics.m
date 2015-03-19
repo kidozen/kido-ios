@@ -11,15 +11,16 @@
 #import "KZAnalyticsSession.h"
 #import "KZAnalyticsUploader.h"
 #import "KZDeviceInfo.h"
-
+#import "KZService.h"
+#import "KZLogging.h"
 
 @interface KZOpenedFromNotificationService : KZBaseService
 
-- (void) applicationDidOpenWithNotificationId:(NSString *)notificationId;
+- (instancetype)initWithEndpoint:(NSString *)endpoint;
+
+- (void) applicationDidOpenWithTrackContext:(NSDictionary *)trackContext;
 
 @end
-
-
 
 
 @interface KZAnalytics ()
@@ -122,14 +123,20 @@
 
 }
 
-- (void) openedFromNotification:(NSString *)notificationId
+- (void) openedFromNotification:(NSDictionary *)trackContext
 {
-    
     if (self.notificationOpenedService == nil) {
-        self.notificationOpenedService = [[KZOpenedFromNotificationService alloc] init];
+        NSString *scheme = [[[self loggingService] serviceUrl] scheme];
+        
+        NSString *host = [[[self loggingService] serviceUrl] host];
+        
+        NSString *url = [NSString stringWithFormat:@"%@://%@/notifications/track/open", scheme, host];
+        self.notificationOpenedService = [[KZOpenedFromNotificationService alloc] initWithEndpoint:url];
+        self.notificationOpenedService.tokenController = self.loggingService.tokenController;
+        self.notificationOpenedService.strictSSL = self.loggingService.strictSSL;
     }
     
-    [self.notificationOpenedService applicationDidOpenWithNotificationId:notificationId];
+    [self.notificationOpenedService applicationDidOpenWithTrackContext:trackContext];
 }
 
 @end
@@ -145,26 +152,24 @@
 
 @implementation KZOpenedFromNotificationService
 
-- (instancetype)init
+- (instancetype)initWithEndpoint:(NSString *)endpoint
 {
-    if ((self = [super initWithEndpoint:@"/notification" andName:nil] )) {
+    if ((self = [super initWithEndpoint:endpoint andName:nil] )) {
  
     }
     
     return self;
 }
 
-- (void) applicationDidOpenWithNotificationId:(NSString *)notificationId {
-
-    NSString *endPoint = [NSString stringWithFormat:@"/%@/ios/opened", notificationId];
-    
+- (void) applicationDidOpenWithTrackContext:(NSDictionary *)trackContext
+{
     [self addAuthorizationHeader];
+    [self.client setSendParametersAsJSON:YES];
     
-    [self.client POST:endPoint
-           parameters:nil 
+    [self.client POST:@"/"
+           parameters:trackContext
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
-               
-        
+               NSLog(@"%@", error);
     }];
 }
 
