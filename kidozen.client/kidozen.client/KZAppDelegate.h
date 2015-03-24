@@ -24,7 +24,7 @@
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *provider;
 
-@property (nonatomic, assign) BOOL notificationsEnabled;
+//@property (nonatomic, assign) BOOL notificationsEnabled;
 @property (nonatomic, assign) BOOL strictSSL;
 
 @property (nonatomic, copy) NSString *deviceToken;

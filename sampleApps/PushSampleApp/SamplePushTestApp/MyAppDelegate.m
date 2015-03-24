@@ -39,11 +39,15 @@ NSString * const kzApplicationKey = @"";
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
 
     [self initializeKidozenWithLaunchOptions:launchOptions
+                                authenticate:YES
                                       success:^{
                                           safeMe.mainViewController.application = safeMe.kzApplication;
                                           [safeMe.window setRootViewController:safeMe.navigationController];
                                       }
                                       failure:^(KZResponse *response) {
+                                          safeMe.mainViewController.application = safeMe.kzApplication;
+                                          [safeMe.window setRootViewController:safeMe.navigationController];
+                                          
                                           [safeMe handleError:response.error];
                                       }];
     
