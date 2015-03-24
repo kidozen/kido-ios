@@ -85,7 +85,6 @@
 		6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD481937CBA400958E65 /* KZObject.m */; };
 		6D58D9FE1AA502DF00C2587B /* KZGoodIdentityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D58D9FC1AA502DF00C2587B /* KZGoodIdentityProvider.h */; };
 		6D58D9FF1AA502DF00C2587B /* KZGoodIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D58D9FD1AA502DF00C2587B /* KZGoodIdentityProvider.m */; };
-		6D58DA061AA5E97E00C2587B /* libKZGood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA051AA5E97E00C2587B /* libKZGood.a */; };
 		6D58DA081AA5E9B200C2587B /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA071AA5E9B200C2587B /* LocalAuthentication.framework */; };
 		6D58DA0A1AA5E9BA00C2587B /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA091AA5E9BA00C2587B /* libstdc++.dylib */; };
 		6D58DA0C1AA5E9BF00C2587B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA0B1AA5E9BF00C2587B /* QuartzCore.framework */; };
@@ -98,7 +97,6 @@
 		6D58DA1A1AA5E9FC00C2587B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA191AA5E9FC00C2587B /* CoreData.framework */; };
 		6D58DA1B1AA5EA0900C2587B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4206165D32B900EB6443 /* Security.framework */; };
 		6D58DA1C1AA5EA0F00C2587B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADA4208165D32BE00EB6443 /* CFNetwork.framework */; };
-		6D58DA1E1AA5EA2500C2587B /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA1D1AA5EA2500C2587B /* GD.framework */; };
 		6D5BBE1419741558008576D5 /* KZApplicationAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */; };
 		6D5BBE1519741558008576D5 /* KZApplicationAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */; };
 		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
@@ -135,6 +133,7 @@
 		6DDE016B1A03344F00442906 /* KZFileStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DDE01691A03344F00442906 /* KZFileStorage.h */; };
 		6DDE016C1A03344F00442906 /* KZFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDE016A1A03344F00442906 /* KZFileStorage.m */; };
 		6DE2A0B11925502B0020C69A /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DE2A0B01925502B0020C69A /* Media.xcassets */; };
+		6DEA94711AC1F3700091930E /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA1D1AA5EA2500C2587B /* GD.framework */; };
 		8E0774A31619D9AF00FA21D9 /* KZADFSIdentityProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774801619D9AF00FA21D9 /* KZADFSIdentityProvider.m */; };
 		8E0774A41619D9AF00FA21D9 /* KZConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774831619D9AF00FA21D9 /* KZConfiguration.m */; };
 		8E0774A51619D9AF00FA21D9 /* KZIdentityProviderFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0774861619D9AF00FA21D9 /* KZIdentityProviderFactory.m */; };
@@ -186,7 +185,6 @@
 		AACBD73B18CA579400518D14 /* applicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AACBD73A18CA579400518D14 /* applicationTests.m */; };
 		AAE6E88C18C0EAEB00FB046A /* KZDatasource.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE6E88A18C0EAEB00FB046A /* KZDatasource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAE6E88D18C0EAEB00FB046A /* KZDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE6E88B18C0EAEB00FB046A /* KZDatasource.m */; };
-		AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1E4B88183127860059314D /* XCTest.framework */; };
 		AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EB8652A1614D11800DD60E6 /* Foundation.framework */; };
 		AAE6E8DA18C10D8100FB046A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0F7EB01730515200C55706 /* UIKit.framework */; };
 		AAE6E8E018C10D8100FB046A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAE6E8DE18C10D8100FB046A /* InfoPlist.strings */; };
@@ -237,13 +235,6 @@
 			containerPortal = 6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6D4DC92B1A93FF0E00D4404E;
-			remoteInfo = KZGood;
-		};
-		6D58DA021AA5096A00C2587B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6D4DC92A1A93FF0E00D4404E;
 			remoteInfo = KZGood;
 		};
 		6D8017F61968A75700E99FB7 /* PBXContainerItemProxy */ = {
@@ -356,7 +347,6 @@
 		6D4DC9451A93FF0E00D4404E /* KZGood.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KZGood.xcodeproj; path = KZGood/KZGood.xcodeproj; sourceTree = "<group>"; };
 		6D58D9FC1AA502DF00C2587B /* KZGoodIdentityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZGoodIdentityProvider.h; sourceTree = "<group>"; };
 		6D58D9FD1AA502DF00C2587B /* KZGoodIdentityProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZGoodIdentityProvider.m; sourceTree = "<group>"; };
-		6D58DA051AA5E97E00C2587B /* libKZGood.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libKZGood.a; path = ../outputLibrary/libKZGood.a; sourceTree = "<group>"; };
 		6D58DA071AA5E9B200C2587B /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		6D58DA091AA5E9BA00C2587B /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		6D58DA0B1AA5E9BF00C2587B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -495,7 +485,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D58DA1E1AA5EA2500C2587B /* GD.framework in Frameworks */,
+				6DEA94711AC1F3700091930E /* GD.framework in Frameworks */,
 				6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */,
 				6D58DA1C1AA5EA0F00C2587B /* CFNetwork.framework in Frameworks */,
 				6D58DA1B1AA5EA0900C2587B /* Security.framework in Frameworks */,
@@ -510,14 +500,12 @@
 				6D58DA0C1AA5E9BF00C2587B /* QuartzCore.framework in Frameworks */,
 				6D58DA0A1AA5E9BA00C2587B /* libstdc++.dylib in Frameworks */,
 				6D58DA081AA5E9B200C2587B /* LocalAuthentication.framework in Frameworks */,
-				6D58DA061AA5E97E00C2587B /* libKZGood.a in Frameworks */,
 				6D8CEE1819F06F3300259796 /* CoreLocation.framework in Frameworks */,
 				6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */,
 				6D0327A919DED93D009C8B2B /* libz.dylib in Frameworks */,
 				6D43DBE01968BF2300D023CF /* kz.client.a in Frameworks */,
 				6D6C85EF18F2D17A002CA3A0 /* libc++.dylib in Frameworks */,
 				AAAAB31718C1145E00262636 /* libicucore.dylib in Frameworks */,
-				AAE6E8D818C10D8100FB046A /* XCTest.framework in Frameworks */,
 				AAE6E8D918C10D8100FB046A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -777,7 +765,6 @@
 				6D58DA0B1AA5E9BF00C2587B /* QuartzCore.framework */,
 				6D58DA091AA5E9BA00C2587B /* libstdc++.dylib */,
 				6D58DA071AA5E9B200C2587B /* LocalAuthentication.framework */,
-				6D58DA051AA5E97E00C2587B /* libKZGood.a */,
 				6D8CEE1319F06EE400259796 /* CoreLocation.framework */,
 				6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */,
 				6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */,
@@ -948,7 +935,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6D58DA031AA5096A00C2587B /* PBXTargetDependency */,
 				6D3D66081A260D0200FC3445 /* PBXTargetDependency */,
 				6D3D660A1A260D0200FC3445 /* PBXTargetDependency */,
 				6D3D660C1A260D0200FC3445 /* PBXTargetDependency */,
@@ -1204,11 +1190,6 @@
 			isa = PBXTargetDependency;
 			name = CrashReporter;
 			targetProxy = 6D3D660B1A260D0200FC3445 /* PBXContainerItemProxy */;
-		};
-		6D58DA031AA5096A00C2587B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = KZGood;
-			targetProxy = 6D58DA021AA5096A00C2587B /* PBXContainerItemProxy */;
 		};
 		6D8018011968ACDE00E99FB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
