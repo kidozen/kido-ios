@@ -17,7 +17,6 @@
 		6D4DC9A41A940D7100D4404E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DC9A31A940D7100D4404E /* Images.xcassets */; };
 		6D4DC9A71A940D7100D4404E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DC9A51A940D7100D4404E /* LaunchScreen.xib */; };
 		6D4DC9B31A940D7100D4404E /* GoodSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4DC9B21A940D7100D4404E /* GoodSampleTests.m */; };
-		6D4DC9C21A940E5E00D4404E /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9C11A940E5E00D4404E /* GD.framework */; };
 		6D4DC9C41A940E8400D4404E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9C31A940E8400D4404E /* CoreLocation.framework */; };
 		6D4DC9C61A940E8A00D4404E /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9C51A940E8A00D4404E /* libc++.dylib */; };
 		6D4DC9C81A940E9000D4404E /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9C71A940E9000D4404E /* libicucore.dylib */; };
@@ -35,6 +34,7 @@
 		6D4DC9E31A94142700D4404E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9E21A94142700D4404E /* CoreGraphics.framework */; };
 		6D4DC9E51A94143000D4404E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9E41A94143000D4404E /* QuartzCore.framework */; };
 		6D4DC9E71A94145400D4404E /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4DC9E61A94145400D4404E /* libstdc++.6.0.9.dylib */; };
+		6DA062861AC2F2E800A15D4A /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA062851AC2F2E800A15D4A /* GD.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +83,7 @@
 		6D4DC9E21A94142700D4404E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6D4DC9E41A94143000D4404E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6D4DC9E61A94145400D4404E /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		6DA062851AC2F2E800A15D4A /* GD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GD.framework; path = GoodSample/GD.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DA062861AC2F2E800A15D4A /* GD.framework in Frameworks */,
 				0DF277851A9E84D600A4C58B /* kz.client.a in Frameworks */,
 				0DF277861A9E84D600A4C58B /* libKZGood.a in Frameworks */,
 				0D64D6FC1A9E8341007FC5B5 /* LocalAuthentication.framework in Frameworks */,
@@ -110,7 +112,6 @@
 				6D4DC9C81A940E9000D4404E /* libicucore.dylib in Frameworks */,
 				6D4DC9C61A940E8A00D4404E /* libc++.dylib in Frameworks */,
 				6D4DC9C41A940E8400D4404E /* CoreLocation.framework in Frameworks */,
-				6D4DC9C21A940E5E00D4404E /* GD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +188,7 @@
 		6D4DC9C01A940E5000D4404E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DA062851AC2F2E800A15D4A /* GD.framework */,
 				0D64D6FB1A9E8341007FC5B5 /* LocalAuthentication.framework */,
 				6D4DC9E61A94145400D4404E /* libstdc++.6.0.9.dylib */,
 				6D4DC9E41A94143000D4404E /* QuartzCore.framework */,
@@ -437,6 +439,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoodSample",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -457,6 +463,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoodSample",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
