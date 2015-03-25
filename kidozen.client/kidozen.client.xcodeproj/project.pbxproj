@@ -109,6 +109,7 @@
 		6D8CEE1819F06F3300259796 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8CEE1319F06EE400259796 /* CoreLocation.framework */; };
 		6D97AE1019D4A9C00004A31E /* KZDataVisualizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D97AE0E19D4A9C00004A31E /* KZDataVisualizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D97AE1119D4A9C00004A31E /* KZDataVisualizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D97AE0F19D4A9C00004A31E /* KZDataVisualizationViewController.m */; };
+		6DA26F3F1AC30BA4001D8A0C /* GD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D58DA1D1AA5EA2500C2587B /* GD.framework */; };
 		6DA452461A1B7D8C00F2A7D6 /* fileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA452451A1B7D8C00F2A7D6 /* fileTests.m */; };
 		6DB7DBD019E2F054005DE9A1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBCF19E2F054005DE9A1 /* CoreTelephony.framework */; };
 		6DB7DBD519E2F071005DE9A1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB7DBD419E2F071005DE9A1 /* SystemConfiguration.framework */; };
@@ -473,6 +474,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DA26F3F1AC30BA4001D8A0C /* GD.framework in Frameworks */,
 				6D8CEE1419F06EE400259796 /* CoreLocation.framework in Frameworks */,
 				AA0F7EB11730515200C55706 /* UIKit.framework in Frameworks */,
 				AA0F7EAB1730514000C55706 /* CFNetwork.framework in Frameworks */,
