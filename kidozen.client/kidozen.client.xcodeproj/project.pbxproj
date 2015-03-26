@@ -83,6 +83,9 @@
 		6D4ACD381937A84900958E65 /* KZApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */; };
 		6D4ACD491937CBA400958E65 /* KZObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D4ACD471937CBA400958E65 /* KZObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D4ACD4A1937CBA400958E65 /* KZObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4ACD481937CBA400958E65 /* KZObject.m */; };
+		6D5BB6AF1AC45C75004D2E91 /* KZCustomAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D5BB6AD1AC45C75004D2E91 /* KZCustomAPI.h */; };
+		6D5BB6B01AC45C75004D2E91 /* KZCustomAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BB6AE1AC45C75004D2E91 /* KZCustomAPI.m */; };
+		6D5BB6B21AC45CA8004D2E91 /* customApiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BB6B11AC45CA8004D2E91 /* customApiTests.m */; };
 		6D5BBE1419741558008576D5 /* KZApplicationAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */; };
 		6D5BBE1519741558008576D5 /* KZApplicationAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */; };
 		6D677C401921073B000DF367 /* mailTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D677C3F1921073B000DF367 /* mailTests.m */; };
@@ -327,6 +330,9 @@
 		6D4ACD361937A84900958E65 /* KZApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationConfiguration.m; sourceTree = "<group>"; };
 		6D4ACD471937CBA400958E65 /* KZObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZObject.h; sourceTree = "<group>"; };
 		6D4ACD481937CBA400958E65 /* KZObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZObject.m; sourceTree = "<group>"; };
+		6D5BB6AD1AC45C75004D2E91 /* KZCustomAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZCustomAPI.h; sourceTree = "<group>"; };
+		6D5BB6AE1AC45C75004D2E91 /* KZCustomAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZCustomAPI.m; sourceTree = "<group>"; };
+		6D5BB6B11AC45CA8004D2E91 /* customApiTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customApiTests.m; sourceTree = "<group>"; };
 		6D5BBE1219741558008576D5 /* KZApplicationAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZApplicationAuthentication.h; sourceTree = "<group>"; };
 		6D5BBE1319741558008576D5 /* KZApplicationAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZApplicationAuthentication.m; sourceTree = "<group>"; };
 		6D677C3F1921073B000DF367 /* mailTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mailTests.m; sourceTree = "<group>"; };
@@ -537,6 +543,8 @@
 		6D4ACD1D1937A39800958E65 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6D5BB6AD1AC45C75004D2E91 /* KZCustomAPI.h */,
+				6D5BB6AE1AC45C75004D2E91 /* KZCustomAPI.m */,
 				8E0774931619D9AF00FA21D9 /* KZBaseService.h */,
 				8E0774941619D9AF00FA21D9 /* KZBaseService.m */,
 				AAC92C451725954200D1FF88 /* KZService.h */,
@@ -779,6 +787,7 @@
 				6D40016A1978687600D5F511 /* configurationTests.m */,
 				6DA452451A1B7D8C00F2A7D6 /* fileTests.m */,
 				6D47088F1A1F748F00AF3837 /* datavizTest.m */,
+				6D5BB6B11AC45CA8004D2E91 /* customApiTests.m */,
 				AAE6E8DC18C10D8100FB046A /* Supporting Files */,
 			);
 			path = "Integration Tests";
@@ -835,6 +844,7 @@
 				6DC953AB19D5ADE8005E3540 /* ioapi.h in Headers */,
 				6D03274C19DC519A009C8B2B /* KZViewEvent.h in Headers */,
 				6D03274419DC519A009C8B2B /* KZEvent.h in Headers */,
+				6D5BB6AF1AC45C75004D2E91 /* KZCustomAPI.h in Headers */,
 				6D4ACD491937CBA400958E65 /* KZObject.h in Headers */,
 				AA211CDC1667B35600848407 /* KZStorageMetadata.h in Headers */,
 				6D12BC93195C6CF500BBCB73 /* KZAuthenticationConfig.h in Headers */,
@@ -1036,6 +1046,7 @@
 				8E0774A61619D9AF00FA21D9 /* KZLogging.m in Sources */,
 				6D03274D19DC519A009C8B2B /* KZViewEvent.m in Sources */,
 				6D03274519DC519A009C8B2B /* KZEvent.m in Sources */,
+				6D5BB6B01AC45C75004D2E91 /* KZCustomAPI.m in Sources */,
 				6DCEDDD719391E9F00A38C39 /* KZTokenController.m in Sources */,
 				6DBA4A8019536BDC00DBFB42 /* KZApplicationServices.m in Sources */,
 				8E0774A71619D9AF00FA21D9 /* KZMail.m in Sources */,
@@ -1090,6 +1101,7 @@
 				6DA452461A1B7D8C00F2A7D6 /* fileTests.m in Sources */,
 				6D291AA2191BFEE8003AEFAF /* NSDictionary+Mongo.m in Sources */,
 				AACBD73B18CA579400518D14 /* applicationTests.m in Sources */,
+				6D5BB6B21AC45CA8004D2E91 /* customApiTests.m in Sources */,
 				6D4708901A1F748F00AF3837 /* datavizTest.m in Sources */,
 				6D40014F1976CE9E00D5F511 /* smsTests.m in Sources */,
 				AAE6E8EA18C10DBF00FB046A /* Constants.m in Sources */,

@@ -459,3 +459,18 @@
 
 
 @end
+
+
+@implementation KZApplication(CustomAPI)
+
+-(void) executeCustomAPI:(NSDictionary *)scriptDictionary
+                    name:(NSString *)name
+              completion:(void (^)(KZResponse *))block
+{
+    [self.appServices executeCustomAPI:scriptDictionary
+                                  name:name
+                            completion:block];
+}
+
+@end
+

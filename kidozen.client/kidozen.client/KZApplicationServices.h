@@ -85,4 +85,11 @@
 
 - (KZNotification *)pushNotifications;
 
+#pragma mark - customAPI
+
+-(void) executeCustomAPI:(NSDictionary *)scriptDictionary
+                    name:(NSString *)name
+              completion:(void (^)(KZResponse *))block;
+
 @end
+

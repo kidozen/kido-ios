@@ -362,3 +362,13 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
                                 error:(void (^)(NSError *error))failure;
 
 @end
+
+
+@interface KZApplication(CustomAPI)
+
+-(void) executeCustomAPI:(NSDictionary *)scriptDictionary
+                    name:(NSString *)name
+              completion:(void (^)(KZResponse *))block;
+
+@end
+
