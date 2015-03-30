@@ -188,6 +188,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6D0E560C1AC97C410089A5BE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8EB8651E1614D11800DD60E6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6DF1EBBA18EDF726000C3AA7;
+			remoteInfo = kidozen.client.fat;
+		};
 		6D3D66051A260C8500FC3445 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6D43DBD41968B26300D023CF /* SocketRocket.xcodeproj */;
@@ -909,6 +916,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D0E560D1AC97C410089A5BE /* PBXTargetDependency */,
 			);
 			name = "Integration Tests";
 			productName = "Integration Tests";
@@ -1117,6 +1125,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6D0E560D1AC97C410089A5BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6DF1EBBA18EDF726000C3AA7 /* kidozen.client.fat */;
+			targetProxy = 6D0E560C1AC97C410089A5BE /* PBXContainerItemProxy */;
+		};
 		6D3D66061A260C8500FC3445 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SocketRocket.fat;
