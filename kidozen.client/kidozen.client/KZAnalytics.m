@@ -166,7 +166,7 @@
     [self addAuthorizationHeader];
     [self.client setSendParametersAsJSON:YES];
     
-    [self.client POST:@"/"
+    [self.client POST:@""
            parameters:trackContext
            completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
                NSLog(@"%@", error);
