@@ -102,13 +102,6 @@ static NSUInteger kMaximumSecondsToUpload = 300;
             [self.session loadEventsFromDisk];
             
             [self.session logSessionWithLength:@(length)];
-            NSLog(@"session events are self.session.events %@", self.session.events);
-            if (self.session.events != nil) {
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.session.events
-                                                               options:NSJSONWritingPrettyPrinted
-                                                                 error:nil];
-                NSLog(@"In json form is %@", [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
-            }
             
             [self sendEvents];
         } else {
@@ -136,6 +129,7 @@ static NSUInteger kMaximumSecondsToUpload = 300;
 
         self.uploading = YES;
         __weak KZAnalyticsUploader *safeMe = self;
+        NSLog(@"Sending %@", self.session.events);
         
         [self.logging write:self.session.events
                     message:@""
@@ -158,7 +152,6 @@ static NSUInteger kMaximumSecondsToUpload = 300;
 
 
     } else {
-        NSLog(@"No events to send. Will try later.");
         [self.uploadTimer invalidate];
         
         [self startTimer];

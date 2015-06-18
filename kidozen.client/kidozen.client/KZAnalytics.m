@@ -11,14 +11,27 @@
 #import "KZAnalyticsSession.h"
 #import "KZAnalyticsUploader.h"
 #import "KZDeviceInfo.h"
+#import "KZService.h"
+#import "KZLogging.h"
+
+@interface KZOpenedFromNotificationService : KZBaseService
+
+- (instancetype)initWithEndpoint:(NSString *)endpoint;
+
+- (void) applicationDidOpenWithTrackContext:(NSDictionary *)trackContext;
+
+@end
+
 
 @interface KZAnalytics ()
 
 @property (nonatomic, strong) KZAnalyticsSession *session;
 @property (nonatomic, strong) KZLogging *loggingService;
 @property (nonatomic, strong) KZAnalyticsUploader *sessionUploader;
+@property (nonatomic, strong) KZOpenedFromNotificationService *notificationOpenedService;
 
 @end
+
 
 @implementation KZAnalytics
 
@@ -26,7 +39,6 @@
 {
     self = [super init];
     if (self) {
-        self.session = [[KZAnalyticsSession alloc] init];
         self.loggingService = logging;
     }
     return self;
@@ -34,6 +46,8 @@
 
 - (void)enableAnalytics:(BOOL)enable {
     if (enable == YES) {
+        self.session = [[KZAnalyticsSession alloc] initWithUserId:self.userId];
+        
         self.sessionUploader = [[KZAnalyticsUploader alloc] initWithSession:self.session
                                                              loggingService:self.loggingService];
         [[KZDeviceInfo sharedDeviceInfo] enableGeoLocation];
@@ -82,6 +96,7 @@
     
     KZClickEvent *clickEvent = [[KZClickEvent alloc] initWithEventValue:buttonName
                                                             sessionUUID:self.session.sessionUUID
+                                                                 userId:self.userId
                                                             timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:clickEvent];
 }
@@ -90,6 +105,7 @@
 {
     KZViewEvent *viewEvent = [[KZViewEvent alloc] initWithEventValue:viewName
                                                          sessionUUID:self.session.sessionUUID
+                                                              userId:self.userId
                                                          timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:viewEvent];
 }
@@ -101,9 +117,60 @@
     KZCustomEvent *customEvent = [[KZCustomEvent alloc] initWithEventName:customEventName
                                                                attributes:attributes
                                                               sessionUUID:self.session.sessionUUID
+                                                                   userId:self.userId
                                                               timeElapsed:[self elapsedTimeSinceStart]];
     [self.session logEvent:customEvent];
 
+}
+
+- (void) openedFromNotification:(NSDictionary *)trackContext
+{
+    if (self.notificationOpenedService == nil) {
+        NSString *scheme = [[[self loggingService] serviceUrl] scheme];
+        
+        NSString *host = [[[self loggingService] serviceUrl] host];
+        
+        NSString *url = [NSString stringWithFormat:@"%@://%@/notifications/track/open", scheme, host];
+        self.notificationOpenedService = [[KZOpenedFromNotificationService alloc] initWithEndpoint:url];
+        self.notificationOpenedService.tokenController = self.loggingService.tokenController;
+        self.notificationOpenedService.strictSSL = self.loggingService.strictSSL;
+    }
+    
+    [self.notificationOpenedService applicationDidOpenWithTrackContext:trackContext];
+}
+
+@end
+
+
+// Bringing private methods.
+@interface KZBaseService ()
+
+- (void)addAuthorizationHeader;
+
+@end
+
+
+@implementation KZOpenedFromNotificationService
+
+- (instancetype)initWithEndpoint:(NSString *)endpoint
+{
+    if ((self = [super initWithEndpoint:endpoint andName:nil] )) {
+ 
+    }
+    
+    return self;
+}
+
+- (void) applicationDidOpenWithTrackContext:(NSDictionary *)trackContext
+{
+    [self addAuthorizationHeader];
+    [self.client setSendParametersAsJSON:YES];
+    
+    [self.client POST:@""
+           parameters:trackContext
+           completion:^(id response, NSHTTPURLResponse *urlResponse, NSError *error) {
+               NSLog(@"%@", error);
+    }];
 }
 
 @end

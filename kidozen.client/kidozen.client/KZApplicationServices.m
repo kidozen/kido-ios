@@ -24,6 +24,7 @@
 #import "KZNotification.h"
 #import "KZAnalytics.h"
 #import "KZFileStorage.h"
+#import "KZCustomAPI.h"
 
 @interface KZApplicationServices()
 
@@ -35,6 +36,8 @@
 @property (strong, nonatomic) KZNotification *pushNotifications;
 @property (nonatomic, strong) KZAnalytics *analytics;
 @property (nonatomic, strong) KZLogging *eventsLogger;
+@property (nonatomic, strong) KZCustomAPI *customAPI;
+
 
 @end
 
@@ -277,5 +280,22 @@
     [self.pushNotifications setStrictSSL:self.strictSSL];
     
 }
+
+#pragma mark - CustomAPI
+
+-(void) executeCustomAPI:(NSDictionary *)scriptDictionary
+                    name:(NSString *)name
+              completion:(void (^)(KZResponse *))block
+{
+    self.customAPI = [[KZCustomAPI alloc] initWithEndpoint:self.applicationConfig.customApi
+                                                   andName:name];
+    
+    self.customAPI.tokenController = self.tokenController;
+    [self.customAPI setStrictSSL:self.strictSSL];
+    
+    [self.customAPI executeCustomAPI:scriptDictionary completion:block];
+    
+}
+
 
 @end

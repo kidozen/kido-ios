@@ -10,6 +10,7 @@
 @interface KZAnalytics : NSObject
 
 @property (nonatomic, readonly) KZAnalyticsSession *session;
+@property (nonatomic, copy) NSString *userId;
 
 - (instancetype)initWithLoggingService:(KZLogging *)loggingService;
 
@@ -51,6 +52,14 @@
  */
 - (void) tagEvent:(NSString *)customEventName
        attributes:(NSDictionary *)attributes;
+
+
+/**
+ *  This method will tell Kidozen that the app has been opened because the user
+ *  tapped on a notification. 
+ *  The instance for analytics does not need to be enabled.
+ */
+- (void) openedFromNotification:(NSDictionary *)trackContext;
 
 /**
  *  This property tells us how much time the app needs to be in the background

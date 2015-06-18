@@ -57,6 +57,8 @@ NSString *const kApplicationNameKey = @"name";
 @property (nonatomic, copy, readwrite) NSString *img;
 @property (nonatomic, strong) NSNumber *rating;
 @property (nonatomic, copy, readwrite) NSString *html5Url;
+@property (nonatomic, copy, readwrite) NSString *customApi;
+
 @property (nonatomic, strong) KZAuthenticationConfig *authConfig;
 
 @property (nonatomic, strong) SVHTTPClient * httpClient;

@@ -60,6 +60,8 @@
 @property (nonatomic, copy, readonly) NSString *img;
 @property (nonatomic, readonly) NSNumber *rating;
 @property (nonatomic, copy, readonly) NSString *html5Url;
+@property (nonatomic, copy, readonly) NSString *customApi;
+
 @property (nonatomic, readonly) KZAuthenticationConfig *authConfig;
 
 @end

@@ -16,6 +16,7 @@
 - (instancetype)initWithEventName:(NSString *)eventName
                             value:(NSString *)eventValue
                       sessionUUID:(NSString *)sessionUUID
+                           userId:(NSString *)userId
                       timeElapsed:(NSNumber *)timeElapsed;
 
 // Will contain the value of the event, such as "OkButton" or "InitialView" or something like that.

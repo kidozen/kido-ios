@@ -31,6 +31,11 @@
  */
 @property (nonatomic) int expiresOn;
 
+/**
+ *  UserID which is obtained from the kzToken.
+ */
+@property (nonatomic, copy, readonly) NSString *userId;
+
 @property (nonatomic, copy) NSString * user;
 @property (nonatomic, copy) NSString * pass;
 

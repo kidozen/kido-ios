@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, copy) NSString *sessionUUID;
 @property (nonatomic, strong) NSNumber *timeElapsed;
+@property (nonatomic, copy, readwrite) NSString *userId;
 
 @end
 
@@ -21,6 +22,7 @@
 
 -(instancetype) initWithEventName:(NSString *)eventName
                       sessionUUID:(NSString *)sessionUUID
+                           userId:(NSString *)userId
                       timeElapsed:(NSNumber *)timeElapsed
 {
     self = [super init];
@@ -29,6 +31,7 @@
         self.eventName = [[eventName componentsSeparatedByCharactersInSet: chSet] componentsJoinedByString: @""];
         self.sessionUUID = sessionUUID;
         self.timeElapsed = timeElapsed;
+        self.userId = userId;
     }
     return self;
 }

@@ -103,7 +103,7 @@
     if (version == nil || [version isEqualToString:@""])
         version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     
-    return version;
+    return version != nil ? version : @"";
 }
 
 - (NSDictionary *)properties
@@ -112,8 +112,9 @@
              @"networkAccess": self.currentRadioAccessTechnology,
              @"isoCountryCode" : self.isoCountryCode,
              @"deviceModel" : self.deviceModel ? : @"Simulator",
-             @"systemVersion" : self.systemVersion,
-             @"uniqueId" : self.getUniqueIdentification
+             @"systemVersion" : [NSString stringWithFormat:@"iOS %@", self.systemVersion],
+             @"uniqueId" : self.getUniqueIdentification,
+             @"appVersion" : self.appVersion
              };
 }
 

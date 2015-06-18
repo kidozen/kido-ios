@@ -7,6 +7,7 @@
 //
 
 #import "KZCustomEvent.h"
+#import "KZDeviceInfo.h"
 
 @interface KZCustomEvent()
 
@@ -20,9 +21,13 @@
 -(instancetype) initWithEventName:(NSString *)eventName
                        attributes:(NSDictionary *)attributes
                       sessionUUID:(NSString *)sessionUUID
+                           userId:(NSString *)userId
                       timeElapsed:(NSNumber *)timeElapsed
 {
-    self = [super initWithEventName:eventName sessionUUID:sessionUUID timeElapsed:timeElapsed];
+    self = [super initWithEventName:eventName
+                        sessionUUID:sessionUUID
+                             userId:userId
+                        timeElapsed:timeElapsed];
     
     if (self) {
         self.attributes = attributes;
@@ -32,19 +37,22 @@
 
 - (NSDictionary *)serializedEvent
 {
-    NSDictionary *params;
+    NSMutableDictionary *attr = [NSMutableDictionary dictionary];
     
     if (self.attributes != nil) {
-        params = @{@"eventName" : self.eventName,
-                   @"sessionUUID" : self.sessionUUID,
-                   @"eventAttr" : self.attributes,
-                   @"elapsedTime" : self.timeElapsed };
-    } else {
-        params = @{@"eventName" : self.eventName,
-                   @"sessionUUID" : self.sessionUUID,
-                   @"elapsedTime" : self.timeElapsed };
+        [attr addEntriesFromDictionary:self.attributes];
     }
-
+    
+    attr[@"platform"] = @"iOS";
+    attr[@"appVersion"] = [KZDeviceInfo sharedDeviceInfo].appVersion;
+    
+    NSDictionary *params = @{@"eventName" : self.eventName,
+                            @"sessionUUID" : self.sessionUUID,
+                             @"userid" : self.userId,
+                            @"eventAttr" : attr,
+                            @"elapsedTime" : self.timeElapsed
+                            };
+    
     return params;
 }
 

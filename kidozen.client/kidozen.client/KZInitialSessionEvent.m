@@ -1,32 +1,29 @@
 //
-//  KZSessionEvent.m
+//  KZInitialSessionEvent.m
 //  kidozen.client
 //
-//  Created by Nicolas Miyasato on 9/16/14.
-//  Copyright (c) 2014 Kidozen. All rights reserved.
+//  Created by Nicolas Miyasato on 2/12/15.
+//  Copyright (c) 2015 KidoZen. All rights reserved.
 //
 
-#import "KZSessionEvent.h"
+#import "KZInitialSessionEvent.h"
 #import "KZDeviceInfo.h"
 
-@implementation KZSessionEvent
+@implementation KZInitialSessionEvent
 
 -(instancetype) initWithAttributes:(NSDictionary *)attributes
-                     sessionLength:(NSNumber *)length
                        sessionUUID:(NSString *)sessionUUID
                             userId:(NSString *)userId
-                       timeElapsed:(NSNumber *)timeElapsed
 {
     NSMutableDictionary *attr = [NSMutableDictionary dictionaryWithDictionary:attributes];
-    attr[@"sessionLength"] = length;
     attr[@"platform"] = @"iOS";
     attr[@"appVersion"] = [KZDeviceInfo sharedDeviceInfo].appVersion;
     
-    return [super initWithEventName:@"usersession"
+    return [super initWithEventName:@"sessionStart"
                          attributes:attr
                         sessionUUID:sessionUUID
                              userId:userId
-                        timeElapsed:timeElapsed];
+                        timeElapsed:@(0)];
 }
 
 @end

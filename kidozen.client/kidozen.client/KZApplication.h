@@ -320,6 +320,14 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
  */
 - (void) enableAnalytics;
 
+
+/**
+    This method will notify kidozen that the application has been opened by
+    tapping on a notification.
+*/
+- (void) openedFromNotification:(NSDictionary *)trackContext;
+
+
 @end
 
 @interface KZApplication(DataVisualization)
@@ -354,3 +362,13 @@ typedef void (^InitializationCompleteBlock)(KZResponse *);
                                 error:(void (^)(NSError *error))failure;
 
 @end
+
+
+@interface KZApplication(CustomAPI)
+
+-(void) executeCustomAPI:(NSDictionary *)scriptDictionary
+                    name:(NSString *)name
+              completion:(void (^)(KZResponse *))block;
+
+@end
+

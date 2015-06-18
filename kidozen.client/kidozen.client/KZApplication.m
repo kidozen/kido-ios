@@ -401,6 +401,7 @@
 
 - (void) enableAnalytics
 {
+    self.analytics.userId = self.kzUser.userId;
     [self.appServices enableAnalytics];
 }
 
@@ -408,6 +409,11 @@
 - (void)setValue:(NSString *)value forSessionAttribute:(NSString *)key
 {
     [self.analytics.session setValue:value forSessionAttribute:key];
+}
+
+- (void) openedFromNotification:(NSDictionary *)trackContext
+{
+    [self.analytics openedFromNotification:trackContext];
 }
 
 @end
@@ -453,3 +459,18 @@
 
 
 @end
+
+
+@implementation KZApplication(CustomAPI)
+
+-(void) executeCustomAPI:(NSDictionary *)scriptDictionary
+                    name:(NSString *)name
+              completion:(void (^)(KZResponse *))block
+{
+    [self.appServices executeCustomAPI:scriptDictionary
+                                  name:name
+                            completion:block];
+}
+
+@end
+

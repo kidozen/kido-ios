@@ -11,6 +11,7 @@
 #import "KZEvents.h"
 #import "KZDeviceInfo.h"
 #import "KZSessionEvent.h"
+#import "KZInitialSessionEvent.h"
 
 static int kDefaultSessionTimeout = 5;
 
@@ -21,23 +22,25 @@ static int kDefaultSessionTimeout = 5;
 @property (nonatomic, strong) NSDate *startSessionDate;
 @property (nonatomic, strong) KZDeviceInfo *deviceInfo;
 @property (nonatomic, strong) NSMutableDictionary *sessionAttributes;
+@property (nonatomic, readwrite, copy) NSString *userId;
 
 @end
 
 
 @implementation KZAnalyticsSession
 
-- (instancetype)init
+- (instancetype)initWithUserId:(NSString *)userId
 {
     self = [super init];
     if (self) {
-        self.allEvents = [[KZEvents alloc] init];
-        self.sessionUUID = [[NSUUID UUID] UUIDString];
-        self.startSessionDate = [NSDate date];
-        self.sessionTimeout = kDefaultSessionTimeout;
         self.deviceInfo = [KZDeviceInfo sharedDeviceInfo];
         self.sessionAttributes = [[NSMutableDictionary alloc] init];
-
+        self.sessionTimeout = kDefaultSessionTimeout;
+        self.userId = userId;
+        [self startNewSession];
+        
+        self.startSessionDate = [NSDate date];
+        
     }
     return self;
 }
@@ -65,6 +68,12 @@ static int kDefaultSessionTimeout = 5;
     self.sessionUUID = [[NSUUID UUID] UUIDString];
     self.startSessionDate = [NSDate date];
     
+    KZInitialSessionEvent *sessionStart = [[KZInitialSessionEvent alloc] initWithAttributes:self.deviceInfo.properties
+                                                                                sessionUUID:self.sessionUUID
+                                                                                     userId:self.userId];
+    
+    [self.allEvents addEvent:sessionStart];
+    
 }
 
 - (void)loadEventsFromDisk {
@@ -86,18 +95,12 @@ static int kDefaultSessionTimeout = 5;
             [[NSDate date] timeIntervalSinceDate:backgroundDate] > self.sessionTimeout;
 }
 
-- (KZSessionEvent *)eventForCurrentSessionWithLength:(NSNumber *)length {
-    NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithDictionary:self.deviceInfo.properties];
-    
-    if (self.sessionAttributes.allKeys.count > 0)
-    {
-        [attrs addEntriesFromDictionary:self.sessionAttributes];
-    }
-    
-    // Session events are always the initial point.
-    KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:attrs
+- (KZSessionEvent *)eventForCurrentSessionWithLength:(NSNumber *)length
+{
+    KZSessionEvent *sessionEvent = [[KZSessionEvent alloc] initWithAttributes:self.sessionAttributes
                                                                 sessionLength:length
                                                                   sessionUUID:self.sessionUUID
+                                                                       userId:self.userId
                                                                   timeElapsed:@(0)];
     return sessionEvent;
 }

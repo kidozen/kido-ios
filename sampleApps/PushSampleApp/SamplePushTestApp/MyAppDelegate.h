@@ -1,5 +1,5 @@
 //
-//  KZAppDelegate.h
+//  MyAppDelegate.h
 //  SamplePushTestApp
 //
 //  Created by Nicolas Miyasato on 6/26/14.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <KZAppDelegate.h>
 
-@interface KZAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MyAppDelegate : KZAppDelegate <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
 
 @end
