@@ -16,6 +16,7 @@
     dispatch_semaphore_t semaphore;
     NSError  * _error;
     NSHTTPURLResponse * _httpResponse;
+    NSMutableData * _responseData;
 }
 @property (nonatomic, copy) NSString * token;
 @property (nonatomic, strong) RequestTokenCompletionBlock requestCompletion;

@@ -58,6 +58,7 @@
 }
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     _httpResponse = (NSHTTPURLResponse *) response;
+    _responseData = [[NSMutableData alloc] init];
     if ([_httpResponse statusCode]>299) {
         [self throwError];
     }
@@ -65,7 +66,12 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    _serviceResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [_responseData appendData:data];
+}
+
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    _serviceResponse = [[NSString alloc] initWithData:_responseData encoding:NSUTF8StringEncoding];
     self.requestCompletion([self getAssert:_serviceResponse], nil);
 }
 
