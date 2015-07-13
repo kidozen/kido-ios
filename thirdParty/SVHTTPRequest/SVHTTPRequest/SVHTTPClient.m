@@ -15,7 +15,7 @@
 #define X_KIDO_SDK_VERSION_HEADER  @"X-Kido-SDK-Version"
 
 #define X_KIDO_SDK_HEADER_VALUE  @"iOS"
-#define X_KIDO_SDK_VERSION_VALUE @"1.2.5"
+#define X_KIDO_SDK_VERSION_VALUE @"1.2.6"
 
 @interface SVHTTPClient ()
 

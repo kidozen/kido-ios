@@ -66,10 +66,7 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
     }
 }
 
-- (void) callCallback:(void (^)(KZResponse *))block
-             response:(id)response
-          urlResponse:(NSHTTPURLResponse *)urlResponse
-                error:(NSError *)error
+- (void) callCallback:(void (^)(KZResponse *))block response:(id)response urlResponse:(NSHTTPURLResponse *)urlResponse error:(NSError *)error
 {
     if (block)
     {
@@ -81,13 +78,19 @@ NSString * const KZServiceErrorDomain = @"KZServiceErrorDomain";
         
         id typedResponse = response;
         if ([response isKindOfClass:[NSData class]]) {
-            NSString *utf8String = [response KZ_UTF8String];
-            
-            if (utf8String != nil) {
-                typedResponse = utf8String;
+            // For attachments , download files
+            if ([[[urlResponse allHeaderFields] objectForKey:@"Content-Disposition"] containsString:@"attachment"]) {
             }
-
-        } else {
+            else
+            {
+                NSString *utf8String = [response KZ_UTF8String];
+                if (utf8String != nil) {
+                    typedResponse = utf8String;
+                }
+            }
+        }
+        else
+        {
             typedResponse = response;
         }
         
